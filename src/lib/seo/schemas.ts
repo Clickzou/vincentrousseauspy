@@ -1,0 +1,160 @@
+/**
+ * Générateurs JSON-LD.
+ *
+ * Trois schémas seulement, assemblés en `@graph` (SEO_MASTER § 3.3) :
+ *   - LocalBusiness + MedicalBusiness : le cabinet, NAP identique à Google Business Profile
+ *   - Person : Vincent, ses titres et son diplôme — pivot E-E-A-T en YMYL
+ *   - Article + BreadcrumbList : contenus cliniques et blog
+ *
+ * DEUX INTERDITS ABSOLUS :
+ *   - Pas d'`AggregateRating` : les avis ne sont pas sollicités (§ 2.3).
+ *   - Pas du type `Physician` : il désigne un médecin. L'employer pour un
+ *     psychologue reviendrait à déclarer un titre inexact.
+ */
+
+import {
+  cabinet,
+  contact,
+  honoraires,
+  horaires,
+  praticien,
+  SITE_URL,
+} from "@/lib/site-config";
+import { absoluteUrl } from "@/lib/url-helpers";
+
+const PERSON_ID = `${SITE_URL}/#vincent-rousseau`;
+const BUSINESS_ID = `${SITE_URL}/#cabinet`;
+
+/** Profils externes vérifiables — renforce l'entité pour le SEO local et le GEO (§ 11.1). */
+const profilsExternes: string[] = [
+  // À compléter : fiche Google Business Profile, annuaire Ameli, ALI, EPB…
+];
+
+export function personSchema() {
+  return {
+    "@type": "Person",
+    "@id": PERSON_ID,
+    name: praticien.nom,
+    jobTitle: praticien.titres,
+    description: `${praticien.titreCourt} à ${cabinet.ville}.`,
+    url: absoluteUrl("vincent-rousseau-psychologue"),
+    identifier: [
+      { "@type": "PropertyValue", propertyID: "ADELI", value: praticien.adeli },
+      { "@type": "PropertyValue", propertyID: "SIRET", value: praticien.siret },
+    ],
+    hasCredential: [
+      {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "degree",
+        name: praticien.diplome.intitule,
+        recognizedBy: { "@type": "CollegeOrUniversity", name: praticien.diplome.etablissement },
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "license",
+        name: "Titre de psychologue (titre protégé — loi n° 85-772 du 25 juillet 1985)",
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "license",
+        name: "Titre de psychothérapeute (titre protégé — registre national ARS)",
+      },
+    ],
+    memberOf: praticien.rattachements.map((nom) => ({ "@type": "Organization", name: nom })),
+    knowsAbout: ["Psychologie clinique", "Psychanalyse", "Psychopathologie", "Psychothérapie"],
+    ...(profilsExternes.length ? { sameAs: profilsExternes } : {}),
+  };
+}
+
+export function localBusinessSchema() {
+  const { geo } = cabinet;
+  return {
+    "@type": ["LocalBusiness", "MedicalBusiness"],
+    "@id": BUSINESS_ID,
+    name: `${praticien.nom} — ${praticien.titreCourt}`,
+    url: SITE_URL,
+    telephone: contact.telephoneE164,
+    email: contact.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: cabinet.rue,
+      postalCode: cabinet.codePostal,
+      addressLocality: cabinet.ville,
+      addressCountry: cabinet.pays,
+    },
+    ...(geo.latitude !== null && geo.longitude !== null
+      ? { geo: { "@type": "GeoCoordinates", latitude: geo.latitude, longitude: geo.longitude } }
+      : {}),
+    areaServed: { "@type": "City", name: cabinet.ville },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [...horaires.jours],
+        opens: horaires.ouverture,
+        closes: horaires.fermeture,
+      },
+    ],
+    priceRange: `${honoraires.min}–${honoraires.max} ${honoraires.devise}`,
+    currenciesAccepted: honoraires.devise,
+    founder: { "@id": PERSON_ID },
+    employee: { "@id": PERSON_ID },
+    // Volontairement PAS d'aggregateRating : cf. en-tête de fichier.
+  };
+}
+
+export type Fil = { nom: string; url: string };
+
+export function breadcrumbSchema(fil: Fil[]) {
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: fil.map((etape, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: etape.nom,
+      item: absoluteUrl(etape.url),
+    })),
+  };
+}
+
+export type ArticleMeta = {
+  titre: string;
+  description: string;
+  slug: string;
+  publieLe: string;
+  modifieLe: string;
+  /** Sources d'autorité citées — minimum 3 en YMYL (§ 5). */
+  sources?: string[];
+};
+
+export function articleSchema(a: ArticleMeta) {
+  return {
+    "@type": "Article",
+    headline: a.titre,
+    description: a.description,
+    url: absoluteUrl(a.slug),
+    datePublished: a.publieLe,
+    dateModified: a.modifieLe,
+    author: { "@id": PERSON_ID },
+    publisher: { "@id": BUSINESS_ID },
+    inLanguage: "fr-FR",
+    ...(a.sources?.length ? { citation: a.sources } : {}),
+  };
+}
+
+export type FaqEntree = { question: string; reponse: string };
+
+export function faqSchema(entrees: FaqEntree[]) {
+  return {
+    "@type": "FAQPage",
+    mainEntity: entrees.map((e) => ({
+      "@type": "Question",
+      name: e.question,
+      acceptedAnswer: { "@type": "Answer", text: e.reponse },
+    })),
+  };
+}
+
+/** Assemble les schémas d'une page en un `@graph` unique. */
+export function graph(...noeuds: object[]) {
+  return { "@context": "https://schema.org", "@graph": noeuds };
+}

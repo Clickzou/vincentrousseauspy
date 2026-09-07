@@ -1,0 +1,30 @@
+# Dépendances
+node_modules/
+.pnp
+.pnp.js
+
+# Build
+.next/
+out/
+build/
+dist/
+
+# Environnement
+.env*.local
+.env
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Archive WordPress — NE JAMAIS VERSIONNER
+# 523 Mo + données personnelles de patients (soumissions de formulaires, abonnés newsletter)
+*.wpress
+_wp_extract/
+
+# Divers
+.DS_Store
+*.log

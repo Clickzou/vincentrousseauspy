@@ -1,0 +1,39 @@
+mot_cle,volume_mensuel,url_positionnee,position_2026_09_06,position_2026_09_07,evolution,trafic_prevu,visibilite,concurrence,serp_features,statut_ciblage
+psychologue nantes,5400,/,4,5,-1,329.4,60,0.00,"Local pack;Avis;Vidéos;PAA;Images",PRIORITE_1
+psychotérapeute nantes,6600,/,9,9,0,171.6,30,0.17,"Local pack;Vidéos;PAA",PRIORITE_1_cluster_ne_pas_ecrire_la_faute
+psychiatres nantes,390,/,-,-,0,0,0,0.06,"Local pack;Vidéos;PAA",EXCLU_titre_non_detenu
+psychiatre nantes,480,/,-,-,0,0,0,0.00,"Local pack;Vidéos;PAA;Images",EXCLU_titre_non_detenu
+psychanalyste loire atlantique,320,/,9,10,-1,7.7,20,0.02,"Local pack;Vidéos;PAA",PRIORITE_2
+psychopraticien nantes,320,/,7,7,0,11.2,50,0.19,"Local pack;PAA",A_ARBITRER
+nantes psychologie,210,/,14,14,0,2.1,0,0.18,"Avis;Liens annexes;Vidéos;PAA;Images;GBP",PRIORITE_3
+psychologue sur nantes,210,/,5,5,0,12.8,60,0.18,"Local pack;Avis;Vidéos;PAA;Images",PRIORITE_1
+nantes psychologue,210,/,5,5,0,12.8,60,0.00,"Avis;Vidéos;PAA;Images",PRIORITE_1
+psy nantes,270,/,7,7,0,9.5,50,0.00,"Local pack;Avis;Vidéos;PAA;Images",PRIORITE_2
+psychologue clinicien nantes,170,/,4,4,0,13.8,85,0.00,"Local pack;Avis;Vidéos;PAA",PRIORITE_1
+psychologues nantes,140,/,5,5,0,8.5,60,0.00,"Local pack;Avis;Vidéos;PAA",PRIORITE_1
+tableau psychologue,110,/psychologue-clinicien-psychotherapeute-psychiatre-psychanalyste/,-,-,0,0,0,1.00,"Local pack;Avis;Vidéos",HORS_SUJET
+psychiatre psychanalyste nantes,70,/,4,4,0,4.1,85,0.00,"Local pack;Vidéos;PAA",A_ARBITRER
+rousseau vincent,70,/psychanalyste-nantes/,26,24,+2,0.7,0,0.02,"Local pack;Avis;Images",MARQUE
+vincent rousseau,480,/contact-psychologue-clinicien-nantes/,37,37,0,0,0,0.00,"Local pack;Avis;Vidéos;PAA;Images",MARQUE_homonymie
+psychanalyste nantes,50,/,2,2,0,8.8,100,0.04,"Local pack;Vidéos;PAA",PRIORITE_1
+psychanalyse nantes,50,/,5,5,0,3.1,60,0.04,"Local pack;Vidéos;PAA",PRIORITE_2
+psychologue psychanalyste nantes,50,/,1,1,0,16.3,100,0.00,"Local pack;Avis;Vidéos;PAA",ACQUIS
+psychologue nantes avis,50,/,4,4,0,4.1,85,0.00,"Avis;Vidéos;PAA",PRIORITE_2
+psychiatre nantes avis,50,/,-,-,0,0,0,0.01,"Vidéos;PAA",EXCLU_titre_non_detenu
+psycho analyste clinicien,50,/psychologue-clinicien-psychotherapeute-psychiatre-psychanalyste/,-,-,0,0,0,0.02,"Aperçu IA;Local pack;Vidéos;PAA;Images",PRIORITE_3
+psycho-analyste clinicien,50,/psychologue-clinicien-psychotherapeute-psychiatre-psychanalyste/,-,-,0,0,0,0.02,"Local pack;Vidéos;PAA",PRIORITE_3
+vincent rousseau nantes,40,/,1,1,0,13,100,0.01,"Avis;Liens annexes;Images;GBP",ACQUIS
+psychologue nantes nord,30,/,4,4,0,2.4,85,0.08,"Local pack;Avis;Vidéos;PAA",PRIORITE_2
+psychothérapeute nantes avis,30,/,7,7,0,1.1,50,0.17,"Avis;Vidéos;PAA",PRIORITE_2
+psychiatre psychothérapeute nantes,30,/,7,7,0,1.1,50,0.00,"Local pack;Vidéos;PAA",PRIORITE_3_via_page_pedagogique
+tarif psychologue nantes,20,/,5,5,0,1.2,60,0.27,"Aperçu IA;Avis;PAA",PRIORITE_1_page_manquante
+psychologue nantes tarif,20,/,4,4,0,1.6,85,0.27,"Local pack;Avis;PAA",PRIORITE_1_page_manquante
+psychothérapeute nantes,10,/,10,9,+1,0.3,30,0.00,"Local pack;Vidéos;PAA;Images",PRIORITE_1_orthographe_a_utiliser
+vincent rousseau psychologue,10,/,1,1,0,3.3,100,0.01,"Avis;Liens annexes;Images;GBP",ACQUIS
+psychologue psychothérapeute nantes,10,/,4,4,0,0,85,0.00,"Local pack;Vidéos;PAA;Images",PRIORITE_1_triple_titre
+psy a nantes,10,/,6,5,+1,0.6,60,0.20,"Local pack;Avis;Vidéos;PAA",PRIORITE_2
+psychotherapeute nantes,10,/,9,9,0,0.3,30,0.00,"Local pack;PAA;Images",PRIORITE_2_variante_sans_accent
+emploi psychologue nantes 44,10,/,-,-,0,0,0,0.00,"Pubs;Travaux",HORS_SUJET
+psychologue à nantes,0,/,5,5,0,0,60,0.00,"Local pack;Avis;Vidéos;PAA;Images",PRIORITE_1
+psychologue clinicien-psychanalyste nantes,0,/,1,1,0,0,100,0.00,"Local pack;Vidéos;PAA",ACQUIS
+dépendance affective nantes,0,/,8,8,0,0,30,0.00,"Aperçu IA;Vidéos;PAA",PRIORITE_3_motif
