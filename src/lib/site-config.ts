@@ -74,19 +74,24 @@ export const cabinet = {
     reperes: "Derrière la Manufacture des Tabacs, proche Gare Nord et Jardin des Plantes",
     stationnement: "Places payantes à proximité",
     /**
-     * Accessibilité confirmée par Vincent le 8 septembre 2026 : le cabinet est
-     * accessible aux personnes à mobilité réduite.
+     * Confirmé par Vincent le 8 septembre 2026 : le cabinet est de plain-pied.
      *
-     * ⚠️ LA MODALITÉ RESTE À PRÉCISER — plain-pied, rampe ou ascenseur ? largeur
-     * de porte ? sanitaires adaptés ? Le texte ci-dessous s'en tient donc au
-     * fait établi et invite à appeler pour le détail. C'est volontaire : une
-     * personne en fauteuil qui se déplace sur une promesse imprécise et ne
-     * peut pas entrer subit un préjudice réel. On n'annonce que ce qu'on sait.
+     * « Plain-pied » répond à la question qui décide du déplacement — y a-t-il
+     * des marches ? — et c'est pourquoi le mot est écrit en toutes lettres
+     * plutôt que la formule creuse du site actuel, « le cabinet tient compte
+     * des normes d'accessibilité », qui n'apprend rien à personne.
+     *
+     * L'invitation à appeler est conservée, et elle n'est pas une précaution
+     * de style : l'absence de marche ne dit rien de la largeur des portes ni
+     * des sanitaires, qui restent inconnues. On annonce ce qu'on sait, on
+     * n'étend pas la promesse à ce qu'on n'a pas vérifié — une personne en
+     * fauteuil qui se déplace sur une promesse trop large et ne peut pas
+     * entrer subit un préjudice réel.
      */
     pmr:
-      "Le cabinet est accessible aux personnes à mobilité réduite. Si vous vous " +
-      "déplacez en fauteuil ou si vous avez un besoin particulier, appelez-moi " +
-      "avant de venir : je vous décrirai l'accès en détail." as string | null,
+      "Le cabinet est de plain-pied : l'accès se fait sans marche ni escalier. " +
+      "Si vous vous déplacez en fauteuil ou si vous avez un besoin particulier, " +
+      "appelez-moi avant de venir." as string | null,
   },
 } as const;
 
