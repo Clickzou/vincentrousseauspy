@@ -44,6 +44,17 @@ export type Article = {
   titre: string;
   /** Sert d'introduction ET de meta description : une seule formulation à tenir. */
   chapeau: string;
+  /**
+   * Versions courtes, POUR LA SERP UNIQUEMENT, quand la formulation éditoriale
+   * dépasse ce que Google affiche — environ 60 caractères de titre suffixe
+   * compris, et 160 de description.
+   *
+   * Le principe « une seule formulation à tenir » reste la règle : ces champs ne
+   * se renseignent qu'après mesure, jamais par habitude. Un bon chapeau qui
+   * tient dans la limite n'a besoin d'aucun des deux.
+   */
+  metaTitre?: string;
+  metaDescription?: string;
   publieLe: string;
   modifieLe: string;
   /**

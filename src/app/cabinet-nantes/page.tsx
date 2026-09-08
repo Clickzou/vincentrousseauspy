@@ -38,10 +38,12 @@ import { canonical, minusculeInitiale } from "@/lib/url-helpers";
 const TITRE = "Le cabinet à Nantes";
 
 export const metadata: Metadata = {
-  title: TITRE,
+  /* `absolute` : le titre contient déjà la ville, le suffixe la répéterait.
+     Voir la règle dans layout.tsx. */
+  title: { absolute: `${TITRE} — ${praticien.nom}` },
   description:
-    `Le cabinet de ${praticien.nom} à ${cabinet.ville} : ${cabinet.rue}, ` +
-    `${cabinet.acces.tram}. ${cabinet.acces.reperes}. Accès, stationnement et horaires.`,
+    `Le cabinet, ${cabinet.rue} à ${cabinet.ville} : tramway ligne 1 arrêt ` +
+    `« Manufacture », quartier Jardin des Plantes. Accès de plain-pied, stationnement.`,
   alternates: { canonical: canonical("cabinet-nantes") },
   openGraph: { title: `${TITRE} — ${praticien.nom}`, url: canonical("cabinet-nantes") },
 };

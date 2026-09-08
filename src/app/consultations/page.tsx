@@ -48,9 +48,8 @@ const MODIFIE_LE = "2026-09-08";
 export const metadata: Metadata = {
   title: TITRE,
   description:
-    `Comment se déroule une consultation chez ${praticien.nom}, ` +
-    `${minusculeInitiale(praticien.titreCourt)} à ${cabinet.ville} : première séance, ` +
-    `cadre, rythme, confidentialité. Adultes uniquement, ${minusculeInitiale(horaires.libelle)}.`,
+    `Comment se déroule une consultation chez un psychologue à ${cabinet.ville} : ` +
+    `première séance, cadre, rythme, confidentialité. Adultes uniquement, sur rendez-vous.`,
   alternates: { canonical: canonical("consultations") },
   openGraph: { title: `${TITRE} — ${praticien.nom}`, url: canonical("consultations") },
 };

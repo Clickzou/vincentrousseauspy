@@ -34,11 +34,13 @@ const TITRE = "Psychothérapeute à Nantes";
 const MODIFIE_LE = "2026-09-08";
 
 export const metadata: Metadata = {
-  title: TITRE,
+  /* `absolute` : le titre contient déjà la ville, le suffixe la répéterait.
+     Voir la règle dans layout.tsx. */
+  title: { absolute: `${TITRE} — ${praticien.nom}` },
   description:
-    `${praticien.nom}, psychothérapeute à ${cabinet.ville} — titre protégé, inscrit au ` +
-    `registre national des psychothérapeutes. Psychothérapie pour adultes sur ` +
-    `rendez-vous, de ${honoraires.min} à ${honoraires.max} €.`,
+    `Psychothérapeute à ${cabinet.ville}, titre protégé et inscrit au registre ` +
+    `national. Psychothérapie pour adultes sur rendez-vous, de ${honoraires.min} à ` +
+    `${honoraires.max} € la séance.`,
   alternates: { canonical: canonical("psychotherapeute-nantes") },
   openGraph: {
     title: `${TITRE} — ${praticien.nom}`,

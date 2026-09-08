@@ -52,9 +52,8 @@ const TITRE = "Contact";
 export const metadata: Metadata = {
   title: TITRE,
   description:
-    `Joindre ${praticien.nom}, ${minusculeInitiale(praticien.titreCourt)} à ` +
-    `${cabinet.ville} : téléphone, adresse du cabinet et horaires. ` +
-    `${horaires.libelle}, réponse ${priseRdv.delaiReponse}.`,
+    `Joindre ${praticien.nom}, psychologue à ${cabinet.ville} : téléphone, adresse du ` +
+    `cabinet et horaires. Réponse ${priseRdv.delaiReponse}.`,
   alternates: { canonical: canonical("contact-psychologue-clinicien-nantes") },
   openGraph: {
     title: `${TITRE} — ${praticien.nom}`,

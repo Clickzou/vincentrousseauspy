@@ -33,6 +33,12 @@ export const pourquoiPasDeVisio: Article = {
     "Je ne propose pas de séances en visioconférence. Ce n'est ni un retard technique, " +
     "ni un jugement sur ceux qui les pratiquent : c'est un choix de cadre, et il se " +
     "discute. Voici le raisonnement, et ce que dit la réglementation.",
+  /* Le titre de la page fait 40 caractères ; avec le suffixe, il dépassait ce
+     que Google affiche. Le <h1> reste inchangé. */
+  metaTitre: "Pourquoi je reçois au cabinet",
+  metaDescription:
+    "Je ne propose pas de séances en visioconférence. Ni retard technique ni " +
+    "jugement : un choix de cadre, et le raisonnement qui le fonde.",
   publieLe: "2026-09-08",
   modifieLe: "2026-09-08",
   motCle: "consultation psychologue à distance",

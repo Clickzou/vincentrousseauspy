@@ -52,7 +52,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: `Psychologue à ${cabinet.ville} — ${praticien.nom}`,
-    template: `%s — ${praticien.nom}, psychologue à ${cabinet.ville}`,
+    /* SUFFIXE COURT. Il pesait `— Vincent Rousseau, psychologue à Nantes`,
+       soit 40 caractères sur les ~60 que Google affiche : il ne restait que
+       20 caractères utiles, et huit pages sur seize étaient tronquées. À 26
+       caractères, seules les pages au titre propre très long dépassent encore,
+       et celles-là posent leur titre en `absolute`. */
+    template: `%s — ${praticien.nom}, ${cabinet.ville}`,
   },
   description:
     `${praticien.titreCourt} à ${cabinet.ville}. Consultations pour adultes sur rendez-vous, ` +

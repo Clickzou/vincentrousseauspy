@@ -39,8 +39,15 @@ export async function generateMetadata({
   if (!article) return {};
 
   return {
-    title: article.titre,
-    description: article.chapeau,
+    /* Le titre affiché en SERP peut être plus court que le <h1> : c'est la
+       seule ligne du site où la contrainte de longueur prime sur la
+       formulation. Le <h1> de la page, lui, ne change pas. */
+    title: {
+      /* Sans la ville : un article sur le secret professionnel intéresse un
+         lecteur de Brest. Le nom de l'auteur reste, il porte l'E-E-A-T. */
+      absolute: `${article.metaTitre ?? article.titre} — ${praticien.nom}`,
+    },
+    description: article.metaDescription ?? article.chapeau,
     alternates: { canonical: canonical(`blog/${article.slug}`) },
     openGraph: {
       type: "article",

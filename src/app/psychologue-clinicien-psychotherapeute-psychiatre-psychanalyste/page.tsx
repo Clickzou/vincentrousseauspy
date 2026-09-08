@@ -39,7 +39,12 @@ export const metadata: Metadata = {
   /* Le title énumérait les quatre titres dans l'ordre du slug. Il mène
      maintenant par « psychologue ou psychiatre » sans rien perdre de la
      portée, et gagne dix caractères avant le suffixe du gabarit. */
-  title: "Psychologue ou psychiatre : les différences entre les « psy »",
+  /* `absolute` : ce titre fait à lui seul 61 caractères, et la page vise une
+     requête nationale — « différence psychologue psychiatre » — où le nom du
+     praticien n'apporte rien. Le suffixe ne ferait que déborder. */
+  title: {
+    absolute: "Psychologue ou psychiatre : les différences entre « psy »",
+  },
   /* La description menait par « formation, titre protégé, droit de prescrire »
      et dépassait 230 caractères — tronquée en SERP avant d'avoir nommé la
      question que le lecteur a tapée. Elle mène désormais par le couple

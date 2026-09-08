@@ -26,9 +26,8 @@ const TITRE = "Blog";
 export const metadata: Metadata = {
   title: TITRE,
   description:
-    `Articles de ${praticien.nom}, ${praticien.titreCourt.toLowerCase()} à ` +
-    `${cabinet.ville} : ce qui se passe réellement en consultation, le cadre, les ` +
-    `questions que l'on pose rarement à voix haute.`,
+    `Ce qui se passe réellement en consultation, le cadre, les questions que l'on pose ` +
+    `rarement à voix haute. Écrits de ${praticien.nom}, psychologue à ${cabinet.ville}.`,
   alternates: { canonical: canonical("blog") },
   openGraph: { title: `${TITRE} — ${praticien.nom}`, url: canonical("blog") },
 };

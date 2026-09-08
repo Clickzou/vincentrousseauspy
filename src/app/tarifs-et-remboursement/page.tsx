@@ -47,9 +47,9 @@ export const metadata: Metadata = {
      (1 078/mois) devance `psychologue prix` (986), et la question du
      remboursement est celle qui inquiète avant la consultation. */
   description:
-    `Un psychologue est-il remboursé ? Ce que prennent en charge l'Assurance Maladie, ` +
-    `« Mon soutien psy » et les mutuelles. Honoraires de ${honoraires.min} à ` +
-    `${honoraires.max} € la séance à ${cabinet.ville}.`,
+    `Un psychologue est-il remboursé ? Assurance Maladie, « Mon soutien psy » et ` +
+    `mutuelles. Honoraires de ${honoraires.min} à ${honoraires.max} € la séance à ` +
+    `${cabinet.ville}.`,
   alternates: { canonical: canonical("tarifs-et-remboursement") },
   openGraph: {
     title: `${TITRE} — ${praticien.nom}`,

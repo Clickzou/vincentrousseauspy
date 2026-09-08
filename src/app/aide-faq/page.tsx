@@ -25,9 +25,8 @@ import { canonical } from "@/lib/url-helpers";
 export const metadata: Metadata = {
   title: "Questions fréquentes",
   description:
-    `Prix, remboursement, déroulé d'une première séance, confidentialité, accès : ` +
-    `les réponses aux questions les plus posées avant une première consultation à ` +
-    `${cabinet.ville}.`,
+    `Prix, remboursement, première séance, confidentialité, accès : les réponses aux ` +
+    `questions les plus posées avant de consulter à ${cabinet.ville}.`,
   alternates: { canonical: canonical("aide-faq") },
 };
 

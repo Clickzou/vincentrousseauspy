@@ -31,6 +31,12 @@ export const secretProfessionnel: Article = {
     "Tout ce qui se dit en séance est couvert par le secret professionnel, et le violer " +
     "est un délit. Voici précisément ce que cela recouvre, les rares exceptions que " +
     "prévoit la loi, et ce que cela change pour vous.",
+  /* Le titre de la page fait 49 caractères. La version courte porte le mot-clé
+     recherché — « secret professionnel psychologue » — en toutes lettres. */
+  metaTitre: "Secret professionnel du psychologue",
+  metaDescription:
+    "Tout ce qui se dit en séance est couvert par le secret professionnel. Ce que " +
+    "cela recouvre, et les rares exceptions prévues par la loi.",
   publieLe: "2026-09-08",
   modifieLe: "2026-09-08",
   motCle: "secret professionnel psychologue",

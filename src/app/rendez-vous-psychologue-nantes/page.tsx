@@ -46,9 +46,8 @@ const TITRE = "Prendre rendez-vous";
 export const metadata: Metadata = {
   title: TITRE,
   description:
-    `Prendre rendez-vous avec ${praticien.nom}, ${minusculeInitiale(praticien.titreCourt)} ` +
-    `à ${cabinet.ville}. Par téléphone au ${contact.telephone} ou par demande de rappel. ` +
-    `Consultations pour adultes, ${minusculeInitiale(horaires.libelle)}.`,
+    `Prendre rendez-vous avec un psychologue à ${cabinet.ville} : par téléphone au ` +
+    `${contact.telephone}, ou par demande de rappel ${priseRdv.delaiReponse}.`,
   alternates: { canonical: canonical("rendez-vous-psychologue-nantes") },
   openGraph: {
     title: `${TITRE} — ${praticien.nom}, psychologue à ${cabinet.ville}`,

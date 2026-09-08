@@ -49,11 +49,12 @@ const TITRE = "Psychanalyste à Nantes";
 const MODIFIE_LE = "2026-09-08";
 
 export const metadata: Metadata = {
-  title: TITRE,
+  /* `absolute` : le titre contient déjà la ville, le suffixe la répéterait.
+     Voir la règle dans layout.tsx. */
+  title: { absolute: `${TITRE} — ${praticien.nom}` },
   description:
-    `${praticien.nom}, psychanalyste à ${cabinet.ville}. La psychanalyse est un ` +
-    `dispositif de psychothérapie par la parole : ce qu'elle est, ce qu'elle écoute, ` +
-    `et comment se déroulent les séances au cabinet.`,
+    `Psychanalyste à ${cabinet.ville} : ce qu'est la psychanalyse, ce qu'elle écoute, ` +
+    `et comment se déroulent les séances au cabinet de ${praticien.nom}.`,
   alternates: { canonical: canonical("psychanalyste-nantes") },
   openGraph: {
     title: `${TITRE} — ${praticien.nom}`,

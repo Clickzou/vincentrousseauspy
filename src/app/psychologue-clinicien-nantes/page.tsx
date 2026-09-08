@@ -51,11 +51,12 @@ const TITRE = "Psychologue clinicien à Nantes";
 const MODIFIE_LE = "2026-09-08";
 
 export const metadata: Metadata = {
-  title: TITRE,
+  /* `absolute` : le titre contient déjà la ville, le suffixe la répéterait.
+     Voir la règle dans layout.tsx. */
+  title: { absolute: `${TITRE} — ${praticien.nom}` },
   description:
     `À quel moment consulter un psychologue clinicien à ${cabinet.ville} ? Ce qu'est un ` +
-    `symptôme, pourquoi il finit par ne plus « tenir », et ce que propose un travail par ` +
-    `la parole. Par ${praticien.nom}, ${praticien.titreCourt.toLowerCase()}.`,
+    `symptôme, pourquoi il finit par ne plus « tenir », et ce que je propose.`,
   alternates: { canonical: canonical("psychologue-clinicien-nantes") },
   openGraph: {
     title: `${TITRE} — ${praticien.nom}`,
