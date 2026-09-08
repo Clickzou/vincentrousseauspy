@@ -368,6 +368,10 @@ agrégateurs portant des centaines de fiches de praticiens et une autorité sans
 mesure. **Aucun contenu ne les déloge des deux premières places organiques.**
 
 La position 3 est donc vraisemblablement **le plafond organique**, et le site y est déjà.
+
+> **Complété au § 8.1 par la SERP elle-même.** Sur 20 résultats, deux seulement sont des
+> sites de praticiens. Le site n'est pas 3ᵉ derrière deux concurrents : il est **premier
+> de sa catégorie**, et le seul praticien du top 5. Le travail est défensif.
 Le § 5.3 doit se lire ainsi : *si* la position 1 était accessible, elle vaudrait +375
 clics ; cet export indique qu'elle ne l'est pas.
 
@@ -378,6 +382,10 @@ devant Doctolib. Il ne dépend pas du site mais de la **fiche Google Business Pr
 
 Quatrième source convergente vers la même action, après les trois du § 5.6. La fiche n'est
 toujours pas vérifiée.
+
+> ⚠️ **Nuancé au § 8.3.** Le panneau d'intention de Sistrix donne « Savoir » en tête et
+> « Visiter » en queue sur cette requête, et la SERP est occupée à 55 % par des annuaires.
+> Il y a **deux** leviers, pas un : la fiche Google, et la présence dans les annuaires.
 
 ## 6.2 Indice de visibilité 0,00 — ce que cela impose au § 5.5
 
@@ -421,3 +429,249 @@ difficile qu'il n'y paraît sur ses requêtes nationales.
 situe le Local pack. Dans Sistrix, elle s'ouvre par l'**icône œil** à droite de la ligne
 du mot-clé, dans le tableau des positions — pas par l'onglet Concurrents, qui raisonne au
 niveau du domaine.
+
+---
+
+# 7. EMPREINTE COMPLÈTE — 50 MOTS-CLÉS, 8 septembre 2026
+
+Export « Mots-clés » (filtre concurrence 1-100), avec les URL positionnées. C'est la vue
+qui manquait : les § 5 et 6 raisonnaient sur les quinze premières lignes.
+
+## 7.1 ⚠️ CORRECTION DU § 5.2 — l'accueil ne porte pas tout
+
+Le § 5.2 affirme que « 15 lignes sur 15 pointent vers l'accueil ». C'est vrai **des quinze
+premières par clics**, et faux de l'empreinte complète.
+
+Sur les 50 mots-clés, **la page pédagogique se positionne seule sur dix requêtes** :
+
+| Mot-clé | Pos. | Vol. |
+|---|---|---|
+| `les différents psy` | 6 | 70 |
+| `les differents psy` (sans accent) | 8 | 40 |
+| `les psychologues` | 46 (−12) | 70 |
+| `different psy` | 5 | 10 |
+| `différent psychologue` | 7 (−6) | 10 |
+| `types de psychologues` | 5 | 10 |
+| `psychologue type` | 4 | 10 |
+| `different type de psychologue` | 6 | 10 |
+| `spécialiste en psychologie` | 10 | 10 |
+| `différents psy` | 5 | 0 |
+
+Elle est **la seule page intérieure à se positionner**. Tout le reste est porté par
+l'accueil. Le constat de cannibalisation du § 1 tient donc, mais avec cette exception, qui
+est aussi une preuve de faisabilité : une page intérieure de ce site *peut* se positionner
+seule.
+
+**Signal d'alerte, en sens inverse :** deux de ses requêtes reculent nettement —
+`les psychologues` (−12, de 34 à 46) et `différent psychologue` (−6). Ce sont ses deux
+requêtes les plus génériques. Cohérent avec le § 6.2 : sur le générique national, un
+domaine à 0,00 d'indice ne tient pas.
+
+## 7.2 ⚠️ NUANCE AU § 5.4 — deux requêtes par symptôme, pas zéro
+
+Le § 5.4 conclut qu'il n'existe **aucune** requête locale par symptôme. C'est exact de la
+liste des 127 idées de mots-clés, sur laquelle la conclusion a été tirée. L'export des
+positions en montre **deux** :
+
+- `psychologue confiance en soi nantes` — 80, position 6 (déjà relevé)
+- `psychologue anxiete nantes` — **10**, position 8, 0 clic
+
+Deux requêtes, dont une à 10 de volume. **La conclusion du § 5.4 ne change pas** — il n'y
+a pas de silo à construire là-dessus — mais l'affirmation « aucune » était trop absolue et
+doit se lire « aucune de volume exploitable ».
+
+## 7.3 Le PDF Visentini se positionne — et la migration le préserve déjà
+
+`/wp-content/uploads/2023/11/20-04-efficacite_psychanalyse_Visentini.pdf`
+
+- `psychanalyse résultats` — **position 2**
+- `rapport inserm psychanalyse` — position 10, volume 10
+
+Un PDF hérité de WordPress capte des positions. **Vérifié le 8 septembre 2026 : les deux
+PDF sont conservés dans la v2 au chemin exact d'origine** (`public/wp-content/uploads/…`),
+et répondent en 200 avec le bon type MIME. Aucune action requise — mais le choix de
+conserver l'arborescence WordPress pour ces fichiers, fait sans cette donnée, se trouve
+validé après coup. **Ne pas les déplacer.**
+
+## 7.4 Les requêtes par quartier et par rue confirment le § 5.7
+
+| Mot-clé | Pos. | Vol. |
+|---|---|---|
+| `psychologue nantes zola` | 6 | 90 |
+| `neuropsychologue nantes rue jean jacques rousseau` | 8 | 90 |
+| `psychologue nantes sud` | 4 | 20 |
+| `psychologue nantes nord` | 4 | 10 |
+| `psychologue nantes chantenay` | 6 | 10 |
+| `psychologue route de vannes nantes` | 5 | 10 |
+
+**Six requêtes géographiques, dont deux à 90 de volume, et aucune ne correspond au
+quartier réel du cabinet** (rue de la Havane, Manufacture des Tabacs, Gare Nord, Jardin
+des Plantes).
+
+`neuropsychologue nantes rue jean jacques rousseau` est une collision de nom, pas une
+intention : le site remonte sur « Rousseau ». Cela ne se reproduit pas volontairement.
+
+La conclusion du § 5.7 s'en trouve renforcée : `/cabinet-nantes/`, page la plus mince du
+site (404 mots), doit porter les repères réels du quartier. C'est la seule de ces requêtes
+qu'on puisse honnêtement viser.
+
+## 7.5 Positions acquises sur ce que le praticien n'est pas
+
+| Mot-clé | Pos. | Problème |
+|---|---|---|
+| `psychologue humaniste nantes` | 7 | Approche psychanalytique, pas humaniste |
+| `psychanalyste jungien nantes` | 9 | Orientation lacanienne (ALI, EPB) |
+| `psychk nantes` | 6 | PSYCH-K est une autre méthode |
+| `etiopsychologie nantes` | 11 | Autre approche |
+| `psychologue clinicienne nantes` | 5 | Féminin |
+| `arnaud buffa nantes` | 19 | Nom d'un tiers |
+
+**Aucune ne doit être renforcée.** Elles expliquent une part de l'empreinte de 50 à 60
+mots-clés, et un visiteur venu par elles repart aussitôt. Elles ne sont pas non plus à
+combattre : on ne les alimente simplement pas.
+
+## 7.6 Requêtes qualitatives — le lien avec les avis
+
+| Mot-clé | Pos. | Vol. |
+|---|---|---|
+| `bon psychanalyste nantes` | 2 | 10 |
+| `bon psychologue nantes` | 3 | 10 |
+| `meilleur psychologue nantes` | 7 | 20 |
+
+Volumes faibles, mais l'intention est celle du § 5.6 : le public cherche à évaluer avant
+de prendre rendez-vous. Même conclusion, même levier — la fiche Google Business Profile.
+
+## 7.7 Le champ « Intention » de Sistrix
+
+L'outil classe `psychanalyste nantes`, `psychologue homme nantes`, `psychologue confiance
+en soi nantes` et la plupart des requêtes locales en **« Visite »**. `psychologue nantes`
+et `psy nantes`, les deux plus gros volumes, sont en **« Diversifié »**.
+
+Le détail de ce « diversifié » est donné au § 8.3, et il n'est pas celui qu'on
+attendait.
+
+---
+
+# 8. LA SERP DE `psychologue nantes` — 8 septembre 2026
+
+La donnée réclamée depuis le § 5.3. Volume 2 000, concurrence 37 %.
+
+| # | Résultat | Nature |
+|---|---|---|
+| 1 | doctolib.fr/psychologue/nantes | Plateforme |
+| 2 | resalib.fr/recherche/psychologue/nantes | Plateforme |
+| **3** | **psychologuenantes-vincentrousseau.fr/** | **Praticien** |
+| 4 | psychologue.net/cabinets/nantes | Annuaire |
+| 5 | doctolib.fr/psychologue-clinicien/nantes | Plateforme |
+| 6 | vincianedevaux-psychologue.com/ | Praticien |
+| 7 | pagesjaunes.fr/annuaire/nantes-44/psychologues | Annuaire |
+| 8 | doctolib.fr/psychologue/nantes/**sophie-thomazeau** | Fiche praticien sur Doctolib |
+| 9 | mappy.com/activite/psychologues/44000-nantes | Annuaire |
+| 10 | psychologytoday.com/fr/psychologues/pdl/nantes | Annuaire |
+| 11 | annuaire-des-psychologues.fr/psychologue/nantes/ | Annuaire |
+| 12 | annuaire.psychologues.fr/annuaire/villes/nantes | Annuaire |
+| 13 | doctolib.fr/psychologue/nantes/**catherine-rio** | Fiche praticien sur Doctolib |
+| 14 | psys.nosavis.com | Annuaire d'avis |
+| 15 | youtube.com | Vidéo |
+| 16 | psygarde.com/loire-atlantique/psychologues-nantes | Annuaire |
+| 17 | facebook.com (Nantes TV) | Vidéo |
+| 18 | psychologue.mayako.fr/annuaire/ville/nantes | Annuaire |
+| 19 | facebook.com (Télénantes) | Vidéo |
+| 20 | ouest-france.fr (vidéo) | Presse |
+
+## 8.1 Le § 6.1 est confirmé — et la lecture doit être renversée
+
+Les positions 1 et 2 sont Doctolib et Resalib. **Inatteignables**, confirmé.
+
+Mais le classement se lit autrement dès qu'on ne compte que ce qui est comparable :
+
+> **Sur les 20 résultats, deux seulement sont des sites de praticiens : Vincent Rousseau
+> en 3ᵉ position, et `vincianedevaux-psychologue.com` en 6ᵉ.**
+
+Il n'est donc pas 3ᵉ derrière deux concurrents. **Il est premier de sa catégorie**, et le
+seul praticien du top 5. Le combat n'est pas de dépasser Doctolib — c'est impossible et
+c'était une erreur de le formuler ainsi au § 5.3. Le combat est de **conserver la première
+place parmi les praticiens**, contre un seul rival identifié.
+
+Cela change la nature du travail : il devient **défensif**. Or c'est exactement le risque
+signalé au § 5.10 — la v2 redistribue sur des pages dédiées le contenu qui tient cette
+3ᵉ place.
+
+## 8.2 Onze résultats sur vingt sont des annuaires où l'on peut être inscrit
+
+Doctolib (×4), Resalib, psychologue.net, PagesJaunes, Mappy, PsychologyToday,
+annuaire-des-psychologues, annuaire.psychologues.fr, psygarde, mayako, nosavis.
+
+**Deux fiches Doctolib de praticiennes nantaises occupent les positions 8 et 13** —
+Sophie Thomazeau et Catherine Rio. Elles sont mieux placées sur cette requête que la
+quasi-totalité des sites personnels de praticiens.
+
+C'est un levier qui n'a rien à voir avec le site : **occuper une place supplémentaire dans
+la même SERP en s'appuyant sur l'autorité d'une plateforme.** Il mérite d'être posé, avec
+ses contreparties, qui ne sont pas nulles :
+
+- Doctolib est payant (abonnement mensuel) et suppose d'accepter la prise de rendez-vous
+  en ligne. Or `priseRdv.plateforme` est à `null` : c'est un choix de fonctionnement, pas
+  un oubli.
+- Une plateforme s'interpose dans la relation et impose son cadre de prise de rendez-vous.
+- Les annuaires gratuits (psychologue.net, PagesJaunes, annuaire-des-psychologues,
+  psygarde) n'ont aucune de ces contreparties et occupent quand même 6 places sur 20.
+
+**Préconisation :** commencer par les annuaires gratuits, qui ne coûtent qu'un formulaire
+et n'engagent rien. La question Doctolib relève de Vincent, pas du SEO.
+
+## 8.3 ⚠️ L'intention n'est pas celle qu'on supposait
+
+Le panneau « Intention de recherche » de Sistrix pour `psychologue nantes` :
+
+| Intention | Poids |
+|---|---|
+| **Savoir** | le plus élevé |
+| Site web | moyen |
+| Faire | faible |
+| **Visiter** | faible |
+
+C'est contre-intuitif pour une requête locale, et **cela nuance les § 5.6, 6.1, 7.6 et
+7.7**, qui concluaient tous que le Local pack — donc la fiche Google Business Profile —
+était le levier déterminant.
+
+La SERP explique pourquoi : elle est occupée à 55 % par des annuaires, c'est-à-dire par
+des pages de **comparaison**. Qui tape `psychologue nantes` ne cherche pas majoritairement
+à s'y rendre tout de suite : il **compare** avant de choisir.
+
+**Position corrigée.** Il y a deux leviers, pas un :
+
+1. **La fiche Google Business Profile** — reste vraie, le Local pack existe (SERP features
+   du CSV agence) et il précède l'organique. Les requêtes d'intention « Visite » du § 7.7
+   en dépendent directement.
+2. **La présence dans les annuaires** — démontrée par cette SERP, et sous-estimée jusqu'ici
+   dans ce document. C'est là que se fait la comparaison, et le site n'y est pas.
+
+Affirmer que « tout converge vers la fiche Google », comme le faisaient les § 5.6 et 6.1,
+était une conclusion tirée trop vite d'indices indirects. La SERP elle-même dit autre
+chose.
+
+## 8.4 Le concurrent direct
+
+`vincianedevaux-psychologue.com` — position 6, seul autre site de praticien du top 20,
+déjà repéré au § 6.3 (17 % de recouvrement de mots-clés). C'est **le** concurrent à
+observer : structure du site, contenu, fiche Google, annuaires où elle est inscrite.
+
+## 8.5 Quatre vidéos dans le top 20
+
+YouTube (15), Facebook Nantes TV (17), Facebook Télénantes (19), Ouest-France (20) —
+cohérent avec la SERP feature « Vidéos » relevée par l'agence. Aucune n'est de Vincent.
+
+Constat, pas préconisation : produire de la vidéo est un métier, et rien n'indique que ce
+soit le meilleur emploi du temps disponible. À noter, sans plus.
+
+## 8.6 Ce qui reste à faire, révisé
+
+1. **Vérifier la fiche Google Business Profile** — inchangé, toujours prioritaire.
+2. **Créer la Search Console** — inchangé, aucun historique rétroactif.
+3. **Inscrire le cabinet dans les annuaires gratuits du top 20** : psychologue.net,
+   PagesJaunes, annuaire-des-psychologues.fr, psygarde.com, mayako. Nouveau, issu du § 8.2.
+4. **Examiner `vincianedevaux-psychologue.com`** — § 8.4.
+5. **Protéger la 3ᵉ place à la bascule** — c'est une position de premier praticien, pas une
+   position moyenne. § 8.1 et § 5.10.
+6. **Étoffer `/cabinet-nantes/`** — § 5.7 et 7.4.
