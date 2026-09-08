@@ -9,6 +9,14 @@ import type { NextConfig } from "next";
  */
 
 const nextConfig: NextConfig = {
+  /**
+   * Dossier de sortie. Vaut `.next` partout, sauf quand `npm run build:check`
+   * pose `NEXT_DIST_DIR` : le build de vérification compile alors dans
+   * `.next-check/` et ne détruit pas les chunks du serveur de développement,
+   * qui écrit dans le même dossier. Voir tools/build-check.mjs.
+   */
+  distDir: process.env.NEXT_DIST_DIR || ".next",
+
   // Le site WordPress sert déjà en /%postname%/ avec slash final et Google a
   // indexé ces URLs. Ne jamais changer ce réglage.
   trailingSlash: true,
