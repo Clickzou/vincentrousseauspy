@@ -160,7 +160,11 @@ const LIENS_UTILES = [
   {
     titre: "Code de déontologie des psychologues",
     detail: "Le texte de référence de la profession",
-    href: "https://www.codededeontologiedespsychologues.fr/LE-CODE.html",
+    /* L'URL héritée du site WordPress (/LE-CODE.html) répond 404 : le site a
+       été refait, et le lien pointait dans le vide depuis. Vérifié le
+       2026-09-08. Un lien mort dans un bloc « sources d'autorité » dessert
+       exactement ce qu'il est censé établir. */
+    href: "https://www.codededeontologiedespsychologues.fr/codes-de-deontologie/",
   },
   {
     titre: "Syndicat National des Psychologues",
@@ -469,6 +473,27 @@ export default function Accueil() {
           ))}
         </ol>
 
+        {/* Renvoi vers la page pédagogique comparative.
+            L'accueil WordPress portait un bouton « Un "psy" c'est quoi ? » qui
+            pointait dessus ; la refonte l'avait perdu, et la page se retrouvait
+            liée par une seule autre page du site alors qu'elle porte les
+            requêtes « psychiatre… ». Rétabli le 2026-09-08, à sa place logique :
+            juste après les trois titres, là où le lecteur compare. */}
+        <p className="mt-8">
+          <Link
+            href="/psychologue-clinicien-psychotherapeute-psychiatre-psychanalyste/"
+            className="group inline-flex items-center gap-2 font-medium text-terracotta-fonce underline underline-offset-4"
+          >
+            Psychologue, psychothérapeute, psychiatre, psychanalyste : quelles différences ?
+            <span
+              aria-hidden="true"
+              className="transition-transform group-hover:translate-x-1"
+            >
+              &rarr;
+            </span>
+          </Link>
+        </p>
+
         {/* Déclarations officielles. Ce sont des faits vérifiables (numéros,
             autorité de tutelle, université) : c'est exactement ce que Google
             attend d'un site YMYL, et ce qu'un visiteur peut contrôler. */}
@@ -673,6 +698,11 @@ export default function Accueil() {
                 <li key={r.href}>
                   <a
                     href={r.href}
+                    /* Nouvel onglet : ce sont des PDF. Les ouvrir dans l'onglet
+                       courant fait quitter le site, et le retour depuis un
+                       lecteur PDF est laborieux — surtout sur mobile. */
+                    target="_blank"
+                    rel="noopener"
                     className="group flex items-start gap-4 rounded-[20px] bg-peche p-5 transition-colors hover:bg-terracotta/40"
                   >
                     <span className="mt-0.5 shrink-0 text-bois-brun" aria-hidden="true">

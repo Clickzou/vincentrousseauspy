@@ -12,6 +12,7 @@ import {
   SITE_URL,
 } from "@/lib/site-config";
 import { graph, localBusinessSchema, personSchema } from "@/lib/seo/schemas";
+import { Navigation } from "@/components/ui/Navigation";
 import {
   IconeHorloge,
   IconeLieu,
@@ -61,32 +62,6 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-/**
- * Navigation. Les libellés disent ce que sont les pages : l'ancien menu
- * (« Qui, quand, où ? », « Les "Psy" », « Infos légales ») masquait des pages
- * positionnées — /psychanalyste-nantes/ ranke 2e sur « psychanalyste nantes ».
- *
- * Huit entrées, c'est le plafond raisonnable : au-delà, le menu passe sur deux
- * lignes en desktop et cesse d'être lisible d'un coup d'œil. Toute page
- * supplémentaire passe donc par le maillage contextuel, le pied de page ou le
- * plan du site — pas par une neuvième entrée.
- *
- * « Écrits » plutôt que « Blog » : c'est le titre porté par la page elle-même,
- * et le mot correspond mieux à deux textes par mois qu'à un flux d'actualité.
- */
-const NAVIGATION = [
-  { href: "/vincent-rousseau-psychologue/", label: "Qui je suis" },
-  { href: "/psychotherapeute-nantes/", label: "La psychothérapie" },
-  { href: "/psychanalyste-nantes/", label: "La psychanalyse" },
-  { href: "/consultations/", label: "Les consultations" },
-  { href: "/tarifs-et-remboursement/", label: "Tarifs" },
-  /* « FAQ » dans le menu, « Questions fréquentes » en H1 sur la page : le menu
-     est en petites capitales et doit rester court, le titre de page porte le
-     mot-clé en toutes lettres. */
-  { href: "/aide-faq/", label: "FAQ" },
-  { href: "/blog/", label: "Écrits" },
-  { href: "/contact-psychologue-clinicien-nantes/", label: "Contact" },
-];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   // LocalBusiness + Person sur toutes les pages : l'entité doit rester
@@ -152,31 +127,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Barre de navigation sombre — element d'identite fort du site actuel. */}
         <header className="bg-white">
-          <nav
-            aria-label="Navigation principale"
-            className="mx-auto max-w-6xl px-5 pb-6"
-          >
-            <ul className="flex flex-wrap items-stretch overflow-hidden rounded-[20px] bg-encre text-xs uppercase tracking-widest text-white">
-              {NAVIGATION.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="block px-5 py-5 hover:text-terracotta"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-              <li className="ml-auto">
-                <Link
-                  href="/rendez-vous-psychologue-nantes/"
-                  className="block h-full bg-terracotta px-7 py-5 font-medium text-encre"
-                >
-                  Prendre RDV
-                </Link>
-              </li>
-            </ul>
-          </nav>
+          <Navigation />
         </header>
 
         <main id="contenu" className="flex-1">

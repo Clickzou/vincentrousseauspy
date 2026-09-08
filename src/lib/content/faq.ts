@@ -114,6 +114,11 @@ export const QUESTIONS: Question[] = [
       "comme à un mal-être qui n'a rien de pathologique.",
   },
   {
+    /* Sur l'accueil : c'est la question qui distingue le mieux la pratique de
+       Vincent, et elle prépare le lecteur à ce qu'il trouvera sur
+       /psychanalyste-nantes/. Elle correspond au « Comment trouver le psy qui
+       vous convient ? » de l'ancien accueil. */
+    surAccueil: true,
     question: "Quelle approche thérapeutique me conviendrait le mieux ?",
     reponse:
       "Il existe différentes approches — thérapie cognitivo-comportementale, " +

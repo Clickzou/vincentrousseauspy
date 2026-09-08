@@ -246,7 +246,46 @@ oublier de les y replacer** — elles sont exactes et utiles, elles ne sont simp
 
 ---
 
-## 7. RAPPELS TECHNIQUES
+## 7. AUDIT DE REPRISE DE L'ACCUEIL WORDPRESS — 2026-09-08
+
+Passe bloc par bloc sur les **69 blocs** de `docs/contenu-actuel/home-main.md`, faite après
+qu'un paragraphe eut été perdu sans être signalé. Chaque bloc a désormais une destination
+ou une raison documentée d'avoir été écarté.
+
+**Repris** : hero · « La psychanalyse, c'est quoi ? » · « Ce qui amène à consulter » ·
+« Vous souhaitez venir ? » · adresse et plan · « La psychanalyse en détails » (3 § sur 3) ·
+les trois titres professionnels · citation René Char · double titre · ADELI, SIRET, diplôme ·
+les 2 PDF · liens utiles · les 12 questions/réponses (fusionnées dans `/aide-faq/`, la page
+auteur, `/consultations/` et `/tarifs-et-remboursement/`) · bouton de rendez-vous.
+
+**Trois manques trouvés et corrigés :**
+
+| Bloc | Sort |
+|---|---|
+| 3<sup>e</sup> § de « La psychanalyse en détails » — « sa propre opacité », « le X qui indique l'emplacement de l'inconscient » | **Perdu par erreur.** Remis sur `/psychanalyste-nantes/`, en clôture de « Ce que l'on écoute en séance » |
+| Bouton « Un "psy" c'est quoi ? » de l'accueil | **Lien perdu.** La page pédagogique n'était liée que par une seule page, alors qu'elle porte les requêtes « psychiatre… ». Rétabli sous les trois titres |
+| Lien « Code de déontologie » (`/LE-CODE.html`) | **404 depuis la refonte du site cible.** Corrigé vers `/codes-de-deontologie/` |
+
+**Écartés volontairement** — à ne pas réintroduire :
+
+| Texte d'origine | Motif |
+|---|---|
+| « une méthode éprouvée visant à apporter des changements durables » | Promesse de résultat (§ 2.2) |
+| « Contrairement à certaines approches psychothérapeutiques adoptant un modèle plus mécanique » | Publicité comparative (§ 2.2). Remplacé par « une thérapie dite de fond », qui distingue sans hiérarchiser |
+| « une séance de 45 min à 1 h peut coûter entre 50 et 70 € […] un psychanalyste facture entre 30 et 80 € » | Comparaison tarifaire avec d'autres praticiens (§ 2.2) |
+| « qu'il soit enfant, adolescent ou adulte », « difficultés au sein des couples ou problèmes avec les enfants/adolescents » | Vincent ne reçoit que des adultes. Le site actuel se contredit d'une page à l'autre |
+| « Je recommande de privilégier un profil professionnel pouvant afficher un numéro ADELI » | Conseil qui vise implicitement les confrères sans numéro. Le fond est conservé, mais retourné en information vérifiable sur la page pédagogique : quels titres sont contrôlables, et auprès de qui |
+
+**Contrôle des liens externes** (2026-09-08) : les 19 liens sortants testés un à un.
+Un seul mort, corrigé. Les 403 de Légifrance sont un blocage anti-robot — les pages ont été
+ouvertes et vérifiées, elles sont exactes.
+
+**Les deux PDF s'ouvrent désormais dans un nouvel onglet**, sur l'accueil comme sur
+`/psychanalyste-nantes/` : le retour depuis un lecteur PDF est laborieux, surtout sur mobile.
+
+---
+
+## 8. RAPPELS TECHNIQUES
 
 - **Palette et polices** extraites du CSS Elementor d'origine, pas estimées à l'œil.
   Roboto (titres et texte), Yesteryear (signature), Abhaya Libre (citations uniquement).

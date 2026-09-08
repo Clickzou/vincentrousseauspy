@@ -212,6 +212,30 @@ export default function PsychanalysteNantes() {
             </li>
           ))}
         </ul>
+
+        {/* Clôture du troisième paragraphe de « La psychanalyse en détails ».
+            Dans le texte d'origine, il suit exactement cette liste et la
+            généralise : il fait passer l'inconscient d'une notion théorique à
+            quelque chose que le lecteur peut reconnaître chez lui. Coupé par
+            erreur lors de la première reprise, remis le 2026-09-08.
+
+            Il vient ICI et pas sur l'accueil : y remettre du fond sur la
+            psychanalyse recréerait la concurrence entre les deux pages que la
+            refonte vient précisément de dénouer (cf. POINT-ETAPE § 6). */}
+        <div className="prose-clinique mt-12">
+          <p>
+            Plus largement&nbsp;: dès lors que l&rsquo;on s&rsquo;interroge un peu
+            sérieusement sur le sens de ses conduites ou de ses dires, on réalise
+            aisément que le sens de nos actions ne nous est pas aussi évident, ni aussi
+            accessible, que l&rsquo;on voudrait bien se le faire croire de prime abord.
+          </p>
+          <p>
+            On se confronte alors à sa propre opacité — à l&rsquo;énigme que l&rsquo;on
+            représente pour soi-même. Et c&rsquo;est bien par cette confrontation à
+            soi-même que l&rsquo;on vient marquer le X qui indique l&rsquo;emplacement de
+            l&rsquo;inconscient&nbsp;: là, à cet endroit, il y a de l&rsquo;inconscient.
+          </p>
+        </div>
       </section>
 
       {/* 4. THÉRAPIE DE FOND. Sert l'intention « psychanalyse ou TCC ? »,
@@ -301,6 +325,9 @@ export default function PsychanalysteNantes() {
               <li key={l.href}>
                 <a
                   href={l.href}
+                  /* Nouvel onglet, comme sur l'accueil : ce sont des PDF. */
+                  target="_blank"
+                  rel="noopener"
                   className="flex items-start gap-4 rounded-[20px] bg-peche p-5 transition-colors hover:bg-terracotta/40"
                 >
                   <span className="mt-0.5 shrink-0 text-bois-brun" aria-hidden="true">
