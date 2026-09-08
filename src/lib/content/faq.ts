@@ -155,14 +155,15 @@ export const QUESTIONS: Question[] = [
   },
   {
     question: "Le cabinet est-il accessible aux personnes en situation de handicap ?",
-    /* TODO Vincent : formulation à préciser. Le site actuel indique seulement
-       que « le cabinet tient compte des normes d'accessibilité », ce qui ne
-       dit pas si l'accès est de plain-pied, s'il y a un ascenseur, etc.
-       Une personne concernée a besoin d'une réponse concrète. */
-    reponse:
-      "Le cabinet tient compte des normes d'accessibilité. Si vous avez un besoin " +
-      "particulier, appelez-moi avant votre venue : nous verrons ensemble ce qu'il " +
-      "est possible d'organiser.",
+    /* Réponse alimentée par `cabinet.acces.pmr`, source unique : la FAQ et la
+       page cabinet ne peuvent plus se contredire.
+
+       Il reste à préciser la MODALITÉ d'accès — plain-pied, rampe, ascenseur.
+       Tant qu'elle est inconnue, on affirme l'accessibilité, on ne décrit pas
+       un dispositif qu'on n'a pas vérifié. */
+    reponse: cabinet.acces.pmr
+      ? cabinet.acces.pmr
+      : "Appelez-moi avant votre venue : je vous décrirai précisément l'accès.",
   },
   {
     question: "Où se trouve le cabinet et quand puis-je venir ?",

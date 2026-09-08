@@ -55,14 +55,38 @@ export const cabinet = {
   codePostal: "44000",
   ville: "Nantes",
   pays: "FR",
-  /** À remplacer par les coordonnées réelles avant mise en production. */
-  geo: { latitude: null as number | null, longitude: null as number | null },
+  /**
+   * COORDONNÉES DE L'AXE, PAS DU NUMÉRO. Relevées le 8 septembre 2026 auprès
+   * d'OpenStreetMap, qui ne connaît pas le 10 bis : c'est le centre de la rue
+   * de la Havane, à quelques dizaines de mètres près. Suffisant pour le
+   * balisage `LocalBusiness`, où la précision au mètre n'a aucune portée.
+   *
+   * À affiner depuis la fiche Google Business Profile le jour où elle sera
+   * créée : c'est elle, et non ce balisage, qui place le point sur la carte
+   * de Google.
+   *
+   * La requête a par ailleurs confirmé le quartier, utile à /cabinet-nantes/ :
+   * Coulmiers — Jardin des Plantes, Malakoff — Saint-Donatien.
+   */
+  geo: { latitude: 47.2200742 as number | null, longitude: -1.5371571 as number | null },
   acces: {
     tram: "Ligne 1, arrêt « Manufacture »",
     reperes: "Derrière la Manufacture des Tabacs, proche Gare Nord et Jardin des Plantes",
     stationnement: "Places payantes à proximité",
-    /** Information absente du site actuel — à obtenir auprès de Vincent. */
-    pmr: null as string | null,
+    /**
+     * Accessibilité confirmée par Vincent le 8 septembre 2026 : le cabinet est
+     * accessible aux personnes à mobilité réduite.
+     *
+     * ⚠️ LA MODALITÉ RESTE À PRÉCISER — plain-pied, rampe ou ascenseur ? largeur
+     * de porte ? sanitaires adaptés ? Le texte ci-dessous s'en tient donc au
+     * fait établi et invite à appeler pour le détail. C'est volontaire : une
+     * personne en fauteuil qui se déplace sur une promesse imprécise et ne
+     * peut pas entrer subit un préjudice réel. On n'annonce que ce qu'on sait.
+     */
+    pmr:
+      "Le cabinet est accessible aux personnes à mobilité réduite. Si vous vous " +
+      "déplacez en fauteuil ou si vous avez un besoin particulier, appelez-moi " +
+      "avant de venir : je vous décrirai l'accès en détail." as string | null,
   },
 } as const;
 
