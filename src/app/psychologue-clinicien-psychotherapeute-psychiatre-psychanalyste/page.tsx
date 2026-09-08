@@ -36,11 +36,17 @@ const MODIFIE_LE = "2026-09-08";
 const SLUG = "psychologue-clinicien-psychotherapeute-psychiatre-psychanalyste";
 
 export const metadata: Metadata = {
-  title: "Psychologue, psychothérapeute, psychiatre, psychanalyste : les différences",
+  /* Le title énumérait les quatre titres dans l'ordre du slug. Il mène
+     maintenant par « psychologue ou psychiatre » sans rien perdre de la
+     portée, et gagne dix caractères avant le suffixe du gabarit. */
+  title: "Psychologue ou psychiatre : les différences entre les « psy »",
+  /* La description menait par « formation, titre protégé, droit de prescrire »
+     et dépassait 230 caractères — tronquée en SERP avant d'avoir nommé la
+     question que le lecteur a tapée. Elle mène désormais par le couple
+     psychologue / psychiatre, qui porte l'essentiel de la demande. */
   description:
-    "Formation, titre protégé, droit de prescrire : ce qui distingue réellement un " +
-    "psychologue clinicien, un psychothérapeute, un psychiatre, un psychanalyste et un " +
-    "psychopraticien. Expliqué par un praticien qui détient trois de ces titres.",
+    "Psychologue ou psychiatre, psychothérapeute ou psychanalyste : qui fait quoi, " +
+    "quel titre est protégé, qui peut prescrire. Par un praticien qui en détient trois.",
   alternates: { canonical: canonical(SLUG) },
   openGraph: {
     title: `Les différents « psy » — ${praticien.nom}`,
@@ -482,6 +488,74 @@ export default function LesDifferentsPsy() {
             </Apparition>
           </li>
         </ul>
+      </section>
+
+      {/* 4 bis. LE COUPLE PSYCHOLOGUE / PSYCHIATRE, NOMMÉ EXPLICITEMENT.
+
+          La page traitait les quatre professions à parts égales. La demande,
+          elle, ne l'est pas : le couple psychologue / psychiatre concentre
+          l'essentiel des recherches de ce silo, et aucun titre ne le nommait.
+          Voir docs/seo/audit-positions-2026-09-08.md § 5.5.
+
+          La première phrase est volontairement une phrase complète et
+          autonome : c'est le format que les extraits enrichis et les aperçus
+          génératifs prélèvent, et une réponse tronquée ne sert personne.
+
+          Pas de FAQPage ici : le balisage FAQ reste réservé à /aide-faq/,
+          une seule page devant le porter (§ 11 du master). */}
+      <section
+        aria-labelledby="psychologue-ou-psychiatre"
+        className="bg-creme px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
+      >
+        <Apparition>
+          <div className="mx-auto max-w-4xl text-center">
+            <h2
+              id="psychologue-ou-psychiatre"
+              className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
+            >
+              Psychologue ou psychiatre&nbsp;?
+            </h2>
+
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+
+            <p className="mt-8 font-accent text-xl italic leading-snug text-bois sm:text-[28px]">
+              Le psychiatre est un médecin, le psychologue ne l&rsquo;est pas.
+            </p>
+          </div>
+        </Apparition>
+
+        <Apparition delai={120}>
+          <div className="mx-auto mt-10 max-w-lecture">
+            <div className="prose-clinique">
+              <p className="!mt-0">
+                Toutes les autres différences découlent de celle-là, à commencer par les
+                deux formations, qui n&rsquo;ont rien de commun. Le psychiatre a fait
+                médecine, puis l&rsquo;internat de psychiatrie&nbsp;: une dizaine
+                d&rsquo;années, au terme desquelles il connaît le corps, les
+                pathologies et les molécules. Le psychologue clinicien a fait cinq ans
+                de psychologie et un stage professionnel supervisé&nbsp;: il n&rsquo;a
+                appris ni à examiner un corps ni à doser un traitement, il a appris à
+                écouter et à conduire un entretien.
+              </p>
+
+              <p>
+                Ce n&rsquo;est donc pas une hiérarchie, et l&rsquo;un n&rsquo;est pas
+                l&rsquo;antichambre de l&rsquo;autre&nbsp;: on ne «&nbsp;monte&nbsp;»
+                pas du psychologue au psychiatre quand cela va plus mal. Ce sont deux
+                façons d&rsquo;aborder la souffrance psychique — l&rsquo;une par le corps
+                et la chimie, l&rsquo;autre par ce qui se dit — et{" "}
+                <strong>elles se conjuguent plus souvent qu&rsquo;elles ne
+                s&rsquo;opposent.</strong>
+              </p>
+
+              <p>
+                Le détail de chaque profession, et ce que je peux ou ne peux pas faire,
+                se lisent plus haut&nbsp;: <a href="#le-psychologue">le psychologue
+                clinicien</a> et <a href="#le-psychiatre">le psychiatre</a>.
+              </p>
+            </div>
+          </div>
+        </Apparition>
       </section>
 
       {/* 5. ORIENTATION PRATIQUE, puis contact.

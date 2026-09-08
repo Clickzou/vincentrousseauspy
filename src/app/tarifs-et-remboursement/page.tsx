@@ -42,10 +42,14 @@ const MODIFIE_LE = "2026-09-08";
 
 export const metadata: Metadata = {
   title: TITRE,
+  /* La description ouvrait sur les honoraires et dépassait 250 caractères.
+     Elle mène désormais par le remboursement : `psychologue remboursement`
+     (1 078/mois) devance `psychologue prix` (986), et la question du
+     remboursement est celle qui inquiète avant la consultation. */
   description:
-    `Honoraires de ${honoraires.min} à ${honoraires.max} € la séance chez ${praticien.nom}, ` +
-    `psychologue à ${cabinet.ville}. ${honoraires.modulation} Ce que remboursent ` +
-    `l'Assurance Maladie et les mutuelles, et ce qu'est « Mon soutien psy ».`,
+    `Un psychologue est-il remboursé ? Ce que prennent en charge l'Assurance Maladie, ` +
+    `« Mon soutien psy » et les mutuelles. Honoraires de ${honoraires.min} à ` +
+    `${honoraires.max} € la séance à ${cabinet.ville}.`,
   alternates: { canonical: canonical("tarifs-et-remboursement") },
   openGraph: {
     title: `${TITRE} — ${praticien.nom}`,
@@ -261,6 +265,55 @@ export default function TarifsEtRemboursement() {
             </div>
           </div>
         </div>
+
+        {/* Troisième bloc, pleine largeur sous les deux cartes : c'est la
+            confusion la plus fréquente sur cette question, et elle mérite
+            mieux qu'une incise. Pas de chiffre de prise en charge pour le
+            psychiatre — il dépend du parcours de soins et du secteur, et une
+            page de tarifs n'a pas à avancer un taux qu'elle ne source pas. */}
+        <Apparition delai={160}>
+          <div className="mx-auto mt-6 max-w-4xl rounded-[20px] border border-sable bg-white p-6 sm:p-8">
+            <h3 className="text-lg font-bold text-encre">
+              Le titre du praticien change-t-il le remboursement&nbsp;?
+            </h3>
+
+            <p className="mt-4 text-ardoise">
+              <strong>Ce n&rsquo;est pas le titre affiché qui compte, mais la profession
+              qui le porte.</strong> C&rsquo;est la confusion la plus fréquente, et elle
+              coûte cher à qui la découvre après coup.
+            </p>
+
+            <p className="mt-4 text-ardoise">
+              Le psychiatre est médecin&nbsp;: sa consultation est prise en charge par
+              l&rsquo;Assurance Maladie, comme toute consultation médicale.{" "}
+              <strong>
+                Le psychologue, le psychothérapeute non médecin et le psychanalyste ne
+                le sont pas
+              </strong>{" "}
+              au titre du régime général, et les deux exceptions ci-dessus sont les
+              seules voies ouvertes.
+            </p>
+
+            <p className="mt-4 text-ardoise">
+              «&nbsp;Psychothérapeute&nbsp;» n&rsquo;est pas une profession de plus&nbsp;:
+              c&rsquo;est un titre qui s&rsquo;ajoute à un diplôme préexistant, et il
+              ne crée aucun droit à remboursement par lui-même. «&nbsp;Psychanalyste&nbsp;»
+              ne relève d&rsquo;aucun diplôme d&rsquo;État, et pas davantage. Quant à
+              «&nbsp;Mon soutien psy&nbsp;», il ne s&rsquo;ouvre qu&rsquo;aux{" "}
+              <strong>psychologues</strong> partenaires du dispositif.
+            </p>
+
+            <p className="mt-4 text-sm text-ardoise">
+              <Link
+                href="/psychologue-clinicien-psychotherapeute-psychiatre-psychanalyste/"
+                className="text-terracotta-fonce underline underline-offset-2"
+              >
+                Ce que recouvre chacun de ces titres, et lequel est protégé
+              </Link>
+              .
+            </p>
+          </div>
+        </Apparition>
       </section>
 
       {/* 3. LE COÛT RÉEL DANS LE TEMPS. Question que tout le monde se pose et
