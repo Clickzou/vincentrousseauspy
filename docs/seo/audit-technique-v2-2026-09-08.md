@@ -210,8 +210,14 @@ contenu. Ici elles ne l'illustrent pas. **Je recommande de maintenir les `alt`
 vides et de noter l'exception dans le master**, plutôt que de remplir douze
 attributs pour satisfaire une règle inadaptée au cas.
 
-Décision à prendre : c'est le seul point où je propose de déroger au document
-de référence.
+**DÉCISION PRISE LE 8 SEPTEMBRE 2026 : l'exception est actée.** Les `alt` vides
+sont maintenus sur les œuvres décoratives, et le master a été modifié en
+conséquence au § 8.5.
+
+**Portée stricte.** L'exception vaut pour les œuvres d'art décoratives, et elles
+seules. Le jour où une photo de Vincent ou du cabinet arrive — ce que le master
+recommande par ailleurs — elle porte une information, et son `alt` doit être
+descriptif. Cette ligne ne doit pas devenir un blanc-seing.
 
 ---
 

@@ -631,7 +631,29 @@ mot-clé principal. Un article ne doit jamais concurrencer une page motif ou app
 
 - Format WebP/AVIF, `next/image`, dimensions explicites
 - **Photos réelles du cabinet et de Vincent** — bien plus efficaces en confiance que des banques d'images
-- `alt` descriptif systématique, jamais vide
+- `alt` descriptif systématique **dès que l'image porte une information** — photo du cabinet,
+  photo de Vincent, schéma, capture. Dans ce cas l'`alt` décrit ce que le lecteur ne voit pas,
+  et il n'est jamais vide.
+
+> **EXCEPTION ACTÉE LE 8 SEPTEMBRE 2026 — les œuvres décoratives portent `alt=""`.**
+>
+> La règle initiale disait « jamais vide » sans distinguer. Les douze images du site sont
+> aujourd'hui des œuvres du domaine public (Matisse, Kandinsky) choisies pour l'atmosphère :
+> elles **n'illustrent pas le propos, elles l'accompagnent**.
+>
+> Leur donner un `alt` descriptif obligerait à écrire « tableau de Matisse représentant une
+> nature morte » au milieu d'un texte sur la psychanalyse. C'est une information sans valeur
+> pour qui écoute la page au lecteur d'écran — la recommandation WCAG pour une image purement
+> décorative est précisément l'`alt` vide, qui la fait ignorer — et sans valeur pour Google
+> sur des requêtes de psychologue à Nantes. Le **`figcaption`** sous chaque image porte déjà
+> le crédit de l'œuvre, en texte lisible par tout le monde.
+>
+> **Portée stricte de l'exception : les œuvres d'art décoratives, et elles seules.** Le jour où
+> Vincent fournit une photo de lui ou du cabinet — ce que le présent § 8.5 recommande par
+> ailleurs — cette photo porte une information, et son `alt` doit être descriptif. L'exception
+> ne s'étend pas à elle.
+>
+> Voir `audit-technique-v2-2026-09-08.md` § 6.
 - **Interdits** : mises en scène de détresse, visages de « patients » achetés en stock, illustrations
   anxiogènes ou stigmatisantes, cerveaux stylisés et autres clichés du secteur
 
