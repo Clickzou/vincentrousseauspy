@@ -155,11 +155,21 @@ export function Navigation() {
      panneau et le clic le refermait dans la foulée — l'entrée devenait
      inutilisable sur tablette.
 
-     LA FERMETURE EST DIFFÉRÉE DE 140 ms. Sans ce délai, le moindre passage
-     hors de l'entrée referme le panneau instantanément : une trajectoire un
-     peu oblique vers le troisième item, un tremblement, et le menu se dérobe
-     sous le curseur. Le délai est annulé dès qu'on revient — il ne retarde
-     donc jamais une fermeture voulue, seulement les fausses. */
+     LA FERMETURE EST DIFFÉRÉE DE 250 ms, ET LE PANNEAU L'ANNULE LUI-MêME.
+
+     Trois défenses se superposent ici, et c'est délibéré : la géométrie du
+     survol est fragile par nature — arrondis au sous-pixel, zoom du
+     navigateur, trajectoire oblique du curseur — et un menu qui se dérobe
+     est un défaut que l'utilisateur ressent sans pouvoir le décrire.
+
+       1. Le panneau touche le bouton (marge intérieure, pas extérieure), et
+          le chevauche même d'un pixel : aucun vide à traverser.
+       2. La fermeture attend 250 ms au lieu d'être immédiate.
+       3. Entrer sur le panneau annule la fermeture en cours, même si le
+          curseur est sorti une fraction de seconde entre les deux.
+
+     Le délai ne retarde jamais une fermeture voulue : dès qu'on s'éloigne
+     vraiment, plus rien ne l'annule. */
   const minuterie = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const annulerFermeture = () => {
@@ -178,7 +188,7 @@ export function Navigation() {
   const survolSortie = (e: React.PointerEvent) => {
     if (e.pointerType !== "mouse") return;
     annulerFermeture();
-    minuterie.current = setTimeout(() => setOuvert(null), 140);
+    minuterie.current = setTimeout(() => setOuvert(null), 250);
   };
 
   /* La minuterie ne doit pas survivre au composant. */
@@ -316,16 +326,22 @@ export function Navigation() {
                 {/* UN CONTENEUR, ET UN SEUL RÔLE : combler l'espace entre le
                     bouton et le panneau. Le décalage de 4 px était auparavant
                     une marge extérieure, donc un vide : en le traversant, le
-                    curseur ne survolait plus rien: l'entrée recevait un
-                    événement de sortie et le panneau se fermait avant d'être
-                    atteint. Le même décalage est maintenant une marge
+                    curseur ne survolait plus rien, l'entrée recevait un
+                    événement de sortie, et le panneau se fermait avant
+                    d'être atteint. Le même décalage est maintenant une marge
                     intérieure de ce conteneur transparent, qui touche le bouton
                     d'un côté et le panneau de l'autre. L'espacement visuel est
                     identique, le pont est continu. */}
                 <div
                   id={`sous-menu-${index}`}
                   hidden={!estOuvert}
-                  className="lg:absolute lg:left-0 lg:top-full lg:z-20 lg:pt-1"
+                  onPointerEnter={annulerFermeture}
+                  /* `-mt-px` : le conteneur remonte d'un pixel sur le bouton.
+                     Les hauteurs calculées tombent rarement sur un pixel entier,
+                     et il suffit d'un demi-pixel de vide pour que le survol se
+                     rompe. Un pixel de recouvrement coûte zéro visuellement et
+                     supprime la question. */
+                  className="lg:absolute lg:left-0 lg:top-full lg:z-20 lg:-mt-px lg:pt-1"
                 >
                   <ul
                     className={[
