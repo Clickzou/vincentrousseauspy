@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { PageEnTete } from "@/components/ui/PageEnTete";
-import { contact, editeur, praticien, priseRdv } from "@/lib/site-config";
+import { ChoixCookies } from "@/components/rgpd/ChoixCookies";
+import { contact, editeur, mesureAudience, praticien, priseRdv } from "@/lib/site-config";
 import { canonical } from "@/lib/url-helpers";
 
 /**
@@ -14,14 +15,19 @@ import { canonical } from "@/lib/url-helpers";
  * explicitement. Une politique standard qui énumère des traitements
  * inexistants inquiète au lieu de rassurer.
  *
- * ⚠️ ELLE DÉCRIT L'ÉTAT RÉEL DU SITE AU JOUR DE SA RÉDACTION, et cet état est
- * inhabituellement simple : aucun cookie, aucune mesure d'audience, aucune
- * base de données. TOUTE ÉVOLUTION TECHNIQUE OBLIGE À METTRE CETTE PAGE À
- * JOUR — en particulier :
- *   - la pose d'un outil d'analytics, même sans cookie (Plausible, Umami) ;
+ * ⚠️ UNE POLITIQUE DE CONFIDENTIALITÉ FAUSSE EST PLUS GRAVE QUE PAS DE
+ * POLITIQUE. Cette page décrivait un état figé à sa rédaction — aucun cookie,
+ * aucune mesure d'audience. Or la mesure se branche en posant une variable
+ * d'environnement dans Vercel, SANS TOUCHER AU CODE : la page serait devenue
+ * fausse sans que personne n'ait de raison de la rouvrir.
+ *
+ * Les passages concernant les cookies dépendent donc de `mesureAudience`, et
+ * non d'un texte écrit une fois pour toutes. Ils disent la vérité avant comme
+ * après le branchement.
+ *
+ * RESTENT À METTRE À JOUR À LA MAIN, faute d'être détectables automatiquement :
  *   - l'ajout d'une carte, d'une vidéo ou de tout contenu tiers embarqué ;
  *   - le passage à une plateforme de prise de rendez-vous.
- * Une politique de confidentialité fausse est plus grave que pas de politique.
  */
 
 export const metadata: Metadata = {
@@ -60,9 +66,16 @@ export default function PolitiqueDeConfidentialite() {
           <p className="font-bold text-encre">En résumé</p>
           <ul className="mt-4 space-y-2 text-ardoise">
             {[
-              "Aucun cookie n'est déposé, y compris publicitaire ou de mesure d'audience.",
+              ...(mesureAudience.identifiant
+                ? [
+                    "Aucun cookie n'est déposé tant que vous n'avez pas accepté, et refuser se fait en un clic.",
+                    "Les seuls cookies possibles sont ceux des statistiques de fréquentation. Aucun cookie publicitaire.",
+                  ]
+                : [
+                    "Aucun cookie n'est déposé, y compris publicitaire ou de mesure d'audience.",
+                    "Aucun outil de statistiques n'est installé. Personne ne compte vos visites.",
+                  ]),
               "Aucune base de données : le site n'enregistre rien, nulle part.",
-              "Aucun outil de statistiques n'est installé. Personne ne compte vos visites.",
               "Le formulaire ne comporte aucune zone de message, et son contenu n'est pas stocké.",
               "Les polices de caractères sont hébergées avec le site : votre adresse IP n'est transmise à aucun tiers.",
             ].map((point) => (
@@ -116,11 +129,53 @@ export default function PolitiqueDeConfidentialite() {
           {priseRdv.delaiReponse}.
         </p>
 
-        <H2 id="mesure">Mesure d&rsquo;audience</H2>
-        <p className="mt-4">
-          Aucune. Il n&rsquo;y a sur ce site ni Google Analytics, ni équivalent, ni
-          traceur publicitaire. Personne ne sait quelles pages vous avez lues.
-        </p>
+        {/* L'ancre reste `#mesure` : la bannière de consentement et le lien
+            « Politique de cookies » du pied de page y renvoient. */}
+        <H2 id="mesure">Cookies et mesure d&rsquo;audience</H2>
+
+        {mesureAudience.identifiant ? (
+          <>
+            <p className="mt-4">
+              Ce site utilise Google Analytics pour compter les visites et savoir quelles
+              pages sont consultées. C&rsquo;est la seule raison pour laquelle un cookie
+              peut être déposé ici. Il n&rsquo;y a aucun traceur publicitaire, aucun
+              bouton de réseau social, et rien qui suive votre navigation sur d&rsquo;autres
+              sites.
+            </p>
+            <p className="mt-4">
+              <strong>Rien n&rsquo;est déposé avant votre accord.</strong> Tant que vous
+              n&rsquo;avez pas répondu, ou si vous refusez, le script de Google n&rsquo;est
+              même pas téléchargé&nbsp;: aucune donnée ne part. Le site fonctionne
+              exactement de la même façon dans les deux cas, formulaire et prise de
+              rendez-vous compris.
+            </p>
+            <p className="mt-4">
+              Ces cookies sont déposés par Google&nbsp;: ils portent des noms commençant
+              par <code>_ga</code> et durent jusqu&rsquo;à treize mois. Votre adresse IP est
+              tronquée avant traitement. Votre choix est conservé sur votre appareil
+              pendant six mois, puis la question vous est reposée. Vous pouvez en changer
+              à tout moment ci-dessous, et supprimer les cookies déjà présents depuis les
+              réglages de votre navigateur.
+            </p>
+
+            <ChoixCookies />
+          </>
+        ) : (
+          <>
+            <p className="mt-4">
+              Aucune. Il n&rsquo;y a sur ce site ni Google Analytics, ni équivalent, ni
+              traceur publicitaire. Personne ne sait quelles pages vous avez lues, et
+              aucune bannière de cookies ne vous est présentée — il n&rsquo;y aurait
+              rien à vous demander.
+            </p>
+            <p className="mt-4">
+              La propriété du site est en revanche vérifiée auprès de Google Search
+              Console, au moyen d&rsquo;une simple balise dans le code de la page. Elle ne
+              dépose rien, ne vous suit pas, et ne permet de connaître que les termes de
+              recherche qui mènent au site, de manière agrégée et anonyme.
+            </p>
+          </>
+        )}
 
         <H2 id="tiers">Contenus tiers</H2>
         <p className="mt-4">

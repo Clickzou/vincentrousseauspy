@@ -8,11 +8,15 @@ import {
   cabinet,
   contact,
   horaires,
+  mesureAudience,
   praticien,
   SITE_URL,
 } from "@/lib/site-config";
 import { graph, localBusinessSchema, personSchema } from "@/lib/seo/schemas";
 import { Navigation } from "@/components/ui/Navigation";
+import { SignatureAgence } from "@/components/ui/SignatureAgence";
+import { BanniereCookies } from "@/components/rgpd/BanniereCookies";
+import { MesureAudience } from "@/components/rgpd/MesureAudience";
 import {
   IconeHorloge,
   IconeLieu,
@@ -60,6 +64,14 @@ export const metadata: Metadata = {
     siteName: `${praticien.nom}, psychologue à ${cabinet.ville}`,
   },
   robots: { index: true, follow: true },
+
+  /* Balise de propriété Search Console. Elle ne dépose aucun cookie et ne
+     suit personne : elle n'est donc soumise à aucun consentement, et se pose
+     dès que le domaine définitif est en ligne. `undefined` quand la variable
+     est absente, ce qui n'émet aucune balise. */
+  verification: mesureAudience.verificationGoogle
+    ? { google: mesureAudience.verificationGoogle }
+    : undefined,
 };
 
 
@@ -164,6 +176,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <li>
                   <Link href="/politique-de-confidentialite/">Confidentialité</Link>
                 </li>
+                {/* Les cookies sont traités DANS la politique de
+                    confidentialité, section « Cookies et mesure d'audience »,
+                    et non sur une page séparée : /politique-de-cookies-ue/ du
+                    site WordPress était vide et se trouve déjà redirigée en 301
+                    vers cette page. En recréer une deuxième reconstituerait
+                    deux pages minces là où une seule dit tout. */}
+                <li>
+                  <Link href="/politique-de-confidentialite/#mesure">
+                    Politique de cookies
+                  </Link>
+                </li>
                 <li>
                   <Link href="/blog/">Écrits</Link>
                 </li>
@@ -188,14 +211,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
 
           <div className="border-t border-peche">
-            <div className="mx-auto max-w-6xl px-5 py-4 text-xs text-ardoise">
+            <div className="mx-auto max-w-6xl px-5 py-4 text-center text-xs text-ardoise">
               <p>
                 Numéro ADELI {praticien.adeli} — SIRET {praticien.siret}. Les séances sont
                 couvertes par le secret professionnel.
               </p>
+              {/* Accueil uniquement : le composant se retire de lui-même
+                  ailleurs. Cf. SignatureAgence.tsx. */}
+              <SignatureAgence />
             </div>
           </div>
         </footer>
+
+        {/* Hors du <footer> : la bannière se superpose à la page, elle n'en est
+            pas le pied. Les deux composants ne rendent rien tant qu'aucun
+            identifiant de mesure n'est configuré. */}
+        <BanniereCookies />
+        <MesureAudience />
       </body>
     </html>
   );

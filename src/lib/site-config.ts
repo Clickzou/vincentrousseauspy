@@ -66,6 +66,32 @@ export const cabinet = {
   },
 } as const;
 
+/**
+ * MESURE D'AUDIENCE ET VÉRIFICATION DES OUTILS GOOGLE.
+ *
+ * Les deux sont volontairement séparés, parce qu'ils n'ont RIEN À VOIR
+ * juridiquement :
+ *
+ *  - `identifiant` (Google Analytics) dépose des cookies et traite des données
+ *    personnelles. Il exige un consentement préalable, d'où toute la mécanique
+ *    de src/lib/consentement.ts. Tant que la variable est absente, aucune
+ *    bannière ne s'affiche et aucun script n'est chargé.
+ *
+ *  - `verificationGoogle` (Search Console) est une simple balise `meta` qui
+ *    prouve la propriété du domaine. Elle ne dépose rien, ne suit personne et
+ *    ne demande AUCUN consentement. Elle peut donc être posée immédiatement,
+ *    indépendamment de la question des cookies.
+ *
+ * Les deux se renseignent dans les variables d'environnement Vercel une fois le
+ * domaine définitif en ligne. Rien a modifier dans le code.
+ */
+export const mesureAudience = {
+  /** Identifiant GA4, de la forme « G-XXXXXXXXXX ». `null` = aucune mesure. */
+  identifiant: process.env.NEXT_PUBLIC_GA_ID || null,
+  /** Jeton de vérification Search Console. Sans cookie, sans consentement. */
+  verificationGoogle: process.env.GOOGLE_SITE_VERIFICATION || null,
+} as const;
+
 export const contact = {
   telephone: "06 52 30 75 86",
   telephoneE164: "+33652307586",

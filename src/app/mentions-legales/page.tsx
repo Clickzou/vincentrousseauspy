@@ -7,6 +7,7 @@ import {
   cabinet,
   contact,
   editeur,
+  mesureAudience,
   praticien,
   SITE_URL,
 } from "@/lib/site-config";
@@ -124,10 +125,11 @@ export default function MentionsLegales() {
 
         <H2 id="donnees">Données personnelles</H2>
         <p className="mt-4">
-          Ce site ne dépose aucun cookie, ne mesure pas votre audience et ne conserve
-          aucune donnée vous concernant.{" "}
+          {mesureAudience.identifiant
+            ? "Ce site ne conserve aucune donnée vous concernant. Les seuls cookies possibles sont ceux des statistiques de fréquentation, et rien n'est déposé sans votre accord."
+            : "Ce site ne dépose aucun cookie, ne mesure pas votre audience et ne conserve aucune donnée vous concernant."}{" "}
           <Link href="/politique-de-confidentialite/">
-            Le détail de ce qui n&rsquo;est pas collecté
+            Le détail de ce qui est — et n&rsquo;est pas — collecté
           </Link>{" "}
           figure sur une page dédiée.
         </p>
