@@ -14,6 +14,7 @@ import {
 } from "@/lib/site-config";
 import { graph, localBusinessSchema, personSchema } from "@/lib/seo/schemas";
 import { Navigation } from "@/components/ui/Navigation";
+import { RetourHaut } from "@/components/ui/RetourHaut";
 import { SignatureAgence } from "@/components/ui/SignatureAgence";
 import { BanniereCookies } from "@/components/rgpd/BanniereCookies";
 import { MesureAudience } from "@/components/rgpd/MesureAudience";
@@ -90,7 +91,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="fr"
       className={`${texte.variable} ${titre.variable} ${signature.variable}`}
     >
-      <body className="flex min-h-screen flex-col bg-white font-texte text-encre">
+      {/* `id="haut"` : cible du lien de retour en haut de page. Sur le
+          <body>, donc valable partout sans avoir à la poser page par page. */}
+      <body
+        id="haut"
+        className="flex min-h-screen flex-col bg-white font-texte text-encre"
+      >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -231,6 +237,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Hors du <footer> : la bannière se superpose à la page, elle n'en est
             pas le pied. Les deux composants ne rendent rien tant qu'aucun
             identifiant de mesure n'est configuré. */}
+        <RetourHaut />
         <BanniereCookies />
         <MesureAudience />
       </body>
