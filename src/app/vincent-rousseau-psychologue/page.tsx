@@ -94,7 +94,7 @@ export default function PageAuteur() {
               <h2>Ma pratique</h2>
               <p>
                 Je suis psychologue clinicien et psychanalyste, installé en libéral à{" "}
-                {cabinet.ville}. Je reçois en consultation {publics.libelle}, sur
+                {cabinet.ville}. Mes consultations s&rsquo;adressent {publics.libelle}, sur
                 rendez-vous et en présentiel.
               </p>
               <p>

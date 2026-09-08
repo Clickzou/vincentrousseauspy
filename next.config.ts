@@ -8,17 +8,6 @@ import type { NextConfig } from "next";
  * Jamais de chaîne A → B → C : toujours la cible finale.
  */
 
-/** Contenu de démonstration du thème Medcaline, en anglais, indexable depuis 2020. */
-const ARTICLES_DEMO = [
-  "/10-quarantine-activities-that-dont-involve-watching-the-news",
-  "/building-a-new-world",
-  "/how-to-catch-the-happiness",
-  "/how-to-cope-with-coronavirus-caused-mental-health-concerns",
-  "/is-it-important-to-say-please-and-thank-you-to-your-partner",
-  "/strict-analysis-in-the-situation",
-  "/three-secrets-to-beat-performance-anxiety",
-];
-
 const nextConfig: NextConfig = {
   // Le site WordPress sert déjà en /%postname%/ avec slash final et Google a
   // indexé ces URLs. Ne jamais changer ce réglage.
@@ -32,24 +21,29 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      // `statusCode: 301` plutôt que `permanent: true` : ce dernier produit un
+      // 308. Google traite les deux à l'identique, mais le master impose du 301
+      // (§ 3.3) et certains outils d'audit et robots anciens le gèrent mieux.
+      // Sur des redirections de pages en GET, 301 n'a aucun inconvénient.
+
       // Page de cookies vide → vraie politique de confidentialité.
       {
         source: "/politique-de-cookies-ue",
         destination: "/politique-de-confidentialite/",
-        permanent: true,
+        statusCode: 301,
       },
       // Ancien slug interne de la page d'accueil.
-      { source: "/home-main", destination: "/", permanent: true },
+      { source: "/home-main", destination: "/", statusCode: 301 },
 
-      // Les articles de démonstration sont dirigés vers le blog. Un 410 serait
-      // plus juste sémantiquement, mais `redirects()` ne le permet pas ; le
-      // traitement définitif se fait dans le middleware ou via une route 410
-      // dédiée si l'un d'eux reçoit des liens entrants.
-      ...ARTICLES_DEMO.map((source) => ({
-        source,
-        destination: "/blog/",
-        permanent: true,
-      })),
+      // /dispositions-legales/ portait les numéros ADELI et SIRET, absents des
+      // mentions légales. La v2 les fait figurer là où on les cherche, et cette
+      // page n'a plus d'objet. Elle était en `noindex`, donc sans référencement
+      // à transférer, mais elle peut avoir été mise en favori ou liée.
+      {
+        source: "/dispositions-legales",
+        destination: "/mentions-legales/",
+        statusCode: 301,
+      },
     ];
   },
 

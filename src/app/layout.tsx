@@ -65,13 +65,26 @@ export const metadata: Metadata = {
  * Navigation. Les libellés disent ce que sont les pages : l'ancien menu
  * (« Qui, quand, où ? », « Les "Psy" », « Infos légales ») masquait des pages
  * positionnées — /psychanalyste-nantes/ ranke 2e sur « psychanalyste nantes ».
+ *
+ * Huit entrées, c'est le plafond raisonnable : au-delà, le menu passe sur deux
+ * lignes en desktop et cesse d'être lisible d'un coup d'œil. Toute page
+ * supplémentaire passe donc par le maillage contextuel, le pied de page ou le
+ * plan du site — pas par une neuvième entrée.
+ *
+ * « Écrits » plutôt que « Blog » : c'est le titre porté par la page elle-même,
+ * et le mot correspond mieux à deux textes par mois qu'à un flux d'actualité.
  */
 const NAVIGATION = [
   { href: "/vincent-rousseau-psychologue/", label: "Qui je suis" },
-  { href: "/consultations/", label: "Les consultations" },
+  { href: "/psychotherapeute-nantes/", label: "La psychothérapie" },
   { href: "/psychanalyste-nantes/", label: "La psychanalyse" },
+  { href: "/consultations/", label: "Les consultations" },
   { href: "/tarifs-et-remboursement/", label: "Tarifs" },
-  { href: "/aide-faq/", label: "Questions fréquentes" },
+  /* « FAQ » dans le menu, « Questions fréquentes » en H1 sur la page : le menu
+     est en petites capitales et doit rester court, le titre de page porte le
+     mot-clé en toutes lettres. */
+  { href: "/aide-faq/", label: "FAQ" },
+  { href: "/blog/", label: "Écrits" },
   { href: "/contact-psychologue-clinicien-nantes/", label: "Contact" },
 ];
 
@@ -199,6 +212,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </li>
                 <li>
                   <Link href="/politique-de-confidentialite/">Confidentialité</Link>
+                </li>
+                <li>
+                  <Link href="/blog/">Écrits</Link>
                 </li>
                 <li>
                   <Link href="/plan-du-site/">Plan du site</Link>

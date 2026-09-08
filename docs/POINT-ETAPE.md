@@ -1,4 +1,4 @@
-# POINT D'ÉTAPE — 7 septembre 2026
+# POINT D'ÉTAPE — 8 septembre 2026
 
 Reprise du projet : lire ce fichier, puis `docs/seo/SEO_MASTER_VINCENT_ROUSSEAU.md` (§ 0 et § 2).
 
@@ -40,28 +40,123 @@ Next.js 15 (App Router) · Tailwind · TypeScript strict · aucun CMS · déploi
   psychanalyse, ressources, citation, FAQ, CTA
 - **`/aide-faq/`** — 14 questions, schéma `FAQPage` (déclaré ici et **nulle part ailleurs**)
 - **`/vincent-rousseau-psychologue/`** — page auteur, pivot E-E-A-T
+- **`/rendez-vous-psychologue-nantes/`** — page de conversion. Canaux dans l'ordre du § 9.3 :
+  téléphone en tête, bloc « plateforme » prêt mais masqué tant que `priseRdv.plateforme`
+  vaut `null`, formulaire en dernier
+- **`/merci-pour-votre-demande/`** — confirmation, `noindex`. C'est l'événement de
+  conversion mesurable (§ 9.5), sans aucune donnée personnelle
+- **`/psychotherapeute-nantes/`** — le plus gros gisement de la refonte (~6 600 rech./mois,
+  aujourd'hui en position 9 portée par l'accueil). Les affirmations juridiques sur le titre
+  sont **sourcées sur Légifrance et l'ARS**, vérifiées le 2026-09-08, via le nouveau
+  composant `src/components/seo/Sources.tsx`
+  - Liens contextuels ajoutés depuis les cartes de titres de l'accueil, et entrée
+    « La psychothérapie » ajoutée à la navigation
+- **`/psychanalyste-nantes/`** — URL conservée, la mieux positionnée du site (2e).
+  Le texte de fond de Vincent y remonte depuis l'accueil WordPress (cf. § 6 ci-dessous)
+- **`/consultations/`** — déroulé, première séance, cadre, confidentialité. Récupère le
+  « Qui, quand et où ? » qui occupait à tort `/psychanalyste-nantes/`. **Aucun bloc FAQ**,
+  pour ne pas concurrencer `/aide-faq/` : les mêmes sujets, un autre format
+- **`/tarifs-et-remboursement/`** — honoraires, mutuelles, « Mon soutien psy ». Conditions
+  du dispositif **vérifiées sur ameli.fr le 2026-09-08** et sourcées en bas de page.
+  La participation de Vincent est un **interrupteur à trois états** (`monSoutienPsy.partenaire`,
+  aujourd'hui `null`) : la page dit quelque chose de juste dans les trois cas, elle peut donc
+  être mise en ligne sans attendre sa réponse
+- **`/psychologue-clinicien-psychotherapeute-psychiatre-psychanalyste/`** — URL conservée.
+  Tableau comparatif des 5 appellations, puis le texte de Vincent avec ses références
+  universitaires (Lagache 1949, Pedinielli 1994). **5 sources Légifrance vérifiées une à une
+  le 2026-09-08.** C'est la page qui capte les requêtes « psychiatre… » : elle dit donc
+  explicitement, en toutes lettres, que Vincent n'est pas psychiatre et ne prescrit pas
+- **`/contact-psychologue-clinicien-nantes/`** — URL conservée. **Sans formulaire** : sur
+  WordPress, cette page et `/rendez-vous-…/` sont identiques et se cannibalisent. Ici, elle
+  dit comment joindre Vincent et **ce qui ne se traite pas par écrit**
+- **`/psychologue-clinicien-nantes/`** — URL conservée, « Pourquoi consulter ? ». Le texte
+  de Vincent avec Dolto et Rückert. Angle propre : ce qu'est un symptôme et le moment où il
+  cesse de « tenir » — à ne pas laisser dériver vers la liste de motifs de
+  `/psychotherapeute-nantes/`
+- **`/cabinet-nantes/`** — accès, tram, stationnement, repères. **Aucune carte embarquée** :
+  un iframe Google Maps transmet l'IP du visiteur avant consentement (§ 2.4)
+- **`/blog/` et `/blog/[slug]/`** — moteur complet : registre typé (`src/lib/content/blog.ts`),
+  un module par article, rendu par blocs (`CorpsArticle`) donc aucun `dangerouslySetInnerHTML`,
+  génération statique, 404 sur slug inconnu. Schéma `Article` déclaré ici et nulle part ailleurs
+  - **Article 1** : « Ce qu'un psychologue a le droit de dire, et à qui » — secret
+    professionnel, 3 sources primaires (articles 226-13 et 226-14 du code pénal). Sujet choisi
+    parce qu'aucune page ne le traite en profondeur et qu'il ne cannibalise rien
+  - **Article 2** : « Pourquoi je reçois uniquement au cabinet » — mot-clé
+    « consultation psychologue à distance », que ne cible aucune page. Argumente une phrase
+    qui n'était qu'énoncée sur trois pages. **Faits tirés d'ameli.fr, pas d'une opinion** :
+    le dispositif public impose le premier entretien en présentiel et plafonne le distanciel
+    à 20 % de l'activité conventionnée. Le reste est présenté comme un choix de cadre assumé,
+    avec orientation vers un confrère — la publicité comparative est proscrite (§ 2.2)
+  - Le champ `motCle` de chaque article documente sa cible : **le vérifier avant d'en ajouter un**
+- **`/mentions-legales/`** — URL conservée, `noindex`. **Le n° ADELI y figure enfin** (il était
+  sur l'accueil et sur `/dispositions-legales/`, mais pas là où on le cherche), ainsi que le
+  SIRET, le diplôme, les titres et le directeur de publication. **Hébergeur corrigé** :
+  Vercel, plus o2switch
+- **`/politique-de-confidentialite/`** — `noindex`. Décrit surtout **ce qui n'est PAS
+  collecté** : aucun cookie, aucune base, aucun analytics, aucun contenu tiers embarqué.
+  ⚠️ Toute évolution technique (analytics, carte, plateforme de RDV) oblige à la corriger
+- **`/plan-du-site/`** — indexable, **engendré** depuis `PAGES` et le registre du blog.
+  Jamais écrit à la main : un plan recopié diverge en trois mois. Les pages `noindex` en
+  sont exclues
+
+### Le formulaire de rappel — architecture RGPD (§ 2.4)
+
+| Fichier | Rôle |
+|---|---|
+| `src/lib/content/rendez-vous.ts` | **Valeurs fermées** : créneaux et type de demande |
+| `src/app/rendez-vous-psychologue-nantes/actions.ts` | Action serveur : revalide tout, piège à robots |
+| `src/app/rendez-vous-psychologue-nantes/FormulaireRappel.tsx` | Formulaire, fonctionne sans JavaScript |
+| `src/lib/email/envoi.ts` | Resend en REST (pas de paquet npm), **zéro persistance** |
+| `.env.example` | `RESEND_API_KEY`, `EMAIL_EXPEDITEUR`, `EMAIL_DESTINATAIRE` |
+
+Quatre champs saisissables au total : nom, téléphone, e-mail facultatif, et deux listes
+de cases à cocher. **Aucune zone de texte libre, et il ne faut jamais en ajouter** — la
+page l'explique d'ailleurs au visiteur dans un encadré dédié. Tant que la clé Resend
+n'est pas renseignée, le formulaire affiche un message qui renvoie au téléphone : rien
+n'est perdu en silence.
 
 ---
 
 ## 2. CE QUI RESTE À CONSTRUIRE
 
-**8 pages sont encore en 404**, et la navigation pointe dessus :
+**Les 17 URLs du registre répondent 200. Plus aucune 404.** Vérifié le 2026-09-08 en
+interrogeant une à une les URLs de `src/lib/sitemap-data.ts`.
 
-| URL | Priorité | Note |
-|---|---|---|
-| `/rendez-vous-psychologue-nantes/` | **1** | Conversion. 6 boutons y renvoient. Formulaire **sans champ libre ni stockage** (§ 2.4) |
-| `/psychotherapeute-nantes/` | **2** | Cluster ~6 600 rech./mois, aujourd'hui porté par la home en position 9 |
-| `/consultations/` | 3 | Déroulé, cadre, première séance |
-| `/psychanalyste-nantes/` | 3 | **URL existante, positionnée 2e** sur « psychanalyste nantes ». Reprendre le texte long de la home actuelle |
-| `/tarifs-et-remboursement/` | 3 | `tarif psychologue nantes` déclenche un Aperçu IA |
-| `/contact-psychologue-clinicien-nantes/` | 4 | URL existante, positionnée |
-| `/blog/` + `/blog/[slug]/` | 4 | Demandé dès le départ. 2 articles/mois maximum |
-| `/mentions-legales/`, `/politique-de-confidentialite/`, `/plan-du-site/` | 5 | Rapides. **Ajouter le n° ADELI aux mentions légales**, absent aujourd'hui |
+Le site est complet au sens de l'arborescence cible. Ce qui reste n'est plus de la
+construction de pages :
+
+| Chantier | Note |
+|---|---|
+| **Validation clinique par Vincent** | Bloquant absolu (§ 3). Toutes les pages sont écrites « sous réserve » |
+| **Analytics sans cookie** | Plausible ou Umami. **Corriger `/politique-de-confidentialite/` en même temps** — elle affirme aujourd'hui qu'aucune mesure d'audience n'existe |
+| **Déploiement Vercel** | Et confirmation de l'adresse légale de l'hébergeur, aujourd'hui tirée d'annuaires |
+| **Clé Resend et domaine d'envoi** | Sans elle, le formulaire renvoie au téléphone |
+| **Citation René Char et CTA final de l'accueil** | Les deux blocs les plus faibles du site |
+| **Troisième article de blog** | 2 par mois maximum : le quota de septembre est atteint. Vérifier `motCle` avant d'écrire |
+
+**Maillage de `/psychologue-clinicien-nantes/` — fait.** Quatre liens contextuels : la carte
+« Ce qui amène à consulter » de l'accueil (qui était la seule des trois portes d'entrée à
+n'ouvrir sur rien, contrairement à ce qu'annonçait son propre commentaire),
+`/consultations/`, `/psychotherapeute-nantes/` et l'article de blog.
+
+**Au passage, un défaut de conception du blog corrigé** : le type `Bloc` ne stockait que du
+texte brut, donc **un article ne pouvait contenir aucun lien interne**. Il captait du trafic
+et le gardait, à rebours du § 7.2 qui veut qu'un article alimente les pages du site. Le type
+`p` accepte désormais un `lien` interne — et seulement interne : une source externe va dans
+le bloc `sources`, où elle est attribuée à son éditeur et vérifiable.
 
 ### Autres chantiers
 - **Citation René Char et CTA final** : passés en pleine largeur mais jamais redesignés — les deux blocs les plus faibles de l'accueil
-- **Redirections** : les 7 articles de démo anglais → 410 (partiellement câblé dans `next.config.ts`)
-- **Analytics sans cookie** (Plausible ou Umami) — cf. § 2.4 du master
+- ~~**Redirections** : les 7 articles de démo anglais → 410~~ **fait**, via `src/middleware.ts`.
+  Les redirections restantes sont passées de `permanent: true` (qui produit un 308) à
+  `statusCode: 301`, conformément au § 3.3.
+  Reste une chaîne inévitable : une URL sans slash final est d'abord normalisée en 308 par
+  `trailingSlash: true` avant d'être redirigée. Sans conséquence — WordPress servait déjà
+  avec le slash, donc toutes les URLs indexées le portent et ne subissent qu'un seul saut
+- **Clé Resend et domaine d'envoi** à créer, puis à saisir dans les variables Vercel
+  (cf. `.env.example`). Sans elles, le formulaire renvoie au téléphone
+- **Analytics sans cookie** (Plausible ou Umami) — cf. § 2.4 du master.
+  Objectif unique : clic `tel:` + arrivée sur `/merci-pour-votre-demande/`
 - **Déploiement Vercel**
 
 ---
@@ -69,13 +164,28 @@ Next.js 15 (App Router) · Tailwind · TypeScript strict · aucun CMS · déploi
 ## 3. EN ATTENTE DE VINCENT — BLOQUANT POUR LA MISE EN LIGNE
 
 1. **Validation de tous les textes cliniques.** Sa responsabilité professionnelle est engagée (§ 7.1).
-2. **Mon soutien psy** : est-il partenaire du dispositif ? La réponse actuelle décrit
-   le dispositif sans l'affirmer (`src/lib/content/faq.ts`).
+2. **Mon soutien psy** : est-il partenaire du dispositif ? **N'est plus bloquant** —
+   `/tarifs-et-remboursement/` est juste dans les trois cas, il suffira de basculer
+   `monSoutienPsy.partenaire`. À lui signaler : s'il est partenaire, la séance relevant du
+   dispositif est à 50 €, tarif conventionnel, donc non modulable.
 3. **ADELI ou RPPS** : le répertoire ADELI est en cours de remplacement pour les psychologues.
 4. **Accessibilité PMR** : le site actuel dit seulement « tient compte des normes ».
    Une personne concernée a besoin d'un fait concret (plain-pied ? ascenseur ?).
 5. **Coordonnées GPS** du cabinet, pour le `geo` du JSON-LD.
 6. **Visuels** : valider le choix Matisse / Kandinsky (cf. § 5 ci-dessous).
+7. **Promesses de rappel** : « je rappelle systématiquement » et « je ne laisse pas de
+   message détaillé sur une messagerie vocale » (page de rendez-vous). Le délai de réponse,
+   lui, est validé — cf. § 5.
+8. **Inscription au registre national des psychothérapeutes.** `/psychotherapeute-nantes/`
+   l'affirme et explique au visiteur que la liste de l'ARS est publique — c'est un signal de
+   confiance fort, mais il devient un risque si l'inscription n'est pas à jour. À confirmer
+   avant mise en ligne. Idéalement, récupérer aussi le département d'inscription.
+9. **Durée d'une séance.** `/consultations/` affiche « de 45 minutes à une heure »
+   (`seance.duree`, marquée `dureeConfirmee: false`). Cette valeur n'est écrite nulle part
+   sur le site actuel — elle n'apparaît qu'indirectement dans une réponse de FAQ.
+10. **Plateforme de RDV hébergée HDS** : Vincent n'en a aucune aujourd'hui. Le master la
+   place en canal n° 2 (§ 9.3). Le bloc est déjà codé et n'attend que
+   `priseRdv.plateforme = { nom, url }`.
 
 ## 4. À FAIRE FAIRE PAR L'AGENCE
 
@@ -100,10 +210,43 @@ Next.js 15 (App Router) · Tailwind · TypeScript strict · aucun CMS · déploi
 | **Slugs français conservés à l'identique** | Ils portent le référencement |
 | **Visuels : Matisse († 1954) et Kandinsky († 1944) uniquement** | **Le Miró et les deux Chagall du site actuel sont sous droits** (2054 et 2056, gérés par l'ADAGP) et leurs fichiers portent un filigrane « WahooArt.com ». Cf. `donnees-vincent.md` § 11 |
 | **Schéma `FAQPage` sur `/aide-faq/` seulement** | Éviter deux blocs FAQ concurrents |
+| **Aucun champ de texte libre dans le formulaire** | Il collecterait des données de santé (art. 9 RGPD) sur un hébergement non agréé HDS. Refuser toute demande d'ajout |
+| **Aucun stockage des demandes** | Un e-mail, puis plus rien. Ni base, ni fichier, ni log du contenu |
+| **Délai de réponse : « sous 48 heures ouvrées »** | **Validé par Vincent le 2026-09-08.** Engagement public (§ 9.4) : ne pas le modifier sans son accord |
+| **`/dispositions-legales/` est redirigée en 301 vers les mentions légales** | Elle portait ADELI et SIRET, désormais à leur place. Elle était `noindex`, donc sans référencement à transférer |
+| **Le plan du site est engendré, jamais écrit** | Un plan recopié à la main diverge du registre et finit par lister des URLs mortes |
+| **Les 7 articles de démo sont en 410, pas en 301** | Aucun équivalent sur le nouveau site. Sept URLs sans rapport pointant vers `/blog/` seraient requalifiées en soft 404. Le 410 provoque un retrait rapide de l'index |
+| **`lastModified` du sitemap : uniquement pour les articles** | Il valait `new Date()` pour toutes les pages, ce qui déclarait le site entier modifié à chaque passage du robot. Une date absente vaut mieux qu'une date fausse |
+| **Aucune carte Google Maps embarquée** | Un iframe transmet l'IP du visiteur à Google avant consentement (§ 2.4), comme les polices en CDN. Lien externe uniquement |
+| **Un seul formulaire sur tout le site** | Sur `/rendez-vous-…/`. La page contact n'en a pas : deux formulaires dispersent la conversion et dupliquent le risque RGPD |
+| **Pas de comparaison de tarifs avec d'autres praticiens** | L'accueil WordPress écrit « un psychanalyste facture généralement entre 30 et 80 euros ». C'est de la publicité comparative, proscrite (§ 2.2). Non reprise |
+| **Toute affirmation juridique ou clinique est sourcée** | Composant `Sources`, sources primaires uniquement (Légifrance, ARS, Ameli, HAS). En YMYL c'est la responsabilité de Vincent qui est engagée, avant le référencement |
 
 ---
 
-## 6. RAPPELS TECHNIQUES
+## 6. CE QU'A RÉVÉLÉ LA REPRISE DE `/psychanalyste-nantes/`
+
+La page WordPress qui se classe **2e sur « psychanalyste nantes » ne parle pas de
+psychanalyse**. Elle s'intitule « Qui, quand et où ? » et ne contient que des informations
+pratiques : horaires, adresse, tram, stationnement. Elle se classe sur la seule force de
+son slug. Le texte de fond de Vincent — « La psychanalyse en détails », le meilleur du
+site — est enterré sur la page d'accueil.
+
+La refonte fait coïncider l'URL et son sujet : le texte remonte sur la page, et les
+informations pratiques repartent vers `/consultations/` et `/cabinet-nantes/`. **Ne pas
+oublier de les y replacer** — elles sont exactes et utiles, elles ne sont simplement pas
+à leur place.
+
+**Deux formulations du site actuel ont été écartées, à ne pas réintroduire :**
+
+| Texte d'origine | Pourquoi il est écarté |
+|---|---|
+| La psychanalyse s'adresse au sujet « qu'il soit enfant, adolescent ou adulte », et la liste des motifs cite « les difficultés au sein des couples ou problèmes avec les enfants/adolescents » | Vincent ne reçoit **que des adultes**. Le site actuel se contredit lui-même d'une page à l'autre |
+| « Une méthode éprouvée visant à apporter des changements durables » | Promesse de résultat, proscrite par le § 2.2. La page assume au contraire qu'un symptôme peut persister sous forme résiduelle |
+
+---
+
+## 7. RAPPELS TECHNIQUES
 
 - **Palette et polices** extraites du CSS Elementor d'origine, pas estimées à l'œil.
   Roboto (titres et texte), Yesteryear (signature), Abhaya Libre (citations uniquement).

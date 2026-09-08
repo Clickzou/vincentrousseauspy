@@ -62,11 +62,17 @@ import { canonical, minusculeInitiale } from "@/lib/url-helpers";
  * par la loi du titre de psychanalyste, qui ne l'est pas : le master interdit
  * de laisser croire à une protection qui n'existe pas (§ 2.2).
  */
+/*
+ * `lien` applique la règle de cloisonnement d'intention (§ 4, silo 3) : chaque
+ * titre renvoie à SA page. Le premier n'en a pas — c'est cette page-ci qui
+ * porte le cluster « psychologue ».
+ */
 const TITRES = [
   {
     nom: "Psychologue clinicien",
     mention: "Titre protégé",
     protege: true,
+    lien: null,
     texte:
       "Titre universitaire protégé, permettant l'inscription au répertoire des " +
       "professionnels de santé. Il atteste d'une compétence reconnue en psychopathologie " +
@@ -76,6 +82,7 @@ const TITRES = [
     nom: "Psychothérapeute",
     mention: "Titre protégé depuis 2010",
     protege: true,
+    lien: { href: "/psychotherapeute-nantes/", libelle: "La psychothérapie" },
     texte:
       "Il correspond à une compétence reconnue dans le soin psychique. Il se distingue de " +
       "celui de psychopraticien, librement utilisable et non reconnu par l'État.",
@@ -84,6 +91,7 @@ const TITRES = [
     nom: "Psychanalyste",
     mention: "Méthode de travail",
     protege: false,
+    lien: { href: "/psychanalyste-nantes/", libelle: "La psychanalyse" },
     texte:
       "Il indique la méthode que j'emploie au quotidien : mon outil de travail. La " +
       "psychanalyse est la forme la plus classique des thérapies dites « de fond », par " +
@@ -275,6 +283,20 @@ export default function Accueil() {
                 Cette liste n&rsquo;est pas un questionnaire à cocher. Vous interroger
                 suffit à venir en parler.
               </p>
+              <p className="pt-4">
+                <Link
+                  href="/psychologue-clinicien-nantes/"
+                  className="group inline-flex items-center gap-2 font-medium text-terracotta-fonce underline underline-offset-4"
+                >
+                  Pourquoi consulter&nbsp;?
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform group-hover:translate-x-1"
+                  >
+                    &rarr;
+                  </span>
+                </Link>
+              </p>
             </article>
           </Apparition>
 
@@ -432,6 +454,16 @@ export default function Accueil() {
                 </h3>
                 <div className="mt-4 h-px w-10 bg-terracotta" aria-hidden="true" />
                 <p className="mt-5 text-ardoise">{carte.texte}</p>
+                {carte.lien && (
+                  <p className="mt-5">
+                    <Link
+                      href={carte.lien.href}
+                      className="text-sm font-medium text-terracotta-fonce underline underline-offset-4"
+                    >
+                      {carte.lien.libelle}
+                    </Link>
+                  </p>
+                )}
               </li>
             </Apparition>
           ))}
