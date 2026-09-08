@@ -148,6 +148,24 @@ export function IconeAffiliation({ className = "h-6 w-6" }: { className?: string
   );
 }
 
+/** Trois barres : ouvre le menu sur petit écran. */
+export function IconeMenu({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...traits}>
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
+  );
+}
+
+/** Croix : referme le menu. */
+export function IconeFermer({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...traits}>
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  );
+}
+
 /** Chevron des accordéons. */
 export function IconeChevron({ className = "h-5 w-5" }: { className?: string }) {
   return (
