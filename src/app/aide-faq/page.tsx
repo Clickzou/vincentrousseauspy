@@ -87,7 +87,9 @@ export default function AideFaq() {
         className="mt-4 bg-lavande px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
       >
         <div className="mx-auto max-w-4xl">
-          <FaqAccordeon questions={QUESTIONS} ouvrirPremiere />
+          {/* `niveau={2}` : ici la liste suit directement le <h1>, sans
+              titre de section intermédiaire. */}
+          <FaqAccordeon questions={QUESTIONS} ouvrirPremiere niveau={2} />
         </div>
       </section>
 
