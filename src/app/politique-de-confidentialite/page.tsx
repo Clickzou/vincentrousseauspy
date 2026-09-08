@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { PageEnTete } from "@/components/ui/PageEnTete";
 import { contact, editeur, praticien, priseRdv } from "@/lib/site-config";
+import { canonical } from "@/lib/url-helpers";
 
 /**
  * /politique-de-confidentialite/ — PAGE NOUVELLE, en `noindex`.
@@ -25,6 +26,10 @@ import { contact, editeur, praticien, priseRdv } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
+  /* Canonique auto-référente MÊME EN `noindex` : sans elle, la page hérite
+     du `alternates.canonical: "/"` du layout et désigne l'accueil comme sa
+     version canonique — un signal faux, même sur une page non indexée. */
+  alternates: { canonical: canonical("politique-de-confidentialite") },
   robots: { index: false, follow: true },
 };
 
@@ -38,8 +43,9 @@ function H2({ children, id }: { children: React.ReactNode; id: string }) {
 
 export default function PolitiqueDeConfidentialite() {
   return (
-    <section className="px-5 pb-16 sm:px-10 lg:px-[100px]">
+    <>
       <PageEnTete
+        centre
         titre="Politique de confidentialité"
         chapeau={
           `Ce site est volontairement pauvre en données. Voici, précisément, ce qu'il ne ` +
@@ -47,7 +53,9 @@ export default function PolitiqueDeConfidentialite() {
         }
       />
 
-      <div className="prose-clinique">
+      {/* Colonne centrée, alignée sur l'en-tête — cf. commentaire dans
+          mentions-legales/page.tsx. */}
+      <div className="prose-clinique mx-auto px-5 pb-16 sm:px-10">
         <div className="mt-4 rounded-[20px] bg-menthe p-6 sm:p-8">
           <p className="font-bold text-encre">En résumé</p>
           <ul className="mt-4 space-y-2 text-ardoise">
@@ -163,6 +171,6 @@ export default function PolitiqueDeConfidentialite() {
           <Link href="/consultations/">Les consultations</Link>
         </p>
       </div>
-    </section>
+    </>
   );
 }

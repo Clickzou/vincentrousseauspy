@@ -50,7 +50,10 @@ import { canonical, minusculeInitiale } from "@/lib/url-helpers";
  *  3. Les informations pratiques (où, quand, combien) étaient dispersées entre
  *     un encart, la FAQ et le pied de page. Elles sont regroupées en un bloc.
  *
- * Cible : « psychologue nantes » (5 400 rech./mois, position 5).
+ * Cible : « psychologue nantes ». Volume 2 100 (Sistrix) à 5 400 (agence),
+ * position 3 à 5 selon la source — cf. docs/seo/audit-positions-2026-09-08.md
+ * § 5.1. Aucun chiffre absolu n'est fiable ici ; l'ordre relatif, oui : c'est
+ * le premier mot-clé du site, et il porte 49 % des clics mesurés.
  * Cette page NE porte PAS le cluster « psychothérapeute » : il a sa page dédiée
  * (§ 4, silo 3 — règle de cloisonnement d'intention).
  *
@@ -784,7 +787,10 @@ export default function Accueil() {
         className="bg-lavande px-5 py-16 sm:px-10 sm:py-20 lg:px-[100px]"
       >
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-4">
+          {/* `flex flex-col` : la colonne devient un conteneur en hauteur, ce
+              qui permet à l'image de prendre la place restante sous le texte
+              et d'aligner le bas des deux colonnes sur l'accordéon. */}
+          <div className="flex flex-col lg:col-span-4">
             <p className="text-xs font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
               Vos questions
             </p>
@@ -809,6 +815,37 @@ export default function Accueil() {
                 </span>
               </Link>
             </p>
+
+            {/* L'image comble le vide laissé sous le texte : la colonne de
+                gauche ne portait que quatre lignes face à sept accordéons.
+                Même motif que la section « Mon approche » — flex-1 + fill,
+                pour que le bas des deux colonnes tombe au même endroit.
+
+                ŒUVRE DU DOMAINE PUBLIC (Kandinsky, mort en 1944, libre
+                depuis 2015). Elle est déjà utilisée sur la page pédagogique
+                des « psy » : c'est la sixième et dernière disponible, aucune
+                ne reste inemployée. Le doublon disparaîtra dès que Vincent
+                fournira une photo du cabinet ou de lui — ce que le master
+                § 8.5 recommande, une vraie photo valant mieux qu'un tableau
+                pour un site de praticien. Décorative, donc alt vide.
+
+                `hidden lg:flex` : sur mobile, les deux colonnes s'empilent et
+                l'image se glisserait entre l'introduction et la première
+                question, en pure perte de défilement avant le contenu utile. */}
+            <figure className="mt-10 hidden flex-1 flex-col lg:flex">
+              <div className="relative min-h-[260px] flex-1 overflow-hidden rounded-[20px]">
+                <Image
+                  src="/images/kandinsky-maisons-a-murnau-1909.jpg"
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 30vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="mt-3 text-xs text-ardoise">
+                Vassily Kandinsky, <cite>Maisons à Murnau</cite> (1909).
+              </figcaption>
+            </figure>
           </div>
 
           <div className="lg:col-span-8">

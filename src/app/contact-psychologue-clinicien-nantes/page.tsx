@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { UrgenceBanner } from "@/components/seo/UrgenceBanner";
-import { PageEnTete } from "@/components/ui/PageEnTete";
+import { Apparition } from "@/components/ui/Apparition";
 import { IconeHorloge, IconeLieu, IconeTelephone } from "@/components/ui/Icones";
 import { breadcrumbSchema, graph } from "@/lib/seo/schemas";
 import {
@@ -25,14 +25,23 @@ import { canonical, minusculeInitiale } from "@/lib/url-helpers";
  * qui se cannibalisent.
  *
  * Partage des rôles retenu :
- *   /rendez-vous-…/  → prendre rendez-vous. C'est là, et là seulement, que
- *                      vit le formulaire.
+ *   /rendez-vous-…/  → prendre rendez-vous, page de conversion principale.
  *   /contact-…/      → joindre Vincent et savoir à quoi il répond. Coordonnées,
  *                      horaires, et surtout ce qui se traite par téléphone
  *                      plutôt que par écrit.
  *
- * NE PAS ajouter de second formulaire ici : deux formulaires sur un même site
- * dispersent la conversion, et celui-ci n'aurait pas d'objet distinct.
+ * ⚠️ PAS DE FORMULAIRE SUR CETTE PAGE. Il y a été ajouté le 2026-09-08 puis
+ * retiré le même jour : la page se retrouvait à afficher un formulaire juste à
+ * côté d'un encadré expliquant que Vincent ne répond pas par écrit.
+ *
+ * Le formulaire vit sur /rendez-vous-psychologue-nantes/, dont l'URL dit ce
+ * qu'on y fait. Cette page y renvoie par un bouton.
+ *
+ * À noter tout de même : le composant et son action serveur ont été sortis de
+ * la route rendez-vous vers `src/components/formulaire/` à cette occasion, et
+ * ils y restent. Le jour où un second formulaire serait décidé, il suffira de
+ * l'importer — les règles du § 2.4 (aucun champ libre, aucun stockage)
+ * s'appliqueront mécaniquement, sans possibilité d'en assouplir une seule.
  *
  * La page porte aussi l'identité — c'est sur « vincent rousseau » qu'elle se
  * classe — d'où le lien appuyé vers la page auteur.
@@ -68,154 +77,219 @@ export default function Contact() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <PageEnTete
-        titre={`Contacter ${praticien.nom}`}
-        chapeau={
-          `${praticien.titreCourt} à ${cabinet.ville}. Le téléphone reste le plus simple : ` +
-          `si je suis en séance, laissez votre numéro, je rappelle. Réponse ` +
-          `${priseRdv.delaiReponse}.`
-        }
-      />
+      {/* EN-TÊTE EN CARTE, comme le reste du site. */}
+      <section className="px-5 pb-6 pt-12 sm:px-10 lg:px-[100px]">
+        <nav aria-label="Fil d'Ariane" className="text-sm text-ardoise">
+          <Link href="/" className="underline underline-offset-2">
+            Accueil
+          </Link>
+          <span aria-hidden="true"> › </span>
+          <span aria-current="page">{TITRE}</span>
+        </nav>
+
+        <Apparition>
+          <div className="mt-8 rounded-[20px] border border-sable bg-creme px-6 py-10 text-center sm:px-12">
+            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
+              {praticien.titreCourt}
+            </p>
+
+            <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-bois sm:text-[40px]">
+              {`Contacter ${praticien.nom}`}
+            </h1>
+
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+
+            <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
+              Le téléphone reste le plus simple&nbsp;: si je suis en séance, laissez votre
+              numéro, je rappelle. Réponse {priseRdv.delaiReponse}.
+            </p>
+          </div>
+        </Apparition>
+      </section>
 
       {/* Les trois coordonnées, en cartes. Le NAP doit être strictement
           identique à celui du pied de page et de la fiche Google Business
           Profile (§ 6.1) : il vient donc entièrement de site-config. */}
-      <section aria-labelledby="coordonnees" className="px-5 pb-4 pt-6 sm:px-10 lg:px-[100px]">
+      <section aria-labelledby="coordonnees" className="px-5 py-6 sm:px-10 lg:px-[100px]">
         <h2 id="coordonnees" className="sr-only">
           Coordonnées
         </h2>
 
         <ul className="grid gap-5 md:grid-cols-3">
-          <li className="rounded-[20px] bg-peche p-7">
-            <span className="text-bois-brun" aria-hidden="true">
-              <IconeTelephone />
-            </span>
-            <h3 className="mt-3 text-sm font-medium uppercase tracking-wider text-bois">
-              Téléphone
-            </h3>
-            <a
-              href={`tel:${contact.telephoneE164}`}
-              className="mt-2 block text-xl font-bold text-encre"
-            >
-              {contact.telephone}
-            </a>
-            <p className="mt-2 text-sm text-ardoise">Le canal le plus direct.</p>
-          </li>
-
-          <li className="rounded-[20px] bg-lavande p-7">
-            <span className="text-bois-brun" aria-hidden="true">
-              <IconeHorloge />
-            </span>
-            <h3 className="mt-3 text-sm font-medium uppercase tracking-wider text-bois">
-              Horaires
-            </h3>
-            <p className="mt-2 font-medium text-encre">{horaires.libelle}</p>
-            <p className="mt-2 text-sm text-ardoise">{horaires.modalite}.</p>
-          </li>
-
-          <li className="rounded-[20px] bg-menthe p-7">
-            <span className="text-bois-brun" aria-hidden="true">
-              <IconeLieu />
-            </span>
-            <h3 className="mt-3 text-sm font-medium uppercase tracking-wider text-bois">
-              Cabinet
-            </h3>
-            <address className="mt-2 not-italic font-medium text-encre">
-              {adressePostale}
-            </address>
-            <p className="mt-2 text-sm text-ardoise">{cabinet.acces.tram}.</p>
-          </li>
+          {[
+            {
+              fond: "bg-peche",
+              Icone: IconeTelephone,
+              titre: "Téléphone",
+              contenu: (
+                <>
+                  <a
+                    href={`tel:${contact.telephoneE164}`}
+                    className="mt-2 block text-xl font-bold text-encre"
+                  >
+                    {contact.telephone}
+                  </a>
+                  <p className="mt-2 text-sm text-ardoise">Le canal le plus direct.</p>
+                </>
+              ),
+            },
+            {
+              fond: "bg-lavande",
+              Icone: IconeHorloge,
+              titre: "Horaires",
+              contenu: (
+                <>
+                  <p className="mt-2 font-medium text-encre">{horaires.libelle}</p>
+                  <p className="mt-2 text-sm text-ardoise">{horaires.modalite}.</p>
+                </>
+              ),
+            },
+            {
+              fond: "bg-menthe",
+              Icone: IconeLieu,
+              titre: "Cabinet",
+              contenu: (
+                <>
+                  <address className="mt-2 not-italic font-medium text-encre">
+                    {adressePostale}
+                  </address>
+                  <p className="mt-2 text-sm text-ardoise">{cabinet.acces.tram}.</p>
+                </>
+              ),
+            },
+          ].map(({ fond, Icone, titre, contenu }, i) => (
+            <li key={titre} className="h-full">
+              <Apparition delai={i * 120} className="h-full">
+                <div className={`h-full rounded-[20px] p-7 ${fond}`}>
+                  <span className="text-bois-brun" aria-hidden="true">
+                    <Icone />
+                  </span>
+                  <h3 className="mt-3 text-sm font-medium uppercase tracking-wider text-bois">
+                    {titre}
+                  </h3>
+                  {contenu}
+                </div>
+              </Apparition>
+            </li>
+          ))}
         </ul>
       </section>
 
-      {/* Ce qui se traite par téléphone, et ce qui ne se traite pas par écrit.
-          C'est le contenu propre de cette page — celui qui la distingue de la
-          page de rendez-vous et qui justifie qu'elle existe. */}
+      {/* PAS DE FORMULAIRE ICI — il vit sur /rendez-vous-psychologue-nantes/,
+          et là seulement.
+
+          Il y a été mis un temps (demande du 2026-09-08), puis retiré : la
+          page affichait un formulaire juste à côté d'un encadré expliquant que
+          Vincent ne répond pas par écrit. Ce n'est pas contradictoire — le
+          formulaire n'a précisément aucune zone de message — mais cela demande
+          au visiteur de tenir deux idées à la fois, à l'endroit même où il
+          faudrait le rassurer.
+
+          Ce bloc est en revanche placé AVANT « Ce que vous pouvez me
+          demander » : l'action passe devant l'explication. */}
+      <section
+        aria-labelledby="par-formulaire"
+        className="mt-8 bg-lin px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
+      >
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:gap-16">
+          <Apparition>
+            <h2 id="par-formulaire" className="text-2xl font-bold text-bois sm:text-[33px]">
+              Si vous préférez ne pas téléphoner
+            </h2>
+            <div className="mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+
+            <p className="mt-6 text-ardoise">
+              Vous pouvez demander à être rappelé en indiquant seulement votre nom, votre
+              numéro et le moment qui vous arrange. Le formulaire ne comporte aucune zone de
+              message&nbsp;: vous n&rsquo;avez rien à raconter par écrit. {priseRdv.suite}
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                href="/rendez-vous-psychologue-nantes/"
+                className="rounded-full bg-terracotta px-8 py-4 text-sm font-semibold uppercase tracking-wider text-encre"
+              >
+                Demander à être rappelé
+              </Link>
+              <a
+                href={`mailto:${contact.email}`}
+                className="rounded-full border border-bois px-8 py-4 text-sm font-semibold uppercase tracking-wider text-bois"
+              >
+                Écrire un e-mail
+              </a>
+            </div>
+          </Apparition>
+
+          {/* Explication du champ absent. Sans elle, l'absence de zone de
+              message passe pour un oubli — alors que c'est une protection. */}
+          <Apparition delai={120}>
+            <aside className="rounded-[20px] border border-white bg-white/60 p-7 sm:p-8">
+              <h3 className="text-lg font-bold text-bois">
+                Ce qui ne se traite pas par écrit
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-ardoise">
+                Je ne donne pas de consultation, d&rsquo;avis clinique ni d&rsquo;orientation
+                détaillée par e-mail. Ce n&rsquo;est pas une question de disponibilité&nbsp;:
+                un échange écrit ne permet ni d&rsquo;entendre ce qui se dit entre les mots,
+                ni de vous répondre avec la prudence qu&rsquo;exige une situation que je ne
+                connais pas.
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-ardoise">
+                C&rsquo;est aussi une protection. Ce que vous traversez relève du secret
+                professionnel&nbsp;; écrit dans un message, il transiterait par des serveurs
+                qui ne sont pas prévus pour recevoir des informations de santé.
+              </p>
+              <p className="mt-4 text-sm">
+                <Link
+                  href="/politique-de-confidentialite/"
+                  className="text-terracotta-fonce underline underline-offset-2"
+                >
+                  Ce que ce site collecte, et ce qu&rsquo;il ne collecte pas
+                </Link>
+              </p>
+            </aside>
+          </Apparition>
+        </div>
+      </section>
+
+      {/* Ce que l'on peut demander : descendu APRÈS le formulaire. */}
       <section
         aria-labelledby="a-quoi-je-reponds"
         className="px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
       >
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <h2 id="a-quoi-je-reponds" className="text-2xl font-bold text-bois sm:text-[33px]">
+        <Apparition>
+          <div className="mx-auto max-w-lecture text-center">
+            <h2
+              id="a-quoi-je-reponds"
+              className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
+            >
               Ce que vous pouvez me demander
             </h2>
-            <ul className="mt-6 space-y-4 text-ardoise">
-              {[
-                "Prendre un premier rendez-vous, ou déplacer un rendez-vous existant.",
-                "Savoir si ce que vous traversez relève de ma pratique — et sinon, vers qui vous tourner.",
-                "Poser une question pratique : tarif, durée, accès au cabinet, remboursement.",
-                "Vérifier mes titres et mon inscription. C'est une question légitime, elle ne me vexera pas.",
-              ].map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-terracotta" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
           </div>
+        </Apparition>
 
-          <div className="rounded-[20px] bg-lin p-7 sm:p-9">
-            <h2 className="text-xl font-bold text-bois">Ce qui ne se traite pas par écrit</h2>
-            <p className="mt-4 text-ardoise">
-              Je ne donne pas de consultation, d&rsquo;avis clinique ni d&rsquo;orientation
-              détaillée par e-mail. Ce n&rsquo;est pas une question de disponibilité&nbsp;:
-              un échange écrit ne permet ni d&rsquo;entendre ce qui se dit entre les mots,
-              ni de vous répondre avec la prudence qu&rsquo;exige une situation que je ne
-              connais pas.
-            </p>
-            <p className="mt-4 text-ardoise">
-              C&rsquo;est aussi une protection. Ce que vous traversez relève du secret
-              professionnel&nbsp;; écrit dans un message, il transiterait par des serveurs
-              qui ne sont pas prévus pour recevoir des informations de santé.
-            </p>
-            <p className="mt-4 text-sm">
-              <Link
-                href="/politique-de-confidentialite/"
-                className="text-terracotta-fonce underline underline-offset-2"
-              >
-                Ce que ce site collecte, et ce qu&rsquo;il ne collecte pas
-              </Link>
-            </p>
-          </div>
-        </div>
+        <ul className="mt-10 grid gap-5 md:grid-cols-2">
+          {[
+            "Prendre un premier rendez-vous, ou déplacer un rendez-vous existant.",
+            "Savoir si ce que vous traversez relève de ma pratique — et sinon, vers qui vous tourner.",
+            "Poser une question pratique : tarif, durée, accès au cabinet, remboursement.",
+            "Vérifier mes titres et mon inscription. C'est une question légitime, elle ne me vexera pas.",
+          ].map((item, i) => (
+            <li key={item} className="h-full">
+              <Apparition delai={(i % 2) * 120} className="h-full">
+                <p className="h-full rounded-[20px] bg-creme px-6 py-6 text-ardoise">
+                  {item}
+                </p>
+              </Apparition>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      {/* Renvoi vers le formulaire, qui vit sur la page de rendez-vous. */}
-      <section
-        aria-labelledby="prendre-rdv"
-        className="bg-creme px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
-      >
-        <div className="max-w-lecture">
-          <h2 id="prendre-rdv" className="text-2xl font-bold text-bois sm:text-[33px]">
-            Si vous préférez ne pas téléphoner
-          </h2>
-          <p className="mt-4 text-ardoise">
-            Vous pouvez demander à être rappelé en indiquant seulement votre nom, votre
-            numéro et le moment qui vous arrange. Le formulaire ne comporte aucune zone de
-            message&nbsp;: vous n&rsquo;avez rien à raconter par écrit. {priseRdv.suite}
-          </p>
-
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Link
-              href="/rendez-vous-psychologue-nantes/"
-              className="rounded-full bg-terracotta px-8 py-4 text-sm font-semibold uppercase tracking-wider text-encre"
-            >
-              Demander à être rappelé
-            </Link>
-            <a
-              href={`mailto:${contact.email}`}
-              className="rounded-full border border-bois px-8 py-4 text-sm font-semibold uppercase tracking-wider text-bois"
-            >
-              Écrire un e-mail
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 py-16 sm:px-10 lg:px-[100px]">
-        <div className="max-w-lecture">
-          <p className="text-ardoise">
+      <section className="px-5 pb-16 sm:px-10 lg:px-[100px]">
+        <div className="mx-auto max-w-lecture">
+          <p className="text-center text-ardoise">
             {praticien.nom} — {praticien.titres.join(", ").toLowerCase()}. Numéro ADELI{" "}
             {praticien.adeli}.{" "}
             <Link

@@ -9,6 +9,12 @@ import { demanderRappel, ETAT_INITIAL } from "./actions";
 /**
  * Formulaire de demande de rappel.
  *
+ * Placé dans `src/components/` et non dans une route : il sert à la fois sur
+ * /rendez-vous-psychologue-nantes/ et sur /contact-…/. Un seul composant, une
+ * seule action serveur — c'est ce qui garantit que les DEUX formulaires du
+ * site respectent les mêmes règles, et qu'on ne puisse pas en assouplir un
+ * sans l'autre.
+ *
  * Ce formulaire ne permet PAS d'écrire un message. Ce n'est pas un oubli :
  * c'est la conséquence directe du § 2.4 du master. Un champ libre sur un
  * site de psychologue collecte des données de santé, que l'hébergement du

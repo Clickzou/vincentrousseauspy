@@ -226,11 +226,19 @@ le bloc `sources`, où elle est attribuée à son éditeur et vérifiable.
 
 ## 6. CE QU'A RÉVÉLÉ LA REPRISE DE `/psychanalyste-nantes/`
 
-La page WordPress qui se classe **2e sur « psychanalyste nantes » ne parle pas de
-psychanalyse**. Elle s'intitule « Qui, quand et où ? » et ne contient que des informations
-pratiques : horaires, adresse, tram, stationnement. Elle se classe sur la seule force de
-son slug. Le texte de fond de Vincent — « La psychanalyse en détails », le meilleur du
-site — est enterré sur la page d'accueil.
+La page WordPress `/psychanalyste-nantes/` **ne parle pas de psychanalyse**. Elle
+s'intitule « Qui, quand et où ? » et ne contient que des informations pratiques : horaires,
+adresse, tram, stationnement. Le texte de fond de Vincent — « La psychanalyse en détails »,
+le meilleur du site — est enterré sur la page d'accueil.
+
+> ⚠️ **Correction du 2026-09-08.** Ce paragraphe affirmait que cette page « se classe 2e
+> sur *psychanalyste nantes* ». **C'est faux**, et l'erreur avait été recopiée dans le
+> registre des URLs, dans l'en-tête de la page et dans le composant de navigation.
+> Vérification faite sur `positions-actuelles.csv` : `/psychanalyste-nantes/` ne ressort
+> que **24e sur « rousseau vincent »**. C'est **l'accueil** qui est 2e sur
+> « psychanalyste nantes ». Cela ne change pas la décision — faire coïncider l'URL et son
+> sujet reste juste — mais cela en change le motif : il ne s'agissait pas de nourrir une
+> page déjà bien classée, il s'agissait de créer une page là où il n'y avait qu'un slug.
 
 La refonte fait coïncider l'URL et son sujet : le texte remonte sur la page, et les
 informations pratiques repartent vers `/consultations/` et `/cabinet-nantes/`. **Ne pas
@@ -285,7 +293,33 @@ ouvertes et vérifiées, elles sont exactes.
 
 ---
 
-## 8. RAPPELS TECHNIQUES
+## 8. DOUBLON À ARBITRER — `/psychologue-clinicien-nantes/`
+
+**Décision client du 2026-09-08** : le texte « Pourquoi consulter ? Qu'est-ce que je
+propose ? » doit figurer sur la page « Qui je suis ». Il y est.
+
+**Conséquence** : ce texte est désormais sur DEUX pages du site, puisqu'il constitue
+l'intégralité de `/psychologue-clinicien-nantes/` — l'URL qu'il occupait déjà sur WordPress,
+derrière l'entrée de menu « À propos ».
+
+**Fait vérifié** : `/psychologue-clinicien-nantes/` n'apparaît dans **aucun** des 38
+mots-clés suivis. Elle ne porte aucune position mesurée.
+
+| Option | Effet |
+|---|---|
+| **301 vers `/vincent-rousseau-psychologue/`** *(recommandé)* | Un seul texte, une seule URL, signaux consolidés sur le pivot E-E-A-T. Rien de mesurable n'est perdu |
+| Laisser les deux en ligne | Deux pages identiques se concurrencent ; Google en choisit une, arbitrairement |
+| Réécrire `/psychologue-clinicien-nantes/` sur un autre angle | Suppose d'inventer du contenu clinique que Vincent devra valider |
+
+⚠️ La réserve du § 4 de l'audit s'applique : 38 mots-clés sont un échantillon. Sans Search
+Console, on ignore la longue traîne réellement captée par cette URL. **Le plus prudent est
+donc de créer la Search Console d'abord, d'observer quelques semaines, puis de trancher.**
+
+Cf. `docs/seo/audit-positions-2026-09-08.md`.
+
+---
+
+## 9. RAPPELS TECHNIQUES
 
 - **Palette et polices** extraites du CSS Elementor d'origine, pas estimées à l'œil.
   Roboto (titres et texte), Yesteryear (signature), Abhaya Libre (citations uniquement).

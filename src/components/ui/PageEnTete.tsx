@@ -15,14 +15,24 @@ export function PageEnTete({
   titre,
   chapeau,
   enfants,
+  centre = false,
 }: {
   miettes?: Miette[];
   titre: string;
   chapeau?: string;
   enfants?: ReactNode;
+  /**
+   * Centre l'en-tête sur une colonne de lecture, au lieu de l'aligner sur la
+   * marge gauche. Réservé aux pages légales : ce sont des documents, pas des
+   * pages de site, et le site d'origine les présentait déjà ainsi. Le texte
+   * reste aligné à gauche à l'intérieur de la colonne — centrer les lignes
+   * elles-mêmes rendrait un texte long illisible.
+   */
+  centre?: boolean;
 }) {
   return (
     <section className="px-5 pb-6 pt-12 sm:px-10 lg:px-[100px]">
+      <div className={centre ? "mx-auto max-w-lecture" : ""}>
       <nav aria-label="Fil d'Ariane" className="text-sm text-ardoise">
         <Link href="/" className="underline underline-offset-2">
           Accueil
@@ -48,6 +58,7 @@ export function PageEnTete({
       )}
 
       {enfants}
+      </div>
     </section>
   );
 }

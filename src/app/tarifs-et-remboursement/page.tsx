@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { AuthorSignature } from "@/components/seo/AuthorSignature";
 import { Sources, type Source } from "@/components/seo/Sources";
-import { PageEnTete } from "@/components/ui/PageEnTete";
+import { Apparition } from "@/components/ui/Apparition";
 import { breadcrumbSchema, graph } from "@/lib/seo/schemas";
 import {
   cabinet,
@@ -117,34 +117,75 @@ export default function TarifsEtRemboursement() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <PageEnTete
-        titre="Tarifs et remboursement"
-        chapeau={
-          `Une consultation coûte entre ${honoraires.min} et ${honoraires.max} €. ` +
-          `${honoraires.modulation} Le reste de cette page explique ce qui est remboursé, ` +
-          `par qui, et ce qui ne l'est pas.`
-        }
-      />
+      {/* EN-TÊTE EN CARTE, comme les autres pages du site. */}
+      <section className="px-5 pb-6 pt-12 sm:px-10 lg:px-[100px]">
+        <nav aria-label="Fil d'Ariane" className="text-sm text-ardoise">
+          <Link href="/" className="underline underline-offset-2">
+            Accueil
+          </Link>
+          <span aria-hidden="true"> › </span>
+          <span aria-current="page">{TITRE}</span>
+        </nav>
+
+        <Apparition>
+          <div className="mt-8 rounded-[20px] border border-sable bg-creme px-6 py-10 text-center sm:px-12">
+            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
+              Honoraires · Mutuelles · Mon soutien psy
+            </p>
+
+            <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-bois sm:text-[40px]">
+              Tarifs et remboursement
+            </h1>
+
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+
+            <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
+              Une consultation coûte entre {honoraires.min} et {honoraires.max} €.{" "}
+              {honoraires.modulation} Le reste de cette page explique ce qui est remboursé,
+              par qui, et ce qui ne l&rsquo;est pas.
+            </p>
+          </div>
+        </Apparition>
+      </section>
 
       {/* 1. LE PRIX, EN PREMIER ET SANS DÉTOUR. C'est la réponse attendue par
           la requête ; la faire attendre serait une manœuvre. */}
-      <section aria-labelledby="honoraires" className="px-5 pb-4 pt-6 sm:px-10 lg:px-[100px]">
-        <div className="rounded-[20px] bg-peche px-6 py-10 sm:px-12">
-          <h2 id="honoraires" className="text-2xl font-bold text-bois">
-            Le prix d&rsquo;une séance
-          </h2>
-          <p className="mt-6 text-4xl font-bold tracking-tight text-encre sm:text-5xl">
-            {honoraires.min} à {honoraires.max} €
-          </p>
-          <p className="mt-4 max-w-lecture text-ardoise">
-            {honoraires.modulation} Le montant se fixe lors du premier rendez-vous, et il
-            n&rsquo;est pas figé&nbsp;: si votre situation change, dites-le-moi. Une séance
-            dure {seance.duree}.
-          </p>
-          <p className="mt-4 max-w-lecture text-sm text-ardoise">
-            Il n&rsquo;y a ni frais de dossier, ni majoration, ni forfait d&rsquo;engagement.
-            Vous réglez à chaque séance.
-          </p>
+      {/* Le prix, et juste à côté, à qui l'on s'adresse.
+
+          La signature auteur était en note de bas de page, en petits
+          caractères, après les sources. Or une personne qui hésite sur
+          40-60 € veut savoir en même temps qui elle paie : le titre, le
+          diplôme et le numéro ADELI font partie de la décision. C'est aussi ce
+          que demande le § 9.4 du master pour les pages de conversion.
+          Déplacement, pas duplication — le bloc n'apparaît plus en bas. */}
+      <section aria-labelledby="honoraires" className="px-5 py-6 sm:px-10 lg:px-[100px]">
+        <div className="grid gap-6 lg:grid-cols-12">
+          <Apparition className="lg:col-span-7">
+            <div className="h-full rounded-[20px] bg-peche px-6 py-10 sm:px-12">
+              <h2 id="honoraires" className="text-2xl font-bold text-bois">
+                Le prix d&rsquo;une séance
+              </h2>
+              <p className="mt-6 text-4xl font-bold tracking-tight text-encre sm:text-5xl">
+                {honoraires.min} à {honoraires.max} €
+              </p>
+              {/* Pas de `max-w-lecture` ici : la carte fait déjà la largeur d'une
+                  colonne de 7/12, et la borne de lecture arrêtait le texte bien
+                  avant son bord droit. */}
+              <p className="mt-4 text-ardoise">
+                {honoraires.modulation} Le montant se fixe lors du premier rendez-vous, et il
+                n&rsquo;est pas figé&nbsp;: si votre situation change, dites-le-moi. Une séance
+                dure {seance.duree}.
+              </p>
+              <p className="mt-4 text-sm text-ardoise">
+                Il n&rsquo;y a ni frais de dossier, ni majoration, ni forfait
+                d&rsquo;engagement. Vous réglez à chaque séance.
+              </p>
+            </div>
+          </Apparition>
+
+          <Apparition delai={120} className="lg:col-span-5">
+            <AuthorSignature modifieLe={MODIFIE_LE} variante="encadre" />
+          </Apparition>
         </div>
       </section>
 
@@ -153,21 +194,34 @@ export default function TarifsEtRemboursement() {
           surprise qu'il faut éviter. */}
       <section
         aria-labelledby="remboursement"
-        className="px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
+        /* `mt-10` : c'est une marge EXTERNE, avant la bande. Un simple `pt`
+           n'aurait fait que descendre le texte à l'intérieur d'un aplat qui,
+           lui, commençait toujours au ras de la carte pêche. Le blanc doit
+           séparer les deux blocs, pas s'ajouter dans le second. */
+        className="mt-10 bg-creme px-5 py-14 sm:mt-14 sm:px-10 sm:py-16 lg:px-[100px]"
       >
-        <h2 id="remboursement" className="text-2xl font-bold text-bois sm:text-[33px]">
-          Ce qui est remboursé, et ce qui ne l&rsquo;est pas
-        </h2>
+        <Apparition>
+          <div className="mx-auto max-w-lecture text-center">
+            <h2
+              id="remboursement"
+              className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
+            >
+              Ce qui est remboursé, et ce qui ne l&rsquo;est pas
+            </h2>
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
-        <div className="prose-clinique mt-6">
-          <p>
-            Une consultation chez un psychologue en libéral{" "}
-            <strong>n&rsquo;est pas remboursée par l&rsquo;Assurance Maladie</strong> au
-            titre du régime général, contrairement à une consultation chez un médecin ou un
-            psychiatre. C&rsquo;est la règle, et il vaut mieux le savoir avant qu&rsquo;après.
-          </p>
-          <p>Il existe deux exceptions, qui ne se recouvrent pas.</p>
-        </div>
+            <p className="mt-6 text-left text-ardoise">
+              Une consultation chez un psychologue en libéral{" "}
+              <strong>n&rsquo;est pas remboursée par l&rsquo;Assurance Maladie</strong> au
+              titre du régime général, contrairement à une consultation chez un médecin ou
+              un psychiatre. C&rsquo;est la règle, et il vaut mieux le savoir avant
+              qu&rsquo;après.
+            </p>
+            <p className="mt-4 text-ardoise">
+              Il existe deux exceptions, qui ne se recouvrent pas.
+            </p>
+          </div>
+        </Apparition>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
           <div className="rounded-[20px] border border-sable p-6 sm:p-8">
@@ -213,61 +267,82 @@ export default function TarifsEtRemboursement() {
           que personne ne pose : une thérapie, ça coûte combien en tout ? */}
       <section
         aria-labelledby="dans-le-temps"
-        className="bg-creme px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
+        /* Blanc, et non plus crème : la section précédente ayant pris le fond
+           crème, deux bandes identiques accolées n'en formeraient plus qu'une. */
+        className="px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
       >
-        <h2 id="dans-le-temps" className="text-2xl font-bold text-bois sm:text-[33px]">
-          Ce que cela représente dans le temps
-        </h2>
-
-        <div className="prose-clinique mt-6">
-          <p>
-            C&rsquo;est une question légitime, et rarement posée à voix haute. La durée
-            d&rsquo;un travail ne se fixe pas d&rsquo;avance&nbsp;: elle dépend de ce qui
-            vous amène et de ce qui se dénoue. Personne ne peut sérieusement vous annoncer
-            un nombre de séances au premier rendez-vous.
-          </p>
-          <p>
-            Ce que je peux vous dire, en revanche&nbsp;: le rythme le plus courant est{" "}
-            {seance.rythmeCourant}, le montant tient compte de vos moyens, et il se
-            réajuste si votre situation change. Si le coût devient un obstacle au travail,
-            c&rsquo;est un sujet dont nous pouvons parler en séance — comme le reste.
-          </p>
-          <p>
-            <Link href="/consultations/">Comment se déroulent les consultations</Link>, et{" "}
-            <Link href="/aide-faq/">les autres questions fréquentes</Link>.
-          </p>
-        </div>
-      </section>
-
-      {/* 4. CONVERSION SOBRE. Aucun argument de prix : § 2.2. */}
-      <section aria-labelledby="prendre-rdv" className="px-5 py-16 sm:px-10 lg:px-[100px]">
-        <div className="max-w-lecture">
-          <h2 id="prendre-rdv" className="text-2xl font-bold text-bois sm:text-[33px]">
-            Une question sur les tarifs&nbsp;?
-          </h2>
-          <p className="mt-4 text-ardoise">
-            Vous pouvez me la poser au téléphone avant de prendre rendez-vous. Cela
-            n&rsquo;engage à rien, et c&rsquo;est souvent plus simple qu&rsquo;un échange
-            écrit.
-          </p>
-
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a
-              href={`tel:${contact.telephoneE164}`}
-              className="rounded-full bg-terracotta px-8 py-4 text-sm font-semibold uppercase tracking-wider text-encre"
+        <Apparition className="mx-auto max-w-lecture">
+          <div className="text-center">
+            <h2
+              id="dans-le-temps"
+              className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
             >
-              {contact.telephone}
-            </a>
-            <Link
-              href="/rendez-vous-psychologue-nantes/"
-              className="rounded-full border border-bois px-8 py-4 text-sm font-semibold uppercase tracking-wider text-bois"
-            >
-              Prendre rendez-vous
-            </Link>
+              Ce que cela représente dans le temps
+            </h2>
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
           </div>
 
+          <div className="prose-clinique mt-8">
+            <p className="!mt-0">
+              C&rsquo;est une question légitime, et rarement posée à voix haute. La durée
+              d&rsquo;un travail ne se fixe pas d&rsquo;avance&nbsp;: elle dépend de ce qui
+              vous amène et de ce qui se dénoue. Personne ne peut sérieusement vous annoncer
+              un nombre de séances au premier rendez-vous.
+            </p>
+            <p>
+              Ce que je peux vous dire, en revanche&nbsp;: le rythme le plus courant est{" "}
+              {seance.rythmeCourant}, le montant tient compte de vos moyens, et il se
+              réajuste si votre situation change. Si le coût devient un obstacle au travail,
+              c&rsquo;est un sujet dont nous pouvons parler en séance — comme le reste.
+            </p>
+            <p>
+              <Link href="/consultations/">Comment se déroulent les consultations</Link>,
+              et <Link href="/aide-faq/">les autres questions fréquentes</Link>.
+            </p>
+          </div>
+        </Apparition>
+      </section>
+
+      {/* 4. CONVERSION SOBRE. Aucun argument de prix : § 2.2 — sur une page de
+          tarifs, le moindre « profitez-en » serait déplacé. La carte reprend
+          le modèle des autres pages : texte centré, filet, boutons. */}
+      <section aria-labelledby="prendre-rdv" className="px-5 pb-10 sm:px-10 lg:px-[100px]">
+        <Apparition>
+          <div className="rounded-[20px] bg-peche px-6 py-10 text-center sm:px-12 sm:py-12">
+            <h2 id="prendre-rdv" className="text-2xl font-bold text-bois sm:text-[33px]">
+              Une question sur les tarifs&nbsp;?
+            </h2>
+
+            <p className="mx-auto mt-5 max-w-3xl text-encre">
+              Vous pouvez me la poser au téléphone avant de prendre rendez-vous. Cela
+              n&rsquo;engage à rien, et c&rsquo;est souvent plus simple qu&rsquo;un échange
+              écrit.
+            </p>
+
+            <div className="mt-9 border-t border-white/70 pt-9">
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <a
+                  href={`tel:${contact.telephoneE164}`}
+                  className="rounded-full bg-terracotta px-8 py-4 text-sm font-semibold uppercase tracking-wider text-encre"
+                >
+                  {contact.telephone}
+                </a>
+                <Link
+                  href="/rendez-vous-psychologue-nantes/"
+                  className="rounded-full border border-bois px-8 py-4 text-sm font-semibold uppercase tracking-wider text-bois"
+                >
+                  Prendre rendez-vous
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Apparition>
+      </section>
+
+      {/* Sources : colonne de lecture centrée. C'est un appareil de notes. */}
+      <section className="px-5 pb-16 sm:px-10 lg:px-[100px]">
+        <div className="mx-auto max-w-lecture">
           <Sources sources={SOURCES} />
-          <AuthorSignature modifieLe={MODIFIE_LE} />
         </div>
       </section>
     </>

@@ -9,9 +9,29 @@ import { praticien } from "@/lib/site-config";
  * contenu clinique, et il lie systématiquement vers la page auteur
  * (SEO_MASTER § 5, règle « Signature » : non négociable).
  */
-export function AuthorSignature({ modifieLe }: { modifieLe?: string }) {
+export function AuthorSignature({
+  modifieLe,
+  variante = "pied",
+}: {
+  modifieLe?: string;
+  /**
+   * `pied` : filet de séparation en bas de page, le cas courant.
+   * `encadre` : bloc autonome, à placer dans le flux — par exemple à côté du
+   * prix sur la page tarifs, où savoir à qui l'on s'adresse fait partie de la
+   * décision et n'a pas à attendre le bas de page.
+   */
+  variante?: "pied" | "encadre";
+}) {
+  const encadre = variante === "encadre";
+
   return (
-    <footer className="mt-12 border-t border-sable pt-6 text-sm text-ardoise">
+    <footer
+      className={
+        encadre
+          ? "rounded-[20px] border border-sable p-7 text-sm text-ardoise sm:p-8"
+          : "mt-12 border-t border-sable pt-6 text-sm text-ardoise"
+      }
+    >
       <p>
         Écrit par{" "}
         <Link

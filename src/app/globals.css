@@ -34,6 +34,10 @@
   /* Colonne de lecture confortable pour les contenus longs. */
   .prose-clinique {
     @apply max-w-lecture text-base leading-relaxed text-ardoise;
+    /* Les mentions légales affichent une URL et une adresse e-mail d'un seul
+       tenant : sans coupure autorisée, elles débordent de leur colonne sur un
+       écran de 320 px. */
+    overflow-wrap: break-word;
   }
   .prose-clinique h2 {
     @apply mt-10 text-2xl font-bold text-bois;

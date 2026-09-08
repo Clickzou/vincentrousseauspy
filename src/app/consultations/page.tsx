@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { AuthorSignature } from "@/components/seo/AuthorSignature";
 import { UrgenceBanner } from "@/components/seo/UrgenceBanner";
-import { PageEnTete } from "@/components/ui/PageEnTete";
+import { Apparition } from "@/components/ui/Apparition";
 import { breadcrumbSchema, graph } from "@/lib/seo/schemas";
 import {
   adressePostale,
@@ -98,41 +98,137 @@ export default function Consultations() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <PageEnTete
-        titre="Les consultations : déroulé, cadre et première séance"
-        chapeau={
-          `Ce qui freine le plus souvent, ce n'est pas le prix : c'est de ne pas savoir ` +
-          `à quoi s'attendre. Voici donc, aussi précisément que possible, comment les ` +
-          `choses se passent au cabinet.`
-        }
-      />
+      {/* EN-TÊTE EN CARTE, comme les trois pages du silo « psy » : bandeau de
+          qualification, titre, filet, accroche en police d'accent. Le bandeau
+          reprend des faits de `site-config`, jamais recopiés en dur. */}
+      <section className="px-5 pb-6 pt-12 sm:px-10 lg:px-[100px]">
+        <nav aria-label="Fil d'Ariane" className="text-sm text-ardoise">
+          <Link href="/" className="underline underline-offset-2">
+            Accueil
+          </Link>
+          <span aria-hidden="true"> › </span>
+          <span aria-current="page">{TITRE}</span>
+        </nav>
 
-      {/* 1. QUI. Reprend la formulation exacte du site actuel, en corrigeant
-          la contradiction : l'ancienne page psychanalyste disait « toute
-          personne à partir de 18 ans », l'accueil ajoutait les enfants. */}
-      <section aria-labelledby="qui" className="px-5 pb-4 pt-6 sm:px-10 lg:px-[100px]">
-        <h2 id="qui" className="text-2xl font-bold text-bois sm:text-[33px]">
-          Qui je reçois
-        </h2>
+        <Apparition>
+          <div className="mt-8 rounded-[20px] border border-sable bg-creme px-6 py-10 text-center sm:px-12">
+            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
+              {`À partir de ${publics.ageMinimum} ans · ${horaires.modalite}`}
+            </p>
 
-        <div className="prose-clinique mt-6">
-          <p>
-            Je reçois toute personne qui le demande, à partir de {publics.ageMinimum} ans.
-            Il n&rsquo;y a pas de profil type, ni de degré de souffrance à atteindre pour
-            avoir le droit de consulter. Les motifs étant différents pour chacun, la
-            première rencontre sert précisément à éclaircir la situation —{" "}
-            <Link href="/psychologue-clinicien-nantes/">
-              ce qui conduit généralement à consulter
-            </Link>
-            .
-          </p>
-          <p>
-            En revanche, je ne reçois ni {publics.nonRecus.join(", ni ")}. Ce n&rsquo;est
-            pas mon champ de pratique, et vous adresser à quelqu&rsquo;un dont c&rsquo;est
-            le travail vous servira mieux. Si vous m&rsquo;appelez dans ce cas, je vous
-            orienterai plutôt que de vous laisser sans réponse.
-          </p>
-        </div>
+            <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-bois sm:text-[40px]">
+              Les consultations&nbsp;: déroulé, cadre et première séance
+            </h1>
+
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+
+            <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
+              Ce qui freine le plus souvent, ce n&rsquo;est pas le prix&nbsp;: c&rsquo;est
+              de ne pas savoir à quoi s&rsquo;attendre. Voici donc, aussi précisément que
+              possible, comment les choses se passent au cabinet.
+            </p>
+          </div>
+        </Apparition>
+      </section>
+
+      {/* 1. QUI, QUAND ET OÙ — trois cartes de front.
+
+          C'est le titre exact de la page WordPress dont ce contenu provient,
+          et les trois questions se répondent : à qui je m'adresse, à quelles
+          heures, à quelle adresse. Elles étaient auparavant séparées par cinq
+          sections, « Qui je reçois » en tête de page et « Quand et où » tout
+          en bas, alors qu'un visiteur qui se demande l'une se demande les
+          trois.
+
+          La formulation « toute personne qui le demande, à partir de 18 ans »
+          est celle du site actuel. Elle corrige au passage sa contradiction :
+          l'ancienne page psychanalyste disait « à partir de 18 ans », l'accueil
+          mentionnait les enfants. */}
+      {/* Les trois cartes reprennent la triade menthe / pêche / lavande des
+          trois portes d'entrée de l'accueil : c'est le même geste — trois
+          questions de même rang, distinguées par la couleur et non par la
+          hiérarchie. Contrastes déjà vérifiés sur ces fonds dans
+          `tailwind.config.ts`. */}
+      <section
+        aria-labelledby="qui-quand-ou"
+        className="px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
+      >
+        <Apparition>
+          <div className="mx-auto max-w-lecture text-center">
+            <h2
+              id="qui-quand-ou"
+              className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
+            >
+              Qui, quand et où
+            </h2>
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+          </div>
+        </Apparition>
+
+        <ul className="mt-10 grid gap-6 lg:grid-cols-3">
+          <li className="h-full">
+            <Apparition className="h-full">
+              <article className="h-full rounded-[20px] bg-menthe p-7 sm:p-8">
+                <h3 className="text-lg font-bold text-bois">Qui je reçois</h3>
+                <p className="mt-4 text-ardoise">
+                  Je reçois toute personne qui le demande, à partir de{" "}
+                  {publics.ageMinimum} ans. Il n&rsquo;y a pas de profil type, ni de degré
+                  de souffrance à atteindre pour avoir le droit de consulter. Les motifs
+                  étant différents pour chacun, la première rencontre sert précisément à
+                  éclaircir la situation —{" "}
+                  <Link
+                    href="/psychologue-clinicien-nantes/"
+                    className="text-terracotta-fonce underline underline-offset-2"
+                  >
+                    ce qui conduit généralement à consulter
+                  </Link>
+                  .
+                </p>
+                <p className="mt-4 text-ardoise">
+                  En revanche, je ne reçois ni {publics.nonRecus.join(", ni ")}. Ce
+                  n&rsquo;est pas mon champ de pratique, et vous adresser à quelqu&rsquo;un
+                  dont c&rsquo;est le travail vous servira mieux. Si vous m&rsquo;appelez
+                  dans ce cas, je vous orienterai plutôt que de vous laisser sans réponse.
+                </p>
+              </article>
+            </Apparition>
+          </li>
+
+          <li className="h-full">
+            <Apparition delai={120} className="h-full">
+              <article className="h-full rounded-[20px] bg-peche p-7 sm:p-8">
+                <h3 className="text-lg font-bold text-bois">Quand</h3>
+                <p className="mt-4 text-ardoise">{horaires.libelle}.</p>
+                <p className="mt-3 text-ardoise">{horaires.modalite}.</p>
+                <p className="mt-3 text-ardoise">
+                  Une séance dure {seance.duree}. Le rythme le plus courant est{" "}
+                  {seance.rythmeCourant}, mais il se décide au premier rendez-vous.
+                </p>
+              </article>
+            </Apparition>
+          </li>
+
+          <li className="h-full">
+            <Apparition delai={240} className="h-full">
+              <article className="h-full rounded-[20px] bg-lavande p-7 sm:p-8">
+                <h3 className="text-lg font-bold text-bois">Où</h3>
+                <address className="mt-4 not-italic text-ardoise">{adressePostale}</address>
+                <p className="mt-3 text-ardoise">{cabinet.acces.reperes}.</p>
+                <p className="mt-3 text-ardoise">
+                  {cabinet.acces.tram}. {cabinet.acces.stationnement}.
+                </p>
+                <p className="mt-4 text-sm">
+                  <Link
+                    href="/cabinet-nantes/"
+                    className="text-terracotta-fonce underline underline-offset-2"
+                  >
+                    Comment venir au cabinet
+                  </Link>
+                </p>
+              </article>
+            </Apparition>
+          </li>
+        </ul>
       </section>
 
       {/* 2. LA PREMIÈRE SÉANCE. L'objet même de la page : c'est cette
@@ -141,13 +237,21 @@ export default function Consultations() {
         aria-labelledby="premiere-seance"
         className="bg-creme px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
       >
-        <h2 id="premiere-seance" className="text-2xl font-bold text-bois sm:text-[33px]">
-          La première séance
-        </h2>
-        <p className="mt-4 max-w-lecture text-ardoise">
-          C&rsquo;est avant tout une rencontre. Elle dure {seance.duree}, comme les
-          suivantes.
-        </p>
+        <Apparition>
+          <div className="mx-auto max-w-lecture text-center">
+            <h2
+              id="premiere-seance"
+              className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
+            >
+              La première séance
+            </h2>
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+            <p className="mt-6 text-ardoise">
+              C&rsquo;est avant tout une rencontre. Elle dure {seance.duree}, comme les
+              suivantes.
+            </p>
+          </div>
+        </Apparition>
 
         <ol className="mt-8 grid gap-6 md:grid-cols-3">
           {PREMIERE_SEANCE.map((etape, i) => (
@@ -164,7 +268,7 @@ export default function Consultations() {
           ))}
         </ol>
 
-        <p className="mt-8 max-w-lecture text-sm text-ardoise">
+        <p className="mx-auto mt-8 max-w-lecture text-center text-sm text-ardoise">
           Vous n&rsquo;avez besoin d&rsquo;aucune ordonnance&nbsp;: la consultation
           d&rsquo;un psychologue est en accès direct, sans passer par votre médecin.
         </p>
@@ -173,12 +277,23 @@ export default function Consultations() {
       {/* 3. LE CADRE. Le mot « cadre » n'est pas décoratif en psychanalyse :
           la régularité et le lieu font partie du travail. */}
       <section aria-labelledby="le-cadre" className="px-5 py-16 sm:px-10 lg:px-[100px]">
-        <h2 id="le-cadre" className="text-2xl font-bold text-bois sm:text-[33px]">
-          Le cadre
-        </h2>
+        <Apparition>
+          <div className="mx-auto max-w-lecture text-center">
+            <h2
+              id="le-cadre"
+              className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
+            >
+              Le cadre
+            </h2>
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+          </div>
+        </Apparition>
 
-        <div className="prose-clinique mt-6">
-          <p>
+        {/* Colonne de lecture centrée : le titre est centré, le texte reste
+            aligné à gauche à l'intérieur. Trois paragraphes centrés ligne à
+            ligne obligeraient l'œil à chercher le début de chaque suivante. */}
+        <div className="prose-clinique mx-auto mt-8">
+          <p className="!mt-0">
             Le cadre — un même lieu, un même horaire, une régularité — n&rsquo;est pas une
             contrainte administrative&nbsp;: c&rsquo;est ce qui rend le travail possible.
             C&rsquo;est parce que quelque chose se répète à l&rsquo;identique que le reste
@@ -215,7 +330,7 @@ export default function Consultations() {
           ))}
         </dl>
 
-        <p className="mt-6 max-w-lecture text-sm text-ardoise">
+        <p className="mx-auto mt-8 max-w-lecture text-center text-sm text-ardoise">
           <Link
             href="/tarifs-et-remboursement/"
             className="text-terracotta-fonce underline underline-offset-2"
@@ -234,30 +349,42 @@ export default function Consultations() {
         aria-labelledby="confidentialite"
         className="bg-menthe px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
       >
-        <h2 id="confidentialite" className="text-2xl font-bold text-bois sm:text-[33px]">
-          La confidentialité
-        </h2>
+        <Apparition>
+          <div className="mx-auto max-w-lecture text-center">
+            <h2
+              id="confidentialite"
+              className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
+            >
+              La confidentialité
+            </h2>
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+            <p className="mt-6 text-ardoise">
+              Les psychologues sont tenus au secret professionnel, sans réserve.
+              Concrètement, cela veut dire trois choses.
+            </p>
+          </div>
+        </Apparition>
 
-        <div className="prose-clinique mt-6">
-          <p>
-            Les psychologues sont tenus au secret professionnel, sans réserve. Concrètement,
-            cela veut dire trois choses.
-          </p>
-        </div>
-
-        <ul className="mt-6 grid max-w-4xl gap-4">
+        {/* Trois colonnes plutôt que trois bandes empilées : les points sont
+            courts et de même nature, ils se lisent de front. Empilés sur une
+            largeur bornée, ils laissaient la moitié droite de la bande vide. */}
+        <ul className="mt-10 grid gap-5 md:grid-cols-3">
           {[
             "Ce qui se dit en séance n'en sort pas.",
             "Le fait même que vous consultiez ne sera communiqué à personne — ni à votre famille, ni à votre employeur, ni à votre médecin sans votre accord.",
             "Cette règle ne connaît que les exceptions prévues par la loi.",
-          ].map((point) => (
-            <li key={point} className="rounded-[20px] bg-white/70 px-6 py-5 text-ardoise">
-              {point}
+          ].map((point, i) => (
+            <li key={point} className="h-full">
+              <Apparition delai={i * 120} className="h-full">
+                <p className="h-full rounded-[20px] bg-white px-6 py-6 text-ardoise">
+                  {point}
+                </p>
+              </Apparition>
             </li>
           ))}
         </ul>
 
-        <p className="mt-6 max-w-lecture text-sm text-ardoise">
+        <p className="mx-auto mt-10 max-w-lecture text-center text-sm text-ardoise">
           C&rsquo;est aussi la raison pour laquelle le formulaire de ce site ne comporte
           aucune zone de message&nbsp;:{" "}
           <Link
@@ -270,61 +397,57 @@ export default function Consultations() {
         </p>
       </section>
 
-      {/* 5. QUAND ET OÙ. C'est le « Qui, quand et où ? » récupéré de
-          l'ancienne page psychanalyste. Le détail de l'accès reste à
-          /cabinet-nantes/, dont c'est le sujet. */}
-      <section aria-labelledby="quand-ou" className="px-5 py-16 sm:px-10 lg:px-[100px]">
-        <h2 id="quand-ou" className="text-2xl font-bold text-bois sm:text-[33px]">
-          Quand et où
-        </h2>
+      {/* 5. CONVERSION, puis appareil de notes. Le « Quand et où » qui vivait
+          ici est remonté dans le bloc « Qui, quand et où » en tête de page. */}
+      <section
+        aria-labelledby="prendre-rdv"
+        /* `pt-14` : la section précédente est une bande menthe pleine largeur.
+           Sans marge haute, la carte pêche venait s'y coller, les deux aplats
+           se touchant bord à bord. Les sections qui suivent un fond blanc n'en
+           ont pas besoin, le `pb` de la précédente suffit. */
+        className="px-5 pb-10 pt-14 sm:px-10 sm:pt-16 lg:px-[100px]"
+      >
+        <Apparition>
+          <div className="rounded-[20px] bg-peche px-6 py-10 text-center sm:px-12 sm:py-12">
+            <h2 id="prendre-rdv" className="text-2xl font-bold text-bois sm:text-[33px]">
+              Prendre rendez-vous
+            </h2>
 
-        <div className="mt-8 grid gap-8 sm:grid-cols-2">
-          <div className="rounded-[20px] border border-sable p-6 sm:p-8">
-            <h3 className="font-bold text-encre">Quand</h3>
-            <p className="mt-3 text-ardoise">{horaires.libelle}.</p>
-            <p className="mt-2 text-ardoise">{horaires.modalite}.</p>
-          </div>
-
-          <div className="rounded-[20px] border border-sable p-6 sm:p-8">
-            <h3 className="font-bold text-encre">Où</h3>
-            <address className="mt-3 not-italic text-ardoise">{adressePostale}</address>
-            <p className="mt-2 text-ardoise">{cabinet.acces.reperes}.</p>
-            <p className="mt-2 text-ardoise">
-              {cabinet.acces.tram}. {cabinet.acces.stationnement}.
+            <p className="mx-auto mt-5 max-w-3xl text-encre">
+              Vous n&rsquo;avez pas besoin de savoir quoi dire, ni de préparer quoi que ce
+              soit. Un premier échange de quelques minutes suffit à fixer une séance.
             </p>
-            <p className="mt-4 text-sm">
-              <Link
-                href="/cabinet-nantes/"
-                className="text-terracotta-fonce underline underline-offset-2"
-              >
-                Comment venir au cabinet
-              </Link>
-            </p>
+
+            <div className="mt-9 border-t border-white/70 pt-9">
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <Link
+                  href="/rendez-vous-psychologue-nantes/"
+                  className="rounded-full bg-terracotta px-8 py-4 text-sm font-semibold uppercase tracking-wider text-encre"
+                >
+                  Prendre rendez-vous
+                </Link>
+                <a
+                  href={`tel:${contact.telephoneE164}`}
+                  className="rounded-full border border-bois px-8 py-4 text-sm font-semibold uppercase tracking-wider text-bois"
+                >
+                  {contact.telephone}
+                </a>
+              </div>
+              <p className="mt-5 text-sm">
+                <Link
+                  href="/aide-faq/"
+                  className="text-terracotta-fonce underline underline-offset-2"
+                >
+                  Autres questions fréquentes
+                </Link>
+              </p>
+            </div>
           </div>
-        </div>
+        </Apparition>
+      </section>
 
-        <div className="mt-10 flex flex-wrap items-center gap-4">
-          <Link
-            href="/rendez-vous-psychologue-nantes/"
-            className="rounded-full bg-terracotta px-8 py-4 text-sm font-semibold uppercase tracking-wider text-encre"
-          >
-            Prendre rendez-vous
-          </Link>
-          <a
-            href={`tel:${contact.telephoneE164}`}
-            className="rounded-full border border-bois px-8 py-4 text-sm font-semibold uppercase tracking-wider text-bois"
-          >
-            {contact.telephone}
-          </a>
-          <Link
-            href="/aide-faq/"
-            className="text-sm text-terracotta-fonce underline underline-offset-2"
-          >
-            Autres questions fréquentes
-          </Link>
-        </div>
-
-        <div className="mt-12 max-w-lecture">
+      <section className="px-5 pb-16 sm:px-10 lg:px-[100px]">
+        <div className="mx-auto max-w-lecture">
           <UrgenceBanner />
           <AuthorSignature modifieLe={MODIFIE_LE} />
         </div>

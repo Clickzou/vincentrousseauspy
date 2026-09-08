@@ -343,6 +343,12 @@ Cinq silos. Chacun a une page pilier et un rôle distinct — règle MECE : **au
 
 | Élément | Valeur |
 |---|---|
+> ⚠️ **SILO SUSPENDU — 8 septembre 2026.** Les données Sistrix (127 idées de
+> mots-clés) ne font apparaître **aucune requête locale par symptôme** à Nantes, et
+> `motifs consultation psychologue` a un volume de 0. La condition posée ci-dessous —
+> « sélectionnés sur données réelles, jamais sur une liste théorique » — n'est donc
+> pas remplie. Voir `audit-positions-2026-09-08.md` § 5.4.
+
 | Pilier | `/motifs-de-consultation/` |
 | Pages | 6 à 10 motifs, **sélectionnés sur données réelles** (Search Console + patientèle effective), jamais sur une liste théorique |
 | Rôle | Capter la longue traîne convertissante : « psychologue burn-out nantes » |

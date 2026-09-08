@@ -88,13 +88,16 @@ export default function PlanDuSite() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <section className="px-5 pb-16 sm:px-10 lg:px-[100px]">
+      {/* Volontairement NON centré, contrairement aux deux pages légales : ce
+          n'est pas un document mais une page de navigation, et sa grille de
+          liens serait écrasée dans une colonne de lecture. */}
+      <section className="pb-16">
         <PageEnTete
           titre="Plan du site"
           chapeau="Toutes les pages, rangées par ce que vous cherchez."
         />
 
-        <div className="grid gap-10 sm:grid-cols-2">
+        <div className="grid gap-10 px-5 sm:grid-cols-2 sm:px-10 lg:px-[100px]">
           {RUBRIQUES.map((rubrique) => (
             <nav key={rubrique.titre} aria-labelledby={`rubrique-${rubrique.titre}`}>
               <h2
@@ -169,7 +172,7 @@ export default function PlanDuSite() {
           )}
         </div>
 
-        <p className="mt-12 max-w-lecture text-sm text-ardoise">
+        <p className="mt-12 max-w-lecture px-5 text-sm text-ardoise sm:px-10 lg:px-[100px]">
           Les mentions légales et la politique de confidentialité, accessibles depuis le
           pied de page, ne figurent pas dans ce plan&nbsp;: elles sont volontairement
           exclues de l&rsquo;indexation.{" "}

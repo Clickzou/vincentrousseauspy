@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { UrgenceBanner } from "@/components/seo/UrgenceBanner";
 import { contact, praticien, priseRdv } from "@/lib/site-config";
+import { canonical } from "@/lib/url-helpers";
 
 /**
  * /merci-pour-votre-demande/ — URL CONSERVÉE du site WordPress.
@@ -19,7 +20,10 @@ import { contact, praticien, priseRdv } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Merci pour votre demande",
-  // Aucune canonique : la page n'est pas indexable.
+  /* Canonique auto-référente MÊME EN `noindex` : sans elle, la page hérite
+     du `alternates.canonical: "/"` du layout et désigne l'accueil comme sa
+     version canonique — un signal faux, même sur une page non indexée. */
+  alternates: { canonical: canonical("merci-pour-votre-demande") },
   robots: { index: false, follow: true },
 };
 

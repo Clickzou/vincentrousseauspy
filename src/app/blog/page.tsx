@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { PageEnTete } from "@/components/ui/PageEnTete";
+import { Apparition } from "@/components/ui/Apparition";
 import { breadcrumbSchema, graph } from "@/lib/seo/schemas";
 import { ARTICLES } from "@/lib/content/blog";
 import { cabinet, contact, praticien } from "@/lib/site-config";
@@ -55,14 +55,40 @@ export default function Blog() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <PageEnTete
-        titre="Écrits"
-        chapeau={
-          `Quelques textes sur ce qui se passe réellement en consultation, sur le cadre, ` +
-          `et sur les questions que l'on pose rarement à voix haute. Ils paraissent quand ` +
-          `j'ai quelque chose à dire, pas selon un calendrier.`
-        }
-      />
+      {/* EN-TÊTE EN CARTE, comme le reste du site. Le compte d'articles est
+          calculé depuis le registre : il ne peut pas se désynchroniser. */}
+      <section className="px-5 pb-6 pt-12 sm:px-10 lg:px-[100px]">
+        <nav aria-label="Fil d'Ariane" className="text-sm text-ardoise">
+          <Link href="/" className="underline underline-offset-2">
+            Accueil
+          </Link>
+          <span aria-hidden="true"> › </span>
+          <span aria-current="page">Écrits</span>
+        </nav>
+
+        <Apparition>
+          <div className="mt-8 rounded-[20px] border border-sable bg-creme px-6 py-10 text-center sm:px-12">
+            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
+              {ARTICLES.length > 1
+                ? `${ARTICLES.length} textes`
+                : `${ARTICLES.length} texte`}{" "}
+              · {praticien.nom}
+            </p>
+
+            <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-bois sm:text-[40px]">
+              Écrits
+            </h1>
+
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+
+            <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
+              Quelques textes sur ce qui se passe réellement en consultation, sur le cadre,
+              et sur les questions que l&rsquo;on pose rarement à voix haute. Ils paraissent
+              quand j&rsquo;ai quelque chose à dire, pas selon un calendrier.
+            </p>
+          </div>
+        </Apparition>
+      </section>
 
       <section aria-label="Liste des articles" className="px-5 py-10 sm:px-10 lg:px-[100px]">
         {ARTICLES.length === 0 ? (
@@ -78,27 +104,29 @@ export default function Blog() {
           </p>
         ) : (
           <ul className="grid gap-6 lg:grid-cols-2">
-            {ARTICLES.map((article) => (
-              <li key={article.slug}>
-                <article className="flex h-full flex-col rounded-[20px] bg-creme p-7 sm:p-9">
-                  <p className="text-xs uppercase tracking-[0.18em] text-terracotta-fonce">
-                    <time dateTime={article.publieLe}>{dateLisible(article.publieLe)}</time>
+            {ARTICLES.map((article, i) => (
+              <li key={article.slug} className="h-full">
+                <Apparition delai={(i % 2) * 120} className="h-full">
+                  <article className="flex h-full flex-col rounded-[20px] bg-lin p-7 sm:p-9">
+                    <p className="text-xs uppercase tracking-[0.18em] text-terracotta-fonce">
+                      <time dateTime={article.publieLe}>{dateLisible(article.publieLe)}</time>
                   </p>
-                  <h2 className="mt-3 text-xl font-bold leading-tight text-bois sm:text-2xl">
-                    <Link href={`/blog/${article.slug}/`} className="hover:underline">
-                      {article.titre}
-                    </Link>
-                  </h2>
-                  <p className="mt-4 flex-1 text-ardoise">{article.chapeau}</p>
-                  <p className="mt-6">
-                    <Link
-                      href={`/blog/${article.slug}/`}
-                      className="text-sm font-medium text-terracotta-fonce underline underline-offset-4"
-                    >
-                      Lire l&rsquo;article
-                    </Link>
-                  </p>
-                </article>
+                    <h2 className="mt-3 text-xl font-bold leading-tight text-bois sm:text-2xl">
+                      <Link href={`/blog/${article.slug}/`} className="hover:underline">
+                        {article.titre}
+                      </Link>
+                    </h2>
+                    <p className="mt-4 flex-1 text-ardoise">{article.chapeau}</p>
+                    <p className="mt-6">
+                      <Link
+                        href={`/blog/${article.slug}/`}
+                        className="text-sm font-medium text-terracotta-fonce underline underline-offset-4"
+                      >
+                        Lire l&rsquo;article
+                      </Link>
+                    </p>
+                  </article>
+                </Apparition>
               </li>
             ))}
           </ul>
@@ -106,7 +134,7 @@ export default function Blog() {
       </section>
 
       <section className="px-5 pb-16 sm:px-10 lg:px-[100px]">
-        <div className="max-w-lecture text-sm text-ardoise">
+        <div className="mx-auto max-w-lecture text-center text-sm text-ardoise">
           <p>
             Ces textes sont d&rsquo;ordre général et ne remplacent pas une consultation.
             Pour une question qui vous concerne, appelez-moi au{" "}

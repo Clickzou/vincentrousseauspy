@@ -10,6 +10,7 @@ import {
   praticien,
   SITE_URL,
 } from "@/lib/site-config";
+import { canonical } from "@/lib/url-helpers";
 
 /**
  * /mentions-legales/ — URL CONSERVÉE, en `noindex` (elle l'est déjà
@@ -33,6 +34,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Mentions légales",
+  /* Canonique auto-référente MÊME EN `noindex` : sans elle, la page hérite
+     du `alternates.canonical: "/"` du layout et désigne l'accueil comme sa
+     version canonique — un signal faux, même sur une page non indexée. */
+  alternates: { canonical: canonical("mentions-legales") },
   robots: { index: false, follow: true },
 };
 
@@ -47,10 +52,16 @@ function H2({ children, id }: { children: React.ReactNode; id: string }) {
 
 export default function MentionsLegales() {
   return (
-    <section className="px-5 pb-16 sm:px-10 lg:px-[100px]">
-      <PageEnTete titre="Mentions légales" />
+    <>
+      <PageEnTete centre titre="Mentions légales" />
 
-      <div className="prose-clinique">
+      {/* Colonne centrée, comme sur le site d'origine : une page légale se lit
+          comme un document, pas comme une page de site. L'en-tête (`centre`) et
+          le corps partagent la même largeur, `max-w-lecture`, donc s'alignent.
+
+          Le `<section>` qui englobait tout a été retiré : il portait les mêmes
+          marges horizontales que `PageEnTete`, qui se retrouvaient doublées. */}
+      <div className="prose-clinique mx-auto px-5 pb-16 sm:px-10">
         <H2 id="editeur">Éditeur du site</H2>
         <p className="mt-4">
           Le site accessible à l&rsquo;adresse{" "}
@@ -159,6 +170,6 @@ export default function MentionsLegales() {
           </Link>
         </p>
       </div>
-    </section>
+    </>
   );
 }

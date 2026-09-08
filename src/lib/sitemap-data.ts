@@ -29,7 +29,9 @@ export const PAGES: Entree[] = [
     titre: "Psychologue à Nantes",
     origine: "conservee",
     priorite: 1.0,
-    note: "Porte 33 des 38 mots-clés suivis. Cible : « psychologue nantes » (5 400/mois, pos. 5).",
+    note:
+      "Porte 33 des 38 mots-clés suivis par l'agence, et 15 des 15 positions relevées par " +
+      "Sistrix. Cible : « psychologue nantes » (pos. 3 à 5 selon la source).",
   },
   {
     slug: "/vincent-rousseau-psychologue/",
@@ -50,7 +52,10 @@ export const PAGES: Entree[] = [
     titre: "Psychanalyste à Nantes",
     origine: "conservee",
     priorite: 0.85,
-    note: "Positionnée (pos. 2 sur « psychanalyste nantes »). Contenu actuel : « Qui, quand et où ? »",
+    note:
+      "⚠️ NON positionnée : elle ne ressort que 24e sur « rousseau vincent ». " +
+      "C'est l'ACCUEIL qui est 2e sur « psychanalyste nantes » (relevé du 2026-09-07). " +
+      "Contenu WordPress : « Qui, quand et où ? », sans rapport avec le slug.",
   },
   {
     slug: "/psychologue-clinicien-nantes/",
