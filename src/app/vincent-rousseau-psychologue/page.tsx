@@ -402,7 +402,7 @@ export default function PageAuteur() {
                 <IconeValidation className="h-4 w-4" />
                 Titre protégé par la loi
               </p>
-              <p className="mt-2 text-lg font-bold text-encre">Psychologue clinicien</p>
+              <h3 className="mt-2 text-lg font-bold text-encre">Psychologue clinicien</h3>
               <p className="mt-2 text-ardoise">
                 Titre universitaire protégé depuis 1985, permettant l&rsquo;inscription au
                 répertoire des professionnels de santé. Il atteste d&rsquo;une compétence
@@ -419,7 +419,7 @@ export default function PageAuteur() {
                 <IconeValidation className="h-4 w-4" />
                 Titre protégé par la loi depuis 2010
               </p>
-              <p className="mt-2 text-lg font-bold text-encre">Psychothérapeute</p>
+              <h3 className="mt-2 text-lg font-bold text-encre">Psychothérapeute</h3>
               <p className="mt-2 text-ardoise">
                 Il correspond à une compétence reconnue dans le soin psychique, et suppose
                 une inscription sur un registre national. Il se distingue de celui de{" "}
@@ -437,7 +437,7 @@ export default function PageAuteur() {
                 <IconeValidation className="h-4 w-4" />
                 Méthode de travail — titre non protégé
               </p>
-              <p className="mt-2 text-lg font-bold text-encre">Psychanalyste</p>
+              <h3 className="mt-2 text-lg font-bold text-encre">Psychanalyste</h3>
               <p className="mt-2 text-ardoise">
                 Ce titre n&rsquo;est pas protégé par la loi&nbsp;: il indique une méthode,
                 la mienne, et repose sur une formation analytique et une appartenance à des

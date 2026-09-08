@@ -501,7 +501,10 @@ export default function Accueil() {
             autorité de tutelle, université) : c'est exactement ce que Google
             attend d'un site YMYL, et ce qu'un visiteur peut contrôler. */}
         <div className="mt-8 rounded-[20px] border border-sable bg-white p-7 sm:p-9">
-          <p className="text-base font-bold text-bois">Formation et enregistrement</p>
+          {/* Titre, et non paragraphe en gras : le même bloc est un <h2>
+              sur la page auteur, et il ouvre ici une liste de faits
+              vérifiables. `h3` parce qu'il dépend du <h2> de la section. */}
+          <h3 className="text-base font-bold text-bois">Formation et enregistrement</h3>
           {/* Chaque entrée porte son icône. Elles sont décoratives : le sens
               est dans le libellé, d'où aria-hidden et aucun alternatif. */}
           <dl className="mt-6 grid gap-x-10 gap-y-6 text-sm sm:grid-cols-2">
@@ -860,9 +863,11 @@ export default function Accueil() {
           CTA FINAL — informer et faciliter, jamais mettre la pression (§ 9.2). */}
       <Section fond="menthe" etroit pleineLargeur>
         <div className="text-center">
-          <p className="text-2xl font-bold text-bois">
+          {/* Ce bloc ouvre une section pleine largeur et n'avait aucun
+              titre : le plan de l'accueil s'arrêtait a la FAQ. */}
+          <h2 className="text-2xl font-bold text-bois">
             Vous souhaitez prendre rendez-vous&nbsp;?
-          </p>
+          </h2>
           <p className="mx-auto mt-3 max-w-lecture text-ardoise">
             Vous n&rsquo;êtes pas obligé de savoir quoi dire, ni de justifier votre demande.
             Un premier échange suffit à voir si nous pouvons travailler ensemble.
