@@ -455,3 +455,33 @@ surcharge forcée ferait courir plus de risque au build qu'elle n'en retire.
 Le premier suppose une décision éditoriale de Vincent : ses meilleurs volumes sont
 `psychanalyse effets négatifs` et `critique de la psychanalyse`. Le second attend
 l'arbitrage du § 8 ci-dessus.
+
+### 10.9 ⚠️ À VÉRIFIER EN PREMIER À LA REPRISE — le survol du sous-menu
+
+Le sous-menu « PSYCHOLOGUE » se fermait quand la souris descendait à peine sous
+le bouton, rendant les quatre entrées difficiles à cliquer. **Signalé deux fois,
+corrigé deux fois, et la seconde correction n'a pas été confirmée par le
+client.** C'est le premier point à tester à la reprise.
+
+**Ce qui a été vérifié, et qui est bon :** la structure du DOM (le panneau est
+un descendant de l'entrée, donc le survoler ne doit pas déclencher de sortie),
+et la génération par Tailwind de `lg:relative`, `lg:absolute`, `lg:top-full`,
+`lg:pt-1`, `lg:-mt-px`. La géométrie devrait être continue. Elle ne l'était pas.
+
+**Première correction** (`1913d7a`) : le décalage de 4 px sous le bouton était
+une marge *extérieure*, donc du vide. Devenu marge *intérieure* d'un conteneur
+transparent qui touche le bouton d'un côté et le panneau de l'autre.
+Insuffisant.
+
+**Seconde correction** (`07abcf7`) : trois défenses superposées, l'interaction
+étant rendue tolérante plutôt que géométriquement parfaite.
+
+1. le conteneur remonte d'un pixel sur le bouton (`lg:-mt-px`) — ils se
+   chevauchent au lieu de se toucher ;
+2. la fermeture est différée de 250 ms ;
+3. entrer sur le panneau annule la fermeture en cours.
+
+**Si le défaut persiste : passer du survol au clic.** C'est moins élégant, mais
+infaillible, et c'est la raison pour laquelle beaucoup de sites sérieux le font.
+Le bouton porte déjà `onClick` et `aria-expanded` : il n'y a que les deux
+gestionnaires `onPointerEnter` / `onPointerLeave` du `<li>` à retirer.
