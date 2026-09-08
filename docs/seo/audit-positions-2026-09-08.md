@@ -194,8 +194,13 @@ usuelles. En position 1, le CTR attendu est de 27 à 30 %, soit **≈ 590 clics*
 À comparer avec le silo « motifs » envisagé : six pages à 80 recherches/mois, atteignant la
 position 3, produiraient **48 clics/mois** au total.
 
-**Le rapport est de 8 pour 1 en faveur du seul mot-clé principal.** Le préalable reste de
-savoir qui occupe les positions 1 et 2 — donnée non fournie.
+**Le rapport est de 8 pour 1 en faveur du seul mot-clé principal.**
+
+> ⚠️ **HYPOTHÈSE INVALIDÉE — voir § 6.1.** L'export « Concurrents » montre que quatre
+> des cinq premiers concurrents sont des annuaires (Doctolib, psychologue.net, Resalib,
+> PagesJaunes). La position 1 organique est vraisemblablement hors d'atteinte, et la
+> position 3 est le plafond. Le gain se joue dans le **Local pack**, donc sur la fiche
+> Google Business Profile — pas sur le site.
 
 ## 5.4 ⚠️ LE SILO « MOTIFS DE CONSULTATION » N'EST PAS SOUTENU PAR LA DONNÉE
 
@@ -324,3 +329,95 @@ tant que les nouvelles pages n'ont pas acquis leur propre autorité. Confirme la
    remboursement, psychanalyse.
 6. **Ne rien écrire sur les motifs de consultation.** Sauf, éventuellement, `confiance en
    soi` — une requête, à traiter comme une section, pas comme un silo.
+
+---
+
+# 6. CONCURRENCE SISTRIX — 8 septembre 2026
+
+Export « Concurrents » (vue domaine), 358 domaines en concurrence. **Ce n'est pas la SERP
+de `psychologue nantes`**, qui reste à relever, mais il tranche déjà une question posée
+au § 5.3.
+
+| # | Domaine | Concurrence | Indice de visibilité |
+|---|---|---|---|
+| 1 | **doctolib.fr** | 187,1 % | 59,67 |
+| 2 | psychologuenantes-vincentrousseau.fr | 100 % (référence) | **0,00** |
+| 3 | **psychologue.net** | 75,6 % | 22,95 |
+| 4 | resalib.fr | 42,0 % | 2,26 |
+| 5 | **pagesjaunes.fr** | 41,2 % | 418,29 |
+| 6 | grenoble-psychologues.fr | 25,9 % | 0,01 |
+| 7 | amandine-caulle.fr | 25,6 % | 0,03 |
+| 8 | sante-mentale-ain.fr | 20,8 % | 0,02 |
+| 9 | vincianedevaux-psychologue.com | 17,0 % | 0,03 |
+| 10 | mappy.com | 16,9 % | 325,02 |
+| 11 | psychanalyse-rivalin.fr | 12,7 % | 0,00 |
+| 12 | **psychologueanantes.fr** | 12,7 % | 0,00 |
+| 13 | wiese-psy-nantes.com | 12,0 % | 0,00 |
+| 14 | psychotherapie-nantes.fr | 11,6 % | 0,00 |
+| 15 | spp.asso.fr | 10,5 % | 1,39 |
+| 16 | psychologue-marionthelisson.com | 9,9 % | 0,00 |
+| 17 | psychologytoday.com | 9,9 % | 0,34 |
+
+## 6.1 ⚠️ CORRECTION DU § 5.3 — les +375 clics/mois sont probablement hors d'atteinte
+
+Le calcul du § 5.3 reste juste comme arithmétique : en position 1, `psychologue nantes`
+vaudrait ≈ 590 clics au lieu de 213. **Son hypothèse ne l'est pas.** Quatre des cinq
+premiers concurrents sont des annuaires ou des plateformes de réservation — Doctolib,
+psychologue.net, Resalib, PagesJaunes — auxquels s'ajoute Mappy en 10ᵉ. Ce sont des
+agrégateurs portant des centaines de fiches de praticiens et une autorité sans commune
+mesure. **Aucun contenu ne les déloge des deux premières places organiques.**
+
+La position 3 est donc vraisemblablement **le plafond organique**, et le site y est déjà.
+Le § 5.3 doit se lire ainsi : *si* la position 1 était accessible, elle vaudrait +375
+clics ; cet export indique qu'elle ne l'est pas.
+
+**Où se trouve réellement le gain :** `psychologue nantes` déclenche un **Local pack**
+(source : `serp_features` du CSV agence), qui s'affiche **au-dessus** des résultats
+organiques, annuaires compris. C'est le seul emplacement où un praticien isolé passe
+devant Doctolib. Il ne dépend pas du site mais de la **fiche Google Business Profile**.
+
+Quatrième source convergente vers la même action, après les trois du § 5.6. La fiche n'est
+toujours pas vérifiée.
+
+## 6.2 Indice de visibilité 0,00 — ce que cela impose au § 5.5
+
+Le domaine est **sous le seuil d'affichage de Sistrix**. C'est normal pour un cabinet
+individuel, mais cela recadre la préconisation du § 5.5 sur l'informationnel national.
+
+Sur `différence entre psychologue et psychiatre` (3 648/mois), les concurrents sont
+Doctolib (59,67), psychologue.net (22,95), psychologytoday.com et les grands sites santé.
+**Espérer ce trafic à court terme serait malhonnête.**
+
+Une nuance en sens inverse, toutefois : `grenoble-psychologues.fr` (indice 0,01) et
+`sante-mentale-ain.fr` (0,02) partagent respectivement 25,9 % et 20,8 % du jeu de
+mots-clés. Des sites sans autorité mesurable se positionnent donc bien sur une partie de
+ces requêtes. L'informationnel n'est pas fermé — il est lent.
+
+**Conclusion :** le travail informationnel du § 5.5 se justifie comme **soutien de
+pertinence thématique aux requêtes locales**, pas comme un gisement de trafic national. Il
+a été fait sur des pages existantes, à coût faible ; ce serait un mauvais calcul d'en
+créer de nouvelles pour cette seule raison.
+
+## 6.3 Les concurrents réels, praticien contre praticien
+
+Indices proches de zéro, donc sites locaux de même nature :
+
+`psychanalyse-rivalin.fr` · **`psychologueanantes.fr`** · `wiese-psy-nantes.com` ·
+`psychotherapie-nantes.fr` · `psychologue-marionthelisson.com` ·
+`vincianedevaux-psychologue.com` · `amandine-caulle.fr`
+
+**`psychologueanantes.fr` mérite un examen** : c'est un nom de domaine de correspondance
+exacte sur le mot-clé principal. Aucun des autres n'a cet avantage.
+
+`grenoble-psychologues.fr` et `sante-mentale-ain.fr` ne sont pas nantais : leur
+recouvrement porte sur les requêtes informationnelles nationales, pas locales. Même chose
+pour `spp.asso.fr` (Société psychanalytique de Paris) et `psychologytoday.com`, qui
+occupent le terrain de la psychanalyse — ce qui rend `/psychanalyste-nantes/` plus
+difficile qu'il n'y paraît sur ses requêtes nationales.
+
+## 6.4 Ce qui manque encore
+
+**La SERP de `psychologue nantes` elle-même** : qui occupe les positions 1 et 2, et où se
+situe le Local pack. Dans Sistrix, elle s'ouvre par l'**icône œil** à droite de la ligne
+du mot-clé, dans le tableau des positions — pas par l'onglet Concurrents, qui raisonne au
+niveau du domaine.
