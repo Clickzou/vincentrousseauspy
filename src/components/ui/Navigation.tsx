@@ -153,10 +153,36 @@ export function Navigation() {
   /* Le survol n'ouvre le sous-menu que pour une souris. Au doigt, une frappe
      émet aussi un événement de survol : sans ce filtre, elle ouvrait le
      panneau et le clic le refermait dans la foulée — l'entrée devenait
-     inutilisable sur tablette. */
-  const survol = (e: React.PointerEvent, href: string | null) => {
-    if (e.pointerType === "mouse") setOuvert(href);
+     inutilisable sur tablette.
+
+     LA FERMETURE EST DIFFÉRÉE DE 140 ms. Sans ce délai, le moindre passage
+     hors de l'entrée referme le panneau instantanément : une trajectoire un
+     peu oblique vers le troisième item, un tremblement, et le menu se dérobe
+     sous le curseur. Le délai est annulé dès qu'on revient — il ne retarde
+     donc jamais une fermeture voulue, seulement les fausses. */
+  const minuterie = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const annulerFermeture = () => {
+    if (minuterie.current) {
+      clearTimeout(minuterie.current);
+      minuterie.current = null;
+    }
   };
+
+  const survolEntree = (e: React.PointerEvent, href: string) => {
+    if (e.pointerType !== "mouse") return;
+    annulerFermeture();
+    setOuvert(href);
+  };
+
+  const survolSortie = (e: React.PointerEvent) => {
+    if (e.pointerType !== "mouse") return;
+    annulerFermeture();
+    minuterie.current = setTimeout(() => setOuvert(null), 140);
+  };
+
+  /* La minuterie ne doit pas survivre au composant. */
+  useEffect(() => annulerFermeture, []);
 
   return (
     <nav aria-label="Navigation principale" className="mx-auto max-w-6xl px-5 pb-6">
@@ -257,8 +283,8 @@ export function Navigation() {
                 /* `relative` seulement à partir de `lg` : sous 1024 px, le
                    sous-menu reste dans le flux, il ne flotte pas. */
                 className="lg:relative"
-                onPointerEnter={(e) => survol(e, item.href)}
-                onPointerLeave={(e) => survol(e, null)}
+                onPointerEnter={(e) => survolEntree(e, item.href)}
+                onPointerLeave={survolSortie}
               >
                 {/* Un bouton, et non un lien : l'élément ouvre un panneau, il ne
                     navigue pas. La page du parent est le premier item du
@@ -287,35 +313,48 @@ export function Navigation() {
                   />
                 </button>
 
-                <ul
+                {/* UN CONTENEUR, ET UN SEUL RÔLE : combler l'espace entre le
+                    bouton et le panneau. Le décalage de 4 px était auparavant
+                    une marge extérieure, donc un vide : en le traversant, le
+                    curseur ne survolait plus rien: l'entrée recevait un
+                    événement de sortie et le panneau se fermait avant d'être
+                    atteint. Le même décalage est maintenant une marge
+                    intérieure de ce conteneur transparent, qui touche le bouton
+                    d'un côté et le panneau de l'autre. L'espacement visuel est
+                    identique, le pont est continu. */}
+                <div
                   id={`sous-menu-${index}`}
                   hidden={!estOuvert}
-                  className={[
-                    "bg-encre",
-                    /* Sous 1024 px : sous-liste indentée, marquée d'un filet
-                       vertical qui la rattache visuellement à son parent. */
-                    "max-lg:ml-5 max-lg:border-l max-lg:border-white/15 max-lg:pb-1",
-                    /* À partir de 1024 px : panneau flottant sous l'entrée. */
-                    "lg:absolute lg:left-0 lg:top-full lg:z-20 lg:mt-1 lg:min-w-[15rem] lg:overflow-hidden lg:rounded-[16px] lg:py-2 lg:shadow-lg",
-                  ].join(" ")}
+                  className="lg:absolute lg:left-0 lg:top-full lg:z-20 lg:pt-1"
                 >
-                  {item.enfants.map((enfant) => (
-                    <li key={enfant.href}>
-                      <Link
-                        href={enfant.href}
-                        aria-current={estActif(enfant.href) ? "page" : undefined}
-                        className={[
-                          "block px-4 py-3 lg:whitespace-nowrap lg:px-5",
-                          estActif(enfant.href)
-                            ? "bg-white/10 font-medium text-terracotta"
-                            : "hover:text-terracotta",
-                        ].join(" ")}
-                      >
-                        {enfant.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                  <ul
+                    className={[
+                      "bg-encre",
+                      /* Sous 1024 px : sous-liste indentée, marquée d'un filet
+                         vertical qui la rattache visuellement à son parent. */
+                      "max-lg:ml-5 max-lg:border-l max-lg:border-white/15 max-lg:pb-1",
+                      /* À partir de 1024 px : le panneau proprement dit. */
+                      "lg:min-w-[15rem] lg:overflow-hidden lg:rounded-[16px] lg:py-2 lg:shadow-lg",
+                    ].join(" ")}
+                  >
+                    {item.enfants.map((enfant) => (
+                      <li key={enfant.href}>
+                        <Link
+                          href={enfant.href}
+                          aria-current={estActif(enfant.href) ? "page" : undefined}
+                          className={[
+                            "block px-4 py-3 lg:whitespace-nowrap lg:px-5",
+                            estActif(enfant.href)
+                              ? "bg-white/10 font-medium text-terracotta"
+                              : "hover:text-terracotta",
+                          ].join(" ")}
+                        >
+                          {enfant.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </li>
             );
           })}

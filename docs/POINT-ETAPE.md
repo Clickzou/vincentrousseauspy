@@ -330,3 +330,128 @@ Cf. `docs/seo/audit-positions-2026-09-08.md`.
   C'est ce qui avait cassé le bandeau d'urgence 3114 (`alerte`, `sable`, `brume`).
 - **`.wpress` et `_wp_extract/` sont exclus de Git** — 523 Mo et des données personnelles
   (soumissions de formulaires, abonnés newsletter).
+
+---
+
+## 10. SÉANCE DU 8 SEPTEMBRE 2026 — ÉTAT À LA REPRISE
+
+Dépôt à jour et synchronisé (`main` = `origin/main`), **déploiement Vercel vert**.
+Tout ce qui suit est mesuré.
+
+### 10.1 Le site est en ligne
+
+Premier déploiement réussi. Les précédents échouaient tous — voir § 10.6.
+
+- Production : `vincentrousseauspy` sur Vercel, scope `clickzous-projects`
+- Les URL de déploiement renvoient un **302 vers `vercel.com/sso-api`** : c'est la
+  protection Vercel, normale tant qu'aucun domaine personnalisé n'est rattaché.
+  **C'est la seule étape technique qui reste avant l'ouverture au public.**
+
+### 10.2 Audits produits
+
+| Document | Contenu |
+|---|---|
+| `docs/seo/audit-positions-2026-09-08.md` § 5 à 8 | Données Sistrix : positions, concurrence, empreinte de 50 mots-clés, SERP de `psychologue nantes` |
+| `docs/seo/audit-technique-v2-2026-09-08.md` | Audit des 16 pages du nouveau site |
+| Rapport client | Publié comme page privée, avant/après, à destination de Vincent |
+
+**Le constat qui commande tout le reste** (§ 8.1 de l'audit de positions) : sur les
+vingt résultats de `psychologue nantes`, **deux seulement sont des sites de
+praticiens**. Le site n'est pas 3ᵉ derrière deux confrères, il est **premier de sa
+catégorie**. Le travail à la bascule est donc **défensif**.
+
+### 10.3 Corrections mesurées
+
+| Avant | Après |
+|---|---|
+| 8 titres sur 16 au-delà de 60 caractères | **0** |
+| 11 descriptions au-delà de 160 caractères | **0** |
+| Questions de FAQ non déclarées comme titres | `h3` sur l'accueil, `h2` sur `/aide-faq/` |
+| 3 intitulés visuellement titres mais codés en `<p>` | Corrigés |
+| `/cabinet-nantes/` : 416 mots, aucun quartier nommé | 556 mots, quartier réel nommé |
+
+Le suffixe de titre est passé de `— Vincent Rousseau, psychologue à Nantes` (40
+caractères) à `— Vincent Rousseau, Nantes` (26). Deux règles nouvelles : une page
+dont le titre contient déjà la ville pose son titre en `absolute` ; la ville
+appartient aux pages locales, pas aux pages informationnelles (les articles gardent
+la signature de l'auteur et perdent la ville).
+
+### 10.4 Ajouts fonctionnels
+
+- **Consentement aux cookies** prêt et conforme CNIL. Tant que `NEXT_PUBLIC_GA_ID`
+  est vide — état actuel — aucune bannière, aucun script, aucun cookie. La politique
+  de confidentialité et les mentions légales **dépendent de cette variable** et
+  basculent d'elles-mêmes le jour du branchement.
+- **Search Console** traitée séparément (`GOOGLE_SITE_VERIFICATION`) : simple balise
+  `meta`, sans cookie, **sans consentement requis**. Peut être posée immédiatement.
+- `/llms.txt`, généré depuis `site-config`. Norme non confirmée lue par les
+  fournisseurs — pari à prix nul, pas une optimisation.
+- **Retour en haut de page** sur les 16 pages.
+- **Signature d'agence** en pied de page, accueil uniquement.
+- `npm run build:check` compile dans `.next-check/` : le build de vérification ne
+  détruit plus les chunks du serveur de développement.
+
+### 10.5 Données obtenues de Vincent
+
+- **Accessibilité : le cabinet est de plain-pied**, sans marche ni escalier.
+  L'invitation à appeler est conservée : la largeur des portes et les sanitaires
+  restent inconnus, et on n'étend pas la promesse à ce qu'on n'a pas vérifié.
+- **Coordonnées** relevées auprès d'OpenStreetMap, qui ne connaît pas le numéro 10
+  bis : c'est le centre de la rue de la Havane. Suffisant pour `LocalBusiness`.
+  La requête a confirmé le quartier : **Coulmiers — Jardin des Plantes**, dans
+  **Malakoff — Saint-Donatien**.
+
+### 10.6 ⚠️ VERCEL BLOQUE LES VERSIONS VULNÉRABLES DE NEXT.JS
+
+Neuf déploiements consécutifs en échec, sur plus de deux heures. **Le build
+réussissait entièrement** — 25 pages générées — et l'échec survenait après :
+
+```
+Build Completed in /vercel/output [26s]
+Deploying outputs...
+Vulnerable version of Next.js detected, please update immediately.
+status ● Error
+```
+
+Next 15.5.2 portait une faille **critique** : exécution de code à distance dans le
+protocole React flight, et exposition du code source des Server Actions — que le
+formulaire de rappel utilise. Résolu par la montée en **15.5.25**, dernière du même
+palier mineur.
+
+**Comment diagnostiquer ce cas** : le tableau de bord n'affiche que le message de
+commit. Le vrai journal s'obtient par
+`npx vercel inspect <url-du-déploiement> --logs --scope clickzous-projects`.
+
+Reste une `postcss` 8.4.31 signalée « high », **épinglée à l'intérieur de Next** et
+non remplaçable sans surcharge. Elle n'intervient qu'à la compilation du CSS, sur du
+CSS que nous écrivons : les deux failles supposent un CSS fourni par un tiers. Une
+surcharge forcée ferait courir plus de risque au build qu'elle n'en retire.
+
+### 10.7 Décisions actées ce jour
+
+- **Le silo « motifs de consultation » est suspendu.** Sur 127 idées de mots-clés,
+  aucune requête locale par symptôme, et `motifs consultation psychologue` a un
+  volume de 0. Le master est annoté au § 8.5. Voir audit de positions § 5.4 et 7.2.
+- **`alt=""` sur les œuvres décoratives** — dérogation au master, actée et bornée :
+  elle vaut pour les œuvres d'art, et elles seules. Une photo de Vincent ou du
+  cabinet porterait une information et devrait recevoir un `alt` descriptif.
+- **Aucun témoignage de patient sur le site**, jamais.
+
+### 10.8 Ce qui reste
+
+**Technique** — rattacher le domaine définitif (lève le 302), puis renseigner
+`GOOGLE_SITE_VERIFICATION` et, si Vincent l'accepte, `NEXT_PUBLIC_GA_ID`.
+
+**Hors site, par ordre de rendement**
+1. Vérifier et reprendre la **fiche Google Business Profile**. Quatre relevés
+   distincts convergent vers cette action.
+2. Créer la **Search Console**. Aucun historique rétroactif : chaque semaine de
+   retard est perdue.
+3. S'inscrire dans les **cinq annuaires gratuits** du top 20.
+4. Obtenir une **photographie** du cabinet ou de Vincent.
+
+**Contenu** — l'informationnel des pages existantes (`/psychanalyste-nantes/` et
+`/psychologue-clinicien-nantes/`, ≈ 900 recherches/mois chacune) n'a pas été traité.
+Le premier suppose une décision éditoriale de Vincent : ses meilleurs volumes sont
+`psychanalyse effets négatifs` et `critique de la psychanalyse`. Le second attend
+l'arbitrage du § 8 ci-dessus.
