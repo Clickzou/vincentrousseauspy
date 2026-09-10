@@ -48,6 +48,17 @@
   .prose-clinique p + p {
     @apply mt-4;
   }
+  /* Les listes à puces sont apparues dans la prose avec la révision du
+     2026-09-10 (page auteur, § « Pourquoi consulter ? »). Sans ces règles,
+     le preflight de Tailwind leur retire puce et retrait : trois items
+     s'affichent alors comme trois paragraphes collés, et l'énumération, qui
+     est justement ce qui rend le passage lisible, disparaît. */
+  .prose-clinique ul {
+    @apply mt-4 list-disc space-y-2 pl-6;
+  }
+  .prose-clinique ul + p {
+    @apply mt-4;
+  }
   .prose-clinique a {
     @apply text-terracotta-fonce underline underline-offset-2;
   }

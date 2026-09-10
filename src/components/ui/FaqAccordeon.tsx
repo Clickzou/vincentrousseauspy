@@ -1,5 +1,5 @@
 import { IconeChevron } from "@/components/ui/Icones";
-import type { Question } from "@/lib/content/faq";
+import type { BlocReponse, Question } from "@/lib/content/faq";
 
 /**
  * Liste de questions en accordéons natifs `<details>/<summary>`.
@@ -27,6 +27,34 @@ import type { Question } from "@/lib/content/faq";
  * suit directement le `<h1>`, donc `h2`. Un niveau fixe aurait sauté un rang
  * quelque part.
  */
+
+/**
+ * Rend une réponse, paragraphes et listes à puces mêlés.
+ *
+ * Les réponses révisées par Vincent (2026-09-10) énumèrent des cas : modalités
+ * de règlement, repères d'accès, manifestations d'une souffrance. Une `<ul>`
+ * les donne à lire d'un coup d'œil, là où le paragraphe unique du modèle
+ * précédent obligeait à tout lire pour trouver la ligne qui concerne.
+ */
+function CorpsReponse({ reponse }: { reponse: BlocReponse[] }) {
+  return (
+    <div className="space-y-3 px-6 pb-6 text-ardoise">
+      {reponse.map((bloc, i) =>
+        typeof bloc === "string" ? (
+          <p key={i}>{bloc}</p>
+        ) : (
+          /* `list-disc` et non des pastilles maison : la puce doit rester une
+             puce pour les lecteurs d'écran, qui annoncent le nombre d'éléments. */
+          <ul key={i} className="list-disc space-y-2 pl-5">
+            {bloc.liste.map((point) => (
+              <li key={point}>{point}</li>
+            ))}
+          </ul>
+        ),
+      )}
+    </div>
+  );
+}
 export function FaqAccordeon({
   questions,
   ouvrirPremiere = false,
@@ -59,7 +87,7 @@ export function FaqAccordeon({
                 <IconeChevron />
               </span>
             </summary>
-            <p className="px-6 pb-6 text-ardoise">{item.reponse}</p>
+            <CorpsReponse reponse={item.reponse} />
           </details>
         </li>
       ))}

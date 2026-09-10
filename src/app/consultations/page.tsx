@@ -246,8 +246,10 @@ export default function Consultations() {
             </h2>
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
             <p className="mt-6 text-ardoise">
-              C&rsquo;est avant tout une rencontre. Elle dure {seance.duree}, comme les
-              suivantes.
+              C&rsquo;est avant tout une rencontre, et{" "}
+              <strong className="font-medium text-encre">elle est gratuite</strong>. Elle
+              dure {seance.duree}, comme les suivantes, et ne vous engage à rien pour la
+              suite.
             </p>
           </div>
         </Apparition>
@@ -269,7 +271,9 @@ export default function Consultations() {
 
         <p className="mx-auto mt-8 max-w-lecture text-center text-sm text-ardoise">
           Vous n&rsquo;avez besoin d&rsquo;aucune ordonnance&nbsp;: la consultation
-          d&rsquo;un psychologue est en accès direct, sans passer par votre médecin.
+          d&rsquo;un psychologue est en accès direct, sans passer par votre médecin. C&rsquo;est
+          également le cas pour le dispositif «&nbsp;Mon Soutien Psy&nbsp;», auquel je suis
+          affilié.
         </p>
       </section>
 
@@ -310,15 +314,24 @@ export default function Consultations() {
           </p>
         </div>
 
+        {/* Quatre repères, et non cinq : « Modalité » (sur rendez-vous, en
+            présentiel) a cédé sa place au couple première séance / séances
+            suivantes le 2026-09-10. Elle n'est pas perdue — elle est déjà dans
+            la carte « Quand » en tête de page et dans le paragraphe qui
+            précède, alors que la gratuité de la première rencontre n'était
+            nulle part. */}
         <dl className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { terme: "Durée d'une séance", detail: seance.duree },
             { terme: "Rythme le plus courant", detail: seance.rythmeCourant },
             {
-              terme: "Honoraires",
+              terme: "Première séance",
+              detail: "Gratuite, et sans engagement pour la suite.",
+            },
+            {
+              terme: "Séances suivantes",
               detail: `De ${honoraires.min} à ${honoraires.max} €. ${honoraires.modulation}`,
             },
-            { terme: "Modalité", detail: horaires.modalite },
           ].map((item) => (
             <div key={item.terme} className="rounded-[20px] bg-lin p-6">
               <dt className="text-xs font-medium uppercase tracking-[0.18em] text-terracotta-fonce">

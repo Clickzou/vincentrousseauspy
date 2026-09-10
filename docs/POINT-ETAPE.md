@@ -164,13 +164,15 @@ le bloc `sources`, où elle est attribuée à son éditeur et vérifiable.
 ## 3. EN ATTENTE DE VINCENT — BLOQUANT POUR LA MISE EN LIGNE
 
 1. **Validation de tous les textes cliniques.** Sa responsabilité professionnelle est engagée (§ 7.1).
-2. **Mon soutien psy** : est-il partenaire du dispositif ? **N'est plus bloquant** —
-   `/tarifs-et-remboursement/` est juste dans les trois cas, il suffira de basculer
-   `monSoutienPsy.partenaire`. À lui signaler : s'il est partenaire, la séance relevant du
-   dispositif est à 50 €, tarif conventionnel, donc non modulable.
+2. ~~**Mon soutien psy** : est-il partenaire du dispositif ?~~ **RÉPONDU LE 2026-09-10 :
+   OUI**, il est affilié. `monSoutienPsy.partenaire` est passé à `true`, et les pages
+   tarifs et FAQ l'affirment désormais. **Reste à lui signaler** : la séance relevant du
+   dispositif est à 50 €, tarif conventionnel, donc **non modulable** — contrairement à
+   ses séances hors dispositif.
 3. **ADELI ou RPPS** : le répertoire ADELI est en cours de remplacement pour les psychologues.
-4. **Accessibilité PMR** : le site actuel dit seulement « tient compte des normes ».
-   Une personne concernée a besoin d'un fait concret (plain-pied ? ascenseur ?).
+4. ~~**Accessibilité PMR**~~ **RÉPONDU LE 2026-09-10** : rampe d'accès à l'entrée du
+   bâtiment, cabinet au 2e étage desservi par un ascenseur. ⚠️ Cela **corrige** la
+   réponse du 8 septembre (« plain-pied »), qui était fausse et figurait sur trois pages.
 5. **Coordonnées GPS** du cabinet, pour le `geo` du JSON-LD.
 6. **Visuels** : valider le choix Matisse / Kandinsky (cf. § 5 ci-dessous).
 7. **Promesses de rappel** : « je rappelle systématiquement » et « je ne laisse pas de
@@ -393,9 +395,10 @@ la signature de l'auteur et perdent la ville).
 
 ### 10.5 Données obtenues de Vincent
 
-- **Accessibilité : le cabinet est de plain-pied**, sans marche ni escalier.
-  L'invitation à appeler est conservée : la largeur des portes et les sanitaires
-  restent inconnus, et on n'étend pas la promesse à ce qu'on n'a pas vérifié.
+- **Accessibilité : rampe d'accès à l'entrée, cabinet au 2e étage desservi par
+  ascenseur** (corrigé le 2026-09-10 ; la mention « plain-pied » du 8 septembre
+  était erronée). L'invitation à appeler est conservée : la largeur des portes et
+  les sanitaires restent inconnus, et on n'étend pas la promesse au non-vérifié.
 - **Coordonnées** relevées auprès d'OpenStreetMap, qui ne connaît pas le numéro 10
   bis : c'est le centre de la rue de la Havane. Suffisant pour `LocalBusiness`.
   La requête a confirmé le quartier : **Coulmiers — Jardin des Plantes**, dans

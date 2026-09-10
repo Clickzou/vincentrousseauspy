@@ -12,8 +12,8 @@ import {
   IconeValidation,
 } from "@/components/ui/Icones";
 import { breadcrumbSchema, graph } from "@/lib/seo/schemas";
-import { cabinet, contact, praticien, publics } from "@/lib/site-config";
-import { canonical } from "@/lib/url-helpers";
+import { cabinet, contact, praticien, publics, urgence } from "@/lib/site-config";
+import { canonical, minusculeInitiale } from "@/lib/url-helpers";
 
 /**
  * PAGE AUTEUR — pivot E-E-A-T du site.
@@ -243,50 +243,74 @@ export default function PageAuteur() {
               <div className="prose-clinique max-w-none">
             <p>
               Ce qui motive généralement quelqu&rsquo;un à consulter un psychologue
-              clinicien est qu&rsquo;il éprouve un ou plusieurs symptômes qui perturbent sa
-              vie quotidienne et auxquels il reconnaît une causalité psychique. Un symptôme,
-              c&rsquo;est en premier lieu quelque chose qui engendre une souffrance — et la
-              gamme est large&nbsp;: mal-être diffus, anxiété, dépression, idées noires,
-              obsessions, difficultés comportementales (anorexie, addiction, TOC,
-              comportement violent), phobies diverses.
+              clinicien, c&rsquo;est qu&rsquo;il éprouve un ou plusieurs symptômes qui
+              perturbent sa vie quotidienne et auxquels il reconnaît une causalité psychique.
             </p>
+            <p>
+              Un symptôme, c&rsquo;est en premier lieu quelque chose qui engendre une
+              souffrance — et la gamme est large&nbsp;:
+            </p>
+            {/* Les trois familles de symptômes passent en liste (révision du
+                2026-09-10) : dans le paragraphe d'origine, quinze termes
+                cliniques se suivaient sans respiration, et le lecteur qui
+                cherche le sien devait tout parcourir. */}
+            <ul>
+              <li>Mal-être diffus, anxiété, dépression, idées noires, obsessions.</li>
+              <li>
+                Difficultés comportementales (anorexie, addiction, TOC, comportement
+                violent).
+              </li>
+              <li>Phobies diverses.</li>
+            </ul>
             <p>
               Certaines difficultés peuvent se déployer plus spécifiquement sur un axe
-              relationnel&nbsp;: difficulté d&rsquo;insertion sociale ou professionnelle,
-              sentiment de malaise en société, tendance au repli sur soi, sentiment de
-              persécution, agoraphobie.
+              relationnel&nbsp;:
             </p>
+            <ul>
+              <li>Difficulté d&rsquo;insertion sociale ou professionnelle.</li>
+              <li>Sentiment de malaise en société.</li>
+              <li>Tendance au repli sur soi, sentiment de persécution, agoraphobie.</li>
+            </ul>
             <p>
               Enfin, le problème pour lequel on vient consulter peut être chronique comme
-              passager, car la vie est faite de périodes de crises, de choix,
-              d&rsquo;obstacles de toutes sortes et de deuils qui nous confrontent à
-              nous-mêmes et à notre détresse, et que nous pouvons parfois avoir du mal à
-              surmonter seuls.
+              passager. La vie est faite de périodes de crises, de choix, d&rsquo;obstacles
+              de toutes sortes et de deuils qui nous confrontent à nous-mêmes et à notre
+              détresse, et que nous pouvons parfois avoir du mal à surmonter seuls.
             </p>
+
+            <h3>Le sens du symptôme</h3>
             <p>
               Il est important de comprendre que <strong>tout le monde a des symptômes et
               que cela est normal</strong> (<em>«&nbsp;Boiter n&rsquo;est pas pécher&nbsp;»</em>,
               dit le poète Friedrich Rückert). J&rsquo;irai jusqu&rsquo;à dire qu&rsquo;ils
-              peuvent avoir une fonction positive et enrichir la vie. Mais il peut arriver
-              que cela ne «&nbsp;tienne plus&nbsp;», que le symptôme devienne trop
-              envahissant, trop douloureux. C&rsquo;est à ce moment qu&rsquo;il peut être
-              pertinent de venir consulter un psychologue clinicien.
+              peuvent avoir une fonction positive et enrichir la vie.
             </p>
             <p>
-              Le travail psychothérapeutique avec un professionnel est alors
-              l&rsquo;occasion d&rsquo;explorer un autre aspect du symptôme&nbsp;: son sens.
-              Plutôt qu&rsquo;un simple parasite indésirable — même s&rsquo;il peut être
-              ressenti comme tel — il dit étrangement quelque chose de nous, de notre
-              subjectivité. Il est en quelque sorte une parole qui attend d&rsquo;être
-              délivrée.
+              Mais il peut arriver que cela ne «&nbsp;tienne plus&nbsp;», et que le symptôme
+              devienne trop envahissant, trop douloureux. C&rsquo;est à ce moment-là
+              qu&rsquo;il peut être pertinent de venir consulter un psychologue clinicien.
             </p>
+            <p>
+              Le travail psychothérapique avec un professionnel est alors l&rsquo;occasion
+              d&rsquo;explorer un autre aspect du symptôme&nbsp;: son sens. Plutôt
+              qu&rsquo;un simple parasite indésirable — même s&rsquo;il peut être ressenti
+              comme tel —, il dit étrangement quelque chose de nous, de notre subjectivité.
+              Il est, en quelque sorte, une parole qui attend d&rsquo;être délivrée.
+            </p>
+
+            <h3>Le cadre thérapeutique</h3>
             <p>
               Je vous propose une approche thérapeutique consistant en un dispositif de
               parole et d&rsquo;écoute, dans un cadre professionnel entièrement confidentiel
-              et non jugeant. En s&rsquo;appuyant sur vos propres ressources, soutenues par
-              la présence et les interventions du thérapeute, le processus a pour objectif
-              d&rsquo;amener au jour ce qui vous pose question et vous divise à travers vos
-              symptômes, et de dépasser cette souffrance qui vous pousse à consulter.
+              et non jugeant.
+            </p>
+            <p>
+              En s&rsquo;appuyant sur vos propres ressources, soutenues par la présence et
+              les interventions du thérapeute, le processus a pour objectif d&rsquo;amener au
+              jour ce qui vous pose question et vous divise à travers vos symptômes, et de
+              dépasser cette souffrance qui vous pousse à consulter.
+            </p>
+            <p>
               D&rsquo;une certaine manière, nous pouvons dire que le traitement consiste à
               vous «&nbsp;guérir&nbsp;» en devenant un peu plus vous-même.
             </p>
@@ -334,9 +358,9 @@ export default function PageAuteur() {
           <div className="mt-14 rounded-[20px] bg-peche px-6 py-10 sm:px-12 sm:py-12">
             <ul className="grid gap-x-12 gap-y-6 lg:grid-cols-2">
               {[
-                "Je reçois toute personne qui le demande.",
-                "La confidentialité des séances est strictement garantie selon les principes de la pratique.",
-                "La première rencontre est l'occasion d'éclaircir ensemble la situation et de déterminer la manière dont nous procéderons.",
+                "Je reçois tout adulte qui en fait la demande.",
+                "La confidentialité des séances est strictement garantie, selon les principes de la pratique.",
+                "La première rencontre est gratuite : elle permet d'éclaircir ensemble votre situation et de définir notre cadre de travail.",
                 "Il vous suffit de me contacter pour convenir d'un rendez-vous.",
               ].map((point) => (
                 <li key={point} className="flex items-start gap-4 text-encre">
@@ -387,9 +411,9 @@ export default function PageAuteur() {
             Les trois titres sous lesquels j&rsquo;exerce
           </h2>
           <p>
-            Le vocabulaire des «&nbsp;psy&nbsp;» est confus, et cette confusion permet à des
-            personnes sans formation reconnue de se présenter comme thérapeutes. Voici
-            précisément ce que recouvrent les miens.
+            Le vocabulaire des «&nbsp;psy&nbsp;» regroupe des réalités très différentes. Pour
+            vous aider à vous y repérer et garantir le sérieux de mon accompagnement, voici
+            précisément ce que recouvrent mes titres et mon parcours.
           </p>
         </div>
         </Apparition>
@@ -404,10 +428,10 @@ export default function PageAuteur() {
               </p>
               <h3 className="mt-2 text-lg font-bold text-encre">Psychologue clinicien</h3>
               <p className="mt-2 text-ardoise">
-                Titre universitaire protégé depuis 1985, permettant l&rsquo;inscription au
-                répertoire des professionnels de santé. Il atteste d&rsquo;une compétence
-                reconnue en psychopathologie — la science des troubles psychiques — et
-                d&rsquo;une écoute formée à la singularité de chacun.
+                C&rsquo;est un titre universitaire protégé par la loi depuis 1985, permettant
+                l&rsquo;inscription au répertoire des professionnels de santé. Il atteste
+                d&rsquo;une compétence reconnue en psychopathologie — la science des troubles
+                psychiques — et d&rsquo;une écoute formée à la singularité de chacun.
               </p>
             </div>
                 </Apparition>
@@ -421,8 +445,8 @@ export default function PageAuteur() {
               </p>
               <h3 className="mt-2 text-lg font-bold text-encre">Psychothérapeute</h3>
               <p className="mt-2 text-ardoise">
-                Il correspond à une compétence reconnue dans le soin psychique, et suppose
-                une inscription sur un registre national. Il se distingue de celui de{" "}
+                Il correspond à une compétence reconnue dans le soin psychique et suppose une
+                inscription sur un registre national. Ce titre se distingue de celui de{" "}
                 <em>psychopraticien</em>, librement utilisable, qui ne résulte
                 d&rsquo;aucun cursus universitaire et n&rsquo;est pas reconnu par
                 l&rsquo;État.
@@ -439,9 +463,9 @@ export default function PageAuteur() {
               </p>
               <h3 className="mt-2 text-lg font-bold text-encre">Psychanalyste</h3>
               <p className="mt-2 text-ardoise">
-                Ce titre n&rsquo;est pas protégé par la loi&nbsp;: il indique une méthode,
-                la mienne, et repose sur une formation analytique et une appartenance à des
-                sociétés de psychanalyse. La psychanalyse est la forme la plus classique
+                Ce titre n&rsquo;est pas protégé par la loi&nbsp;: il indique une méthode, la
+                mienne, et repose sur une formation analytique ainsi que sur une appartenance
+                à des sociétés de psychanalyse. La psychanalyse est la forme la plus classique
                 des thérapies dites «&nbsp;de fond&nbsp;», par opposition aux thérapies
                 brèves.
               </p>
@@ -494,17 +518,26 @@ export default function PageAuteur() {
 
           <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-16">
             <Apparition className="lg:col-span-7">
+              {/* Titre révisé le 2026-09-10. « Ce que je ne fais pas » sonnait
+                  comme une clause d'exclusion ; « Limites de ma pratique » dit
+                  la même chose sans renvoyer le lecteur concerné à un refus, et
+                  annonce les numéros d'urgence qui suivent. */}
               <div className="prose-clinique">
-                <h2 className="!mt-0">Ce que je ne fais pas</h2>
+                <h2 className="!mt-0">Limites de ma pratique et urgences</h2>
                 <p>
-                  Je ne reçois ni {publics.nonRecus.join(", ni ")}. Si votre demande concerne
-                  l&rsquo;un de ces publics, une ou un collègue spécialisé sera plus indiqué,
-                  et votre médecin traitant peut vous orienter.
+                  Mon accompagnement est exclusivement dédié aux {publics.recus.join(" et ")}.
+                  Je ne reçois pas les {publics.nonRecus.join(", les ")}. Si votre démarche
+                  concerne l&rsquo;un de ces publics, un confrère ou une consœur spécialisée
+                  sera plus à même de vous aider, et votre médecin traitant pourra vous
+                  orienter.
                 </p>
                 <p>
-                  Je ne prends pas en charge les situations d&rsquo;urgence. En cas de
-                  détresse immédiate, le <strong>3114</strong> répond gratuitement à toute
-                  heure, et le <strong>15</strong> en cas d&rsquo;urgence vitale.
+                  Par ailleurs, le cadre du cabinet libéral n&rsquo;est pas adapté pour
+                  prendre en charge les situations d&rsquo;urgence. En cas de détresse
+                  immédiate, le <strong>{urgence.preventionSuicide.numero}</strong> (numéro
+                  national de prévention du suicide) répond gratuitement à toute heure. En cas
+                  d&rsquo;urgence vitale, contactez immédiatement le{" "}
+                  <strong>{urgence.secours.numero}</strong> ({urgence.secours.libelle}).
                 </p>
               </div>
             </Apparition>
@@ -513,18 +546,45 @@ export default function PageAuteur() {
               <aside>
               <div className="rounded-[20px] bg-menthe p-7 sm:p-8">
                 <h2 className="text-base font-bold text-bois">Me joindre</h2>
-                <address className="mt-3 not-italic text-ardoise">
-                  {cabinet.rue}, {cabinet.codePostal} {cabinet.ville}
-                  <br />
-                  {cabinet.acces.tram}
-                </address>
-                <p className="mt-4">
-                  <a
-                    href={`tel:${contact.telephoneE164}`}
-                    className="text-lg font-medium text-encre underline underline-offset-4"
-                  >
-                    {contact.telephone}
-                  </a>
+
+                {/* Trois lignes étiquetées plutôt qu'un bloc d'adresse suivi
+                    d'un numéro (révision du 2026-09-10) : on cherche l'une des
+                    trois, pas les trois. */}
+                <dl className="mt-4 space-y-3 text-ardoise">
+                  <div>
+                    <dt className="text-[11px] font-medium uppercase tracking-wider text-terracotta-fonce">
+                      Adresse
+                    </dt>
+                    <dd>
+                      <address className="not-italic">
+                        {cabinet.rue}, {cabinet.codePostal} {cabinet.ville}
+                      </address>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-[11px] font-medium uppercase tracking-wider text-terracotta-fonce">
+                      Accès
+                    </dt>
+                    <dd>Tramway {minusculeInitiale(cabinet.acces.tram)}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[11px] font-medium uppercase tracking-wider text-terracotta-fonce">
+                      Téléphone
+                    </dt>
+                    <dd>
+                      <a
+                        href={`tel:${contact.telephoneE164}`}
+                        className="text-lg font-medium text-encre underline underline-offset-4"
+                      >
+                        {contact.telephone}
+                      </a>
+                    </dd>
+                  </div>
+                </dl>
+
+                <p className="mt-5 text-ardoise">
+                  Un premier échange téléphonique permettra de fixer notre premier
+                  rendez-vous, qui est gratuit.
                 </p>
                 <p className="mt-5">
                   <Bouton href="/rendez-vous-psychologue-nantes/">Prendre rendez-vous</Bouton>

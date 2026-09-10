@@ -12,13 +12,13 @@ import {
   IconeDocument,
   IconeInstitution,
   IconeLienExterne,
-  IconeLieu,
   IconeValidation,
 } from "@/components/ui/Icones";
 import { Apparition } from "@/components/ui/Apparition";
 import { Bouton } from "@/components/ui/Bouton";
 import { FaqAccordeon } from "@/components/ui/FaqAccordeon";
 import { HeroCarrousel } from "@/components/ui/HeroCarrousel";
+import { PlanCabinet } from "@/components/ui/PlanCabinet";
 import { Section } from "@/components/ui/Section";
 import { QUESTIONS_ACCUEIL } from "@/lib/content/faq";
 import { OEUVRES_ACCUEIL } from "@/lib/content/oeuvres";
@@ -70,16 +70,23 @@ import { canonical, minusculeInitiale } from "@/lib/url-helpers";
  * titre renvoie à SA page. Le premier n'en a pas — c'est cette page-ci qui
  * porte le cluster « psychologue ».
  */
+/* Textes révisés par Vincent le 2026-09-10. Deux changements de fond : le
+   premier titre nomme désormais le répertoire (Adeli) — un fait vérifiable
+   vaut mieux qu'une périphrase sur un site YMYL — et il porte enfin un lien
+   vers sa page, comme les deux autres. Le renvoi va vers
+   /psychologue-clinicien-nantes/, dont c'est le sujet : la règle de
+   cloisonnement (§ 4, silo 3) n'interdit pas de lier, elle interdit de traiter
+   deux fois le même cluster sur deux URLs. */
 const TITRES = [
   {
     nom: "Psychologue clinicien",
     mention: "Titre protégé",
     protege: true,
-    lien: null,
+    lien: { href: "/psychologue-clinicien-nantes/", libelle: "Le psychologue clinicien" },
     texte:
-      "Titre universitaire protégé, permettant l'inscription au répertoire des " +
-      "professionnels de santé. Il atteste d'une compétence reconnue en psychopathologie " +
-      "et d'une écoute formée à la singularité de chacun.",
+      "Ce titre universitaire protégé permet mon inscription au répertoire national des " +
+      "professionnels de santé (Adeli). Il atteste d'une compétence reconnue en " +
+      "psychopathologie et d'une écoute formée à la singularité de chaque histoire.",
   },
   {
     nom: "Psychothérapeute",
@@ -87,8 +94,9 @@ const TITRES = [
     protege: true,
     lien: { href: "/psychotherapeute-nantes/", libelle: "La psychothérapie" },
     texte:
-      "Il correspond à une compétence reconnue dans le soin psychique. Il se distingue de " +
-      "celui de psychopraticien, librement utilisable et non reconnu par l'État.",
+      "Il correspond à une compétence réglementée dans le soin psychique. Ce titre se " +
+      "distingue de celui de psychopraticien, qui est librement utilisable mais non " +
+      "reconnu par l'État.",
   },
   {
     nom: "Psychanalyste",
@@ -96,9 +104,9 @@ const TITRES = [
     protege: false,
     lien: { href: "/psychanalyste-nantes/", libelle: "La psychanalyse" },
     texte:
-      "Il indique la méthode que j'emploie au quotidien : mon outil de travail. La " +
-      "psychanalyse est la forme la plus classique des thérapies dites « de fond », par " +
-      "opposition aux thérapies brèves.",
+      "Il indique la méthode que j'emploie au quotidien dans mon cabinet. La psychanalyse " +
+      "est la forme la plus classique des thérapies dites « de fond », par opposition aux " +
+      "approches brèves.",
   },
 ];
 
@@ -107,37 +115,70 @@ const TITRES = [
  * WordPress (`public/wp-content/uploads/...`) : si ces PDF reçoivent des liens
  * entrants ou sont indexés, la refonte ne casse rien (SEO_MASTER § 10.2).
  */
-/** Motifs en étiquettes : le visiteur doit se reconnaître d'un coup d'œil. */
+/**
+ * Motifs en étiquettes : le visiteur doit se reconnaître d'un coup d'œil.
+ *
+ * Liste étendue de 12 à 24 entrées par Vincent le 2026-09-10. L'ajout n'est pas
+ * du remplissage : les douze nouveaux motifs sont des situations (conflits,
+ * séparation, burn-out, transitions de vie) là où les douze premiers étaient
+ * surtout des symptômes. Ce sont ces mots-là que les gens tapent, et dans
+ * lesquels ils se reconnaissent avant de savoir nommer un trouble.
+ *
+ * ⚠️ « Difficultés de couple ou séparation » désigne bien un travail
+ * INDIVIDUEL sur ce que l'on traverse. Vincent ne reçoit pas les couples : ne
+ * jamais en faire une entrée de thérapie de couple ailleurs sur le site.
+ */
 const MOTIFS = [
   "Anxiété",
+  "Conflits familiaux",
   "Symptômes dépressifs",
-  "Phobies",
-  "Troubles obsessionnels",
-  "Mal-être diffus",
-  "Deuil",
-  "Troubles alimentaires",
-  "Stress",
-  "Confiance en soi",
-  "Addictions",
-  "Dépendance affective",
+  "Répétitions de scénarios de vie",
   "Troubles du sommeil",
+  "Perte de sens",
+  "Phobies",
+  "Difficultés de couple ou séparation",
+  "Mal-être diffus",
+  "Épuisement professionnel (burn-out)",
+  "Troubles alimentaires",
+  "Sentiment de stagnation",
+  "Confiance en soi",
+  "Douleurs ou symptômes corporels inexpliqués",
+  "Stress",
+  "Rapports de force au travail",
+  "Traumatismes ou chocs de vie",
+  "Dépendance affective",
+  "Transitions de vie (parentalité, retraite…)",
+  "Troubles obsessionnels",
+  "Isolement ou solitude",
+  "Addictions",
+  "Gestion des émotions",
+  "Deuil",
 ];
 
-/** Déroulé en trois temps, à la place de trois paragraphes de prose. */
+/**
+ * Déroulé en trois temps, à la place de trois paragraphes de prose.
+ * Textes révisés par Vincent le 2026-09-10 : la gratuité de la première
+ * rencontre y apparaît, et la restriction d'âge remonte en tête de carte au
+ * lieu d'être reléguée dans la troisième étape.
+ */
 const ETAPES = [
   {
     titre: "Le premier contact",
-    texte: "Par téléphone. Vous n'avez pas à expliquer votre situation à ce moment-là.",
+    texte:
+      "Un échange téléphonique pour convenir d'un rendez-vous. Vous n'avez pas à exposer " +
+      "votre situation à ce moment-là.",
   },
   {
-    titre: "La première séance",
+    titre: "La première rencontre",
     texte:
-      "Une rencontre. Nous éclaircissons ensemble ce qui vous amène. Rien ne vous engage au-delà.",
+      "Cette séance est gratuite. Elle permet de faire le point sur votre démarche et vos " +
+      "attentes, sans aucun engagement pour la suite.",
   },
   {
-    titre: "La suite",
+    titre: "Le suivi",
     texte:
-      "Si nous décidons de travailler ensemble, nous en fixons le rythme. Adultes uniquement, à partir de 18 ans.",
+      "Si nous choisissons de poursuivre, nous définissons ensemble le rythme et les " +
+      "modalités des séances.",
   },
 ];
 
@@ -180,7 +221,8 @@ export const metadata: Metadata = {
   title: `Psychologue à ${cabinet.ville} — ${praticien.nom}`,
   description:
     `${praticien.titreCourt} à ${cabinet.ville}. Consultations pour adultes sur rendez-vous, ` +
-    `${horaires.libelle.toLowerCase()}. Séances de ${honoraires.min} à ${honoraires.max} €.`,
+    `${horaires.libelle.toLowerCase()}. Première séance gratuite, puis de ${honoraires.min} ` +
+    `à ${honoraires.max} € la séance.`,
   alternates: { canonical: canonical("/") },
 };
 
@@ -218,8 +260,8 @@ export default function Accueil() {
             Psychologue à {cabinet.ville}
           </h1>
           <p className="ombre-hero mt-5 max-w-xl text-lg text-white">
-            {praticien.titres.join(" · ")}. Je reçois en consultation, sur rendez-vous,
-            toute personne majeure qui en fait la demande.
+            {praticien.titres.join(" · ")}. Je reçois en consultation, sur rendez-vous, tout
+            public adulte qui en fait la demande, dans mon cabinet situé au {adressePostale}.
           </p>
 
           <div className="mt-9 flex flex-wrap gap-4">
@@ -271,8 +313,12 @@ export default function Accueil() {
                 Ce qui amène à consulter
               </h3>
               <p className="mt-4 text-ardoise">
-                Il n&rsquo;y a pas de profil-type, ni de situation qui mériterait plus
-                qu&rsquo;une autre d&rsquo;être entendue.
+                Chaque démarche est unique. Il n&rsquo;y a pas de profil-type, ni de
+                situation qui mériterait plus qu&rsquo;une autre d&rsquo;être entendue.
+              </p>
+              <p className="mt-3 text-ardoise">
+                Voici quelques motifs fréquents qui peuvent marquer le point de départ
+                d&rsquo;un travail&nbsp;:
               </p>
 
               <ul className="mt-5 flex flex-wrap gap-2">
@@ -287,8 +333,8 @@ export default function Accueil() {
               </ul>
 
               <p className="mt-auto pt-6 text-sm italic text-ardoise">
-                Cette liste n&rsquo;est pas un questionnaire à cocher. Vous interroger
-                suffit à venir en parler.
+                Cette liste n&rsquo;est pas un questionnaire à cocher. Le simple fait de
+                vous interroger suffit pour venir en parler.
               </p>
               <p className="pt-4">
                 <Link
@@ -314,8 +360,11 @@ export default function Accueil() {
                 <IconeAmpoule />
               </span>
               <h3 className="mt-5 text-2xl font-bold tracking-tight text-bois">
-                Comment ça se passe
+                Comment ça se passe&nbsp;?
               </h3>
+              <p className="mt-4 text-ardoise">
+                Consultations pour adultes, à partir de {publics.ageMinimum} ans.
+              </p>
 
               <ol className="mt-5 space-y-5">
                 {ETAPES.map((e, i) => (
@@ -361,47 +410,58 @@ export default function Accueil() {
                 Venir au cabinet
               </h3>
 
-              <dl className="mt-5 space-y-4">
+              {/* Trois rubriques en listes à puces plutôt qu'en phrases suivies
+                  (révision du 2026-09-10). Chaque ligne est une information que
+                  l'on cherche isolément — l'horaire, le tram, le prix — et une
+                  liste se balaye, là où un paragraphe se lit en entier. */}
+              <dl className="mt-5 space-y-5">
                 <div>
                   <dt className="text-[11px] font-medium uppercase tracking-wider text-terracotta-fonce">
                     Horaires
                   </dt>
-                  <dd className="mt-1 text-ardoise">
-                    {horaires.libelle}. {horaires.modalite}.
+                  <dd className="mt-2 text-ardoise">
+                    <ul className="list-disc space-y-1 pl-5">
+                      <li>{horaires.libelle}.</li>
+                      <li>Uniquement sur rendez-vous, en présentiel.</li>
+                    </ul>
                   </dd>
                 </div>
                 <div>
                   <dt className="text-[11px] font-medium uppercase tracking-wider text-terracotta-fonce">
                     Accès
                   </dt>
-                  <dd className="mt-1 text-ardoise">
-                    {cabinet.acces.reperes}.
-                    <br />
-                    Tramway&nbsp;: {minusculeInitiale(cabinet.acces.tram)}.{" "}
-                    {cabinet.acces.stationnement}.
+                  <dd className="mt-2 text-ardoise">
+                    <ul className="list-disc space-y-1 pl-5">
+                      <li>
+                        Adresse&nbsp;: <address className="inline not-italic">{adressePostale}</address>
+                      </li>
+                      <li>Repères&nbsp;: {cabinet.acces.reperes}.</li>
+                      <li>Tramway&nbsp;: {minusculeInitiale(cabinet.acces.tram)}.</li>
+                      <li>Stationnement&nbsp;: {minusculeInitiale(cabinet.acces.stationnement)}.</li>
+                    </ul>
                   </dd>
                 </div>
                 <div>
                   <dt className="text-[11px] font-medium uppercase tracking-wider text-terracotta-fonce">
                     Tarif
                   </dt>
-                  <dd className="mt-1 text-ardoise">
-                    <strong className="font-medium text-encre">
-                      De {honoraires.min} à {honoraires.max}&nbsp;€ la séance.
-                    </strong>{" "}
-                    {honoraires.modulation}
+                  <dd className="mt-2 text-ardoise">
+                    <ul className="list-disc space-y-1 pl-5">
+                      <li>
+                        <strong className="font-medium text-encre">
+                          De {honoraires.min}&nbsp;€ à {honoraires.max}&nbsp;€ la séance.
+                        </strong>
+                      </li>
+                      <li>
+                        {honoraires.modulation} {honoraires.premiereSeance.court}
+                      </li>
+                    </ul>
                   </dd>
                 </div>
               </dl>
 
               <div className="mt-auto pt-6">
-                <p className="flex items-start gap-2 text-ardoise">
-                  <span className="mt-0.5 shrink-0 text-bois-brun" aria-hidden="true">
-                    <IconeLieu />
-                  </span>
-                  <address className="not-italic">{adressePostale}</address>
-                </p>
-                <p className="mt-4">
+                <p>
                   <Bouton href="/rendez-vous-psychologue-nantes/" className="px-6 py-3">
                     Prendre rendez-vous
                   </Bouton>
@@ -409,6 +469,21 @@ export default function Accueil() {
               </div>
             </article>
           </Apparition>
+        </div>
+
+        {/* PLAN INTERACTIF — demandé par Vincent le 2026-09-10.
+
+            Il vient SOUS les trois cartes et non dans celle de droite : dans
+            une colonne d'un tiers de largeur, une carte fait 300 px de côté et
+            ne montre plus rien d'utile. En pleine largeur, on voit le quartier,
+            la Manufacture et la ligne de tram — c'est-à-dire ce qui permet de
+            se repérer avant de venir.
+
+            Le composant ne charge RIEN tant que le visiteur n'a pas cliqué :
+            voir l'en-tête de PlanCabinet.tsx, cette contrainte est juridique. */}
+        <div className="mt-10">
+          <h3 className="sr-only">Plan d&rsquo;accès au cabinet</h3>
+          <PlanCabinet />
         </div>
       </section>
 
@@ -649,29 +724,32 @@ export default function Accueil() {
             {/* Chapeau en corps plus large : c'est la définition, elle porte
                 la réponse directe attendue par les moteurs et par le lecteur. */}
             <p className="max-w-lecture text-xl leading-relaxed text-encre sm:text-[1.375rem]">
-              La psychanalyse est un dispositif de psychothérapie par la parole, visant à une
-              investigation de la psyché — aussi bien dans son fonctionnement actuel que dans
-              l&rsquo;histoire de vie à travers laquelle elle s&rsquo;est construite.
+              La psychanalyse est une psychothérapie par la parole qui explore la psyché
+              humaine, tant dans son fonctionnement actuel que dans son histoire. En mettant
+              en lumière vos mécanismes internes, vos choix répétitifs et vos relations aux
+              autres, elle accompagne une transformation en profondeur.
             </p>
 
             <blockquote className="my-9 border-l-2 border-terracotta pl-6">
               <p className="font-accent text-2xl italic leading-snug text-bois sm:text-[28px]">
-                Elle invite à transformer la plainte en une question.
+                Elle invite à transformer la plainte initiale en une véritable question.
               </p>
             </blockquote>
 
             <div className="prose-clinique">
               <p>
-                Le symptôme y est considéré comme porteur d&rsquo;un sens qui reste opaque, et
-                qu&rsquo;il s&rsquo;agit de déchiffrer par la parole. C&rsquo;est au terme de
-                ce travail — plus large que la plainte initiale, mais l&rsquo;impliquant — que
-                le symptôme cesse d&rsquo;être envahissant, s&rsquo;aménage autrement, ou
-                disparaît.
+                Ici, le symptôme cache un sens d&rsquo;abord opaque qu&rsquo;il s&rsquo;agit
+                de déchiffrer par les mots. C&rsquo;est au terme de ce travail de fond que le
+                symptôme s&rsquo;apaise, se transforme ou disparaît. Les bénéfices sont
+                doubles&nbsp;: ils soulagent la souffrance immédiate (angoisse, dépression,
+                troubles relationnels) et structurent durablement l&rsquo;organisation
+                psychique.
               </p>
               <p>
-                C&rsquo;est une thérapie dite «&nbsp;de fond&nbsp;», qui se distingue des
-                thérapies brèves par sa durée et par son objet&nbsp;: non pas seulement le
-                symptôme, mais ce qu&rsquo;il vient dire de votre histoire.
+                Cette approche se distingue des thérapies brèves. Son objet n&rsquo;est pas
+                seulement le symptôme, mais ce qu&rsquo;il révèle de votre histoire. Elle
+                favorise ainsi un gain d&rsquo;autonomie, une meilleure connaissance de soi
+                et une force accrue pour faire face aux difficultés de la vie.
               </p>
             </div>
           </div>
@@ -804,8 +882,9 @@ export default function Accueil() {
               Questions fréquentes
             </h2>
             <p className="mt-4 max-w-lecture text-ardoise">
-              Les questions que l&rsquo;on me pose le plus souvent avant un premier
-              rendez-vous.
+              Entreprendre une démarche thérapeutique soulève souvent des interrogations.
+              Retrouvez ici les réponses aux questions les plus courantes, pour vous aider à
+              aborder votre premier rendez-vous en toute sérénité.
             </p>
             <p className="mt-6">
               <Link
@@ -869,8 +948,9 @@ export default function Accueil() {
             Vous souhaitez prendre rendez-vous&nbsp;?
           </h2>
           <p className="mx-auto mt-3 max-w-lecture text-ardoise">
-            Vous n&rsquo;êtes pas obligé de savoir quoi dire, ni de justifier votre demande.
-            Un premier échange suffit à voir si nous pouvons travailler ensemble.
+            Le premier entretien est gratuit et sans aucun engagement. C&rsquo;est un espace
+            d&rsquo;échange simple pour faire le point sur vos attentes et décider ensemble
+            de la suite.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link

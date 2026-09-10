@@ -313,9 +313,9 @@ export default function PourquoiConsulter() {
             </h2>
 
             <p className="mx-auto mt-5 max-w-3xl text-encre">
-              La première rencontre sert à éclaircir ensemble la situation, et à déterminer
-              la manière dont nous procéderons. Vous n&rsquo;avez rien à préparer. Je reçois{" "}
-              {publics.libelle}, sur rendez-vous.
+              La première rencontre est gratuite&nbsp;: elle sert à éclaircir ensemble la
+              situation, et à déterminer la manière dont nous procéderons. Vous n&rsquo;avez
+              rien à préparer. Je reçois {publics.libelle}, sur rendez-vous.
             </p>
 
             <div className="mt-9 border-t border-white/70 pt-9">

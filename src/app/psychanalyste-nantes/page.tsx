@@ -469,10 +469,10 @@ export default function PsychanalysteNantes() {
             </h2>
 
             <p className="mx-auto mt-5 max-w-3xl text-encre">
-              La première rencontre sert à éclaircir ensemble la situation et à déterminer la
-              manière dont nous procéderons. Elle ne vous engage pas au-delà. Les séances
-              sont de {honoraires.min} à {honoraires.max} €, et{" "}
-              {minusculeInitiale(honoraires.modulation)}
+              La première rencontre est gratuite&nbsp;: elle sert à éclaircir ensemble la
+              situation et à déterminer la manière dont nous procéderons, sans vous engager
+              au-delà. Les séances suivantes sont de {honoraires.min} à {honoraires.max} €,
+              et {minusculeInitiale(honoraires.modulation)}
             </p>
 
             <div className="mt-9 border-t border-white/70 pt-9">

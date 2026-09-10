@@ -47,7 +47,8 @@ export const metadata: Metadata = {
   title: TITRE,
   description:
     `Prendre rendez-vous avec un psychologue à ${cabinet.ville} : par téléphone au ` +
-    `${contact.telephone}, ou par demande de rappel ${priseRdv.delaiReponse}.`,
+    `${contact.telephone}, ou par demande de rappel ${priseRdv.delaiReponse}. Première ` +
+    `séance gratuite.`,
   alternates: { canonical: canonical("rendez-vous-psychologue-nantes") },
   openGraph: {
     title: `${TITRE} — ${praticien.nom}, psychologue à ${cabinet.ville}`,
@@ -72,8 +73,8 @@ const ETAPES = [
   {
     titre: "Nous nous rencontrons au cabinet",
     texte:
-      "La première séance sert à faire connaissance et à voir ensemble si un " +
-      "travail est indiqué. Elle ne vous engage pas au-delà.",
+      "Cette première séance est gratuite. Elle sert à faire connaissance et à voir " +
+      "ensemble si un travail est indiqué, sans vous engager au-delà.",
   },
 ];
 
@@ -174,7 +175,9 @@ export default function RendezVous() {
                     { icone: <IconeLieu />, texte: adressePostale },
                     {
                       icone: <IconeDocument className="h-5 w-5" />,
-                      texte: `${honoraires.min} à ${honoraires.max} € la séance`,
+                      texte:
+                        `Première séance gratuite, puis ${honoraires.min} à ` +
+                        `${honoraires.max} € la séance`,
                     },
                   ].map((info) => (
                     <li key={info.texte} className="flex items-center gap-3">

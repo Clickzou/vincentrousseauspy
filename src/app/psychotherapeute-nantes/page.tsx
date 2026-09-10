@@ -371,9 +371,10 @@ export default function PsychotherapeuteNantes() {
                 face, et nous parlons.
               </p>
               <p>
-                Concrètement, la première séance sert à faire connaissance et à formuler ce
-                qui vous amène. Nous convenons ensuite d&rsquo;un rythme — le plus souvent
-                hebdomadaire — et le travail se construit à partir de ce que vous apportez.{" "}
+                Concrètement, la première séance — qui est gratuite — sert à faire
+                connaissance et à formuler ce qui vous amène. Nous convenons ensuite
+                d&rsquo;un rythme — le plus souvent hebdomadaire — et le travail se construit
+                à partir de ce que vous apportez.{" "}
                 <Link href="/psychanalyste-nantes/">
                   En savoir plus sur mon approche psychanalytique
                 </Link>
@@ -418,7 +419,9 @@ export default function PsychotherapeuteNantes() {
                   },
                   {
                     terme: "Combien",
-                    detail: `De ${honoraires.min} à ${honoraires.max} € la séance. ${honoraires.modulation}`,
+                    detail:
+                      `Première séance gratuite, puis de ${honoraires.min} à ` +
+                      `${honoraires.max} € la séance. ${honoraires.modulation}`,
                   },
                   { terme: "Pour qui", detail: `Uniquement ${publics.libelle}.` },
                   {

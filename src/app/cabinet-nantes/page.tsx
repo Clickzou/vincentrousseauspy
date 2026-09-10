@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { PageEnTete } from "@/components/ui/PageEnTete";
 import { IconeLienExterne } from "@/components/ui/Icones";
+import { PLAN_URL, PlanCabinet } from "@/components/ui/PlanCabinet";
 import { breadcrumbSchema, graph } from "@/lib/seo/schemas";
 import {
   adressePostale,
@@ -22,16 +23,20 @@ import { canonical, minusculeInitiale } from "@/lib/url-helpers";
  * soutient le pack local avec la fiche Google Business Profile — d'où un NAP
  * strictement identique, tiré de site-config et de nulle part ailleurs.
  *
- * ⚠️ PAS DE CARTE EMBARQUÉE. Un iframe Google Maps transmet l'adresse IP du
- * visiteur à Google avant tout consentement, ce que le § 2.4 proscrit au même
- * titre que les polices en CDN. La page renvoie donc vers un plan par un lien
- * externe, que le visiteur ouvre s'il le veut. Ne pas « améliorer » cette page
- * en y encastrant une carte.
+ * ⚠️ CARTE EMBARQUÉE DEPUIS LE 2026-09-10, SUR DEMANDE EXPRESSE DE VINCENT.
+ * Cette page portait jusque-là une consigne inverse : un iframe Google Maps
+ * transmet l'adresse IP du visiteur à Google avant tout consentement, ce que
+ * le § 2.4 proscrivait au même titre que les polices en CDN. La consigne est
+ * levée par le client, qui est le responsable de traitement ; la contrepartie
+ * est déclarée dans la section « Contenus tiers » de la politique de
+ * confidentialité. Cf. l'en-tête de PlanCabinet.tsx.
  *
- * ACCESSIBILITÉ PMR : obtenue le 8 septembre 2026 — le cabinet est de
- * plain-pied. Le mot est écrit en toutes lettres parce qu'il répond à la
- * seule question qui décide du déplacement, là où le « tient compte des
- * normes d'accessibilité » du site actuel n'informait de rien.
+ * ACCESSIBILITÉ PMR : ⚠️ CORRIGÉE PAR VINCENT LE 2026-09-10. Le cabinet
+ * n'est pas de plain-pied, comme l'indiquait la version du 8 septembre : le
+ * bâtiment a une rampe d'accès et le cabinet est au 2e étage, desservi par un
+ * ascenseur. La modalité est écrite en toutes lettres parce que c'est elle qui
+ * décide du déplacement, là où le « tient compte des normes d'accessibilité »
+ * du site actuel n'informait de rien. Le texte vient de `cabinet.acces.pmr`.
  */
 
 const TITRE = "Le cabinet à Nantes";
@@ -42,13 +47,10 @@ export const metadata: Metadata = {
   title: { absolute: `${TITRE} — ${praticien.nom}` },
   description:
     `Le cabinet, ${cabinet.rue} à ${cabinet.ville} : tramway ligne 1 arrêt ` +
-    `« Manufacture », quartier Jardin des Plantes. Accès de plain-pied, stationnement.`,
+    `« Manufacture », quartier Jardin des Plantes. Accès PMR par rampe et ascenseur.`,
   alternates: { canonical: canonical("cabinet-nantes") },
   openGraph: { title: `${TITRE} — ${praticien.nom}`, url: canonical("cabinet-nantes") },
 };
-
-/** Lien de plan externe, repris du site actuel (docs/donnees-vincent.md § 2). */
-const PLAN_URL = "https://goo.gl/maps/DQ4LPE52wByQV3i29";
 
 export default function CabinetNantes() {
   const jsonLd = graph(
@@ -92,10 +94,20 @@ export default function CabinetNantes() {
               className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 text-sm font-semibold uppercase tracking-wider text-encre"
             >
               <IconeLienExterne className="h-4 w-4" />
-              Ouvrir le plan
+              Ouvrir l&rsquo;itinéraire
             </a>
           </p>
         </div>
+      </section>
+
+      {/* LE PLAN, juste sous l'adresse : c'est l'ordre dans lequel on les
+          cherche — le nom de la rue, puis où elle tombe. Ajouté le 2026-09-10
+          à la demande de Vincent, en même temps que celui de l'accueil. */}
+      <section aria-labelledby="plan" className="px-5 py-6 sm:px-10 lg:px-[100px]">
+        <h2 id="plan" className="sr-only">
+          Plan d&rsquo;accès
+        </h2>
+        <PlanCabinet />
       </section>
 
       <section aria-labelledby="venir" className="px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]">
@@ -198,7 +210,10 @@ export default function CabinetNantes() {
             Accessibilité
           </h2>
           {cabinet.acces.pmr ? (
-            <p className="mt-4 text-ardoise">{cabinet.acces.pmr}</p>
+            <>
+              <p className="mt-4 font-medium text-encre">{cabinet.acces.pmr.resume}</p>
+              <p className="mt-3 text-ardoise">{cabinet.acces.pmr.detail}</p>
+            </>
           ) : (
             <p className="mt-4 text-ardoise">
               Si vous êtes en situation de handicap ou à mobilité réduite,{" "}

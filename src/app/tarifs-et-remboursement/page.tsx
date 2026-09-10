@@ -84,6 +84,22 @@ function participation(partenaire: boolean | null) {
         `${monSoutienPsy.tarifSeance} €. Je vous remets une feuille de soins à ` +
         `transmettre à votre caisse, qui vous rembourse ${monSoutienPsy.tauxAssuranceMaladie} %. ` +
         `Le reste relève de votre complémentaire santé.`,
+      /*
+       * ⚠️ CETTE PRÉCISION N'EST PAS UN DÉTAIL. Le reste de la page annonce
+       * une fourchette modulable et une première séance gratuite : les deux
+       * sont vraies HORS dispositif, et fausses à l'intérieur. Une personne
+       * qui arrive par « Mon soutien psy » en croyant sa première séance
+       * gratuite découvrirait le contraire au moment de payer — c'est
+       * exactement la mauvaise surprise que cette page existe pour éviter.
+       *
+       * ⚠️ FORMULATION SOUMISE À VINCENT LE 2026-09-10, EN ATTENTE DE SA
+       * VALIDATION : c'est lui qui applique la convention, pas nous.
+       */
+      reserve:
+        `Ce tarif est fixé par l'Assurance Maladie : il n'est donc pas modulable, ` +
+        `contrairement à celui des séances hors dispositif. Pour la même raison, la ` +
+        `gratuité de la première séance ne s'applique pas à un suivi engagé dans ce ` +
+        `cadre.`,
     };
   }
   if (partenaire === false) {
@@ -93,6 +109,7 @@ function participation(partenaire: boolean | null) {
         "Les séances au cabinet ne relèvent donc pas de « Mon soutien psy ». " +
         "Si ce cadre correspond à ce que vous cherchez, l'annuaire de l'Assurance " +
         "Maladie recense les psychologues qui y participent, et je peux vous orienter.",
+      reserve: null,
     };
   }
   return {
@@ -101,6 +118,7 @@ function participation(partenaire: boolean | null) {
       "Le dispositif suppose que le psychologue en soit partenaire. Appelez-moi ou " +
       "posez-moi la question avant votre premier rendez-vous : je vous répondrai " +
       "clairement, et je vous orienterai si ce cadre est celui qu'il vous faut.",
+    reserve: null,
   };
 }
 
@@ -144,9 +162,9 @@ export default function TarifsEtRemboursement() {
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
             <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
-              Une consultation coûte entre {honoraires.min} et {honoraires.max} €.{" "}
-              {honoraires.modulation} Le reste de cette page explique ce qui est remboursé,
-              par qui, et ce qui ne l&rsquo;est pas.
+              La première séance est gratuite. Les suivantes coûtent entre {honoraires.min} et{" "}
+              {honoraires.max} €. {honoraires.modulation} Le reste de cette page explique ce
+              qui est remboursé, par qui, et ce qui ne l&rsquo;est pas.
             </p>
           </div>
         </Apparition>
@@ -169,7 +187,21 @@ export default function TarifsEtRemboursement() {
               <h2 id="honoraires" className="text-2xl font-bold text-bois">
                 Le prix d&rsquo;une séance
               </h2>
-              <p className="mt-6 text-4xl font-bold tracking-tight text-encre sm:text-5xl">
+
+              {/* La gratuité de la première séance est annoncée AVANT la
+                  fourchette (décision de Vincent du 2026-09-10) : elle est la
+                  première chose qui concerne la personne qui arrive, et la
+                  placer après le prix en ferait une note de bas de page.
+                  Énoncée comme un fait, sans vocabulaire d'offre — § 2.2. */}
+              <p className="mt-6 text-3xl font-bold tracking-tight text-encre sm:text-4xl">
+                Première séance&nbsp;: gratuite
+              </p>
+              <p className="mt-1 text-ardoise">Sans engagement pour la suite.</p>
+
+              <p className="mt-6 border-t border-white/70 pt-6 text-xs font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
+                Séances suivantes
+              </p>
+              <p className="mt-2 text-4xl font-bold tracking-tight text-encre sm:text-5xl">
                 {honoraires.min} à {honoraires.max} €
               </p>
               {/* Pas de `max-w-lecture` ici : la carte fait déjà la largeur d'une
@@ -182,8 +214,28 @@ export default function TarifsEtRemboursement() {
               </p>
               <p className="mt-4 text-sm text-ardoise">
                 Il n&rsquo;y a ni frais de dossier, ni majoration, ni forfait
-                d&rsquo;engagement. Vous réglez à chaque séance.
+                d&rsquo;engagement. Vous réglez à chaque séance. Le règlement se fait par
+                chèque ou en espèces&nbsp;; le cabinet ne dispose pas de terminal de carte
+                bancaire.
               </p>
+
+              {/* Renvoi vers la réserve, dans le bloc même où l'on lit
+                  « gratuite » et « 40 à 60 € ». Sans lui, une personne éligible
+                  au dispositif quitte cette carte avec deux chiffres qui ne la
+                  concernent pas. */}
+              {monSoutienPsy.partenaire === true && (
+                <p className="mt-6 border-t border-white/70 pt-6 text-sm text-ardoise">
+                  Ces montants valent pour un suivi hors dispositif public. Si votre suivi
+                  relève de{" "}
+                  <Link
+                    href="#remboursement"
+                    className="text-terracotta-fonce underline underline-offset-2"
+                  >
+                    «&nbsp;Mon soutien psy&nbsp;»
+                  </Link>
+                  , la séance est au tarif conventionnel de {monSoutienPsy.tarifSeance} €.
+                </p>
+              )}
             </div>
           </Apparition>
 
@@ -262,6 +314,14 @@ export default function TarifsEtRemboursement() {
             <div className="mt-5 rounded-[20px] bg-white/70 p-5">
               <p className="font-medium text-encre">{msp.titre}</p>
               <p className="mt-2 text-sm leading-relaxed text-ardoise">{msp.texte}</p>
+              {/* La réserve est détachée par un filet, et non fondue dans le
+                  paragraphe : elle contredit deux annonces faites plus haut
+                  sur la page, elle doit se voir. */}
+              {msp.reserve && (
+                <p className="mt-3 border-t border-lavande pt-3 text-sm leading-relaxed text-ardoise">
+                  {msp.reserve}
+                </p>
+              )}
             </div>
           </div>
         </div>

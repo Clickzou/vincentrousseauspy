@@ -26,7 +26,11 @@ import { canonical } from "@/lib/url-helpers";
  * après le branchement.
  *
  * RESTENT À METTRE À JOUR À LA MAIN, faute d'être détectables automatiquement :
- *   - l'ajout d'une carte, d'une vidéo ou de tout contenu tiers embarqué ;
+ *   - l'ajout d'une carte, d'une vidéo ou de tout contenu tiers embarqué.
+ *     ⚠️ FAIT LE 2026-09-10 : le plan Google Maps de l'accueil et de
+ *     /cabinet-nantes/ est déclaré dans la section « Contenus tiers ». Si ce
+ *     plan est retiré ou repassé en chargement au clic (`<PlanCabinet differe />`),
+ *     ce paragraphe doit être récrit — il serait alors faux ;
  *   - le passage à une plateforme de prise de rendez-vous.
  */
 
@@ -77,7 +81,8 @@ export default function PolitiqueDeConfidentialite() {
                   ]),
               "Aucune base de données : le site n'enregistre rien, nulle part.",
               "Le formulaire ne comporte aucune zone de message, et son contenu n'est pas stocké.",
-              "Les polices de caractères sont hébergées avec le site : votre adresse IP n'est transmise à aucun tiers.",
+              "Les polices de caractères sont hébergées avec le site.",
+              "Seule exception : le plan du cabinet est fourni par Google Maps, qui reçoit votre adresse IP quand la carte s'affiche.",
             ].map((point) => (
               <li key={point} className="flex gap-3">
                 <span
@@ -179,11 +184,32 @@ export default function PolitiqueDeConfidentialite() {
 
         <H2 id="tiers">Contenus tiers</H2>
         <p className="mt-4">
-          Le site n&rsquo;encastre ni carte, ni vidéo, ni bouton de réseau social. La carte
-          du cabinet est un simple lien&nbsp;: elle ne s&rsquo;ouvre que si vous cliquez, et
-          rien n&rsquo;est transmis avant. Les polices de caractères sont servies depuis le
-          site lui-même et non par un service extérieur, ce qui évite que votre adresse IP
-          soit communiquée à un tiers à votre insu.
+          Deux pages de ce site — l&rsquo;accueil et celle du cabinet — affichent un{" "}
+          <strong>plan fourni par Google Maps</strong>. Quand la carte s&rsquo;affiche,
+          votre navigateur se connecte aux serveurs de Google, qui reçoit alors votre
+          adresse IP, le type de navigateur que vous utilisez et le fait qu&rsquo;une carte
+          a été demandée. Ce chargement a lieu automatiquement, sans vous être demandé.
+        </p>
+        <p className="mt-4">
+          Aucun cookie n&rsquo;est déposé par ce plan sur ce site, et il ne permet pas de
+          vous identifier nominativement. Si vous préférez l&rsquo;éviter, un bloqueur de
+          contenus tiers suffit&nbsp;: le reste du site fonctionne sans lui, et
+          l&rsquo;adresse du cabinet reste écrite en toutes lettres à côté du plan. Les
+          traitements que Google opère pour son compte relèvent de{" "}
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            sa propre politique de confidentialité
+          </a>
+          .
+        </p>
+        <p className="mt-4">
+          En dehors de ce plan, le site n&rsquo;encastre ni vidéo, ni bouton de réseau
+          social, ni aucun autre contenu extérieur. Les polices de caractères sont servies
+          depuis le site lui-même, ce qui évite que votre adresse IP soit communiquée à un
+          tiers à votre insu.
         </p>
 
         <H2 id="hebergement">Hébergement et journaux techniques</H2>

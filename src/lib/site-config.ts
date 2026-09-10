@@ -39,11 +39,15 @@ export const praticien = {
       "— enfants, adolescents et adultes",
     etablissement: "Université Paul Valéry Montpellier III",
   },
-  /** Formulation de Vincent, à la première personne. */
+  /**
+   * Formulation de Vincent, à la première personne.
+   * Révisée par le client le 2026-09-10 (document « Refonte site internet
+   * Vincent Rousseau », correctif n° 5).
+   */
   doubleTitre:
     "Le double titre de « psychologue clinicien-psychanalyste » sous lequel je me présente " +
-    "est une manière de mettre l'accent sur ma double formation, menée en parallèle et " +
-    "complémentaire.",
+    "met l'accent sur ma double formation. Ces deux approches, menées en parallèle, se " +
+    "complètent pour enrichir ma pratique.",
   rattachements: [
     "Association lacanienne internationale (ALI)",
     "École psychanalytique de Bretagne (EPB)",
@@ -72,26 +76,32 @@ export const cabinet = {
   acces: {
     tram: "Ligne 1, arrêt « Manufacture »",
     reperes: "Derrière la Manufacture des Tabacs, proche Gare Nord et Jardin des Plantes",
-    stationnement: "Places payantes à proximité",
+    stationnement: "Places payantes à proximité immédiate",
     /**
-     * Confirmé par Vincent le 8 septembre 2026 : le cabinet est de plain-pied.
+     * ⚠️ CORRIGÉ PAR VINCENT LE 2026-09-10 (document « Refonte site internet
+     * Vincent Rousseau », correctif n° 14). Le cabinet n'est PAS de plain-pied,
+     * comme l'indiquait la version du 8 septembre : le bâtiment a une rampe
+     * d'accès à l'entrée, et le cabinet est au 2e étage, desservi par un
+     * ascenseur. Ne pas réintroduire « plain-pied » : une personne en fauteuil
+     * qui se déplace sur une information fausse subit un préjudice réel.
      *
-     * « Plain-pied » répond à la question qui décide du déplacement — y a-t-il
-     * des marches ? — et c'est pourquoi le mot est écrit en toutes lettres
-     * plutôt que la formule creuse du site actuel, « le cabinet tient compte
-     * des normes d'accessibilité », qui n'apprend rien à personne.
-     *
-     * L'invitation à appeler est conservée, et elle n'est pas une précaution
-     * de style : l'absence de marche ne dit rien de la largeur des portes ni
-     * des sanitaires, qui restent inconnues. On annonce ce qu'on sait, on
-     * n'étend pas la promesse à ce qu'on n'a pas vérifié — une personne en
-     * fauteuil qui se déplace sur une promesse trop large et ne peut pas
-     * entrer subit un préjudice réel.
+     * L'invitation à appeler est conservée : la rampe et l'ascenseur ne disent
+     * rien de la largeur des portes ni des sanitaires, qui restent inconnues.
+     * On annonce ce qu'on sait, on n'étend pas la promesse au non-vérifié.
      */
-    pmr:
-      "Le cabinet est de plain-pied : l'accès se fait sans marche ni escalier. " +
-      "Si vous vous déplacez en fauteuil ou si vous avez un besoin particulier, " +
-      "appelez-moi avant de venir." as string | null,
+    pmr: {
+      /** Réponse franche, en une phrase : c'est elle qu'on cherche. */
+      resume: "Oui, le cabinet est accessible.",
+      /** Le détail qui décide réellement du déplacement. */
+      detail:
+        "Le bâtiment dispose d'une rampe d'accès à l'entrée, et le cabinet se situe au " +
+        "2e étage, entièrement desservi par un ascenseur. Si vous vous déplacez en " +
+        "fauteuil roulant ou si vous avez un besoin particulier, n'hésitez pas à m'en " +
+        "informer par téléphone avant votre première visite, afin que je puisse vous " +
+        "accueillir dans les meilleures conditions.",
+      /** Résumé d'une ligne, pour les métadonnées et les listes de repères. */
+      court: "rampe d'accès et ascenseur",
+    } as { resume: string; detail: string; court: string } | null,
   },
 } as const;
 
@@ -176,12 +186,41 @@ export const seance = {
   rythmeCourant: "une séance par semaine",
 } as const;
 
+/**
+ * Honoraires.
+ *
+ * ⚠️ NOUVEAUTÉ DU 2026-09-10 : la PREMIÈRE SÉANCE EST GRATUITE (décision de
+ * Vincent, document « Refonte site internet Vincent Rousseau »). La fourchette
+ * ci-dessous ne vaut donc plus que pour les séances SUIVANTES : partout où le
+ * prix est annoncé, la gratuité de la première rencontre doit être dite dans
+ * la même phrase ou juste à côté, sinon l'information est fausse par omission.
+ *
+ * Elle est énoncée comme un fait, jamais comme une offre : ni « profitez-en »,
+ * ni « offerte », ni durée limitée. Le § 2.2 du master proscrit le vocabulaire
+ * promotionnel sur un site de praticien, et une gratuité présentée comme un
+ * argument commercial se retournerait contre lui.
+ */
 export const honoraires = {
   min: 40,
   max: 60,
   devise: "EUR",
-  /** Formulation sobre imposée par le § 2.2 du master : pas de vocabulaire commercial. */
-  modulation: "Le tarif tient compte des moyens financiers de chacun.",
+  /**
+   * Formulation sobre imposée par le § 2.2 du master : pas de vocabulaire
+   * commercial. Révisée par Vincent le 2026-09-10 — la seconde moitié dit
+   * pourquoi le tarif se module, ce qui est le vrai frein levé.
+   */
+  modulation:
+    "Le montant est adapté aux moyens financiers de chacun, afin que le coût ne soit " +
+    "pas un frein à la démarche.",
+  /** La première rencontre n'est pas facturée. */
+  premiereSeanceGratuite: true,
+  /** Formulations prêtes à l'emploi, pour que le site ne varie pas d'une page à l'autre. */
+  premiereSeance: {
+    court: "La première séance est gratuite.",
+    long:
+      "La première séance est gratuite : elle permet de faire le point sur votre " +
+      "démarche et vos attentes, sans aucun engagement pour la suite.",
+  },
 } as const;
 
 /**
@@ -192,19 +231,20 @@ export const honoraires = {
  * tarifs, et ne jamais recopier ces valeurs de mémoire.
  *
  * `partenaire` est un interrupteur à trois états, et c'est volontaire :
- *   true  → Vincent est psychologue partenaire du dispositif
+ *   true  → Vincent est psychologue partenaire du dispositif (état actuel)
  *   false → il ne l'est pas
- *   null  → on ne sait pas encore (état actuel)
+ *   null  → on ne sait pas encore
  * La page /tarifs-et-remboursement/ affiche un texte juste dans les trois cas.
- * Elle peut donc être mise en ligne sans attendre sa réponse ; il suffira de
- * basculer cette valeur.
  *
- * ⚠️ Si Vincent est partenaire, la séance relevant du dispositif est à 50 €,
- * tarif fixé par la convention — ce qui se situe dans sa fourchette actuelle
- * mais n'est plus modulable. À lui signaler.
+ * ✅ RÉPONSE DE VINCENT LE 2026-09-10 : il EST affilié au dispositif (document
+ * « Refonte site internet Vincent Rousseau », correctifs n° 10 et 11).
+ *
+ * ⚠️ CONSÉQUENCE À LUI RAPPELER : la séance relevant du dispositif est à 50 €,
+ * tarif fixé par la convention — dans sa fourchette actuelle, mais NON
+ * modulable, contrairement à ses séances hors dispositif.
  */
 export const monSoutienPsy = {
-  partenaire: null as boolean | null,
+  partenaire: true as boolean | null,
   seancesParAn: 12,
   tarifSeance: 50,
   tauxAssuranceMaladie: 60,

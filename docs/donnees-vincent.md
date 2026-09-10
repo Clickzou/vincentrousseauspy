@@ -102,11 +102,13 @@
 
 | Champ | Valeur |
 |---|---|
-| **Tarif** | **Entre 40 € et 60 € la séance** |
+| **Première séance** | **Gratuite** (décision du 2026-09-10) |
+| **Tarif des séances suivantes** | **Entre 40 € et 60 € la séance** |
+| Règlement | Chèque ou espèces. Pas de carte bancaire. |
 | Modulation | *« Le tarif des consultations tient compte de vos propres moyens financiers »* |
 | Remboursement CPAM | Non systématique |
 | Mutuelles | Remboursement partiel possible selon contrat |
-| Mon soutien psy | **Non mentionné sur le site actuel — à vérifier avec Vincent** |
+| Mon soutien psy | **Vincent est affilié au dispositif** (confirmé le 2026-09-10). Séance à 50 €, tarif conventionnel non modulable. Accès direct, sans passage par un médecin. |
 
 > **Opportunité (§ 5.5 de l'inventaire)** : le site n'a **aucune page tarifs**, alors que
 > `tarif psychologue nantes` et `psychologue nantes tarif` sont en position 4-5 et que l'un des deux

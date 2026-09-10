@@ -50,16 +50,21 @@ export function GET() {
 
 - Adresse : ${cabinet.rue}, ${cabinet.codePostal} ${cabinet.ville}
 - Accès : ${cabinet.acces.tram}. ${cabinet.acces.reperes}.
+- Accessibilité : rampe d'accès à l'entrée du bâtiment, cabinet au 2e étage
+  desservi par un ascenseur.
 - Horaires : ${horaires.libelle}. ${horaires.modalite}.
 - Téléphone : ${contact.telephone}
 - Délai de réponse : ${priseRdv.delaiReponse}
 
 ## Tarifs
 
-- ${honoraires.min} à ${honoraires.max} € la séance. ${honoraires.modulation}
+- La première séance est gratuite et n'engage à rien.
+- Séances suivantes : ${honoraires.min} à ${honoraires.max} € la séance. ${honoraires.modulation}
+- Règlement par chèque ou en espèces. Le cabinet n'accepte pas la carte bancaire.
 - Une consultation chez un psychologue en libéral n'est pas remboursée par
   l'Assurance Maladie au titre du régime général. Deux exceptions : les
-  complémentaires santé, et le dispositif « Mon soutien psy ».
+  complémentaires santé, et le dispositif « Mon soutien psy », auquel
+  ${praticien.nom} est affilié. L'accès y est direct, sans passer par un médecin.
 
 ## Pages principales
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { Apparition } from "@/components/ui/Apparition";
 import { FaqAccordeon } from "@/components/ui/FaqAccordeon";
-import { QUESTIONS } from "@/lib/content/faq";
+import { QUESTIONS, reponseEnTexte } from "@/lib/content/faq";
 import { breadcrumbSchema, faqSchema, graph } from "@/lib/seo/schemas";
 import { cabinet, contact, praticien } from "@/lib/site-config";
 import { canonical } from "@/lib/url-helpers";
@@ -32,7 +32,14 @@ export const metadata: Metadata = {
 
 export default function AideFaq() {
   const jsonLd = graph(
-    faqSchema(QUESTIONS.map((q) => ({ question: q.question, reponse: q.reponse }))),
+    faqSchema(
+      QUESTIONS.map((q) => ({
+        question: q.question,
+        /* `acceptedAnswer.text` n'admet qu'une chaîne : les paragraphes et les
+           puces de la réponse y sont aplatis. */
+        reponse: reponseEnTexte(q.reponse),
+      })),
+    ),
     breadcrumbSchema([
       { nom: "Accueil", url: "/" },
       { nom: "Questions fréquentes", url: "aide-faq" },
@@ -70,9 +77,11 @@ export default function AideFaq() {
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
             <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
-              Voici les questions que l&rsquo;on me pose le plus souvent avant un premier
-              rendez-vous. Si la vôtre n&rsquo;y figure pas, appelez-moi&nbsp;: j&rsquo;y
-              répondrai volontiers, sans que cela vous engage.
+              Entreprendre une démarche thérapeutique soulève souvent des interrogations.
+              Retrouvez ici les réponses aux questions les plus courantes, pour vous aider à
+              aborder votre premier rendez-vous en toute sérénité. Si la vôtre n&rsquo;y
+              figure pas, appelez-moi&nbsp;: je vous répondrai avec plaisir, sans aucun
+              engagement de votre part.
             </p>
           </div>
         </Apparition>
@@ -97,12 +106,13 @@ export default function AideFaq() {
         <Apparition>
           <div className="rounded-[20px] bg-peche px-6 py-10 text-center sm:px-12 sm:py-12">
             <h2 id="pas-la" className="text-2xl font-bold text-bois sm:text-[33px]">
-              Votre question n&rsquo;est pas là&nbsp;?
+              Votre question n&rsquo;est pas dans cette liste&nbsp;?
             </h2>
 
             <p className="mx-auto mt-5 max-w-3xl text-encre">
-              Vous pouvez m&rsquo;appeler directement. Un premier échange suffit souvent à
-              savoir si une consultation est indiquée.
+              N&rsquo;hésitez pas à m&rsquo;appeler directement. Un court échange
+              téléphonique suffit souvent pour faire le point sur votre situation et savoir
+              si une consultation dans mon cabinet est indiquée.
             </p>
 
             <div className="mt-9 border-t border-white/70 pt-9">
