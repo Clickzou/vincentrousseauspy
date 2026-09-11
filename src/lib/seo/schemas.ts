@@ -5,6 +5,8 @@
  *   - LocalBusiness + MedicalBusiness : le cabinet, NAP identique à Google Business Profile
  *   - Person : Vincent, ses titres et son diplôme — pivot E-E-A-T en YMYL
  *   - Article + BreadcrumbList : contenus cliniques et blog
+ * Plus `ScholarlyArticle`, pour les publications de Vincent en revue : elles
+ * rattachent l'entité Person à des textes vérifiables chez un éditeur tiers.
  *
  * DEUX INTERDITS ABSOLUS :
  *   - Pas d'`AggregateRating` : les avis ne sont pas sollicités (§ 2.3).
@@ -21,6 +23,7 @@ import {
   SITE_URL,
 } from "@/lib/site-config";
 import { absoluteUrl } from "@/lib/url-helpers";
+import type { Publication } from "@/lib/content/publications";
 
 const PERSON_ID = `${SITE_URL}/#vincent-rousseau`;
 const BUSINESS_ID = `${SITE_URL}/#cabinet`;
@@ -138,6 +141,38 @@ export function articleSchema(a: ArticleMeta) {
     publisher: { "@id": BUSINESS_ID },
     inLanguage: "fr-FR",
     ...(a.sources?.length ? { citation: a.sources } : {}),
+  };
+}
+
+/**
+ * Publication en revue. L'URL est celle de l'éditeur, pas celle du site : le
+ * texte n'est pas reproduit ici, et déclarer une URL locale reviendrait à
+ * revendiquer une page qui n'existe pas.
+ */
+export function publicationSchema(p: Publication) {
+  return {
+    "@type": "ScholarlyArticle",
+    headline: p.titre,
+    abstract: p.resume,
+    author: { "@id": PERSON_ID },
+    ...(p.intervieweur ? { contributor: { "@type": "Person", name: p.intervieweur } } : {}),
+    datePublished: p.publieLe,
+    url: p.url,
+    ...(p.doi
+      ? {
+          identifier: { "@type": "PropertyValue", propertyID: "DOI", value: p.doi },
+          sameAs: `https://doi.org/${p.doi}`,
+        }
+      : {}),
+    pageStart: p.pageDebut,
+    pageEnd: p.pageFin,
+    isPartOf: {
+      "@type": "PublicationIssue",
+      issueNumber: String(p.numero),
+      isPartOf: { "@type": "Periodical", name: p.revue },
+    },
+    publisher: { "@type": "Organization", name: p.editeur },
+    inLanguage: "fr-FR",
   };
 }
 

@@ -19,7 +19,11 @@ import { canonical } from "@/lib/url-helpers";
  * par l'ACCUEIL, faute d'une page dont le titre corresponde à son slug. Le
  * titre et le H1 nomment donc désormais le titre professionnel, la question
  * « pourquoi consulter ? » restant en seconde partie de H1 : c'est elle qui
- * fait l'intérêt de la page, et le texte de Vincent n'a pas bougé d'un mot.
+ * fait l'intérêt de la page.
+ *
+ * TEXTE ENTIÈREMENT RÉVISÉ PAR VINCENT LE 2026-09-11 (document « word3 »). Il
+ * diffère désormais de la version conservée sur la page auteur, ce qui atténue
+ * le doublon du POINT-ETAPE § 8 sans le lever.
  *
  * CLOISONNEMENT avec /psychotherapeute-nantes/, qui comporte aussi un bloc
  * « ce qui conduit à consulter ». Les deux ne disent pas la même chose et ne
@@ -34,10 +38,10 @@ import { canonical } from "@/lib/url-helpers";
  * boitant n'est pas une faute. Écrite avec l'accent circonflexe, la citation
  * ne veut plus rien dire.
  *
- * L'essentiel du texte est celui de Vincent, avec ses citations. Ses
- * formulations prudentes — « d'une certaine manière », les guillemets autour
- * de « guérir » — sont conservées telles quelles : ce sont elles qui
- * distinguent une description d'une promesse de résultat (§ 2.2).
+ * Le texte est celui de Vincent, avec ses citations. Ses formulations
+ * prudentes — « d'une certaine manière », « vise à », « cherche à vous
+ * soulager » — sont conservées telles quelles : ce sont elles qui distinguent
+ * une description d'une promesse de résultat (§ 2.2).
  *
  * CONTENU À VALIDER PAR VINCENT avant mise en ligne (§ 7.1).
  */
@@ -48,7 +52,7 @@ import { canonical } from "@/lib/url-helpers";
    Surtout, le slug disait « psychologue clinicien nantes » et le titre autre
    chose : les deux s'accordent enfin. */
 const TITRE = "Psychologue clinicien à Nantes";
-const MODIFIE_LE = "2026-09-08";
+const MODIFIE_LE = "2026-09-11";
 
 export const metadata: Metadata = {
   /* `absolute` : le titre contient déjà la ville, le suffixe la répéterait.
@@ -92,7 +96,7 @@ export default function PourquoiConsulter() {
         <Apparition>
           <div className="mt-8 rounded-[20px] border border-sable bg-creme px-6 py-10 text-center sm:px-12">
             <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
-              Titre protégé par la loi · Master 2 et 500 h de stage supervisé
+              Titre protégé par la loi
             </p>
 
             <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-bois sm:text-[40px]">
@@ -102,9 +106,9 @@ export default function PourquoiConsulter() {
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
             <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
-              On ne consulte pas parce qu&rsquo;on va «&nbsp;assez mal&nbsp;» pour cela. On
-              consulte quand quelque chose ne tient plus. Voici ce que cela veut dire, et ce
-              que je propose.
+              Il n&rsquo;y a pas de «&nbsp;seuil de souffrance&nbsp;» à atteindre pour
+              légitimer une consultation. On consulte quand quelque chose ne tient plus.
+              Voici le sens de cette démarche et ce que je vous propose.
             </p>
           </div>
         </Apparition>
@@ -157,20 +161,23 @@ export default function PourquoiConsulter() {
 
             <div className="prose-clinique mt-6 max-w-none">
               <p className="!mt-0">
-                Ce qui pousse généralement à consulter un psychologue clinicien, c&rsquo;est
-                d&rsquo;éprouver un ou plusieurs symptômes qui perturbent la vie quotidienne,
-                et auxquels on reconnaît une cause psychique. Un symptôme, c&rsquo;est
-                d&rsquo;abord quelque chose qui fait souffrir — et la gamme est large&nbsp;:
-                mal-être diffus, anxiété, dépression, idées noires, obsessions, phobies,
-                difficultés de comportement.
+                On décide généralement de consulter un psychologue clinicien lorsque des
+                difficultés intérieures commencent à impacter la vie de tous les jours. Ces
+                manifestations, dont on ressent l&rsquo;origine psychologique, prennent
+                souvent la forme d&rsquo;un symptôme. C&rsquo;est d&rsquo;abord une souffrance
+                qui s&rsquo;exprime, et ses visages sont multiples&nbsp;: un mal-être diffus,
+                de l&rsquo;anxiété, un état dépressif, des pensées sombres, des phobies, des
+                obsessions ou des troubles du comportement.
               </p>
               <p>
-                Certaines difficultés se déploient plus particulièrement sur un axe
-                relationnel&nbsp;: difficulté d&rsquo;insertion sociale ou professionnelle,
-                malaise en société, repli sur soi, sentiment de persécution, agoraphobie. Et
-                le problème peut être chronique comme passager&nbsp;: la vie est faite de
-                crises, de choix, d&rsquo;obstacles et de deuils qui nous confrontent à
-                nous-mêmes, et que nous avons parfois du mal à surmonter seuls.
+                Parfois, cette souffrance se déploie plus spécifiquement dans notre rapport
+                aux autres. Elle se traduit alors par un repli sur soi, un sentiment
+                d&rsquo;insécurité en société, une agoraphobie, ou des blocages dans sa vie
+                sociale et professionnelle. Que ce nœud soit ancien ou passager, il surgit
+                souvent à l&rsquo;occasion des crises, des choix, des obstacles ou des deuils
+                qui traversent chaque existence. Ce sont des moments de bascule qui nous
+                confrontent à nous-mêmes, et que l&rsquo;on ne peut pas toujours surmonter
+                seul.
               </p>
             </div>
           </Apparition>
@@ -221,15 +228,16 @@ export default function PourquoiConsulter() {
             </h2>
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
-            {/* « Il faut le dire clairement : » précède la phrase dans le
-                texte de Vincent. La mise en exergue l'avait fait disparaître ;
-                elle est restaurée en amorce, car c'est elle qui donne à la
-                phrase son ton d'insistance. */}
+            {/* La première phrase du texte de Vincent est découpée en deux :
+                son amorce (« Il faut partir d'un constat simple : ») en
+                surtitre, sa suite en exergue. Le passage se lit ainsi d'un
+                trait, sans un mot ajouté ni retranché. */}
             <p className="mt-8 text-sm uppercase tracking-[0.18em] text-terracotta-fonce">
-              Il faut le dire clairement
+              Il faut partir d&rsquo;un constat simple
             </p>
             <p className="mt-4 font-accent text-2xl italic leading-snug text-bois sm:text-[30px]">
-              Tout le monde a des symptômes, et c&rsquo;est normal.
+              Ressentir des difficultés ou développer un symptôme est profondément humain,
+              et c&rsquo;est tout à fait normal.
             </p>
           </div>
         </Apparition>
@@ -237,17 +245,18 @@ export default function PourquoiConsulter() {
         <Apparition delai={120}>
           <div className="mx-auto mt-12 grid max-w-5xl gap-10 text-ardoise md:grid-cols-2 md:gap-0 md:divide-x md:divide-sable">
             <p className="leading-relaxed md:pr-10">
-              J&rsquo;irais jusqu&rsquo;à dire qu&rsquo;ils peuvent avoir une fonction
-              positive et enrichir une vie.{" "}
-              <em>«&nbsp;Boiter n&rsquo;est pas pécher&nbsp;»</em>, écrivait le poète
-              Friedrich Rückert.
+              Ces manifestations peuvent même jouer un rôle protecteur et, d&rsquo;une
+              certaine manière, participer à l&rsquo;équilibre d&rsquo;une vie. Le poète
+              Friedrich Rückert le résumait ainsi&nbsp;:{" "}
+              <em>«&nbsp;Boiter n&rsquo;est pas pécher&nbsp;»</em>.
             </p>
             <p className="leading-relaxed md:pl-10">
-              Mais il arrive que cela ne tienne plus — que le symptôme devienne trop
-              envahissant, trop douloureux. C&rsquo;est à ce moment-là qu&rsquo;il devient
-              pertinent de consulter. Non pas quand on a atteint un seuil de souffrance
-              mesurable, mais quand l&rsquo;arrangement qu&rsquo;on avait trouvé ne
-              fonctionne plus.
+              Pourtant, il arrive un moment où ce compromis fragile vacille. Lorsque le
+              symptôme devient trop lourd, trop douloureux ou trop envahissant au quotidien,
+              la démarche de consulter prend tout son sens. On ne prend pas rendez-vous
+              parce qu&rsquo;on a franchi une limite de souffrance mesurable, mais
+              simplement parce que l&rsquo;arrangement que l&rsquo;on avait réussi à trouver
+              avec soi-même ne fonctionne plus.
             </p>
           </div>
         </Apparition>
@@ -266,7 +275,7 @@ export default function PourquoiConsulter() {
               id="le-sens"
               className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
             >
-              Le symptôme a un sens
+              Le sens du symptôme
             </h2>
             <div className="mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
           </Apparition>
@@ -274,27 +283,31 @@ export default function PourquoiConsulter() {
           <Apparition delai={120} className="lg:col-span-8">
             <div className="prose-clinique max-w-none">
               <p className="!mt-0">
-                Le travail avec un professionnel est alors l&rsquo;occasion d&rsquo;explorer
-                un autre aspect du symptôme&nbsp;: son sens. Plutôt qu&rsquo;un parasite
-                indésirable — même s&rsquo;il est ressenti comme tel — il dit étrangement
-                quelque chose de nous, de notre subjectivité. Il est en quelque sorte une
+                Le travail thérapeutique offre l&rsquo;occasion d&rsquo;explorer une autre
+                dimension du symptôme&nbsp;: son sens. Plutôt qu&rsquo;un simple parasite
+                indésirable, même s&rsquo;il est souvent vécu comme tel, il exprime de façon
+                singulière quelque chose de notre subjectivité. Il est, en quelque sorte, une
                 parole qui attend d&rsquo;être délivrée.
               </p>
               <p>
-                Ce que je propose est un dispositif de parole et d&rsquo;écoute, dans un
-                cadre professionnel entièrement confidentiel et non jugeant. En
-                s&rsquo;appuyant sur vos propres ressources, soutenues par la présence et les
-                interventions du thérapeute, le processus vise à amener au jour ce qui vous
-                pose question et vous divise à travers vos symptômes. D&rsquo;une certaine
-                manière, on pourrait dire que le traitement consiste à vous
-                «&nbsp;guérir&nbsp;» en devenant un peu plus vous-même.
+                Pour vous accompagner, je vous propose un dispositif de parole et
+                d&rsquo;écoute au sein d&rsquo;un cadre strictement confidentiel et
+                bienveillant. En vous appuyant sur vos propres ressources, soutenues par ma
+                présence active et mes interventions, ce processus vise à mettre en lumière
+                ce qui vous traverse et vous divise à travers vos symptômes. D&rsquo;une
+                certaine manière, le traitement cherche ainsi à vous soulager en vous
+                permettant de devenir un peu plus vous-même.
               </p>
+              {/* Le second lien menait en haut de /psychotherapeute-nantes/, sur
+                  le titre de psychothérapeute, et non sur les situations
+                  annoncées (signalé par Vincent le 2026-09-11). L'ancre vise
+                  désormais la section « quand consulter » elle-même. */}
               <p>
                 <Link href="/psychanalyste-nantes/">
                   Comment ce déchiffrement se travaille concrètement
                 </Link>
                 , et{" "}
-                <Link href="/psychotherapeute-nantes/">
+                <Link href="/psychotherapeute-nantes/#quand-consulter">
                   les situations qui conduisent le plus souvent à consulter
                 </Link>
                 .
@@ -309,13 +322,15 @@ export default function PourquoiConsulter() {
         <Apparition>
           <div className="rounded-[20px] bg-peche px-6 py-10 text-center sm:px-12 sm:py-12">
             <h2 id="commencer" className="text-2xl font-bold text-bois sm:text-[33px]">
-              Si vous vous reconnaissez là-dedans
+              Si vous vous reconnaissez dans ces situations
             </h2>
 
             <p className="mx-auto mt-5 max-w-3xl text-encre">
-              La première rencontre est gratuite&nbsp;: elle sert à éclaircir ensemble la
-              situation, et à déterminer la manière dont nous procéderons. Vous n&rsquo;avez
-              rien à préparer. Je reçois {publics.libelle}, sur rendez-vous.
+              Notre première rencontre — entièrement gratuite — sert à éclaircir ensemble
+              votre situation et à définir la manière dont nous travaillerons. Vous
+              n&rsquo;avez absolument rien à préparer pour ce rendez-vous. Mon cabinet
+              s&rsquo;adresse exclusivement aux adultes et aux jeunes adultes (à partir de{" "}
+              {publics.ageMinimum} ans), sur rendez-vous.
             </p>
 
             <div className="mt-9 border-t border-white/70 pt-9">

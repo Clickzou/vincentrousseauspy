@@ -31,7 +31,7 @@ import { canonical } from "@/lib/url-helpers";
  */
 
 const TITRE = "Psychothérapeute à Nantes";
-const MODIFIE_LE = "2026-09-08";
+const MODIFIE_LE = "2026-09-11";
 
 export const metadata: Metadata = {
   /* `absolute` : le titre contient déjà la ville, le suffixe la répéterait.
@@ -312,7 +312,7 @@ export default function PsychotherapeuteNantes() {
             "La même chose se répète : les mêmes impasses, les mêmes ruptures, le même sentiment d'échec.",
             "Un événement a fait bascule : un deuil, une séparation, une perte, un diagnostic.",
             "Le quotidien tient encore, mais au prix d'un effort qui devient coûteux.",
-            "L'entourage s'inquiète, ou vous vous surprenez à éviter ce que vous aimiez.",
+            "L'entourage s'inquiète, ou vos relations sociales deviennent source de souffrance.",
             "Vous voulez comprendre ce qui vous détermine, sans qu'il y ait d'urgence particulière.",
           ].map((cas, i) => (
             <li key={cas} className="h-full">
@@ -367,8 +367,8 @@ export default function PsychotherapeuteNantes() {
                 Mon référentiel est la psychanalyse. Cela ne veut pas dire un divan et un
                 silence de plusieurs années&nbsp;: cela veut dire que j&rsquo;accorde une
                 place centrale à votre parole et à ce qu&rsquo;elle dit de votre histoire,
-                plutôt qu&rsquo;au seul effacement du symptôme. Nous sommes assis face à
-                face, et nous parlons.
+                plutôt qu&rsquo;au seul effacement du symptôme. C&rsquo;est une démarche
+                thérapeutique qui se déploie intégralement par la parole.
               </p>
               <p>
                 Concrètement, la première séance — qui est gratuite — sert à faire

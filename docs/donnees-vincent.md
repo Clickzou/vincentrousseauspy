@@ -73,7 +73,9 @@
 | Jours | **Du lundi au vendredi** |
 | Horaires | **9 h – 20 h** |
 | Modalité | **Sur rendez-vous, en présentiel uniquement** (pas de visio) |
-| Durée de séance | 45 min à 1 h *(mentionné indirectement dans la FAQ — à confirmer)* |
+| Durée de séance | **45 minutes**, première séance comprise *(confirmé par Vincent le 2026-09-11)* |
+| Rythme | **Hebdomadaire** *(présenté comme la règle du cadre depuis le 2026-09-11)* |
+| Délai de réponse | **En moins de 24 heures** *(demandé par Vincent le 2026-09-11 ; remplace « sous 48 heures ouvrées »)* |
 | Confidentialité | Rappelée explicitement sur le site |
 
 ---

@@ -38,7 +38,7 @@ import { canonical } from "@/lib/url-helpers";
  */
 
 const TITRE = "Tarifs et remboursement";
-const MODIFIE_LE = "2026-09-08";
+const MODIFIE_LE = "2026-09-11";
 
 export const metadata: Metadata = {
   title: TITRE,
@@ -77,13 +77,16 @@ const SOURCES: Source[] = [
  */
 function participation(partenaire: boolean | null) {
   if (partenaire === true) {
+    /* Titre et texte dans la formulation de Vincent du 2026-09-11 : le tarif
+       et le taux de remboursement sont déjà dits juste au-dessus, dans la
+       même carte, et n'étaient qu'une redite. */
     return {
-      titre: "Je suis psychologue partenaire du dispositif",
+      titre: "Ma participation au dispositif",
       texte:
-        `Les séances réalisées dans ce cadre sont au tarif conventionnel de ` +
-        `${monSoutienPsy.tarifSeance} €. Je vous remets une feuille de soins à ` +
-        `transmettre à votre caisse, qui vous rembourse ${monSoutienPsy.tauxAssuranceMaladie} %. ` +
-        `Le reste relève de votre complémentaire santé.`,
+        "Je suis partenaire de ce dispositif public pour une partie de mon activité. " +
+        "N'hésitez pas à m'en parler avant notre premier rendez-vous : nous ferons le " +
+        "point ensemble pour vérifier si ce cadre réglementé correspond à votre situation " +
+        "et à vos besoins.",
       /*
        * ⚠️ CETTE PRÉCISION N'EST PAS UN DÉTAIL. Le reste de la page annonce
        * une fourchette modulable et une première séance gratuite : les deux
@@ -93,7 +96,10 @@ function participation(partenaire: boolean | null) {
        * exactement la mauvaise surprise que cette page existe pour éviter.
        *
        * ⚠️ FORMULATION SOUMISE À VINCENT LE 2026-09-10, EN ATTENTE DE SA
-       * VALIDATION : c'est lui qui applique la convention, pas nous.
+       * VALIDATION : c'est lui qui applique la convention, pas nous. Son
+       * document du 2026-09-11 ne la reprend pas — il a été rédigé sur une
+       * version antérieure au 10, où elle n'existait pas encore. Elle est
+       * donc conservée, et la question lui est reposée.
        */
       reserve:
         `Ce tarif est fixé par l'Assurance Maladie : il n'est donc pas modulable, ` +
@@ -162,9 +168,14 @@ export default function TarifsEtRemboursement() {
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
             <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
-              La première séance est gratuite. Les suivantes coûtent entre {honoraires.min} et{" "}
-              {honoraires.max} €. {honoraires.modulation} Le reste de cette page explique ce
-              qui est remboursé, par qui, et ce qui ne l&rsquo;est pas.
+              {/* Texte de Vincent du 2026-09-11, rédigé sur une version où la
+                  gratuité de la première séance n'était pas encore annoncée.
+                  Elle est rétablie en tête : un prix affiché sans elle serait
+                  faux par omission (règle posée dans `honoraires`). */}
+              La première séance est gratuite. Une consultation au cabinet coûte ensuite
+              entre {honoraires.min} et {honoraires.max} €. Le tarif tient compte des moyens
+              financiers de chacun. Les sections suivantes détaillent le fonctionnement des
+              honoraires ainsi que les différentes possibilités de prise en charge.
             </p>
           </div>
         </Apparition>
@@ -208,15 +219,16 @@ export default function TarifsEtRemboursement() {
                   colonne de 7/12, et la borne de lecture arrêtait le texte bien
                   avant son bord droit. */}
               <p className="mt-4 text-ardoise">
-                {honoraires.modulation} Le montant se fixe lors du premier rendez-vous, et il
-                n&rsquo;est pas figé&nbsp;: si votre situation change, dites-le-moi. Une séance
-                dure {seance.duree}.
+                Le tarif tient compte des moyens financiers de chacun. Le montant se fixe
+                lors du premier rendez-vous et il n&rsquo;est pas figé&nbsp;: si votre
+                situation change, nous pourrons en reparler. Une séance dure {seance.duree}.
+                Vous réglez à chaque séance.
               </p>
+              {/* Le moyen de paiement vient du correctif du 2026-09-10 : il est
+                  absent du document du 11, rédigé sur une version antérieure. */}
               <p className="mt-4 text-sm text-ardoise">
-                Il n&rsquo;y a ni frais de dossier, ni majoration, ni forfait
-                d&rsquo;engagement. Vous réglez à chaque séance. Le règlement se fait par
-                chèque ou en espèces&nbsp;; le cabinet ne dispose pas de terminal de carte
-                bancaire.
+                Le règlement se fait par chèque ou en espèces&nbsp;; le cabinet ne dispose
+                pas de terminal de carte bancaire.
               </p>
 
               {/* Renvoi vers la réserve, dans le bloc même où l'on lit
@@ -269,12 +281,11 @@ export default function TarifsEtRemboursement() {
             <p className="mt-6 text-left text-ardoise">
               Une consultation chez un psychologue en libéral{" "}
               <strong>n&rsquo;est pas remboursée par l&rsquo;Assurance Maladie</strong> au
-              titre du régime général, contrairement à une consultation chez un médecin ou
-              un psychiatre. C&rsquo;est la règle, et il vaut mieux le savoir avant
-              qu&rsquo;après.
+              titre du régime général, contrairement à un rendez-vous chez un médecin ou un
+              psychiatre. Il est préférable de le savoir avant d&rsquo;engager un suivi.
             </p>
             <p className="mt-4 text-ardoise">
-              Il existe deux exceptions, qui ne se recouvrent pas.
+              Il existe cependant deux possibilités de prise en charge distinctes.
             </p>
           </div>
         </Apparition>
@@ -284,13 +295,13 @@ export default function TarifsEtRemboursement() {
             <h3 className="text-lg font-bold text-encre">Votre complémentaire santé</h3>
             <p className="mt-3 text-ardoise">
               De nombreuses mutuelles prennent en charge tout ou partie des séances de
-              psychologue, souvent sous forme d&rsquo;un forfait annuel. Les conditions
-              varient beaucoup d&rsquo;un contrat à l&rsquo;autre.
+              psychologie, le plus souvent sous la forme d&rsquo;un forfait annuel. Les
+              conditions varient selon les contrats.
             </p>
             <p className="mt-3 text-sm text-ardoise">
-              Le plus sûr est de leur poser la question directement, en demandant la prise
-              en charge des « consultations de psychologue ». Je vous remets un justificatif
-              si votre contrat l&rsquo;exige.
+              Le plus simple est de poser directement la question à votre organisme en
+              demandant les modalités pour les «&nbsp;consultations de psychologue&nbsp;». Je
+              vous remets un justificatif si votre contrat l&rsquo;exige.
             </p>
           </div>
 
@@ -300,15 +311,15 @@ export default function TarifsEtRemboursement() {
             </h3>
             <p className="mt-3 text-ardoise">
               L&rsquo;Assurance Maladie prend en charge jusqu&rsquo;à{" "}
-              {monSoutienPsy.seancesParAn} séances par année civile, chez un psychologue
-              partenaire du dispositif, au tarif de {monSoutienPsy.tarifSeance} € la séance.
-              Elle rembourse {monSoutienPsy.tauxAssuranceMaladie} %, le reste relevant de
-              votre complémentaire.
+              {monSoutienPsy.seancesParAn} séances par année civile chez un psychologue
+              partenaire du dispositif, au tarif réglementé de {monSoutienPsy.tarifSeance} €
+              la séance. Elle rembourse {monSoutienPsy.tauxAssuranceMaladie} %, le reste
+              étant généralement couvert par votre mutuelle.
             </p>
             <p className="mt-3 text-ardoise">
               {monSoutienPsy.adressageMedicalRequis
                 ? "Une consultation médicale préalable est nécessaire."
-                : "Depuis juin 2024, vous n'avez plus besoin d'être adressé par un médecin : l'accès est direct."}
+                : "L'accès est direct et se fait sans ordonnance médicale."}
             </p>
 
             <div className="mt-5 rounded-[20px] bg-white/70 p-5">
@@ -338,30 +349,36 @@ export default function TarifsEtRemboursement() {
             </h3>
 
             <p className="mt-4 text-ardoise">
-              <strong>Ce n&rsquo;est pas le titre affiché qui compte, mais la profession
-              qui le porte.</strong> C&rsquo;est la confusion la plus fréquente, et elle
-              coûte cher à qui la découvre après coup.
+              <strong>Ce n&rsquo;est pas le titre affiché qui détermine la prise en charge,
+              mais la profession réglementée du praticien.</strong> C&rsquo;est une confusion
+              fréquente qui peut réserver des surprises.
             </p>
 
             <p className="mt-4 text-ardoise">
-              Le psychiatre est médecin&nbsp;: sa consultation est prise en charge par
-              l&rsquo;Assurance Maladie, comme toute consultation médicale.{" "}
+              Le psychiatre étant médecin, sa consultation est prise en charge par
+              l&rsquo;Assurance Maladie au titre du régime général.{" "}
               <strong>
-                Le psychologue, le psychothérapeute non médecin et le psychanalyste ne
-                le sont pas
+                Le psychologue, le psychothérapeute non-médecin et le psychanalyste ne le
+                sont pas.
               </strong>{" "}
-              au titre du régime général, et les deux exceptions ci-dessus sont les
-              seules voies ouvertes.
+              Les deux options présentées ci-dessus (mutuelles ou dispositif public) sont les
+              seules voies de remboursement ouvertes.
             </p>
 
-            <p className="mt-4 text-ardoise">
-              «&nbsp;Psychothérapeute&nbsp;» n&rsquo;est pas une profession de plus&nbsp;:
-              c&rsquo;est un titre qui s&rsquo;ajoute à un diplôme préexistant, et il
-              ne crée aucun droit à remboursement par lui-même. «&nbsp;Psychanalyste&nbsp;»
-              ne relève d&rsquo;aucun diplôme d&rsquo;État, et pas davantage. Quant à
-              «&nbsp;Mon soutien psy&nbsp;», il ne s&rsquo;ouvre qu&rsquo;aux{" "}
-              <strong>psychologues</strong> partenaires du dispositif.
-            </p>
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-ardoise">
+              <li>
+                «&nbsp;Psychothérapeute&nbsp;» n&rsquo;est pas une profession de santé
+                supplémentaire&nbsp;: c&rsquo;est un titre officiel qui s&rsquo;ajoute à un
+                diplôme universitaire préexistant. Il ne crée aucun droit au remboursement
+                par lui-même.
+              </li>
+              <li>
+                «&nbsp;Psychanalyste&nbsp;» désigne une méthode de travail et ne relève pas
+                d&rsquo;un diplôme d&rsquo;État. Quant au dispositif «&nbsp;Mon soutien
+                psy&nbsp;», il est exclusivement réservé aux <strong>psychologues</strong>{" "}
+                partenaires.
+              </li>
+            </ul>
 
             <p className="mt-4 text-sm text-ardoise">
               <Link
@@ -397,16 +414,23 @@ export default function TarifsEtRemboursement() {
 
           <div className="prose-clinique mt-8">
             <p className="!mt-0">
-              C&rsquo;est une question légitime, et rarement posée à voix haute. La durée
-              d&rsquo;un travail ne se fixe pas d&rsquo;avance&nbsp;: elle dépend de ce qui
-              vous amène et de ce qui se dénoue. Personne ne peut sérieusement vous annoncer
-              un nombre de séances au premier rendez-vous.
+              C&rsquo;est une question légitime. La durée totale d&rsquo;un suivi ne se fixe
+              pas d&rsquo;avance&nbsp;: elle dépend entièrement de ce qui vous amène et du
+              rythme auquel les choses se dénouent. Personne ne peut sérieusement vous
+              annoncer un nombre précis de séances lors d&rsquo;un premier rendez-vous.
             </p>
             <p>
-              Ce que je peux vous dire, en revanche&nbsp;: le rythme le plus courant est{" "}
-              {seance.rythmeCourant}, le montant tient compte de vos moyens, et il se
-              réajuste si votre situation change. Si le coût devient un obstacle au travail,
-              c&rsquo;est un sujet dont nous pouvons parler en séance — comme le reste.
+              Ce que je peux vous dire, en revanche, c&rsquo;est que le cadre est pensé pour
+              être soutenant. Chaque consultation dure {seance.duree} et le rythme des
+              séances est {seance.rythme}, afin de préserver la continuité indispensable de
+              votre travail psychique.
+            </p>
+            <p>
+              Le montant des honoraires tient compte de vos moyens dès le départ, et il
+              n&rsquo;est pas figé&nbsp;: si votre situation financière change, nous pourrons
+              tout à fait en reparler. Si le coût devient un obstacle à la continuité du
+              suivi, c&rsquo;est un sujet dont nous discutons ensemble en séance — au même
+              titre que le reste.
             </p>
             <p>
               <Link href="/consultations/">Comment se déroulent les consultations</Link>,
@@ -427,9 +451,9 @@ export default function TarifsEtRemboursement() {
             </h2>
 
             <p className="mx-auto mt-5 max-w-3xl text-encre">
-              Vous pouvez me la poser au téléphone avant de prendre rendez-vous. Cela
-              n&rsquo;engage à rien, et c&rsquo;est souvent plus simple qu&rsquo;un échange
-              écrit.
+              Vous pouvez tout à fait me la poser par téléphone avant de prendre
+              rendez-vous. Cet échange préalable n&rsquo;engage à rien et permet de faire le
+              point ensemble.
             </p>
 
             <div className="mt-9 border-t border-white/70 pt-9">

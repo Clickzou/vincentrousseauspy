@@ -38,12 +38,13 @@ import { canonical, minusculeInitiale } from "@/lib/url-helpers";
  * pages /consultations/adolescent/ et /consultations/couple/ du brouillon du
  * master sont supprimées (docs/donnees-vincent.md § 5).
  *
- * CONTENU À VALIDER PAR VINCENT avant mise en ligne (§ 7.1) — en particulier
- * la durée de séance, qui n'est aujourd'hui sourcée nulle part.
+ * CONTENU À VALIDER PAR VINCENT avant mise en ligne (§ 7.1). Textes révisés
+ * par lui le 2026-09-11 (document « word3 »), qui confirme aussi la durée de
+ * séance : 45 minutes.
  */
 
 const TITRE = "Les consultations";
-const MODIFIE_LE = "2026-09-08";
+const MODIFIE_LE = "2026-09-11";
 
 export const metadata: Metadata = {
   title: TITRE,
@@ -55,30 +56,35 @@ export const metadata: Metadata = {
 };
 
 /**
- * Le déroulé d'une première séance, en trois temps. Repris de la formulation
- * de Vincent sur le site actuel : « la première rencontre est l'occasion
- * d'éclaircir ensemble la situation et de déterminer la manière dont nous
- * procèderons ».
+ * Le déroulé d'une première séance, en trois temps. Réécrit par Vincent le
+ * 2026-09-11 : la première séance n'est plus présentée comme une prise de
+ * contact, mais comme une évaluation mutuelle — le troisième temps nomme
+ * l'alliance thérapeutique et ses trois composantes.
  */
 const PREMIERE_SEANCE = [
   {
-    temps: "Vous racontez ce qui vous amène",
+    temps: "Vous exprimez ce qui vous amène",
     texte:
-      "Comme vous le pouvez, dans l'ordre que vous voulez. Vous n'avez rien à préparer, " +
-      "et vous n'êtes pas obligé de savoir quoi dire : c'est aussi mon travail de vous " +
-      "aider à le formuler.",
+      "Nous explorons ensemble votre demande, votre histoire et vos difficultés " +
+      "actuelles. Vous parlez comme vous le souhaitez, dans l'ordre que vous voulez. " +
+      "Vous n'avez rien à préparer, et il est tout à fait normal de ne pas savoir par " +
+      "où commencer.",
   },
   {
     temps: "Nous éclaircissons la situation ensemble",
     texte:
-      "Je pose des questions, je reformule. L'objectif n'est pas de poser une étiquette, " +
-      "mais de comprendre ce qui fait difficulté et depuis quand.",
+      "J'écoute, je pose des questions et je reformule pour mieux comprendre votre " +
+      "souffrance et vos objectifs. C'est le moment où je vous présente mon approche. " +
+      "Nous discutons ensemble de la pertinence et de la faisabilité d'un travail " +
+      "thérapeutique orienté par la psychanalyse.",
   },
   {
-    temps: "Nous décidons de la suite",
+    temps: "Nous évaluons la possibilité de la suite",
     texte:
-      "S'il y a lieu de travailler ensemble, nous convenons d'un rythme. Sinon, je vous " +
-      "oriente vers le professionnel indiqué. Rien ne vous engage au-delà de cette séance.",
+      "Surtout, cette séance sert à vérifier si une véritable alliance thérapeutique " +
+      "peut se nouer. Ce lien de confiance, de collaboration et de sécurité repose sur " +
+      "trois piliers : l'accord sur les objectifs, l'accord sur les tâches et un lien " +
+      "émotionnel positif. C'est le fondement indispensable de tout travail en profondeur.",
   },
 ];
 
@@ -112,19 +118,20 @@ export default function Consultations() {
         <Apparition>
           <div className="mt-8 rounded-[20px] border border-sable bg-creme px-6 py-10 text-center sm:px-12">
             <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
-              {`À partir de ${publics.ageMinimum} ans · ${horaires.modalite}`}
+              Consultations pour adultes, sur rendez-vous au cabinet
             </p>
 
             <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-bois sm:text-[40px]">
-              Les consultations&nbsp;: déroulé, cadre et première séance
+              Le déroulé, le cadre et la première séance
             </h1>
 
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
             <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
-              Ce qui freine le plus souvent, ce n&rsquo;est pas le prix&nbsp;: c&rsquo;est
-              de ne pas savoir à quoi s&rsquo;attendre. Voici donc, aussi précisément que
-              possible, comment les choses se passent au cabinet.
+              Faire la démarche de consulter est un grand pas, et il est tout à fait naturel
+              de ressentir de l&rsquo;appréhension face à l&rsquo;inconnu. Pour vous aider à
+              aborder ce moment plus sereinement, je vous propose de découvrir ici, en toute
+              transparence, comment se déroulent nos rencontres au cabinet.
             </p>
           </div>
         </Apparition>
@@ -168,26 +175,32 @@ export default function Consultations() {
           <li className="h-full">
             <Apparition className="h-full">
               <article className="h-full rounded-[20px] bg-menthe p-7 sm:p-8">
-                <h3 className="text-lg font-bold text-bois">Qui je reçois</h3>
+                <h3 className="text-lg font-bold text-bois">Pour qui&nbsp;?</h3>
+                {/* Le lien vers /psychologue-clinicien-nantes/ portait sur
+                    « ce qui conduit généralement à consulter », que la révision
+                    du 2026-09-11 a retiré. Il passe sur « ce qui vous amène »,
+                    qui dit la même chose : sans lui, cette page ne pointait
+                    plus vers la page de réflexion sur le symptôme. */}
                 <p className="mt-4 text-ardoise">
-                  Je reçois toute personne qui le demande, à partir de{" "}
-                  {publics.ageMinimum} ans. Il n&rsquo;y a pas de profil type, ni de degré
-                  de souffrance à atteindre pour avoir le droit de consulter. Les motifs
-                  étant différents pour chacun, la première rencontre sert précisément à
-                  éclaircir la situation —{" "}
+                  J&rsquo;accompagne les adultes (à partir de {publics.ageMinimum} ans),
+                  quels que soient vos besoins ou votre parcours. Il n&rsquo;y a pas de
+                  profil type, ni de seuil de souffrance minimal pour s&rsquo;autoriser à
+                  consulter. Chaque démarche est unique. Notre première rencontre sera
+                  justement l&rsquo;occasion de faire le point ensemble et de clarifier{" "}
                   <Link
                     href="/psychologue-clinicien-nantes/"
                     className="text-terracotta-fonce underline underline-offset-2"
                   >
-                    ce qui conduit généralement à consulter
+                    ce qui vous amène
                   </Link>
                   .
                 </p>
                 <p className="mt-4 text-ardoise">
-                  En revanche, je ne reçois ni {publics.nonRecus.join(", ni ")}. Ce
-                  n&rsquo;est pas mon champ de pratique, et vous adresser à quelqu&rsquo;un
-                  dont c&rsquo;est le travail vous servira mieux. Si vous m&rsquo;appelez
-                  dans ce cas, je vous orienterai plutôt que de vous laisser sans réponse.
+                  Ma pratique est exclusivement dédiée aux suivis individuels pour adultes.
+                  Je ne reçois pas les enfants, les adolescents ni les couples. Si votre
+                  demande concerne l&rsquo;un de ces publics, je prendrai le temps de vous
+                  orienter vers des confrères spécialisés afin que vous puissiez bénéficier
+                  d&rsquo;un accompagnement adapté.
                 </p>
               </article>
             </Apparition>
@@ -196,12 +209,18 @@ export default function Consultations() {
           <li className="h-full">
             <Apparition delai={120} className="h-full">
               <article className="h-full rounded-[20px] bg-peche p-7 sm:p-8">
-                <h3 className="text-lg font-bold text-bois">Quand</h3>
-                <p className="mt-4 text-ardoise">{horaires.libelle}.</p>
-                <p className="mt-3 text-ardoise">{horaires.modalite}.</p>
+                <h3 className="text-lg font-bold text-bois">
+                  Quand&nbsp;? Horaires et déroulement
+                </h3>
+                <p className="mt-4 text-ardoise">
+                  Je vous reçois au cabinet {minusculeInitiale(horaires.libelle)},
+                  exclusivement sur rendez-vous.
+                </p>
                 <p className="mt-3 text-ardoise">
-                  Une séance dure {seance.duree}. Le rythme le plus courant est{" "}
-                  {seance.rythmeCourant}, mais il se décide au premier rendez-vous.
+                  Les consultations durent {seance.duree}. En règle générale, le rythme des
+                  séances est {seance.rythme}. Néanmoins, nous prendrons le temps
+                  d&rsquo;évaluer vos besoins lors de notre première rencontre afin de fixer
+                  la fréquence la plus adaptée.
                 </p>
               </article>
             </Apparition>
@@ -210,12 +229,28 @@ export default function Consultations() {
           <li className="h-full">
             <Apparition delai={240} className="h-full">
               <article className="h-full rounded-[20px] bg-lavande p-7 sm:p-8">
-                <h3 className="text-lg font-bold text-bois">Où</h3>
-                <address className="mt-4 not-italic text-ardoise">{adressePostale}</address>
-                <p className="mt-3 text-ardoise">{cabinet.acces.reperes}.</p>
-                <p className="mt-3 text-ardoise">
-                  {cabinet.acces.tram}. {cabinet.acces.stationnement}.
+                <h3 className="text-lg font-bold text-bois">
+                  Où se situe le cabinet&nbsp;?
+                </h3>
+                <p className="mt-4 text-ardoise">
+                  Le cabinet se trouve au {adressePostale}. Il est situé juste derrière la
+                  Manufacture des Tabacs, à deux pas de la Gare Nord et du Jardin des Plantes.
                 </p>
+                {/* Le document de Vincent place deux émojis (tram, voiture) devant
+                    ces lignes. Ils ne sont pas repris : le site signale ses
+                    rubriques par des intitulés et des icônes dessinées, et un
+                    émoji change d'aspect d'un système à l'autre. */}
+                <p className="mt-4 font-medium text-encre">Pour venir&nbsp;:</p>
+                <ul className="mt-2 space-y-2 text-ardoise">
+                  <li>
+                    <strong className="font-medium text-encre">Tramway&nbsp;:</strong>{" "}
+                    {cabinet.acces.tram}
+                  </li>
+                  <li>
+                    <strong className="font-medium text-encre">Stationnement&nbsp;:</strong>{" "}
+                    des places de parking payantes sont disponibles dans les rues adjacentes.
+                  </li>
+                </ul>
                 <p className="mt-4 text-sm">
                   <Link
                     href="/cabinet-nantes/"
@@ -242,17 +277,27 @@ export default function Consultations() {
               id="premiere-seance"
               className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
             >
-              La première séance
+              La première séance (gratuite)
             </h2>
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
-            <p className="mt-6 text-ardoise">
-              C&rsquo;est avant tout une rencontre, et{" "}
-              <strong className="font-medium text-encre">elle est gratuite</strong>. Elle
-              dure {seance.duree}, comme les suivantes, et ne vous engage à rien pour la
-              suite.
-            </p>
           </div>
         </Apparition>
+
+        <div className="prose-clinique mx-auto mt-8">
+          <p className="!mt-0">
+            C&rsquo;est avant tout une rencontre, mais elle n&rsquo;est pas une simple
+            «&nbsp;prise de contact&nbsp;». D&rsquo;une durée de {seance.duree}, ce premier
+            rendez-vous occupe une place particulière&nbsp;: c&rsquo;est un véritable temps
+            d&rsquo;évaluation mutuelle qui détermine la suite du travail.
+          </p>
+          <p>
+            La gratuité de cette séance permet d&rsquo;abaisser les barrières financières et
+            psychologiques pour prendre le temps nécessaire, sans pression. Elle témoigne de
+            mon engagement&nbsp;: je préfère vérifier que nous sommes pleinement alignés
+            avant de commencer un travail exigeant.
+          </p>
+          <p>Voici comment se déroule ce premier échange&nbsp;:</p>
+        </div>
 
         <ol className="mt-8 grid gap-6 md:grid-cols-3">
           {PREMIERE_SEANCE.map((etape, i) => (
@@ -269,11 +314,21 @@ export default function Consultations() {
           ))}
         </ol>
 
-        <p className="mx-auto mt-8 max-w-lecture text-center text-sm text-ardoise">
-          Vous n&rsquo;avez besoin d&rsquo;aucune ordonnance&nbsp;: la consultation
-          d&rsquo;un psychologue est en accès direct, sans passer par votre médecin. C&rsquo;est
-          également le cas pour le dispositif «&nbsp;Mon Soutien Psy&nbsp;», auquel je suis
-          affilié.
+        <p className="mx-auto mt-8 max-w-lecture text-center text-ardoise">
+          Si nous choisissons d&rsquo;engager ce travail, nous validerons la mise en place du
+          suivi. Dans le cas contraire, je vous orienterai vers un professionnel plus
+          adapté. Rien ne vous engage au-delà de cette première rencontre.
+        </p>
+
+        {/* La phrase sur « Mon Soutien Psy » n'est pas dans le document du
+            2026-09-11, rédigé sur une version antérieure au 10 : elle vient du
+            correctif précédent de Vincent et elle est conservée. */}
+        <p className="mx-auto mt-6 max-w-lecture text-center text-sm text-ardoise">
+          <strong className="font-medium text-encre">À savoir&nbsp;:</strong> vous
+          n&rsquo;avez besoin d&rsquo;aucune ordonnance. La consultation chez un psychologue
+          se fait en accès direct, sans obligation de passer par votre médecin traitant.
+          C&rsquo;est également le cas pour le dispositif «&nbsp;Mon Soutien Psy&nbsp;»,
+          auquel je suis affilié.
         </p>
       </section>
 
@@ -286,7 +341,7 @@ export default function Consultations() {
               id="le-cadre"
               className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
             >
-              Le cadre
+              Le cadre thérapeutique
             </h2>
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
           </div>
@@ -297,40 +352,59 @@ export default function Consultations() {
             ligne obligeraient l'œil à chercher le début de chaque suivante. */}
         <div className="prose-clinique mx-auto mt-8">
           <p className="!mt-0">
-            Le cadre — un même lieu, un même horaire, une régularité — n&rsquo;est pas une
-            contrainte administrative&nbsp;: c&rsquo;est ce qui rend le travail possible.
-            C&rsquo;est parce que quelque chose se répète à l&rsquo;identique que le reste
-            peut se déplacer.
+            Le cadre — un lieu unique, un horaire fixe, une régularité — n&rsquo;est pas une
+            contrainte administrative. C&rsquo;est un repère rassurant et stable qui rend le
+            travail thérapeutique possible.
+          </p>
+          {/* ⚠️ Le document du 2026-09-11 ouvre ce paragraphe par « Pour
+              garantir l'efficacité de l'accompagnement ». Ces mots ne sont pas
+              repris : garantir une efficacité est une promesse de résultat, que
+              le § 2.2 du master proscrit (c'est le motif pour lequel « une
+              méthode éprouvée visant à apporter des changements durables » a
+              été écartée en septembre). Le reste de la phrase dit déjà
+              pourquoi la régularité compte. En attente de l'accord de Vincent. */}
+          <p>
+            <strong>Le rythme&nbsp;:</strong> les séances sont hebdomadaires. C&rsquo;est
+            cette régularité indispensable qui maintient la continuité du travail psychique
+            entre les rendez-vous, vous permettant ainsi de construire des repères solides et
+            d&rsquo;avancer sereinement. Nous fixerons ensemble ce créneau régulier lors de
+            notre première rencontre.
           </p>
           <p>
-            La fréquence se décide au premier rendez-vous. Le rythme le plus courant est{" "}
-            {seance.rythmeCourant}, mais il se discute et se réévalue. La durée totale du
-            travail, elle, ne se fixe pas d&rsquo;avance&nbsp;: elle varie d&rsquo;une
-            personne à l&rsquo;autre, et vous restez libre d&rsquo;interrompre.
+            <strong>La durée du suivi&nbsp;:</strong> elle ne se fixe pas d&rsquo;avance.
+            Elle dépend du cheminement de chacun, et vous restez entièrement libre
+            d&rsquo;interrompre le travail quand vous le souhaitez.
           </p>
           <p>
-            Les séances ont lieu au cabinet, en présentiel uniquement&nbsp;: je ne propose
-            pas de consultation en visioconférence.
+            <strong>Les modalités&nbsp;:</strong> les consultations ont lieu exclusivement
+            au cabinet, en présentiel. Je ne propose pas de suivi en visioconférence, car la
+            rencontre physique est essentielle à ma pratique.
           </p>
         </div>
 
-        {/* Quatre repères, et non cinq : « Modalité » (sur rendez-vous, en
-            présentiel) a cédé sa place au couple première séance / séances
-            suivantes le 2026-09-10. Elle n'est pas perdue — elle est déjà dans
-            la carte « Quand » en tête de page et dans le paragraphe qui
-            précède, alors que la gratuité de la première rencontre n'était
-            nulle part. */}
+        {/* Quatre repères, dans la formulation du 2026-09-11. « Modalité »
+            revient, et la gratuité de la première séance passe dans la liste
+            qui suit : elle reste dite juste à côté du prix, comme l'exige la
+            règle posée dans `honoraires` (site-config). */}
         <dl className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { terme: "Durée d'une séance", detail: seance.duree },
-            { terme: "Rythme le plus courant", detail: seance.rythmeCourant },
             {
-              terme: "Première séance",
-              detail: "Gratuite, et sans engagement pour la suite.",
+              terme: "Durée d'une séance",
+              detail: `${seance.duree} (première consultation et suivis)`,
             },
             {
-              terme: "Séances suivantes",
-              detail: `De ${honoraires.min} à ${honoraires.max} €. ${honoraires.modulation}`,
+              terme: "Rythme des séances",
+              detail: "Hebdomadaire, pour garantir la continuité du travail psychique",
+            },
+            {
+              terme: "Honoraires",
+              detail:
+                `De ${honoraires.min} à ${honoraires.max} €. Le montant exact est défini ` +
+                `ensemble selon vos possibilités.`,
+            },
+            {
+              terme: "Modalité",
+              detail: "Sur rendez-vous, en présentiel uniquement au cabinet",
             },
           ].map((item) => (
             <div key={item.terme} className="rounded-[20px] bg-lin p-6">
@@ -342,16 +416,37 @@ export default function Consultations() {
           ))}
         </dl>
 
-        <p className="mx-auto mt-8 max-w-lecture text-center text-sm text-ardoise">
-          <Link
-            href="/tarifs-et-remboursement/"
-            className="text-terracotta-fonce underline underline-offset-2"
-          >
-            Le détail des tarifs et des remboursements
-          </Link>{" "}
-          — dont ce que prennent en charge les mutuelles, et ce que ne prend pas en charge
-          l&rsquo;Assurance maladie.
-        </p>
+        {/* Liste demandée par Vincent le 2026-09-11 à la place de la phrase de
+            renvoi. Le renvoi n'est pas perdu pour autant : l'intitulé devient
+            le lien vers /tarifs-et-remboursement/, seul lien de la page vers
+            elle.
+
+            ⚠️ Le document écrit « Les consultations ne sont pas prises en
+            charge par l'Assurance Maladie ». C'est faux pour un suivi engagé
+            dans « Mon Soutien Psy », auquel Vincent est affilié : remboursé à
+            60 %. La restriction « Hors dispositif » rétablit l'exactitude. */}
+        <div className="mx-auto mt-8 max-w-lecture text-sm text-ardoise">
+          <p className="font-medium text-encre">
+            <Link
+              href="/tarifs-et-remboursement/"
+              className="text-terracotta-fonce underline underline-offset-2"
+            >
+              Tarifs et remboursements
+            </Link>
+            &nbsp;:
+          </p>
+          <ul className="mt-3 list-disc space-y-1.5 pl-5">
+            <li>La première séance de rencontre est gratuite.</li>
+            <li>
+              Hors dispositif «&nbsp;Mon Soutien Psy&nbsp;», les consultations ne sont pas
+              prises en charge par l&rsquo;Assurance Maladie.
+            </li>
+            <li>
+              De nombreuses mutuelles proposent un remboursement partiel ou total (pensez à
+              contacter votre organisme).
+            </li>
+          </ul>
+        </div>
       </section>
 
       {/* 4. CONFIDENTIALITÉ. Formulée par ses conséquences concrètes : dire
@@ -371,8 +466,8 @@ export default function Consultations() {
             </h2>
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
             <p className="mt-6 text-ardoise">
-              Les psychologues sont tenus au secret professionnel, sans réserve.
-              Concrètement, cela veut dire trois choses.
+              Les psychologues sont soumis au secret professionnel absolu. Concrètement, cet
+              engagement repose sur trois piliers&nbsp;:
             </p>
           </div>
         </Apparition>
@@ -382,9 +477,9 @@ export default function Consultations() {
             largeur bornée, ils laissaient la moitié droite de la bande vide. */}
         <ul className="mt-10 grid gap-5 md:grid-cols-3">
           {[
-            "Ce qui se dit en séance n'en sort pas.",
-            "Le fait même que vous consultiez ne sera communiqué à personne — ni à votre famille, ni à votre employeur, ni à votre médecin sans votre accord.",
-            "Cette règle ne connaît que les exceptions prévues par la loi.",
+            "Tout ce que vous exprimez ou déposez en séance reste strictement confidentiel.",
+            "Le fait même de consulter demeure secret : aucune information n'est transmise à vos proches, votre employeur ou votre médecin sans votre accord.",
+            "Cette règle éthique s'applique sans réserve, en dehors des seules exceptions strictement prévues par la loi.",
           ].map((point, i) => (
             <li key={point} className="h-full">
               <Apparition delai={i * 120} className="h-full">
@@ -397,8 +492,8 @@ export default function Consultations() {
         </ul>
 
         <p className="mx-auto mt-10 max-w-lecture text-center text-sm text-ardoise">
-          C&rsquo;est aussi la raison pour laquelle le formulaire de ce site ne comporte
-          aucune zone de message&nbsp;:{" "}
+          C&rsquo;est également pour protéger votre vie privée que le formulaire de ce site
+          ne comporte aucune zone de message&nbsp;:{" "}
           <Link
             href="/politique-de-confidentialite/"
             className="text-terracotta-fonce underline underline-offset-2"
@@ -426,8 +521,9 @@ export default function Consultations() {
             </h2>
 
             <p className="mx-auto mt-5 max-w-3xl text-encre">
-              Vous n&rsquo;avez pas besoin de savoir quoi dire, ni de préparer quoi que ce
-              soit. Un premier échange de quelques minutes suffit à fixer une séance.
+              Pour prendre contact, nul besoin de préparer quoi que ce soit. Un court
+              échange de quelques minutes nous permettra simplement de faire le point et de
+              planifier notre rencontre.
             </p>
 
             <div className="mt-9 border-t border-white/70 pt-9">

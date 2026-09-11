@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Apparition } from "@/components/ui/Apparition";
-import { breadcrumbSchema, graph } from "@/lib/seo/schemas";
+import { IconeLienExterne } from "@/components/ui/Icones";
+import { breadcrumbSchema, graph, publicationSchema } from "@/lib/seo/schemas";
 import { ARTICLES } from "@/lib/content/blog";
+import { PUBLICATIONS, type Publication } from "@/lib/content/publications";
 import { cabinet, contact, praticien } from "@/lib/site-config";
 import { canonical } from "@/lib/url-helpers";
 
@@ -26,8 +28,8 @@ const TITRE = "Blog";
 export const metadata: Metadata = {
   title: TITRE,
   description:
-    `Ce qui se passe réellement en consultation, le cadre, les questions que l'on pose ` +
-    `rarement à voix haute. Écrits de ${praticien.nom}, psychologue à ${cabinet.ville}.`,
+    `Textes sur la réalité des consultations et le cadre des séances, et contributions ` +
+    `scientifiques de ${praticien.nom}, psychologue et psychanalyste à ${cabinet.ville}.`,
   alternates: { canonical: canonical("blog") },
   openGraph: { title: `${TITRE} — ${praticien.nom}`, url: canonical("blog") },
 };
@@ -39,12 +41,17 @@ const dateLisible = (iso: string) =>
     year: "numeric",
   });
 
+/** « le 17 avril 2026 » si la date est connue au jour près, « en 2024 » sinon. */
+const datePublication = (p: Publication) =>
+  p.publieLe.length === 4 ? `en ${p.publieLe}` : `le ${dateLisible(p.publieLe)}`;
+
 export default function Blog() {
   const jsonLd = graph(
     breadcrumbSchema([
       { nom: "Accueil", url: "/" },
       { nom: TITRE, url: "blog" },
     ]),
+    ...PUBLICATIONS.map(publicationSchema),
   );
 
   return (
@@ -75,15 +82,14 @@ export default function Blog() {
             </p>
 
             <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-bois sm:text-[40px]">
-              Écrits
+              Quelques écrits
             </h1>
 
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
             <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
-              Quelques textes sur ce qui se passe réellement en consultation, sur le cadre,
-              et sur les questions que l&rsquo;on pose rarement à voix haute. Ils paraissent
-              quand j&rsquo;ai quelque chose à dire, pas selon un calendrier.
+              Vous trouverez ici quelques textes simples sur la réalité des consultations et
+              le cadre des séances.
             </p>
           </div>
         </Apparition>
@@ -132,7 +138,79 @@ export default function Blog() {
         )}
       </section>
 
-      <section className="px-5 pb-16 sm:px-10 lg:px-[100px]">
+      {/* CONTRIBUTIONS SCIENTIFIQUES — rubrique demandée par Vincent le
+          2026-09-11. Les textes restent chez l'éditeur (droits d'auteur) :
+          chaque carte présente la référence et le résumé de Vincent, puis
+          renvoie vers Cairn.
+
+          ⏳ VIDÉO EN ATTENTE. Le document prévoit, sous les trois références,
+          une présentation vidéo du premier article réalisée avec NotebookLM.
+          Le fichier n'a pas été transmis. À son arrivée : l'héberger sur le
+          site (aucun tiers) ou, s'il passe par YouTube, le charger au clic
+          comme `PlanDiffere` — un lecteur encastré transmet l'IP du visiteur
+          à Google avant tout consentement. */}
+      <section
+        aria-labelledby="contributions"
+        className="bg-creme px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
+      >
+        <Apparition>
+          <div className="mx-auto max-w-lecture text-center">
+            <h2
+              id="contributions"
+              className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
+            >
+              Contributions scientifiques
+            </h2>
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+            <p className="mt-6 text-ardoise">
+              Pour des raisons de droits d&rsquo;auteur, mes articles publiés dans des revues
+              scientifiques ne peuvent pas être partagés en accès libre sur ce site.
+            </p>
+          </div>
+        </Apparition>
+
+        <ul className="mx-auto mt-10 max-w-4xl space-y-6">
+          {PUBLICATIONS.map((p) => (
+            <li key={p.url}>
+              <Apparition>
+                <article className="rounded-[20px] bg-white p-7 sm:p-9">
+                  <p className="text-xs uppercase tracking-[0.18em] text-terracotta-fonce">
+                    {p.revue} · n°&nbsp;{p.numero} ·{" "}
+                    {p.nature === "entretien" ? "Entretien" : "Article"}
+                  </p>
+                  <h3 className="mt-3 text-xl font-bold leading-tight text-bois sm:text-2xl">
+                    {p.titre}
+                  </h3>
+                  <p className="mt-3 text-sm text-ardoise">
+                    {praticien.nom}
+                    {p.intervieweur ? `, entretien mené par ${p.intervieweur}` : ""}. Publié{" "}
+                    {datePublication(p)} dans la revue <cite>{p.revue}</cite> (n°&nbsp;
+                    {p.numero}, pages {p.pageDebut} à {p.pageFin}, {p.editeur}
+                    {p.doi ? `, DOI ${p.doi}` : ""}).
+                  </p>
+                  <p className="mt-5 leading-relaxed text-ardoise">{p.resume}</p>
+                  <p className="mt-6 border-t border-sable pt-5 text-sm text-ardoise">
+                    {p.nature === "entretien" ? "L’entretien" : "L’article"} complet est
+                    disponible sur la plateforme Cairn&nbsp;:{" "}
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-medium text-terracotta-fonce underline underline-offset-4"
+                    >
+                      cairn.info
+                      <IconeLienExterne className="h-3.5 w-3.5" />
+                      <span className="sr-only"> (nouvel onglet)</span>
+                    </a>
+                  </p>
+                </article>
+              </Apparition>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="px-5 pb-16 pt-14 sm:px-10 sm:pt-16 lg:px-[100px]">
         <div className="mx-auto max-w-lecture text-center text-sm text-ardoise">
           <p>
             Ces textes sont d&rsquo;ordre général et ne remplacent pas une consultation.

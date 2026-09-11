@@ -99,8 +99,9 @@ export default function Contact() {
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
             <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
-              Le téléphone reste le plus simple&nbsp;: si je suis en séance, laissez votre
-              numéro, je rappelle. Réponse {priseRdv.delaiReponse}.
+              Le téléphone reste le moyen le plus simple pour me joindre. Si je suis en
+              séance, laissez-moi un message avec votre numéro et je vous rappelle. Je vous
+              recontacte {priseRdv.delaiReponse}.
             </p>
           </div>
         </Apparition>
@@ -128,7 +129,9 @@ export default function Contact() {
                   >
                     {contact.telephone}
                   </a>
-                  <p className="mt-2 text-sm text-ardoise">Le canal le plus direct.</p>
+                  <p className="mt-2 text-sm text-ardoise">
+                    Le moyen le plus simple et direct pour me joindre.
+                  </p>
                 </>
               ),
             },
@@ -139,7 +142,9 @@ export default function Contact() {
               contenu: (
                 <>
                   <p className="mt-2 font-medium text-encre">{horaires.libelle}</p>
-                  <p className="mt-2 text-sm text-ardoise">{horaires.modalite}.</p>
+                  <p className="mt-2 text-sm text-ardoise">
+                    Consultations sur rendez-vous, exclusivement au cabinet.
+                  </p>
                 </>
               ),
             },
@@ -152,7 +157,9 @@ export default function Contact() {
                   <address className="mt-2 not-italic font-medium text-encre">
                     {adressePostale}
                   </address>
-                  <p className="mt-2 text-sm text-ardoise">{cabinet.acces.tram}.</p>
+                  <p className="mt-2 text-sm text-ardoise">
+                    Tramway {minusculeInitiale(cabinet.acces.tram)}.
+                  </p>
                 </>
               ),
             },
@@ -182,10 +189,7 @@ export default function Contact() {
           Vincent ne répond pas par écrit. Ce n'est pas contradictoire — le
           formulaire n'a précisément aucune zone de message — mais cela demande
           au visiteur de tenir deux idées à la fois, à l'endroit même où il
-          faudrait le rassurer.
-
-          Ce bloc est en revanche placé AVANT « Ce que vous pouvez me
-          demander » : l'action passe devant l'explication. */}
+          faudrait le rassurer. */}
       <section
         aria-labelledby="par-formulaire"
         className="mt-8 bg-lin px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
@@ -198,9 +202,12 @@ export default function Contact() {
             <div className="mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
             <p className="mt-6 text-ardoise">
-              Vous pouvez demander à être rappelé en indiquant seulement votre nom, votre
-              numéro et le moment qui vous arrange. Le formulaire ne comporte aucune zone de
-              message&nbsp;: vous n&rsquo;avez rien à raconter par écrit. {priseRdv.suite}
+              Vous pouvez demander à être rappelé en indiquant simplement votre nom, votre
+              numéro et vos disponibilités.
+            </p>
+            <p className="mt-4 text-ardoise">
+              Ce formulaire ne contient aucune zone de texte&nbsp;: vous n&rsquo;avez rien à
+              rédiger. Je vous recontacte personnellement sur le créneau de votre choix.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -251,42 +258,13 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Ce que l'on peut demander : descendu APRÈS le formulaire. */}
-      <section
-        aria-labelledby="a-quoi-je-reponds"
-        className="px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
-      >
-        <Apparition>
-          <div className="mx-auto max-w-lecture text-center">
-            <h2
-              id="a-quoi-je-reponds"
-              className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
-            >
-              Ce que vous pouvez me demander
-            </h2>
-            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
-          </div>
-        </Apparition>
-
-        <ul className="mt-10 grid gap-5 md:grid-cols-2">
-          {[
-            "Prendre un premier rendez-vous, ou déplacer un rendez-vous existant.",
-            "Savoir si ce que vous traversez relève de ma pratique — et sinon, vers qui vous tourner.",
-            "Poser une question pratique : tarif, durée, accès au cabinet, remboursement.",
-            "Vérifier mes titres et mon inscription. C'est une question légitime, elle ne me vexera pas.",
-          ].map((item, i) => (
-            <li key={item} className="h-full">
-              <Apparition delai={(i % 2) * 120} className="h-full">
-                <p className="h-full rounded-[20px] bg-creme px-6 py-6 text-ardoise">
-                  {item}
-                </p>
-              </Apparition>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="px-5 pb-16 sm:px-10 lg:px-[100px]">
+      {/* « CE QUE VOUS POUVEZ ME DEMANDER » A ÉTÉ RETIRÉ LE 2026-09-11, à la
+          demande de Vincent, qui demandait s'il servait le référencement. Il
+          ne le servait pas : la page se classe sur le nom de Vincent, requête
+          de navigation, et ces quatre cartes ne portaient aucune requête. Le
+          seul point utile — « vérifier mes titres » — est déjà assuré par la
+          ligne ADELI ci-dessous et son lien vers la page auteur. */}
+      <section className="px-5 pb-16 pt-14 sm:px-10 sm:pt-16 lg:px-[100px]">
         <div className="mx-auto max-w-lecture">
           <p className="text-center text-ardoise">
             {praticien.nom} — {praticien.titres.join(", ").toLowerCase()}. Numéro ADELI{" "}

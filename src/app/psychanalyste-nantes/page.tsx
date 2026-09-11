@@ -8,7 +8,7 @@ import { Apparition } from "@/components/ui/Apparition";
 import { IconeDocument } from "@/components/ui/Icones";
 import { breadcrumbSchema, graph } from "@/lib/seo/schemas";
 import { cabinet, contact, honoraires, praticien, publics } from "@/lib/site-config";
-import { canonical, minusculeInitiale } from "@/lib/url-helpers";
+import { canonical } from "@/lib/url-helpers";
 
 /**
  * /psychanalyste-nantes/ — URL CONSERVÉE.
@@ -46,7 +46,7 @@ import { canonical, minusculeInitiale } from "@/lib/url-helpers";
  */
 
 const TITRE = "Psychanalyste à Nantes";
-const MODIFIE_LE = "2026-09-08";
+const MODIFIE_LE = "2026-09-11";
 
 export const metadata: Metadata = {
   /* `absolute` : le titre contient déjà la ville, le suffixe la répéterait.
@@ -264,11 +264,12 @@ export default function PsychanalysteNantes() {
               s&rsquo;aménage autrement, ou disparaît.
             </p>
             <p className="leading-relaxed lg:pl-10">
-              Il faut le dire sans embellir&nbsp;: il est fréquent qu&rsquo;un symptôme
-              persiste sous une forme résiduelle. Une phobie travaillée avec succès laisse
-              souvent une vague aversion pour l&rsquo;ancien objet, ou une anxiété en sa
-              présence. Autrement, une ancienne dépression peut se trouver sublimée dans une
-              activité sociale ou artistique, l&rsquo;écriture par exemple.
+              Il faut le dire avec honnêteté&nbsp;: il est fréquent qu&rsquo;un symptôme
+              persiste sous une forme résiduelle. Une phobie traversée avec succès laisse
+              ainsi souvent place à une vague aversion pour l&rsquo;ancien objet, ou à une
+              légère anxiété en sa présence. Dans d&rsquo;autres cas, une ancienne
+              dépression peut se trouver sublimée dans une activité sociale ou artistique,
+              comme l&rsquo;écriture.
             </p>
           </div>
         </Apparition>
@@ -289,8 +290,9 @@ export default function PsychanalysteNantes() {
               Ce que l&rsquo;on écoute en séance
             </h2>
             <p>
-              La démarche accorde une place particulière aux processus psychiques dits
-              inconscients. Concrètement, cela veut dire prêter attention à ce qui suit.
+              La démarche accorde une place particulière aux processus psychiques
+              inconscients. En pratique, cela se traduit par une attention fine portée aux
+              différentes «&nbsp;formations de l&rsquo;inconscient&nbsp;»&nbsp;:
             </p>
           </div>
         </Apparition>
@@ -363,12 +365,13 @@ export default function PsychanalysteNantes() {
                 connues sont les thérapies cognitivo-comportementales.
               </p>
               <p>
-                Ce sont des outils différents, et il ne s&rsquo;agit pas de les hiérarchiser.
-                La question utile n&rsquo;est pas « laquelle est la meilleure », mais
-                « qu&rsquo;est-ce que je cherche&nbsp;? »&nbsp;: apaiser un symptôme précis
-                dans un temps court, ou comprendre ce qui le fait tenir. Nous en parlerons
-                lors du premier rendez-vous, et je vous orienterai si ce que vous cherchez
-                n&rsquo;est pas ce que je pratique.
+                Ce sont des outils différents qu&rsquo;il ne s&rsquo;agit pas de
+                hiérarchiser. La question utile n&rsquo;est pas de savoir quelle approche est
+                la meilleure, mais plutôt de clarifier ce que vous recherchez&nbsp;: apaiser
+                un symptôme précis dans un temps court, ou en comprendre le sens et la place
+                dans votre économie psychique. Nous aborderons cette question ensemble lors
+                de notre premier rendez-vous gratuit, et je vous orienterai si votre attente
+                ne correspond pas à ma pratique.
               </p>
               <p>
                 La durée n&rsquo;est pas fixée d&rsquo;avance et le rythme se décide
@@ -469,10 +472,12 @@ export default function PsychanalysteNantes() {
             </h2>
 
             <p className="mx-auto mt-5 max-w-3xl text-encre">
-              La première rencontre est gratuite&nbsp;: elle sert à éclaircir ensemble la
-              situation et à déterminer la manière dont nous procéderons, sans vous engager
-              au-delà. Les séances suivantes sont de {honoraires.min} à {honoraires.max} €,
-              et {minusculeInitiale(honoraires.modulation)}
+              La première rencontre est gratuite. Elle sert à éclaircir ensemble votre
+              situation et à définir la manière dont nous travaillerons, sans aucun
+              engagement pour la suite. Si nous choisissons de poursuivre, le tarif des
+              séances suivantes se situe entre {honoraires.min}&nbsp;€ et{" "}
+              {honoraires.max}&nbsp;€, le montant exact étant adapté aux moyens financiers
+              de chacun.
             </p>
 
             <div className="mt-9 border-t border-white/70 pt-9">

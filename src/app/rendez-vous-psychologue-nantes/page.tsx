@@ -60,9 +60,7 @@ export const metadata: Metadata = {
 const ETAPES = [
   {
     titre: "Vous prenez contact",
-    texte:
-      "Par téléphone, ou en demandant à être rappelé. Vous n'avez rien à préparer, " +
-      "et vous n'êtes pas obligé de savoir quoi dire.",
+    texte: "Par téléphone ou en demandant à être rappelé. Vous n'avez rien à préparer à l'avance.",
   },
   {
     titre: "Nous convenons d'un horaire",
@@ -73,8 +71,8 @@ const ETAPES = [
   {
     titre: "Nous nous rencontrons au cabinet",
     texte:
-      "Cette première séance est gratuite. Elle sert à faire connaissance et à voir " +
-      "ensemble si un travail est indiqué, sans vous engager au-delà.",
+      "La première séance est gratuite et sans engagement. C'est un moment pour faire " +
+      "connaissance et voir ensemble si un travail est indiqué.",
   },
 ];
 
@@ -116,9 +114,9 @@ export default function RendezVous() {
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
             <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
-              Le plus simple est de m&rsquo;appeler&nbsp;: nous fixons un horaire en quelques
-              minutes. Si vous préférez ne pas téléphoner, vous pouvez demander à être
-              rappelé — je réponds {priseRdv.delaiReponse}.
+              Le plus simple est de m&rsquo;appeler&nbsp;: nous fixons un rendez-vous en
+              quelques minutes. Si vous préférez ne pas téléphoner, vous pouvez demander à
+              être rappelé. Je vous recontacte {priseRdv.delaiReponse}.
             </p>
           </div>
         </Apparition>
@@ -151,8 +149,9 @@ export default function RendezVous() {
                   Par téléphone
                 </h3>
                 <p className="mt-3 text-ardoise">
-                  Si je ne réponds pas, c&rsquo;est que je suis en séance. Laissez votre
-                  numéro sur la messagerie&nbsp;: je rappelle systématiquement.
+                  Si je ne réponds pas, c&rsquo;est que je suis en consultation.
+                  Laissez-moi votre numéro sur le répondeur&nbsp;: je rappelle
+                  systématiquement {priseRdv.delaiReponse}.
                 </p>
 
                 <p className="mt-6">

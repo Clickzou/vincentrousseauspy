@@ -182,9 +182,8 @@ le bloc `sources`, où elle est attribuée à son éditeur et vérifiable.
    l'affirme et explique au visiteur que la liste de l'ARS est publique — c'est un signal de
    confiance fort, mais il devient un risque si l'inscription n'est pas à jour. À confirmer
    avant mise en ligne. Idéalement, récupérer aussi le département d'inscription.
-9. **Durée d'une séance.** `/consultations/` affiche « de 45 minutes à une heure »
-   (`seance.duree`, marquée `dureeConfirmee: false`). Cette valeur n'est écrite nulle part
-   sur le site actuel — elle n'apparaît qu'indirectement dans une réponse de FAQ.
+9. ~~**Durée d'une séance.**~~ **RÉPONDU LE 2026-09-11 : 45 minutes**, première séance
+   comprise. `seance.duree` est à jour et `dureeConfirmee` passe à `true`.
 10. **Plateforme de RDV hébergée HDS** : Vincent n'en a aucune aujourd'hui. Le master la
    place en canal n° 2 (§ 9.3). Le bloc est déjà codé et n'attend que
    `priseRdv.plateforme = { nom, url }`.
@@ -214,7 +213,7 @@ le bloc `sources`, où elle est attribuée à son éditeur et vérifiable.
 | **Schéma `FAQPage` sur `/aide-faq/` seulement** | Éviter deux blocs FAQ concurrents |
 | **Aucun champ de texte libre dans le formulaire** | Il collecterait des données de santé (art. 9 RGPD) sur un hébergement non agréé HDS. Refuser toute demande d'ajout |
 | **Aucun stockage des demandes** | Un e-mail, puis plus rien. Ni base, ni fichier, ni log du contenu |
-| **Délai de réponse : « sous 48 heures ouvrées »** | **Validé par Vincent le 2026-09-08.** Engagement public (§ 9.4) : ne pas le modifier sans son accord |
+| **Délai de réponse : « en moins de 24 heures »** | Validé à « sous 48 heures ouvrées » le 2026-09-08, puis **raccourci à la demande de Vincent le 2026-09-11**. Engagement public (§ 9.4) : ne pas le modifier sans son accord |
 | **`/dispositions-legales/` est redirigée en 301 vers les mentions légales** | Elle portait ADELI et SIRET, désormais à leur place. Elle était `noindex`, donc sans référencement à transférer |
 | **Le plan du site est engendré, jamais écrit** | Un plan recopié à la main diverge du registre et finit par lister des URLs mortes |
 | **Les 7 articles de démo sont en 410, pas en 301** | Aucun équivalent sur le nouveau site. Sept URLs sans rapport pointant vers `/blog/` seraient requalifiées en soft 404. Le 410 provoque un retrait rapide de l'index |
@@ -318,6 +317,11 @@ Console, on ignore la longue traîne réellement captée par cette URL. **Le plu
 donc de créer la Search Console d'abord, d'observer quelques semaines, puis de trancher.**
 
 Cf. `docs/seo/audit-positions-2026-09-08.md`.
+
+> **Mise à jour du 2026-09-11** : Vincent a entièrement réécrit le texte de
+> `/psychologue-clinicien-nantes/`. Les deux pages ne portent plus le même texte mot pour
+> mot — la page auteur garde l'ancienne version —, mais elles traitent toujours le même
+> sujet, dans le même ordre. Le doublon est atténué, pas levé : l'arbitrage reste à faire.
 
 ---
 
@@ -488,3 +492,83 @@ Insuffisant.
 infaillible, et c'est la raison pour laquelle beaucoup de sites sérieux le font.
 Le bouton porte déjà `onClick` et `aria-expanded` : il n'y a que les deux
 gestionnaires `onPointerEnter` / `onPointerLeave` du `<li>` à retirer.
+
+---
+
+## 11. SÉANCE DU 11 SEPTEMBRE 2026 — CORRECTIFS DU « WORD 3 »
+
+Source : `Refonte site Internet Vincent Rousseau word3.docx`, à la racine, non versionné
+(comme les deux précédents). Neuf pages concernées.
+
+### 11.1 ⚠️ Le document a été rédigé sur une version antérieure au 10 septembre
+
+Plusieurs « textes initiaux » qu'il cite sont ceux d'avant les correctifs du 10 (Word 1
+et 2). **Règle appliquée** : les corrections du 11 remplacent le texte, mais les ajouts du
+10 qu'elles effaceraient sans le vouloir sont conservés — la gratuité de la première
+séance à côté de tout prix, l'affiliation à Mon Soutien Psy, la réserve sur le tarif
+conventionnel, le moyen de paiement. Chaque cas est commenté dans le code.
+
+### 11.2 Données changées dans `site-config`
+
+| Donnée | Avant | Après |
+|---|---|---|
+| `priseRdv.delaiReponse` | sous 48 heures ouvrées | **en moins de 24 heures** |
+| `seance.duree` | de 45 minutes à une heure (non confirmée) | **45 minutes** (confirmée) |
+| `seance.rythme` (ex-`rythmeCourant`) | le plus courant : une séance par semaine | **hebdomadaire** |
+| `praticien.titreCourt` | trait d'union | tiret demi-cadratin |
+
+Le délai se répercute seul sur neuf emplacements (contact, rendez-vous, formulaire, page
+de remerciement, politique de confidentialité, `llms.txt`, deux meta descriptions).
+
+### 11.3 Pages révisées
+
+- `/psychologue-clinicien-nantes/` : texte entièrement réécrit par Vincent. Le lien vers
+  « les situations qui conduisent le plus souvent à consulter » menait en haut de
+  `/psychotherapeute-nantes/` ; il vise désormais `#quand-consulter`.
+- `/psychologue-clinicien-psychotherapeute-psychiatre-psychanalyste/` : chapeau et
+  paragraphe sur les formations.
+- `/psychotherapeute-nantes/` et `/psychanalyste-nantes/` : quatre passages chacune au plus.
+- `/consultations/` : révision quasi complète (cartes, première séance, cadre, repères,
+  confidentialité).
+- `/tarifs-et-remboursement/` : tous les blocs, dans la formulation de Vincent.
+- `/contact-…/` : textes des cartes, et **suppression de « Ce que vous pouvez me
+  demander »** — Vincent demandait si le bloc servait le référencement. Réponse : non. La
+  page se classe sur son nom (requête de navigation), et « vérifier mes titres » est déjà
+  assuré par la ligne ADELI et le lien vers la page auteur.
+- `/rendez-vous-…/` : chapeau, bloc téléphone, deux étapes.
+- `/blog/` : nouveau chapeau, et **nouvelle rubrique « Contributions scientifiques »**
+  (3 publications chez érès, registre `src/lib/content/publications.ts`, déclarées en
+  `ScholarlyArticle`). Signal E-E-A-T de premier rang.
+
+### 11.4 Écarts assumés par rapport au document — à faire valider par Vincent
+
+1. **« Pour garantir l'efficacité de l'accompagnement »** (`/consultations/`, « Le cadre
+   thérapeutique ») n'est pas repris : promesse de résultat, § 2.2. Le reste de la phrase
+   est intact.
+2. **« Les consultations ne sont pas prises en charge par l'Assurance Maladie »** devient
+   « Hors dispositif « Mon Soutien Psy », … ». Sans cette restriction la phrase est fausse :
+   Vincent est affilié, et le dispositif rembourse 60 %.
+3. **Tarifs** : la gratuité de la première séance est rétablie dans le chapeau, et la
+   réserve sur le tarif conventionnel (50 €, non modulable, gratuité non applicable) est
+   conservée. Elle attend toujours sa validation depuis le 10.
+4. Les émojis 🚇 🚗 de la carte « Où » ne sont pas repris : le site signale ses rubriques
+   par des intitulés et des icônes dessinées.
+
+### 11.5 Questions ouvertes pour Vincent
+
+1. **La vidéo NotebookLM** du blog : le fichier n'a pas été transmis. À l'arrivée,
+   l'héberger sur le site ; si elle passe par YouTube, la charger au clic (comme
+   `PlanDiffere`), sinon Google reçoit l'IP du visiteur avant tout consentement.
+2. **« En moins de 24 heures »** ne dit plus « ouvrées » : lu à la lettre, le délai court
+   le week-end. Est-ce voulu ?
+3. **Le rythme** : la carte « Quand ? » de `/consultations/` le dit adaptable (« en règle
+   générale… la fréquence la plus adaptée »), le bloc « Le cadre thérapeutique » de la
+   même page le dit fixe. Laquelle des deux formulations fait foi ?
+4. **« Formations de l'inconscient »** (`/psychanalyste-nantes/`) : la liste affichée
+   dessous comprend « les répétitions », qui n'en est pas une au sens classique, et
+   n'a pas le mot d'esprit. À lui de dire si la liste doit suivre le nouvel intitulé.
+
+**Point d'agence, non soumis** : le H1 de `/consultations/` devient « Le déroulé, le
+cadre et la première séance » et perd le mot « consultations ». Le `title` le garde, la
+perte est faible ; si on veut la rattraper, « Les consultations : le déroulé, le cadre
+et la première séance » tient sur deux lignes.

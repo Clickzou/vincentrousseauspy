@@ -32,7 +32,7 @@ import { canonical } from "@/lib/url-helpers";
  */
 
 const TITRE = "Les différents « psy »";
-const MODIFIE_LE = "2026-09-08";
+const MODIFIE_LE = "2026-09-11";
 const SLUG = "psychologue-clinicien-psychotherapeute-psychiatre-psychanalyste";
 
 export const metadata: Metadata = {
@@ -179,10 +179,11 @@ export default function LesDifferentsPsy() {
             <div className="mt-6 h-px w-12 bg-terracotta" aria-hidden="true" />
 
             <p className="mt-6 text-lg leading-relaxed text-ardoise">
-              Le vocabulaire des «&nbsp;psy&nbsp;» est confus, et cette confusion permet à
-              des personnes sans formation reconnue de se présenter comme thérapeutes.
-              Voici ce que recouvre chacun de ces mots. J&rsquo;en détiens trois&nbsp;:
-              c&rsquo;est ce qui me permet de les comparer, et non de les vendre.
+              Le vocabulaire des «&nbsp;psy&nbsp;» regroupe des réalités et des parcours
+              très variés, et il est parfois difficile de s&rsquo;y repérer. Afin de vous
+              apporter des repères clairs, voici ce que recouvre précisément chacun de ces
+              titres. Exerçant moi-même sous trois de ces statuts, mon objectif est de vous
+              proposer un éclairage objectif et transparent sur ces différentes pratiques.
             </p>
           </Apparition>
 
@@ -534,13 +535,15 @@ export default function LesDifferentsPsy() {
             <div className="prose-clinique">
               <p className="!mt-0">
                 Toutes les autres différences découlent de celle-là, à commencer par les
-                deux formations, qui n&rsquo;ont rien de commun. Le psychiatre a fait
-                médecine, puis l&rsquo;internat de psychiatrie&nbsp;: une dizaine
-                d&rsquo;années, au terme desquelles il connaît le corps, les
-                pathologies et les molécules. Le psychologue clinicien a fait cinq ans
-                de psychologie et un stage professionnel supervisé&nbsp;: il n&rsquo;a
-                appris ni à examiner un corps ni à doser un traitement, il a appris à
-                écouter et à conduire un entretien.
+                formations, qui se distinguent largement. Le psychiatre a fait médecine,
+                puis l&rsquo;internat de psychiatrie&nbsp;: une dizaine d&rsquo;années
+                d&rsquo;études au terme desquelles il connaît le corps, les pathologies et
+                les molécules. Le psychologue clinicien, quant à lui, a validé cinq ans de
+                psychologie et des stages professionnels supervisés. S&rsquo;il n&rsquo;a
+                appris ni à examiner un corps ni à doser un traitement, il s&rsquo;est
+                formé à l&rsquo;écoute, à la conduite d&rsquo;entretiens cliniques et à la
+                pratique des psychothérapies, en s&rsquo;appuyant sur une formation
+                approfondie en psychopathologie.
               </p>
 
               <p>

@@ -16,7 +16,7 @@ export const praticien = {
   nom: "Vincent Rousseau",
   /** Ordre volontaire : les deux titres protégés d'abord. */
   titres: ["Psychologue clinicien", "Psychothérapeute", "Psychanalyste"],
-  titreCourt: "Psychologue clinicien - psychanalyste",
+  titreCourt: "Psychologue clinicien – psychanalyste",
   /**
    * ADELI est en cours de remplacement par le RPPS pour les psychologues.
    * Si Vincent obtient un RPPS, l'ajouter ici et afficher les deux le temps
@@ -149,14 +149,22 @@ export const contact = {
  * canal n° 2 (§ 9.3) : dès qu'elle existe, renseigner l'objet ici suffit à
  * la faire apparaître sur la page de rendez-vous, sans toucher au JSX.
  *
- * `delaiReponse` est un engagement affiché au public. VALIDÉ PAR VINCENT le
- * 2026-09-08 : « sous 48 heures ouvrées ». Ne jamais le modifier sans son
- * accord — le § 9.4 du master en fait un élément de réassurance, et un délai
- * annoncé qui n'est pas tenu se retourne contre le praticien.
+ * `delaiReponse` est un engagement affiché au public. Validé par Vincent le
+ * 2026-09-08 à « sous 48 heures ouvrées », puis RACCOURCI À SA DEMANDE le
+ * 2026-09-11 (document « word3 ») : « en moins de 24 heures ». Ne jamais le
+ * modifier sans son accord — le § 9.4 du master en fait un élément de
+ * réassurance, et un délai annoncé qui n'est pas tenu se retourne contre le
+ * praticien.
+ *
+ * ⚠️ Le nouveau délai ne dit plus « ouvrées » : lu à la lettre, il court aussi
+ * le week-end. Signalé à Vincent le 2026-09-11.
+ *
+ * La valeur s'insère après « Réponse », « Je réponds » ou « je rappelle » :
+ * elle doit rester une locution, sans majuscule ni point final.
  */
 export const priseRdv = {
   plateforme: null as { nom: string; url: string } | null,
-  delaiReponse: "sous 48 heures ouvrées",
+  delaiReponse: "en moins de 24 heures",
   /** Ce qui se passe concrètement après l'envoi du formulaire (§ 9.4). */
   suite: "Je vous rappelle au numéro indiqué, sur l'un des créneaux que vous avez cochés.",
 } as const;
@@ -172,18 +180,21 @@ export const horaires = {
 /**
  * Déroulé des séances.
  *
- * ⚠️ `duree` n'est PAS une donnée relevée : le site actuel ne l'affiche nulle
- * part, elle n'apparaît qu'indirectement dans une réponse de FAQ. À confirmer
- * par Vincent avant mise en ligne (cf. docs/donnees-vincent.md § 4).
+ * ✅ DURÉE CONFIRMÉE PAR VINCENT LE 2026-09-11 (document « word3 ») : une séance
+ * dure 45 minutes, première consultation comprise. L'ancienne valeur, « de 45
+ * minutes à une heure », n'était sourcée nulle part.
  *
- * La fréquence, elle, est bien sourcée : « la fréquence se décide lors du
- * premier rendez-vous », le rythme hebdomadaire n'étant que le plus courant.
- * Ne pas la présenter comme une règle.
+ * ⚠️ LE RYTHME A CHANGÉ DE STATUT le même jour. Il n'est plus « le plus
+ * courant » : il est hebdomadaire, et Vincent en fait la condition de la
+ * continuité du travail. Seule la carte « Quand ? » de /consultations/ garde
+ * une souplesse (« en règle générale… la fréquence la plus adaptée ») que le
+ * bloc « Le cadre thérapeutique » de la même page n'a plus. Signalé à Vincent
+ * le 2026-09-11.
  */
 export const seance = {
-  duree: "de 45 minutes à une heure",
-  dureeConfirmee: false,
-  rythmeCourant: "une séance par semaine",
+  duree: "45 minutes",
+  dureeConfirmee: true,
+  rythme: "hebdomadaire",
 } as const;
 
 /**
