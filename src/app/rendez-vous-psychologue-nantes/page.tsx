@@ -46,9 +46,10 @@ const TITRE = "Prendre rendez-vous";
 export const metadata: Metadata = {
   title: TITRE,
   description:
-    `Prendre rendez-vous avec un psychologue à ${cabinet.ville} : par téléphone au ` +
-    `${contact.telephone}, ou par demande de rappel ${priseRdv.delaiReponse}. Première ` +
-    `séance gratuite.`,
+    /* Resserrée le 2026-09-11 : le délai s'est allongé de « hors soir et
+       week-end », et l'ancienne tournure dépassait alors 160 caractères. */
+    `Rendez-vous avec un psychologue à ${cabinet.ville} : au ${contact.telephone}, ou ` +
+    `rappel ${priseRdv.delaiReponse}. Première séance gratuite.`,
   alternates: { canonical: canonical("rendez-vous-psychologue-nantes") },
   openGraph: {
     title: `${TITRE} — ${praticien.nom}, psychologue à ${cabinet.ville}`,

@@ -363,8 +363,12 @@ export default function Consultations() {
               méthode éprouvée visant à apporter des changements durables » a
               été écartée en septembre). Le reste de la phrase dit déjà
               pourquoi la régularité compte. En attente de l'accord de Vincent. */}
+          {/* « Le plus souvent » : réponse de Vincent du 2026-09-11. Le bloc
+              disait le rythme fixe, la carte « Quand ? » plus haut le disait
+              adaptable ; c'est la carte qui fait foi. */}
           <p>
-            <strong>Le rythme&nbsp;:</strong> les séances sont hebdomadaires. C&rsquo;est
+            <strong>Le rythme&nbsp;:</strong> c&rsquo;est le plus souvent une séance par
+            semaine. C&rsquo;est
             cette régularité indispensable qui maintient la continuité du travail psychique
             entre les rendez-vous, vous permettant ainsi de construire des repères solides et
             d&rsquo;avancer sereinement. Nous fixerons ensemble ce créneau régulier lors de
@@ -394,7 +398,8 @@ export default function Consultations() {
             },
             {
               terme: "Rythme des séances",
-              detail: "Hebdomadaire, pour garantir la continuité du travail psychique",
+              detail:
+                "Le plus souvent une séance par semaine, pour la continuité du travail psychique",
             },
             {
               terme: "Honoraires",

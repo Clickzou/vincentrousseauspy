@@ -21,9 +21,21 @@ import { canonical } from "@/lib/url-helpers";
  * « pourquoi consulter ? » restant en seconde partie de H1 : c'est elle qui
  * fait l'intérêt de la page.
  *
- * TEXTE ENTIÈREMENT RÉVISÉ PAR VINCENT LE 2026-09-11 (document « word3 »). Il
- * diffère désormais de la version conservée sur la page auteur, ce qui atténue
- * le doublon du POINT-ETAPE § 8 sans le lever.
+ * TEXTE RÉÉCRIT UNE SECONDE FOIS LE 2026-09-11 (document « Pourquoi
+ * consulter »), pour qu'il ne double plus celui de la page auteur. Vincent y
+ * proposait quatre variantes ; c'est la PREMIÈRE qui est en place, la seule qui
+ * ne heurte aucune règle du site :
+ *   - la 2e promet « la pleine liberté de votre trajectoire » (§ 2.1) ;
+ *   - la 3e écrit « confidentialité absolue », ce qui est faux — l'article sur
+ *     le secret professionnel détaille ses exceptions légales ;
+ *   - la 4e dit la consultation « urgente » (le cabinet ne reçoit pas les
+ *     urgences) et parle de « protocole clinique », quand /psychanalyste-nantes/
+ *     affirme qu'il n'y a pas de protocole applicable à tous.
+ * Les intertitres sont les siens, sans leur numérotation.
+ *
+ * La citation de Rückert (« Boiter n'est pas pécher », avec l'accent aigu : la
+ * graphie du site WordPress, « pêcher », en inversait le sens) ne figure dans
+ * aucune variante. Elle est donc retirée ; celle de Dolto reste, à sa demande.
  *
  * CLOISONNEMENT avec /psychotherapeute-nantes/, qui comporte aussi un bloc
  * « ce qui conduit à consulter ». Les deux ne disent pas la même chose et ne
@@ -33,15 +45,9 @@ import { canonical } from "@/lib/url-helpers";
  * C'est une page de réflexion, pas une liste de motifs. Si l'une des deux
  * commence à ressembler à l'autre, c'est celle-ci qu'il faut resserrer.
  *
- * ⚠️ CORRECTION D'UNE COQUILLE DU SITE ACTUEL : il cite Rückert par
- * « Boiter n'est pas pêcher ». C'est « pécher » — le vers dit qu'avancer en
- * boitant n'est pas une faute. Écrite avec l'accent circonflexe, la citation
- * ne veut plus rien dire.
- *
- * Le texte est celui de Vincent, avec ses citations. Ses formulations
- * prudentes — « d'une certaine manière », « vise à », « cherche à vous
- * soulager » — sont conservées telles quelles : ce sont elles qui distinguent
- * une description d'une promesse de résultat (§ 2.2).
+ * Ses formulations prudentes — « vise à », « atténuer » — sont conservées
+ * telles quelles : ce sont elles qui distinguent une description d'une
+ * promesse de résultat (§ 2.1).
  *
  * CONTENU À VALIDER PAR VINCENT avant mise en ligne (§ 7.1).
  */
@@ -118,7 +124,10 @@ export default function PourquoiConsulter() {
           phrases ce que la page met vingt lignes à expliquer, et elle désamorce
           l'idée qu'il faudrait arriver en sachant ce qu'on a. Elle est donc
           traitée comme une ouverture pleine largeur, centrée, et non comme un
-          encart perdu dans la marge gauche. */}
+          encart perdu dans la marge gauche.
+
+          Absente du texte réécrit par Vincent le 2026-09-11, mais maintenue à
+          sa demande le jour même : ce n'était pas une suppression. */}
       <section
         aria-labelledby="dolto"
         className="mt-6 bg-creme px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
@@ -155,29 +164,28 @@ export default function PourquoiConsulter() {
               id="le-symptome"
               className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
             >
-              Ce qui amène à consulter
+              Les motifs de la démarche clinique
             </h2>
             <div className="mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
             <div className="prose-clinique mt-6 max-w-none">
               <p className="!mt-0">
-                On décide généralement de consulter un psychologue clinicien lorsque des
-                difficultés intérieures commencent à impacter la vie de tous les jours. Ces
-                manifestations, dont on ressent l&rsquo;origine psychologique, prennent
-                souvent la forme d&rsquo;un symptôme. C&rsquo;est d&rsquo;abord une souffrance
-                qui s&rsquo;exprime, et ses visages sont multiples&nbsp;: un mal-être diffus,
-                de l&rsquo;anxiété, un état dépressif, des pensées sombres, des phobies, des
-                obsessions ou des troubles du comportement.
+                L&rsquo;engagement dans une démarche thérapeutique naît généralement lorsque
+                le vécu intérieur commence à entraver le quotidien. Cette détresse psychique,
+                dont on perçoit les racines inconscientes, s&rsquo;objective le plus souvent
+                sous la forme d&rsquo;un symptôme. Ses manifestations sont diverses et
+                singulières&nbsp;: anxiété persistante, inhibitions, affects dépressifs,
+                ruminations ou conduites addictives.
               </p>
               <p>
-                Parfois, cette souffrance se déploie plus spécifiquement dans notre rapport
-                aux autres. Elle se traduit alors par un repli sur soi, un sentiment
-                d&rsquo;insécurité en société, une agoraphobie, ou des blocages dans sa vie
-                sociale et professionnelle. Que ce nœud soit ancien ou passager, il surgit
-                souvent à l&rsquo;occasion des crises, des choix, des obstacles ou des deuils
-                qui traversent chaque existence. Ce sont des moments de bascule qui nous
-                confrontent à nous-mêmes, et que l&rsquo;on ne peut pas toujours surmonter
-                seul.
+                Cette souffrance s&rsquo;actualise également dans le lien interpersonnel, se
+                traduisant par des mouvements de retrait, une insécurité sociale ou des
+                impasses professionnelles. Qu&rsquo;elles s&rsquo;inscrivent dans une
+                temporalité longue ou qu&rsquo;elles soient réactionnelles, ces difficultés
+                émergent fréquemment lors des points de rupture de l&rsquo;existence&nbsp;:
+                séparations, deuils, transitions ou choix cruciaux. Ces moments de crise
+                confrontent le sujet à ses propres limites et nécessitent parfois le recours
+                à un tiers.
               </p>
             </div>
           </Apparition>
@@ -224,20 +232,16 @@ export default function PourquoiConsulter() {
               id="quand-ca-ne-tient-plus"
               className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
             >
-              Quand cela ne «&nbsp;tient&nbsp;» plus
+              Le point de rupture de l&rsquo;équilibre subjectif
             </h2>
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
-            {/* La première phrase du texte de Vincent est découpée en deux :
-                son amorce (« Il faut partir d'un constat simple : ») en
-                surtitre, sa suite en exergue. Le passage se lit ainsi d'un
-                trait, sans un mot ajouté ni retranché. */}
-            <p className="mt-8 text-sm uppercase tracking-[0.18em] text-terracotta-fonce">
-              Il faut partir d&rsquo;un constat simple
-            </p>
-            <p className="mt-4 font-accent text-2xl italic leading-snug text-bois sm:text-[30px]">
-              Ressentir des difficultés ou développer un symptôme est profondément humain,
-              et c&rsquo;est tout à fait normal.
+            {/* La première phrase du texte de Vincent est posée en exergue, la
+                suite passe en deux colonnes : le passage se lit d'un trait,
+                sans un mot ajouté ni retranché. */}
+            <p className="mt-8 font-accent text-2xl italic leading-snug text-bois sm:text-[30px]">
+              L&rsquo;émergence d&rsquo;un symptôme ou d&rsquo;une entrave psychique constitue
+              une réponse structurelle et humaine face à la souffrance.
             </p>
           </div>
         </Apparition>
@@ -245,18 +249,17 @@ export default function PourquoiConsulter() {
         <Apparition delai={120}>
           <div className="mx-auto mt-12 grid max-w-5xl gap-10 text-ardoise md:grid-cols-2 md:gap-0 md:divide-x md:divide-sable">
             <p className="leading-relaxed md:pr-10">
-              Ces manifestations peuvent même jouer un rôle protecteur et, d&rsquo;une
-              certaine manière, participer à l&rsquo;équilibre d&rsquo;une vie. Le poète
-              Friedrich Rückert le résumait ainsi&nbsp;:{" "}
-              <em>«&nbsp;Boiter n&rsquo;est pas pécher&nbsp;»</em>.
+              Loin d&rsquo;être une simple anomalie, cette construction subjective fait
+              initialement office de solution et participe à maintenir un certain équilibre,
+              aussi précaire soit-il.
             </p>
             <p className="leading-relaxed md:pl-10">
-              Pourtant, il arrive un moment où ce compromis fragile vacille. Lorsque le
-              symptôme devient trop lourd, trop douloureux ou trop envahissant au quotidien,
-              la démarche de consulter prend tout son sens. On ne prend pas rendez-vous
-              parce qu&rsquo;on a franchi une limite de souffrance mesurable, mais
-              simplement parce que l&rsquo;arrangement que l&rsquo;on avait réussi à trouver
-              avec soi-même ne fonctionne plus.
+              Cependant, ce compromis peut vaciller. La décision de solliciter un clinicien
+              s&rsquo;impose lorsque le coût du symptôme devient trop lourd, invalidant ou
+              douloureux au quotidien. On ne consulte pas en fonction d&rsquo;un seuil de
+              douleur quantifiable, mais dès lors que les aménagements inconscients et les
+              défenses que l&rsquo;on avait mis en place pour tenir ne suffisent plus à
+              contenir le malaise.
             </p>
           </div>
         </Apparition>
@@ -275,7 +278,7 @@ export default function PourquoiConsulter() {
               id="le-sens"
               className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
             >
-              Le sens du symptôme
+              La fonction et la portée du symptôme
             </h2>
             <div className="mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
           </Apparition>
@@ -283,20 +286,20 @@ export default function PourquoiConsulter() {
           <Apparition delai={120} className="lg:col-span-8">
             <div className="prose-clinique max-w-none">
               <p className="!mt-0">
-                Le travail thérapeutique offre l&rsquo;occasion d&rsquo;explorer une autre
-                dimension du symptôme&nbsp;: son sens. Plutôt qu&rsquo;un simple parasite
-                indésirable, même s&rsquo;il est souvent vécu comme tel, il exprime de façon
-                singulière quelque chose de notre subjectivité. Il est, en quelque sorte, une
-                parole qui attend d&rsquo;être délivrée.
+                L&rsquo;espace de la cure invite à appréhender le symptôme sous un jour
+                nouveau, non comme une anomalie à éradiquer, mais comme une formation
+                porteuse de sens. S&rsquo;il est d&rsquo;abord vécu comme une contrainte, il
+                représente surtout une modalité d&rsquo;expression singulière de la
+                subjectivité, une parole cryptée qui cherche à se faire entendre.
               </p>
               <p>
-                Pour vous accompagner, je vous propose un dispositif de parole et
-                d&rsquo;écoute au sein d&rsquo;un cadre strictement confidentiel et
-                bienveillant. En vous appuyant sur vos propres ressources, soutenues par ma
-                présence active et mes interventions, ce processus vise à mettre en lumière
-                ce qui vous traverse et vous divise à travers vos symptômes. D&rsquo;une
-                certaine manière, le traitement cherche ainsi à vous soulager en vous
-                permettant de devenir un peu plus vous-même.
+                Pour soutenir ce cheminement, je vous propose un cadre thérapeutique fondé
+                sur une écoute rigoureuse, la confidentialité et la neutralité bienveillante.
+                En prenant appui sur votre propre dynamique psychique, étayée par ma présence
+                et mes interventions cliniques, ce travail vise à éclairer les conflits
+                internes qui vous traversent. L&rsquo;enjeu de la thérapeutique est ainsi
+                d&rsquo;atténuer la souffrance en vous permettant de réinvestir votre propre
+                désir.
               </p>
               {/* Le second lien menait en haut de /psychotherapeute-nantes/, sur
                   le titre de psychothérapeute, et non sur les situations

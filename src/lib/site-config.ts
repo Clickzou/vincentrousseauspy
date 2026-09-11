@@ -156,15 +156,15 @@ export const contact = {
  * réassurance, et un délai annoncé qui n'est pas tenu se retourne contre le
  * praticien.
  *
- * ⚠️ Le nouveau délai ne dit plus « ouvrées » : lu à la lettre, il court aussi
- * le week-end. Signalé à Vincent le 2026-09-11.
+ * Le nouveau délai ne disait plus « ouvrées » et, lu à la lettre, courait le
+ * week-end. Réponse de Vincent le 2026-09-11 : « hors soir et week-end ».
  *
  * La valeur s'insère après « Réponse », « Je réponds » ou « je rappelle » :
  * elle doit rester une locution, sans majuscule ni point final.
  */
 export const priseRdv = {
   plateforme: null as { nom: string; url: string } | null,
-  delaiReponse: "en moins de 24 heures",
+  delaiReponse: "en moins de 24 heures, hors soir et week-end",
   /** Ce qui se passe concrètement après l'envoi du formulaire (§ 9.4). */
   suite: "Je vous rappelle au numéro indiqué, sur l'un des créneaux que vous avez cochés.",
 } as const;
@@ -184,12 +184,11 @@ export const horaires = {
  * dure 45 minutes, première consultation comprise. L'ancienne valeur, « de 45
  * minutes à une heure », n'était sourcée nulle part.
  *
- * ⚠️ LE RYTHME A CHANGÉ DE STATUT le même jour. Il n'est plus « le plus
- * courant » : il est hebdomadaire, et Vincent en fait la condition de la
- * continuité du travail. Seule la carte « Quand ? » de /consultations/ garde
- * une souplesse (« en règle générale… la fréquence la plus adaptée ») que le
- * bloc « Le cadre thérapeutique » de la même page n'a plus. Signalé à Vincent
- * le 2026-09-11.
+ * Le rythme est hebdomadaire LE PLUS SOUVENT, pas par principe : réponse de
+ * Vincent le 2026-09-11 (« c'est le plus souvent une séance par semaine »),
+ * après que le document « word3 » l'eut dit fixe sur un bloc et adaptable sur
+ * un autre. Partout où `rythme` est affiché, il doit donc être précédé d'un
+ * « le plus souvent » ou d'un « en règle générale ».
  */
 export const seance = {
   duree: "45 minutes",

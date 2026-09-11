@@ -132,7 +132,7 @@ construction de pages :
 | **Déploiement Vercel** | Et confirmation de l'adresse légale de l'hébergeur, aujourd'hui tirée d'annuaires |
 | **Clé Resend et domaine d'envoi** | Sans elle, le formulaire renvoie au téléphone |
 | **Citation René Char et CTA final de l'accueil** | Les deux blocs les plus faibles du site |
-| **Troisième article de blog** | 2 par mois maximum : le quota de septembre est atteint. Vérifier `motCle` avant d'écrire |
+| **Publier la file d'articles** | 13 articles prêts dans `A_PARAITRE` (`src/lib/content/blog.ts`), un le 1er et un le 15 de chaque mois, d'octobre 2026 à avril 2027. Procédure en tête de la file ; cf. § 12 |
 
 **Maillage de `/psychologue-clinicien-nantes/` — fait.** Quatre liens contextuels : la carte
 « Ce qui amène à consulter » de l'accueil (qui était la seule des trois portes d'entrée à
@@ -166,9 +166,9 @@ le bloc `sources`, où elle est attribuée à son éditeur et vérifiable.
 1. **Validation de tous les textes cliniques.** Sa responsabilité professionnelle est engagée (§ 7.1).
 2. ~~**Mon soutien psy** : est-il partenaire du dispositif ?~~ **RÉPONDU LE 2026-09-10 :
    OUI**, il est affilié. `monSoutienPsy.partenaire` est passé à `true`, et les pages
-   tarifs et FAQ l'affirment désormais. **Reste à lui signaler** : la séance relevant du
-   dispositif est à 50 €, tarif conventionnel, donc **non modulable** — contrairement à
-   ses séances hors dispositif.
+   tarifs et FAQ l'affirment désormais. La réserve (séance à 50 €, tarif conventionnel
+   **non modulable**, gratuité de la première séance non applicable) est **validée le
+   2026-09-11** : « c'est ainsi que j'applique la convention ».
 3. **ADELI ou RPPS** : le répertoire ADELI est en cours de remplacement pour les psychologues.
 4. ~~**Accessibilité PMR**~~ **RÉPONDU LE 2026-09-10** : rampe d'accès à l'entrée du
    bâtiment, cabinet au 2e étage desservi par un ascenseur. ⚠️ Cela **corrige** la
@@ -209,11 +209,13 @@ le bloc `sources`, où elle est attribuée à son éditeur et vérifiable.
 | **Pas d'`AggregateRating`, pas de sollicitation d'avis** | Déontologie (§ 2.3) |
 | **Pas de type `Physician` en JSON-LD** | Désigne un médecin |
 | **Slugs français conservés à l'identique** | Ils portent le référencement |
-| **Visuels : Matisse († 1954) et Kandinsky († 1944) uniquement** | **Le Miró et les deux Chagall du site actuel sont sous droits** (2054 et 2056, gérés par l'ADAGP) et leurs fichiers portent un filigrane « WahooArt.com ». Cf. `donnees-vincent.md` § 11 |
+| **Visuels : domaine public uniquement, auteur mort en 1955 au plus tard ET œuvre antérieure à 1931** | **Le Miró et les deux Chagall du site actuel sont sous droits** (2054 et 2056, gérés par l'ADAGP) et leurs fichiers portent un filigrane « WahooArt.com ». Cf. `donnees-vincent.md` § 11. Pages : Matisse et Kandinsky. Cartes du blog (élargi le 2026-09-11) : Vallotton, Vuillard, Hammershøi, Klee, Macke, Marc, Jawlensky, fichiers Wikimedia Commons marqués domaine public. Jamais deux fois la même œuvre |
+| **Articles : 2 par mois, le 1er et le 15, depuis une file** | Master § 7.1. Treize textes reçus d'un coup le 2026-09-11 : écrits tout de suite, publiés au rythme. `verifierPubliable` bloque la compilation d'un article sans 3 sources, sans œuvre, ou qui pointe vers un article non publié |
 | **Schéma `FAQPage` sur `/aide-faq/` seulement** | Éviter deux blocs FAQ concurrents |
 | **Aucun champ de texte libre dans le formulaire** | Il collecterait des données de santé (art. 9 RGPD) sur un hébergement non agréé HDS. Refuser toute demande d'ajout |
 | **Aucun stockage des demandes** | Un e-mail, puis plus rien. Ni base, ni fichier, ni log du contenu |
-| **Délai de réponse : « en moins de 24 heures »** | Validé à « sous 48 heures ouvrées » le 2026-09-08, puis **raccourci à la demande de Vincent le 2026-09-11**. Engagement public (§ 9.4) : ne pas le modifier sans son accord |
+| **Délai de réponse : « en moins de 24 heures, hors soir et week-end »** | Validé à « sous 48 heures ouvrées » le 2026-09-08, puis **raccourci à la demande de Vincent le 2026-09-11**, et borné le même jour aux jours et heures ouvrés. Engagement public (§ 9.4) : ne pas le modifier sans son accord |
+| **Rythme : « le plus souvent une séance par semaine »** | Réponse de Vincent du 2026-09-11. Jamais présenté comme une condition fixe |
 | **`/dispositions-legales/` est redirigée en 301 vers les mentions légales** | Elle portait ADELI et SIRET, désormais à leur place. Elle était `noindex`, donc sans référencement à transférer |
 | **Le plan du site est engendré, jamais écrit** | Un plan recopié à la main diverge du registre et finit par lister des URLs mortes |
 | **Les 7 articles de démo sont en 410, pas en 301** | Aucun équivalent sur le nouveau site. Sept URLs sans rapport pointant vers `/blog/` seraient requalifiées en soft 404. Le 410 provoque un retrait rapide de l'index |
@@ -322,6 +324,12 @@ Cf. `docs/seo/audit-positions-2026-09-08.md`.
 > `/psychologue-clinicien-nantes/`. Les deux pages ne portent plus le même texte mot pour
 > mot — la page auteur garde l'ancienne version —, mais elles traitent toujours le même
 > sujet, dans le même ordre. Le doublon est atténué, pas levé : l'arbitrage reste à faire.
+
+> **Seconde mise à jour du 2026-09-11** : pour lever cette redondance, Vincent a transmis
+> quatre réécritures de `/psychologue-clinicien-nantes/` (document « Pourquoi consulter »).
+> La variante 1 est en place (motifs au § 12.2). Les deux pages ne partagent plus aucune
+> phrase. Elles suivent encore le même plan en trois temps — motifs, point de rupture, sens
+> du symptôme — : l'arbitrage du 301 perd de son urgence, sans devenir sans objet.
 
 ---
 
@@ -512,9 +520,9 @@ conventionnel, le moyen de paiement. Chaque cas est commenté dans le code.
 
 | Donnée | Avant | Après |
 |---|---|---|
-| `priseRdv.delaiReponse` | sous 48 heures ouvrées | **en moins de 24 heures** |
+| `priseRdv.delaiReponse` | sous 48 heures ouvrées | **en moins de 24 heures, hors soir et week-end** |
 | `seance.duree` | de 45 minutes à une heure (non confirmée) | **45 minutes** (confirmée) |
-| `seance.rythme` (ex-`rythmeCourant`) | le plus courant : une séance par semaine | **hebdomadaire** |
+| `seance.rythme` (ex-`rythmeCourant`) | le plus courant : une séance par semaine | **hebdomadaire**, toujours affiché avec « le plus souvent » (cf. § 11.5) |
 | `praticien.titreCourt` | trait d'union | tiret demi-cadratin |
 
 Le délai se répercute seul sur neuf emplacements (contact, rendez-vous, formulaire, page
@@ -550,34 +558,126 @@ de remerciement, politique de confidentialité, `llms.txt`, deux meta descriptio
    Vincent est affilié, et le dispositif rembourse 60 %.
 3. **Tarifs** : la gratuité de la première séance est rétablie dans le chapeau, et la
    réserve sur le tarif conventionnel (50 €, non modulable, gratuité non applicable) est
-   conservée. Elle attend toujours sa validation depuis le 10.
+   conservée. **Validée le 2026-09-11.**
 4. Les émojis 🚇 🚗 de la carte « Où » ne sont pas repris : le site signale ses rubriques
    par des intitulés et des icônes dessinées.
 
 ### 11.5 Questions ouvertes pour Vincent
 
-1. ~~**La vidéo NotebookLM** du blog~~ — **reçue et intégrée le 11 septembre.**
+1. ~~**La vidéo NotebookLM** du blog~~ — **reçue et intégrée le 11 septembre**, puis
+   déplacée le même jour dans la rubrique « Vidéos » en bas de `/blog/` (cf. § 12.1).
    Hébergée sur le site (`public/videos/`, 8 Mo après réencodage, 36 Mo à
    l'origine), chargée au clic seulement, déclarée en `VideoObject`. **Reste à
    faire : les sous-titres** (RGAA), par transcription relue par Vincent.
-2. **« En moins de 24 heures »** ne dit plus « ouvrées » : lu à la lettre, le délai court
-   le week-end. Est-ce voulu ?
-3. **Le rythme** : la carte « Quand ? » de `/consultations/` le dit adaptable (« en règle
-   générale… la fréquence la plus adaptée »), le bloc « Le cadre thérapeutique » de la
-   même page le dit fixe. Laquelle des deux formulations fait foi ? La réponse vaut
-   aussi pour deux passages que le document ne touche pas : `/psychanalyste-nantes/`
-   (« le rythme se décide ensemble — le plus souvent une séance par semaine ») et
-   `/psychotherapeute-nantes/` (« le plus souvent hebdomadaire »). Les aligner tous
-   les trois sur sa réponse.
-4. **« Formations de l'inconscient »** (`/psychanalyste-nantes/`) : la liste affichée
-   dessous comprend « les répétitions », qui n'en est pas une au sens classique, et
-   n'a pas le mot d'esprit. À lui de dire si la liste doit suivre le nouvel intitulé.
-5. **La citation de Dolto** (`/psychologue-clinicien-nantes/`, en ouverture) : Vincent
-   dit corriger « l'ensemble du texte de la page », et sa version ne la contient pas.
-   Omission volontaire ou simple oubli de sa part ? Elle reste en place en attendant,
-   puisqu'elle vient du site WordPress.
+**Questions 2 à 5 répondues le 2026-09-11, et reportées dans le code :**
+
+2. ~~**« En moins de 24 heures »** court-il le week-end ?~~ Non : **« en moins de 24
+   heures, hors soir et week-end »**. La valeur de `priseRdv.delaiReponse` se répercute
+   seule sur ses neuf emplacements ; la meta description de `/rendez-vous-…/`, qui
+   dépassait alors 160 caractères, a été resserrée.
+3. ~~**Le rythme** : fixe ou adaptable ?~~ **« C'est le plus souvent une séance par
+   semaine. »** Le bloc « Le cadre thérapeutique » et le repère « Rythme des séances »
+   de `/consultations/`, ainsi que `/tarifs-et-remboursement/`, qui le disaient fixe,
+   sont alignés. `/psychanalyste-nantes/`, `/psychotherapeute-nantes/`, la FAQ et la
+   carte « Quand ? » l'étaient déjà.
+4. ~~**« Formations de l'inconscient »**~~ : les répétitions restent, **le mot d'esprit
+   est ajouté** (six cartes, soit deux rangées pleines sur grand écran). Son texte
+   de carte est de l'agence : à faire relire par Vincent.
+5. ~~**La citation de Dolto**~~ : **conservée**, ce n'était pas une suppression.
 
 **Point d'agence, non soumis** : le H1 de `/consultations/` devient « Le déroulé, le
 cadre et la première séance » et perd le mot « consultations ». Le `title` le garde, la
 perte est faible ; si on veut la rattraper, « Les consultations : le déroulé, le cadre
 et la première séance » tient sur deux lignes.
+
+---
+
+## 12. SÉANCE DU 11 SEPTEMBRE 2026 (SUITE) — « ARTICLES & VIDÉOS » ET « POURQUOI CONSULTER »
+
+Sources : `Refonte site Vincent Rousseau Articles & Vidéos.docx` et `Refonte site internet
+Vincent Rousseau Pourquoi consulter.docx`, à la racine, non versionnés.
+
+### 12.1 Blog : rubrique « Vidéos »
+
+- Troisième rubrique de `/blog/`, **tout en bas**, après « Quelques écrits » et
+  « Contributions scientifiques ». La vidéo qui occupait la colonne de droite y descend ;
+  les articles passent en grille sur deux colonnes, sur toute la largeur.
+- Chapeau commun de Vincent (`INTRODUCTION_VIDEOS`), puis une phrase par vidéo : sa
+  **version courte** (ses « modèles »), choix de l'agence — la version longue redoublait
+  le résumé déjà affiché dans « Contributions scientifiques ».
+- **Deux vidéos annoncées n'ont pas été reçues** : Katabasis et le pervers narcissique.
+  La vidéo non versionnée à la racine (`video-vincent-rousseau-psychologue-nantes.mp4`)
+  est l'**original du contre-transfert**, même durée à la milliseconde : elle n'est pas
+  l'une des deux. Leurs phrases sont prêtes en commentaire dans `publications.ts` ;
+  procédure : réencoder comme la première, créer l'entrée, l'ajouter à `VIDEOS`.
+
+### 12.2 `/psychologue-clinicien-nantes/` : variante 1 sur 4
+
+Le document proposait quatre réécritures du texte de la page, produites par un outil
+(ses propres introductions : « rendre le texte d'origine totalement méconnaissable »).
+Seule la **première** ne contredit aucune règle du site :
+
+| Variante | Écartée pour |
+|---|---|
+| 2 | « vous restituer la pleine liberté de votre trajectoire » — promesse (§ 2.1) |
+| 3 | « confidentialité absolue » — faux : le secret a des exceptions légales, que l'article du blog détaille |
+| 4 | « la rencontre clinique devient urgente » (le cabinet ne reçoit pas les urgences) et « protocole clinique » (contredit `/psychanalyste-nantes/`) |
+
+La citation de **Rückert** ne figure dans aucune variante : elle est retirée. **Dolto
+reste**, à la demande de Vincent (§ 11.5).
+
+### 12.3 Treize articles en file d'attente
+
+Reçus : « L'alliance et le transfert » et douze « propositions ». Un module par article dans
+`src/lib/content/articles/`, **aucun n'est publié** : ils sont dans `A_PARAITRE`, dans
+l'ordre et aux dates prévues (commentaires de la file). Choix de l'agence : tout préparer,
+publier deux par mois. La proposition 6 (séance au cabinet), voisine de l'article « Pourquoi
+je reçois uniquement au cabinet », est publiée séparément à la demande de l'agence, sous un
+autre mot-clé, en dernier.
+
+**Chaque article a** : 3 ou 4 sources vérifiées une à une le 2026-09-11 (Psycom, ameli, HAS,
+3114, Centre national fin de vie, Code de déontologie, Freud aux Classiques des sciences
+sociales, revues sur Cairn) ; une œuvre du domaine public qui lui est propre ; 2 ou 3 liens
+internes vers les pages du site ; son mot-clé documenté dans `motCle`. Bandeau d'urgence
+sur le deuil et l'angoisse.
+
+**Ce qui a été retiré partout** : les notes entre crochets adressées à Vincent (« Ce texte
+est idéal pour un bouton de renvoi… ») et les renvois « [2] », « [2, 3] » laissés par
+l'outil qui a produit les textes.
+
+**Écarts de fond, à faire valider par Vincent** — listés en tête de chaque module. Pour
+l'essentiel : les promesses de résultat ramenées à une visée (« si efficace », « la fin
+des répétitions », « le corps peut alors se détendre », « garantie absolue ») ; les thèses
+psychanalytiques attribuées plutôt qu'énoncées comme des faits ; trois comparaisons
+implicites neutralisées (le voyant d'essence, la « pensée positive », l'« écran à la
+maison ») ; une orientation médicale ajoutée là où des signes peuvent avoir une cause
+physique (angoisse, insomnie, fatigue) ; une inexactitude corrigée (on ne « contourne » pas
+les défenses par l'association libre : Freud montre qu'elles s'y manifestent). **Deux titres
+changent** : l'angoisse (« …pour retrouver le calme » promettait un résultat) et la
+thérapie qui avance (« réussie » retiré).
+
+**⚠️ Longueur** : 254 à 444 mots de corps par article, pour **1 200 à 2 000** au § 7.1 du
+master (les deux articles en ligne font 646 et 812). Rien n'a été ajouté pour atteindre la
+cible : ce serait écrire du clinique à la place de Vincent. **À lui de dire s'il veut
+développer certains textes avant leur date.**
+
+**Estime de soi** : aucune source institutionnelle ne traite le sujet sous cet angle ; les
+trois sources sont psychanalytiques (Freud et deux revues à comité de lecture).
+
+**À faire le jour de la publication de « symptôme »** (1er mars 2027) : ajouter depuis
+`/psychologue-clinicien-nantes/` le lien que suggérait Vincent. Pas avant : un contenu
+publié ne pointe jamais vers un brouillon (§ 5 du master).
+
+### 12.4 Mail de suivi de publication
+
+Le 1er et le 15 de chaque mois à 16 h UTC (18 h l'été, 17 h l'hiver à Paris), un cron
+Vercel (`vercel.json`) appelle `/api/cron/publication-blog/`, qui écrit à
+**jc@clickzou.fr** : articles de la file dont la date est passée et **non publiés**,
+articles **publiés** depuis le dernier point, et le **prochain**. La route lit le registre
+de la version déployée, donc ce qui est réellement en ligne. **Aucun mail quand il n'y a
+rien à signaler** : les envois s'arrêtent seuls une fois la file épuisée.
+
+Même montage que le site Clickzou : `nodemailer` et les identifiants SMTP de
+`clickzou-v2/.env.local` (`SMTP_*`, `MAIL_FROM`), recopiés dans `.env.local` et dans les
+variables de production Vercel le 2026-09-11, avec un `CRON_SECRET` propre à ce projet.
+Sans ce secret, la route répond 401. Test manuel : `?apercu=1` force l'envoi.

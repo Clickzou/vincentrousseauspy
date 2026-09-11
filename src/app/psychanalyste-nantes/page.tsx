@@ -66,6 +66,10 @@ export const metadata: Metadata = {
  * Les manifestations de l'inconscient, telles que Vincent les énumère sur le
  * site actuel. Conservées parce qu'elles sont concrètes : elles donnent au
  * lecteur une idée de ce dont on parle réellement en séance.
+ *
+ * Sous l'intitulé « formations de l'inconscient » (document du 2026-09-11),
+ * Vincent a choisi le 2026-09-11 de garder les répétitions et d'ajouter le mot
+ * d'esprit, qui manquait à la liste classique de Freud.
  */
 const MANIFESTATIONS = [
   {
@@ -79,6 +83,12 @@ const MANIFESTATIONS = [
   {
     nom: "Les actes manqués",
     texte: "Manqués pour la conscience, mais réussis pour l'inconscient.",
+  },
+  {
+    nom: "Les mots d'esprit",
+    texte:
+      "Ce trait qui fait rire parce qu'il dit, en passant, plus qu'on ne voulait dire. " +
+      "Freud leur a consacré un ouvrage en 1905.",
   },
   {
     nom: "Les symptômes",

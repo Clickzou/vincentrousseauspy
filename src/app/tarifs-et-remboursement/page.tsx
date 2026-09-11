@@ -95,11 +95,8 @@ function participation(partenaire: boolean | null) {
        * gratuite découvrirait le contraire au moment de payer — c'est
        * exactement la mauvaise surprise que cette page existe pour éviter.
        *
-       * ⚠️ FORMULATION SOUMISE À VINCENT LE 2026-09-10, EN ATTENTE DE SA
-       * VALIDATION : c'est lui qui applique la convention, pas nous. Son
-       * document du 2026-09-11 ne la reprend pas — il a été rédigé sur une
-       * version antérieure au 10, où elle n'existait pas encore. Elle est
-       * donc conservée, et la question lui est reposée.
+       * ✅ FORMULATION VALIDÉE PAR VINCENT LE 2026-09-11 : « c'est ainsi que
+       * j'applique la convention ». Ne pas l'adoucir sans son accord.
        */
       reserve:
         `Ce tarif est fixé par l'Assurance Maladie : il n'est donc pas modulable, ` +
@@ -422,8 +419,8 @@ export default function TarifsEtRemboursement() {
             <p>
               Ce que je peux vous dire, en revanche, c&rsquo;est que le cadre est pensé pour
               être soutenant. Chaque consultation dure {seance.duree} et le rythme des
-              séances est {seance.rythme}, afin de préserver la continuité indispensable de
-              votre travail psychique.
+              séances est le plus souvent {seance.rythme}, afin de préserver la continuité
+              indispensable de votre travail psychique.
             </p>
             <p>
               Le montant des honoraires tient compte de vos moyens dès le départ, et il
