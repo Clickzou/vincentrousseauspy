@@ -8,11 +8,14 @@
  *   - Vassily Kandinsky  1866-1944 → domaine public depuis 2015
  *   - Félix Vallotton .. 1865-1925 → domaine public depuis 1996
  *
- * Les deux œuvres des cartes du blog (Vallotton, « La Chambre rouge », et
- * Kandinsky, « Tableau au centre vert ») viennent de Wikimedia Commons,
- * marquées domaine public : le serveur d'images de l'Art Institute oppose
- * désormais un contrôle anti-robot. Elles sont déclarées dans les articles
- * (`illustration`), pas ici.
+ * Les œuvres des cartes du blog viennent de Wikimedia Commons, marquées
+ * domaine public : le serveur d'images de l'Art Institute oppose désormais un
+ * contrôle anti-robot. Elles sont déclarées dans les articles (`illustration`),
+ * pas ici. Pour les treize articles de la file (2026-09-11), la palette s'est
+ * élargie à des peintres de la même époque, tous morts avant 1956 et pour des
+ * œuvres antérieures à 1931 (domaine public en France ET aux États-Unis, sans
+ * quoi Commons ne les héberge pas) : Vuillard († 1940), Hammershøi († 1916),
+ * Klee († 1940), Macke († 1914), Marc († 1916), Jawlensky († 1941).
  *
  * Le droit moral est perpétuel en France : toute œuvre affichée est créditée
  * (auteur, titre, année), même dans le domaine public.

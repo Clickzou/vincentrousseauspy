@@ -187,7 +187,9 @@ export function publicationSchema(p: Publication) {
 export function videoSchema(v: Video) {
   return {
     "@type": "VideoObject",
-    name: v.titre,
+    /* `titre` est celui de la publication : on précise qu'il s'agit de sa
+       présentation, pour ne pas donner au VideoObject le nom de l'article. */
+    name: `${v.titre} — présentation en vidéo`,
     description: v.description,
     thumbnailUrl: `${SITE_URL}${v.affiche}`,
     contentUrl: `${SITE_URL}${v.fichier}`,

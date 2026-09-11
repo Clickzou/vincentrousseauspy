@@ -7,8 +7,9 @@ import { IconeLienExterne } from "@/components/ui/Icones";
 import { breadcrumbSchema, graph, publicationSchema, videoSchema } from "@/lib/seo/schemas";
 import { ARTICLES } from "@/lib/content/blog";
 import {
+  INTRODUCTION_VIDEOS,
   PUBLICATIONS,
-  VIDEO_CONTRE_TRANSFERT as VIDEO,
+  VIDEOS,
   type Publication,
 } from "@/lib/content/publications";
 import { cabinet, contact, praticien } from "@/lib/site-config";
@@ -57,7 +58,7 @@ export default function Blog() {
       { nom: TITRE, url: "blog" },
     ]),
     ...PUBLICATIONS.map(publicationSchema),
-    videoSchema(VIDEO),
+    ...VIDEOS.map(videoSchema),
   );
 
   return (
@@ -101,13 +102,12 @@ export default function Blog() {
         </Apparition>
       </section>
 
-      {/* ARTICLES À GAUCHE, EMPILÉS ; VIDÉO À DROITE (demande du 2026-09-11).
-          La vidéo prend la colonne large : réduite à 5/12, elle deviendrait
-          trop petite pour qu'on lise ses diapositives. Sur mobile, les
-          articles passent d'abord. */}
+      {/* LES ARTICLES, EN GRILLE SUR TOUTE LA LARGEUR. La vidéo qui occupait
+          la colonne de droite est descendue dans la rubrique « Vidéos », en
+          bas de page (document « Articles & Vidéos » du 2026-09-11) : avec un
+          article de plus chaque quinzaine, la colonne de gauche aurait vite
+          dépassé la vidéo de plusieurs écrans. */}
       <section aria-label="Liste des articles" className="px-5 py-10 sm:px-10 lg:px-[100px]">
-        <div className="grid gap-6 lg:grid-cols-12">
-        <div className="flex flex-col lg:col-span-5">
         {ARTICLES.length === 0 ? (
           <p className="max-w-lecture text-ardoise">
             Le premier texte est en cours d&rsquo;écriture. En attendant, les{" "}
@@ -120,29 +120,26 @@ export default function Blog() {
             répondent à l&rsquo;essentiel.
           </p>
         ) : (
-          /* HAUTEUR ÉGALE À LA CARTE VIDÉO : la grille étire les deux colonnes
-             à la même hauteur, et les deux cartes se la partagent (`flex-1`).
-             C'est l'illustration qui absorbe la différence — à côté du texte
-             quand la carte est large (mobile paysage, tablette, grand écran),
-             au-dessus quand la colonne se resserre (lg, 1024-1279 px), où un
-             texte réduit à 3/5 de 340 px deviendrait illisible. */
-          <ul className="flex flex-1 flex-col gap-6">
+          /* Deux colonnes dès la tablette, l'œuvre au-dessus du texte. Les
+             cartes d'une même rangée prennent la hauteur de la plus haute, et
+             le lien « Lire l'article » reste calé en bas de chacune. */
+          <ul className="grid gap-6 md:grid-cols-2">
             {ARTICLES.map((article, i) => (
-              <li key={article.slug} className="flex-1">
-                <Apparition delai={i * 120} className="h-full">
-                  <article className="flex h-full flex-col overflow-hidden rounded-[20px] bg-lin sm:flex-row lg:flex-col xl:flex-row">
+              <li key={article.slug}>
+                <Apparition delai={(i % 2) * 120} className="h-full">
+                  <article className="flex h-full flex-col overflow-hidden rounded-[20px] bg-lin">
                     {article.illustration && (
-                      <div className="relative min-h-[180px] flex-1 sm:w-2/5 sm:flex-none lg:w-auto lg:flex-1 xl:w-2/5 xl:flex-none">
+                      <div className="relative aspect-[16/9]">
                         <Image
                           src={article.illustration.src}
                           alt=""
                           fill
-                          sizes="(min-width: 1280px) 17vw, (min-width: 1024px) 40vw, (min-width: 640px) 40vw, 100vw"
+                          sizes="(min-width: 768px) 45vw, 100vw"
                           className="object-cover"
                         />
                       </div>
                     )}
-                    <div className="flex flex-col p-7 sm:flex-1 sm:p-8 lg:flex-none xl:flex-1">
+                    <div className="flex flex-1 flex-col p-7 sm:p-8">
                     <p className="text-xs uppercase tracking-[0.18em] text-terracotta-fonce">
                       <time dateTime={article.publieLe}>{dateLisible(article.publieLe)}</time>
                     </p>
@@ -174,44 +171,13 @@ export default function Blog() {
             ))}
           </ul>
         )}
-        </div>
-
-        {/* La vidéo : le texte est celui de Vincent. Aucun chargement avant le
-            clic (`preload="none"`), l'affiche seule s'affiche. */}
-        <Apparition delai={120} className="lg:col-span-7">
-          <figure className="h-full rounded-[20px] bg-lin p-7 sm:p-9">
-            <p className="text-xs uppercase tracking-[0.18em] text-terracotta-fonce">
-              {VIDEO.article.revue} · n°&nbsp;{VIDEO.article.numero} · Vidéo
-            </p>
-            <p className="mt-4 leading-relaxed text-ardoise">{VIDEO.introduction}</p>
-            <p className="mt-3 leading-relaxed text-ardoise">{VIDEO.description}</p>
-            <video
-              controls
-              playsInline
-              preload="none"
-              poster={VIDEO.affiche}
-              width={VIDEO.largeur}
-              height={VIDEO.hauteur}
-              aria-label={VIDEO.titre}
-              className="mt-6 aspect-video w-full rounded-[12px] bg-encre"
-            >
-              <source src={VIDEO.fichier} type="video/mp4" />
-              Votre navigateur ne lit pas cette vidéo.{" "}
-              <a href={VIDEO.fichier}>Télécharger le fichier</a>.
-            </video>
-            <figcaption className="mt-3 text-xs text-ardoise">
-              Durée&nbsp;: 7&nbsp;min&nbsp;55. Réalisée avec NotebookLM.
-            </figcaption>
-          </figure>
-        </Apparition>
-        </div>
       </section>
 
       {/* CONTRIBUTIONS SCIENTIFIQUES — rubrique demandée par Vincent le
           2026-09-11. Les textes restent chez l'éditeur (droits d'auteur) :
           chaque carte présente la référence et le résumé de Vincent, puis
-          renvoie vers Cairn. La présentation vidéo du premier article est plus
-          haut, à droite des articles du blog (voir `VIDEO_CONTRE_TRANSFERT`). */}
+          renvoie vers Cairn. Leurs présentations vidéo suivent, dans la
+          rubrique « Vidéos ». */}
       <section
         aria-labelledby="contributions"
         className="bg-creme px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
@@ -266,6 +232,63 @@ export default function Blog() {
                       <span className="sr-only"> (nouvel onglet)</span>
                     </a>
                   </p>
+                </article>
+              </Apparition>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* VIDÉOS — troisième rubrique, tout en bas (document « Articles &
+          Vidéos » du 2026-09-11). Le chapeau est commun, chaque vidéo n'a
+          qu'une phrase : le résumé de la publication est juste au-dessus.
+          Le lecteur prend la colonne large, sinon les diapositives deviennent
+          illisibles. Aucun chargement avant le clic (`preload="none"`). */}
+      <section aria-labelledby="videos" className="px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]">
+        <Apparition>
+          <div className="mx-auto max-w-lecture text-center">
+            <h2
+              id="videos"
+              className="text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
+            >
+              Vidéos
+            </h2>
+            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+            <p className="mt-6 text-ardoise">{INTRODUCTION_VIDEOS}</p>
+          </div>
+        </Apparition>
+
+        <ul className="mx-auto mt-10 max-w-6xl space-y-6">
+          {VIDEOS.map((v) => (
+            <li key={v.fichier}>
+              <Apparition>
+                <article className="grid gap-8 rounded-[20px] bg-lin p-7 sm:p-9 lg:grid-cols-12 lg:items-center">
+                  <div className="lg:col-span-5">
+                    <p className="text-xs uppercase tracking-[0.18em] text-terracotta-fonce">
+                      {v.article.revue} · n°&nbsp;{v.article.numero}
+                    </p>
+                    <h3 className="mt-3 text-xl font-bold leading-tight text-bois sm:text-2xl">
+                      {v.titre}
+                    </h3>
+                    <p className="mt-4 leading-relaxed text-ardoise">{v.description}</p>
+                    <p className="mt-4 text-xs text-ardoise">
+                      Durée&nbsp;: {v.dureeLisible}. Réalisée avec NotebookLM.
+                    </p>
+                  </div>
+                  <video
+                    controls
+                    playsInline
+                    preload="none"
+                    poster={v.affiche}
+                    width={v.largeur}
+                    height={v.hauteur}
+                    aria-label={`Présentation en vidéo : ${v.titre}`}
+                    className="aspect-video w-full rounded-[12px] bg-encre lg:col-span-7"
+                  >
+                    <source src={v.fichier} type="video/mp4" />
+                    Votre navigateur ne lit pas cette vidéo.{" "}
+                    <a href={v.fichier}>Télécharger le fichier</a>.
+                  </video>
                 </article>
               </Apparition>
             </li>

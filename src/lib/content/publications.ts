@@ -128,11 +128,29 @@ export const PUBLICATIONS: Publication[] = [
   },
 ];
 
+/**
+ * Chapeau de la rubrique « Vidéos » du blog, dans la formulation de Vincent
+ * (document « Articles & Vidéos », 2026-09-11). Il vaut pour toutes les vidéos :
+ * chaque entrée n'a plus qu'une phrase propre.
+ */
+export const INTRODUCTION_VIDEOS =
+  "Vous trouverez dans cet espace une présentation de mes publications sous forme de " +
+  "vidéos. Réalisées avec l'outil NotebookLM, ces séquences proposent des synthèses " +
+  "ludiques et dynamiques de chaque texte. Ce format alternatif offre une approche " +
+  "accessible de leurs enjeux théoriques, que ce soit en guise d'introduction ou pour en " +
+  "découvrir un résumé autonome.";
+
 export type Video = {
   titre: string;
-  /** Texte de Vincent, affiché sous le lecteur et repris en JSON-LD. */
-  introduction: string;
+  /**
+   * Une phrase de Vincent, affichée sous le titre et reprise en JSON-LD. C'est
+   * la version COURTE de son document (ses « modèles ») : le résumé long de la
+   * publication figure déjà dans la rubrique « Contributions scientifiques »,
+   * sur la même page.
+   */
   description: string;
+  /** Durée lisible, affichée sous le lecteur. */
+  dureeLisible: string;
   /** Chemins sous `public/`, sans slash final : ce sont des fichiers. */
   fichier: string;
   affiche: string;
@@ -161,17 +179,25 @@ export type Video = {
  * ⚠️ PAS DE SOUS-TITRES pour l'instant. Une vidéo parlée devrait en avoir
  * (RGAA 4.1). À produire par transcription, puis à faire relire par Vincent :
  * le vocabulaire analytique ne se transcrit pas sans erreurs.
+ *
+ * LES DEUX AUTRES VIDÉOS (Katabasis, le pervers narcissique) sont annoncées
+ * dans le document du 2026-09-11 mais n'ont pas été transmises. Leur phrase de
+ * présentation est prête ci-dessous, en commentaire : à la réception du
+ * fichier, réencoder comme celui-ci, créer l'entrée et l'ajouter à `VIDEOS`.
+ *   - Katabasis : « Cette séquence retrace le voyage mythologique et littéraire
+ *     de la descente aux enfers pour éclairer, sous un jour nouveau, les
+ *     mécanismes de la souffrance dépressive. »
+ *   - Le pervers narcissique : « Cet échange propose de déconstruire cette
+ *     figure incontournable de notre imaginaire en interrogeant l'impact des
+ *     mutations de notre postmodernité sur la clinique du lien. »
  */
 export const VIDEO_CONTRE_TRANSFERT: Video = {
-  titre: "Proposition sur l'usage du contre-transfert : présentation en vidéo",
-  introduction:
-    "Vous trouverez ci-dessous une présentation de l'article « Proposition sur " +
-    "l'usage du contre-transfert : l'intervention de l'analyste » sous forme de vidéo.",
+  titre: "Proposition sur l'usage du contre-transfert : l'intervention de l'analyste",
   description:
-    "Réalisée avec l'outil NotebookLM, cette séquence propose une synthèse ludique et " +
-    "dynamique du texte. Ce format alternatif offre une approche accessible de ses " +
-    "enjeux théoriques, que ce soit en guise d'introduction ou pour en découvrir un " +
-    "résumé autonome.",
+    "Cette vidéo explore les articulations cliniques entre l'orthodoxie freudienne et " +
+    "l'orientation lacanienne autour de la position de l'analyste et du maniement de ses " +
+    "affects.",
+  dureeLisible: "7 min 55",
   fichier: "/videos/contre-transfert-intervention-analyste.mp4",
   affiche: "/videos/contre-transfert-intervention-analyste.jpg",
   duree: "PT7M55S",
@@ -180,3 +206,6 @@ export const VIDEO_CONTRE_TRANSFERT: Video = {
   ajouteeLe: "2026-09-11",
   article: PUBLICATIONS[0],
 };
+
+/** Du plus récent au plus ancien. */
+export const VIDEOS: Video[] = [VIDEO_CONTRE_TRANSFERT];

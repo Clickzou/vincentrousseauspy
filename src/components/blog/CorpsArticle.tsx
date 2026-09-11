@@ -39,12 +39,19 @@ export function CorpsArticle({ blocs }: { blocs: Bloc[] }) {
             return (
               <ul key={i} className="mt-5 space-y-3">
                 {bloc.items.map((item) => (
-                  <li key={item} className="flex gap-3">
+                  <li key={typeof item === "string" ? item : item.terme} className="flex gap-3">
                     <span
                       aria-hidden="true"
                       className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-terracotta"
                     />
-                    <span>{item}</span>
+                    {typeof item === "string" ? (
+                      <span>{item}</span>
+                    ) : (
+                      <span>
+                        <strong className="font-medium text-encre">{item.terme}</strong>
+                        &nbsp;: {item.texte}
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>
