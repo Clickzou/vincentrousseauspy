@@ -41,6 +41,14 @@ export const secretProfessionnel: Article = {
   modifieLe: "2026-09-08",
   motCle: "secret professionnel psychologue",
   urgence: true,
+  /* Une abstraction : rien ne s'y laisse lire d'emblée. L'œuvre accompagne
+     le propos, elle ne l'illustre pas (master § 8.5). */
+  illustration: {
+    src: "/images/kandinsky-tableau-centre-vert-1913.jpg",
+    auteur: "Vassily Kandinsky",
+    titre: "Tableau au centre vert",
+    annee: "1913",
+  },
   sources: [
     {
       titre: "Article 226-13 du code pénal — atteinte au secret professionnel",

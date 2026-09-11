@@ -6,6 +6,16 @@
  *
  *   - Henri Matisse .... 1869-1954 → domaine public depuis le 1er janvier 2025
  *   - Vassily Kandinsky  1866-1944 → domaine public depuis 2015
+ *   - Félix Vallotton .. 1865-1925 → domaine public depuis 1996
+ *
+ * Les deux œuvres des cartes du blog (Vallotton, « La Chambre rouge », et
+ * Kandinsky, « Tableau au centre vert ») viennent de Wikimedia Commons,
+ * marquées domaine public : le serveur d'images de l'Art Institute oppose
+ * désormais un contrôle anti-robot. Elles sont déclarées dans les articles
+ * (`illustration`), pas ici.
+ *
+ * Le droit moral est perpétuel en France : toute œuvre affichée est créditée
+ * (auteur, titre, année), même dans le domaine public.
  *
  * ATTENTION — ne JAMAIS réintroduire les visuels du site WordPress : le Miró
  * du hero (mort en 1983, protégé jusqu'en 2054) et les deux Chagall (mort en

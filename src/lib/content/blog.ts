@@ -1,4 +1,5 @@
 import type { Source } from "@/components/seo/Sources";
+import type { Oeuvre } from "@/lib/content/oeuvres";
 import { pourquoiPasDeVisio } from "@/lib/content/articles/pourquoi-pas-de-visio";
 import { secretProfessionnel } from "@/lib/content/articles/secret-professionnel";
 
@@ -66,6 +67,11 @@ export type Article = {
   sources: Source[];
   /** Affiche le bandeau d'urgence : obligatoire dès qu'un sujet à risque est évoqué. */
   urgence?: boolean;
+  /**
+   * Œuvre affichée sur la carte du blog. Domaine public uniquement, et jamais
+   * une œuvre déjà employée ailleurs sur le site (règles dans `oeuvres.ts`).
+   */
+  illustration?: Oeuvre;
   corps: Bloc[];
 };
 

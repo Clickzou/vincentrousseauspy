@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import { Apparition } from "@/components/ui/Apparition";
@@ -106,7 +107,7 @@ export default function Blog() {
           articles passent d'abord. */}
       <section aria-label="Liste des articles" className="px-5 py-10 sm:px-10 lg:px-[100px]">
         <div className="grid gap-6 lg:grid-cols-12">
-        <div className="lg:col-span-5">
+        <div className="flex flex-col lg:col-span-5">
         {ARTICLES.length === 0 ? (
           <p className="max-w-lecture text-ardoise">
             Le premier texte est en cours d&rsquo;écriture. En attendant, les{" "}
@@ -119,14 +120,32 @@ export default function Blog() {
             répondent à l&rsquo;essentiel.
           </p>
         ) : (
-          <ul className="space-y-6">
+          /* HAUTEUR ÉGALE À LA CARTE VIDÉO : la grille étire les deux colonnes
+             à la même hauteur, et les deux cartes se la partagent (`flex-1`).
+             C'est l'illustration qui absorbe la différence — à côté du texte
+             quand la carte est large (mobile paysage, tablette, grand écran),
+             au-dessus quand la colonne se resserre (lg, 1024-1279 px), où un
+             texte réduit à 3/5 de 340 px deviendrait illisible. */
+          <ul className="flex flex-1 flex-col gap-6">
             {ARTICLES.map((article, i) => (
-              <li key={article.slug}>
-                <Apparition delai={i * 120}>
-                  <article className="flex h-full flex-col rounded-[20px] bg-lin p-7 sm:p-9">
+              <li key={article.slug} className="flex-1">
+                <Apparition delai={i * 120} className="h-full">
+                  <article className="flex h-full flex-col overflow-hidden rounded-[20px] bg-lin sm:flex-row lg:flex-col xl:flex-row">
+                    {article.illustration && (
+                      <div className="relative min-h-[180px] flex-1 sm:w-2/5 sm:flex-none lg:w-auto lg:flex-1 xl:w-2/5 xl:flex-none">
+                        <Image
+                          src={article.illustration.src}
+                          alt=""
+                          fill
+                          sizes="(min-width: 1280px) 17vw, (min-width: 1024px) 40vw, (min-width: 640px) 40vw, 100vw"
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-col p-7 sm:flex-1 sm:p-8 lg:flex-none xl:flex-1">
                     <p className="text-xs uppercase tracking-[0.18em] text-terracotta-fonce">
                       <time dateTime={article.publieLe}>{dateLisible(article.publieLe)}</time>
-                  </p>
+                    </p>
                     <h2 className="mt-3 text-xl font-bold leading-tight text-bois sm:text-2xl">
                       <Link href={`/blog/${article.slug}/`} className="hover:underline">
                         {article.titre}
@@ -141,6 +160,14 @@ export default function Blog() {
                         Lire l&rsquo;article
                       </Link>
                     </p>
+                    {/* Crédit : le droit moral est perpétuel en France. */}
+                    {article.illustration && (
+                      <p className="mt-4 text-xs text-ardoise">
+                        {article.illustration.auteur}, <cite>{article.illustration.titre}</cite>{" "}
+                        ({article.illustration.annee}).
+                      </p>
+                    )}
+                    </div>
                   </article>
                 </Apparition>
               </li>
@@ -152,7 +179,7 @@ export default function Blog() {
         {/* La vidéo : le texte est celui de Vincent. Aucun chargement avant le
             clic (`preload="none"`), l'affiche seule s'affiche. */}
         <Apparition delai={120} className="lg:col-span-7">
-          <figure className="rounded-[20px] bg-lin p-7 sm:p-9">
+          <figure className="h-full rounded-[20px] bg-lin p-7 sm:p-9">
             <p className="text-xs uppercase tracking-[0.18em] text-terracotta-fonce">
               {VIDEO.article.revue} · n°&nbsp;{VIDEO.article.numero} · Vidéo
             </p>

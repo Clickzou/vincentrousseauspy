@@ -42,6 +42,14 @@ export const pourquoiPasDeVisio: Article = {
   publieLe: "2026-09-08",
   modifieLe: "2026-09-08",
   motCle: "consultation psychologue à distance",
+  /* Une pièce, et deux personnes présentes dans le même lieu : c'est le
+     propos de l'article, sans qu'on ait à le souligner. */
+  illustration: {
+    src: "/images/vallotton-chambre-rouge-1898.jpg",
+    auteur: "Félix Vallotton",
+    titre: "La Chambre rouge",
+    annee: "1898",
+  },
   sources: [
     {
       titre: "Le parcours de prise en charge d'un patient dans le cadre de Mon soutien psy",
