@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -57,6 +58,17 @@ export async function generateMetadata({
       publishedTime: article.publieLe,
       modifiedTime: article.modifieLe,
       authors: [praticien.nom],
+      /* L'œuvre de l'article sert aussi d'aperçu au partage du lien. */
+      ...(article.illustration
+        ? {
+            images: [
+              {
+                url: article.illustration.src,
+                alt: `${article.illustration.auteur}, « ${article.illustration.titre} » (${article.illustration.annee})`,
+              },
+            ],
+          }
+        : {}),
     },
   };
 }
@@ -78,6 +90,7 @@ export default async function ArticlePage({
       publieLe: article.publieLe,
       modifieLe: article.modifieLe,
       sources: article.sources.map((s) => s.href),
+      image: article.illustration?.src,
     }),
     breadcrumbSchema([
       { nom: "Accueil", url: "/" },
@@ -110,8 +123,13 @@ export default async function ArticlePage({
           <span aria-current="page">{article.titre}</span>
         </nav>
 
-        <Apparition>
-          <div className="mt-8 rounded-[20px] border border-sable bg-creme px-6 py-10 text-center sm:px-12">
+        {/* AVEC UNE ŒUVRE, l'en-tête passe en deux colonnes — la carte à
+            gauche, l'œuvre à droite, étirée à la hauteur de la carte — comme
+            sur la page « les différents psy ». Sans œuvre, la carte reprend
+            toute la largeur. */}
+        <div className={article.illustration ? "mt-8 grid gap-6 lg:grid-cols-12" : "mt-8"}>
+        <Apparition className={article.illustration ? "lg:col-span-7" : undefined}>
+          <div className="flex h-full flex-col justify-center rounded-[20px] border border-sable bg-creme px-6 py-10 text-center sm:px-12">
             <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
               <time dateTime={article.publieLe}>
                 {new Date(article.publieLe).toLocaleDateString("fr-FR", {
@@ -134,6 +152,29 @@ export default async function ArticlePage({
             </p>
           </div>
         </Apparition>
+
+        {article.illustration && (
+          <Apparition delai={120} className="lg:col-span-5">
+            <figure className="flex h-full flex-col">
+              <div className="relative min-h-[260px] flex-1 overflow-hidden rounded-[20px]">
+                <Image
+                  src={article.illustration.src}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 38vw, 100vw"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              {/* Crédit : le droit moral est perpétuel en France. */}
+              <figcaption className="mt-3 text-xs text-ardoise">
+                {article.illustration.auteur}, <cite>{article.illustration.titre}</cite>{" "}
+                ({article.illustration.annee}).
+              </figcaption>
+            </figure>
+          </Apparition>
+        )}
+        </div>
       </section>
 
       {/* Le corps de l'article dans une colonne de lecture CENTRÉE. C'est le

@@ -127,6 +127,8 @@ export type ArticleMeta = {
   modifieLe: string;
   /** Sources d'autorité citées — minimum 3 en YMYL (§ 5). */
   sources?: string[];
+  /** Chemin d'un fichier sous `public/` : Google attend une image pour un Article. */
+  image?: string;
 };
 
 export function articleSchema(a: ArticleMeta) {
@@ -141,6 +143,8 @@ export function articleSchema(a: ArticleMeta) {
     publisher: { "@id": BUSINESS_ID },
     inLanguage: "fr-FR",
     ...(a.sources?.length ? { citation: a.sources } : {}),
+    /* Pas d'`absoluteUrl` : il ajoute un slash final, faux pour un fichier. */
+    ...(a.image ? { image: `${SITE_URL}${a.image}` } : {}),
   };
 }
 
