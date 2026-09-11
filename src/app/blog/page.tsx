@@ -100,7 +100,13 @@ export default function Blog() {
         </Apparition>
       </section>
 
+      {/* ARTICLES À GAUCHE, EMPILÉS ; VIDÉO À DROITE (demande du 2026-09-11).
+          La vidéo prend la colonne large : réduite à 5/12, elle deviendrait
+          trop petite pour qu'on lise ses diapositives. Sur mobile, les
+          articles passent d'abord. */}
       <section aria-label="Liste des articles" className="px-5 py-10 sm:px-10 lg:px-[100px]">
+        <div className="grid gap-6 lg:grid-cols-12">
+        <div className="lg:col-span-5">
         {ARTICLES.length === 0 ? (
           <p className="max-w-lecture text-ardoise">
             Le premier texte est en cours d&rsquo;écriture. En attendant, les{" "}
@@ -113,10 +119,10 @@ export default function Blog() {
             répondent à l&rsquo;essentiel.
           </p>
         ) : (
-          <ul className="grid gap-6 lg:grid-cols-2">
+          <ul className="space-y-6">
             {ARTICLES.map((article, i) => (
-              <li key={article.slug} className="h-full">
-                <Apparition delai={(i % 2) * 120} className="h-full">
+              <li key={article.slug}>
+                <Apparition delai={i * 120}>
                   <article className="flex h-full flex-col rounded-[20px] bg-lin p-7 sm:p-9">
                     <p className="text-xs uppercase tracking-[0.18em] text-terracotta-fonce">
                       <time dateTime={article.publieLe}>{dateLisible(article.publieLe)}</time>
@@ -141,13 +147,44 @@ export default function Blog() {
             ))}
           </ul>
         )}
+        </div>
+
+        {/* La vidéo : le texte est celui de Vincent. Aucun chargement avant le
+            clic (`preload="none"`), l'affiche seule s'affiche. */}
+        <Apparition delai={120} className="lg:col-span-7">
+          <figure className="rounded-[20px] bg-lin p-7 sm:p-9">
+            <p className="text-xs uppercase tracking-[0.18em] text-terracotta-fonce">
+              {VIDEO.article.revue} · n°&nbsp;{VIDEO.article.numero} · Vidéo
+            </p>
+            <p className="mt-4 leading-relaxed text-ardoise">{VIDEO.introduction}</p>
+            <p className="mt-3 leading-relaxed text-ardoise">{VIDEO.description}</p>
+            <video
+              controls
+              playsInline
+              preload="none"
+              poster={VIDEO.affiche}
+              width={VIDEO.largeur}
+              height={VIDEO.hauteur}
+              aria-label={VIDEO.titre}
+              className="mt-6 aspect-video w-full rounded-[12px] bg-encre"
+            >
+              <source src={VIDEO.fichier} type="video/mp4" />
+              Votre navigateur ne lit pas cette vidéo.{" "}
+              <a href={VIDEO.fichier}>Télécharger le fichier</a>.
+            </video>
+            <figcaption className="mt-3 text-xs text-ardoise">
+              Durée&nbsp;: 7&nbsp;min&nbsp;55. Réalisée avec NotebookLM.
+            </figcaption>
+          </figure>
+        </Apparition>
+        </div>
       </section>
 
       {/* CONTRIBUTIONS SCIENTIFIQUES — rubrique demandée par Vincent le
           2026-09-11. Les textes restent chez l'éditeur (droits d'auteur) :
           chaque carte présente la référence et le résumé de Vincent, puis
-          renvoie vers Cairn. Sous les trois références, la présentation vidéo
-          du premier article, hébergée sur le site (voir `VIDEO_CONTRE_TRANSFERT`). */}
+          renvoie vers Cairn. La présentation vidéo du premier article est plus
+          haut, à droite des articles du blog (voir `VIDEO_CONTRE_TRANSFERT`). */}
       <section
         aria-labelledby="contributions"
         className="bg-creme px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
@@ -207,37 +244,6 @@ export default function Blog() {
             </li>
           ))}
         </ul>
-
-        {/* La vidéo, dans une carte du même gabarit que les références : elle
-            en est le prolongement, pas une rubrique à part. Le texte est celui
-            de Vincent. Aucun chargement avant le clic (`preload="none"`),
-            l'affiche seule s'affiche. */}
-        <Apparition>
-          <figure className="mx-auto mt-6 max-w-4xl rounded-[20px] bg-white p-7 sm:p-9">
-            <p className="text-xs uppercase tracking-[0.18em] text-terracotta-fonce">
-              {VIDEO.article.revue} · n°&nbsp;{VIDEO.article.numero} · Vidéo
-            </p>
-            <p className="mt-4 leading-relaxed text-ardoise">{VIDEO.introduction}</p>
-            <p className="mt-3 leading-relaxed text-ardoise">{VIDEO.description}</p>
-            <video
-              controls
-              playsInline
-              preload="none"
-              poster={VIDEO.affiche}
-              width={VIDEO.largeur}
-              height={VIDEO.hauteur}
-              aria-label={VIDEO.titre}
-              className="mt-6 aspect-video w-full rounded-[12px] bg-encre"
-            >
-              <source src={VIDEO.fichier} type="video/mp4" />
-              Votre navigateur ne lit pas cette vidéo.{" "}
-              <a href={VIDEO.fichier}>Télécharger le fichier</a>.
-            </video>
-            <figcaption className="mt-3 text-xs text-ardoise">
-              Durée&nbsp;: 7&nbsp;min&nbsp;55. Réalisée avec NotebookLM.
-            </figcaption>
-          </figure>
-        </Apparition>
       </section>
 
       <section className="px-5 pb-16 pt-14 sm:px-10 sm:pt-16 lg:px-[100px]">
