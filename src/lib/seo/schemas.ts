@@ -23,7 +23,7 @@ import {
   SITE_URL,
 } from "@/lib/site-config";
 import { absoluteUrl } from "@/lib/url-helpers";
-import type { Publication } from "@/lib/content/publications";
+import type { Publication, Video } from "@/lib/content/publications";
 
 const PERSON_ID = `${SITE_URL}/#vincent-rousseau`;
 const BUSINESS_ID = `${SITE_URL}/#cabinet`;
@@ -173,6 +173,27 @@ export function publicationSchema(p: Publication) {
     },
     publisher: { "@type": "Organization", name: p.editeur },
     inLanguage: "fr-FR",
+  };
+}
+
+/**
+ * Vidéo hébergée sur le site. `absoluteUrl` n'est pas utilisé : il ajoute un
+ * slash final, correct pour une page, faux pour un fichier.
+ */
+export function videoSchema(v: Video) {
+  return {
+    "@type": "VideoObject",
+    name: v.titre,
+    description: v.description,
+    thumbnailUrl: `${SITE_URL}${v.affiche}`,
+    contentUrl: `${SITE_URL}${v.fichier}`,
+    uploadDate: v.ajouteeLe,
+    duration: v.duree,
+    width: v.largeur,
+    height: v.hauteur,
+    inLanguage: "fr-FR",
+    creator: { "@id": PERSON_ID },
+    isBasedOn: v.article.doi ? `https://doi.org/${v.article.doi}` : v.article.url,
   };
 }
 

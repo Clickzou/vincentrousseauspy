@@ -556,9 +556,10 @@ de remerciement, politique de confidentialité, `llms.txt`, deux meta descriptio
 
 ### 11.5 Questions ouvertes pour Vincent
 
-1. **La vidéo NotebookLM** du blog : le fichier n'a pas été transmis. À l'arrivée,
-   l'héberger sur le site ; si elle passe par YouTube, la charger au clic (comme
-   `PlanDiffere`), sinon Google reçoit l'IP du visiteur avant tout consentement.
+1. ~~**La vidéo NotebookLM** du blog~~ — **reçue et intégrée le 11 septembre.**
+   Hébergée sur le site (`public/videos/`, 8 Mo après réencodage, 36 Mo à
+   l'origine), chargée au clic seulement, déclarée en `VideoObject`. **Reste à
+   faire : les sous-titres** (RGAA), par transcription relue par Vincent.
 2. **« En moins de 24 heures »** ne dit plus « ouvrées » : lu à la lettre, le délai court
    le week-end. Est-ce voulu ?
 3. **Le rythme** : la carte « Quand ? » de `/consultations/` le dit adaptable (« en règle

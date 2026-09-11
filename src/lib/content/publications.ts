@@ -127,3 +127,56 @@ export const PUBLICATIONS: Publication[] = [
       "fonction essentielle de désaliénation du travail psychothérapeutique.",
   },
 ];
+
+export type Video = {
+  titre: string;
+  /** Texte de Vincent, affiché sous le lecteur et repris en JSON-LD. */
+  introduction: string;
+  description: string;
+  /** Chemins sous `public/`, sans slash final : ce sont des fichiers. */
+  fichier: string;
+  affiche: string;
+  /** Durée ISO 8601, relevée avec ffprobe : 474,8 s. */
+  duree: string;
+  largeur: number;
+  hauteur: number;
+  ajouteeLe: string;
+  /** La publication que la vidéo présente. */
+  article: Publication;
+};
+
+/**
+ * Présentation vidéo du premier article, réalisée par Vincent avec NotebookLM
+ * et transmise le 2026-09-11.
+ *
+ * HÉBERGÉE SUR LE SITE, et non sur YouTube : un lecteur encastré transmettrait
+ * l'adresse IP du visiteur à Google dès l'affichage de la page, avant tout
+ * consentement. Ici, `preload="none"` : rien n'est téléchargé avant le clic.
+ *
+ * Réencodée pour le web depuis l'original de 36 Mo (H.264 CRF 28, audio AAC
+ * 64 kb/s mono, `+faststart` pour que la lecture démarre avant la fin du
+ * téléchargement) : 8 Mo, texte des diapositives toujours net. L'original
+ * n'est pas versionné.
+ *
+ * ⚠️ PAS DE SOUS-TITRES pour l'instant. Une vidéo parlée devrait en avoir
+ * (RGAA 4.1). À produire par transcription, puis à faire relire par Vincent :
+ * le vocabulaire analytique ne se transcrit pas sans erreurs.
+ */
+export const VIDEO_CONTRE_TRANSFERT: Video = {
+  titre: "Proposition sur l'usage du contre-transfert : présentation en vidéo",
+  introduction:
+    "Vous trouverez ci-dessous une présentation de l'article « Proposition sur " +
+    "l'usage du contre-transfert : l'intervention de l'analyste » sous forme de vidéo.",
+  description:
+    "Réalisée avec l'outil NotebookLM, cette séquence propose une synthèse ludique et " +
+    "dynamique du texte. Ce format alternatif offre une approche accessible de ses " +
+    "enjeux théoriques, que ce soit en guise d'introduction ou pour en découvrir un " +
+    "résumé autonome.",
+  fichier: "/videos/contre-transfert-intervention-analyste.mp4",
+  affiche: "/videos/contre-transfert-intervention-analyste.jpg",
+  duree: "PT7M55S",
+  largeur: 1280,
+  hauteur: 720,
+  ajouteeLe: "2026-09-11",
+  article: PUBLICATIONS[0],
+};

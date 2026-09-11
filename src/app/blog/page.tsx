@@ -3,9 +3,13 @@ import Link from "next/link";
 
 import { Apparition } from "@/components/ui/Apparition";
 import { IconeLienExterne } from "@/components/ui/Icones";
-import { breadcrumbSchema, graph, publicationSchema } from "@/lib/seo/schemas";
+import { breadcrumbSchema, graph, publicationSchema, videoSchema } from "@/lib/seo/schemas";
 import { ARTICLES } from "@/lib/content/blog";
-import { PUBLICATIONS, type Publication } from "@/lib/content/publications";
+import {
+  PUBLICATIONS,
+  VIDEO_CONTRE_TRANSFERT as VIDEO,
+  type Publication,
+} from "@/lib/content/publications";
 import { cabinet, contact, praticien } from "@/lib/site-config";
 import { canonical } from "@/lib/url-helpers";
 
@@ -52,6 +56,7 @@ export default function Blog() {
       { nom: TITRE, url: "blog" },
     ]),
     ...PUBLICATIONS.map(publicationSchema),
+    videoSchema(VIDEO),
   );
 
   return (
@@ -141,14 +146,8 @@ export default function Blog() {
       {/* CONTRIBUTIONS SCIENTIFIQUES — rubrique demandée par Vincent le
           2026-09-11. Les textes restent chez l'éditeur (droits d'auteur) :
           chaque carte présente la référence et le résumé de Vincent, puis
-          renvoie vers Cairn.
-
-          ⏳ VIDÉO EN ATTENTE. Le document prévoit, sous les trois références,
-          une présentation vidéo du premier article réalisée avec NotebookLM.
-          Le fichier n'a pas été transmis. À son arrivée : l'héberger sur le
-          site (aucun tiers) ou, s'il passe par YouTube, le charger au clic
-          comme `PlanDiffere` — un lecteur encastré transmet l'IP du visiteur
-          à Google avant tout consentement. */}
+          renvoie vers Cairn. Sous les trois références, la présentation vidéo
+          du premier article, hébergée sur le site (voir `VIDEO_CONTRE_TRANSFERT`). */}
       <section
         aria-labelledby="contributions"
         className="bg-creme px-5 py-14 sm:px-10 sm:py-16 lg:px-[100px]"
@@ -208,6 +207,37 @@ export default function Blog() {
             </li>
           ))}
         </ul>
+
+        {/* La vidéo, dans une carte du même gabarit que les références : elle
+            en est le prolongement, pas une rubrique à part. Le texte est celui
+            de Vincent. Aucun chargement avant le clic (`preload="none"`),
+            l'affiche seule s'affiche. */}
+        <Apparition>
+          <figure className="mx-auto mt-6 max-w-4xl rounded-[20px] bg-white p-7 sm:p-9">
+            <p className="text-xs uppercase tracking-[0.18em] text-terracotta-fonce">
+              {VIDEO.article.revue} · n°&nbsp;{VIDEO.article.numero} · Vidéo
+            </p>
+            <p className="mt-4 leading-relaxed text-ardoise">{VIDEO.introduction}</p>
+            <p className="mt-3 leading-relaxed text-ardoise">{VIDEO.description}</p>
+            <video
+              controls
+              playsInline
+              preload="none"
+              poster={VIDEO.affiche}
+              width={VIDEO.largeur}
+              height={VIDEO.hauteur}
+              aria-label={VIDEO.titre}
+              className="mt-6 aspect-video w-full rounded-[12px] bg-encre"
+            >
+              <source src={VIDEO.fichier} type="video/mp4" />
+              Votre navigateur ne lit pas cette vidéo.{" "}
+              <a href={VIDEO.fichier}>Télécharger le fichier</a>.
+            </video>
+            <figcaption className="mt-3 text-xs text-ardoise">
+              Durée&nbsp;: 7&nbsp;min&nbsp;55. Réalisée avec NotebookLM.
+            </figcaption>
+          </figure>
+        </Apparition>
       </section>
 
       <section className="px-5 pb-16 pt-14 sm:px-10 sm:pt-16 lg:px-[100px]">
