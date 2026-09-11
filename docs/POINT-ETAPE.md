@@ -563,10 +563,18 @@ de remerciement, politique de confidentialité, `llms.txt`, deux meta descriptio
    le week-end. Est-ce voulu ?
 3. **Le rythme** : la carte « Quand ? » de `/consultations/` le dit adaptable (« en règle
    générale… la fréquence la plus adaptée »), le bloc « Le cadre thérapeutique » de la
-   même page le dit fixe. Laquelle des deux formulations fait foi ?
+   même page le dit fixe. Laquelle des deux formulations fait foi ? La réponse vaut
+   aussi pour deux passages que le document ne touche pas : `/psychanalyste-nantes/`
+   (« le rythme se décide ensemble — le plus souvent une séance par semaine ») et
+   `/psychotherapeute-nantes/` (« le plus souvent hebdomadaire »). Les aligner tous
+   les trois sur sa réponse.
 4. **« Formations de l'inconscient »** (`/psychanalyste-nantes/`) : la liste affichée
    dessous comprend « les répétitions », qui n'en est pas une au sens classique, et
    n'a pas le mot d'esprit. À lui de dire si la liste doit suivre le nouvel intitulé.
+5. **La citation de Dolto** (`/psychologue-clinicien-nantes/`, en ouverture) : Vincent
+   dit corriger « l'ensemble du texte de la page », et sa version ne la contient pas.
+   Omission volontaire ou simple oubli de sa part ? Elle reste en place en attendant,
+   puisqu'elle vient du site WordPress.
 
 **Point d'agence, non soumis** : le H1 de `/consultations/` devient « Le déroulé, le
 cadre et la première séance » et perd le mot « consultations ». Le `title` le garde, la
