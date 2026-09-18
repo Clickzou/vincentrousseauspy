@@ -196,14 +196,20 @@ export default function PourquoiConsulter() {
                   /consultations/, Le Rêve la remplace ici. Rousseau, domaine
                   public.
 
-                  Le même soir, Le Rêve est aussi venu sur l'accueil, au bloc
-                  « Mon approche » : la règle « aucune page ne répète l'œuvre
-                  d'une autre » ne tient plus. Cadrage laissé centré, il garde
-                  la dormeuse entière dans cette colonne-ci. */}
+                  Le soir même, Le Rêve est parti sur l'accueil (bloc « Mon
+                  approche ») et la « Lutte de l'Indien et du gorille » l'a
+                  remplacé ici, en venant de /aide-faq/ : la scène de combat
+                  ouvrait mal une page de questions pratiques, elle est à sa
+                  place devant un texte sur les ruptures et les crises. Chaque
+                  page retrouve ainsi une œuvre qui n'est qu'à elle.
+
+                  Cadrage laissé centré : le combat et le soleil rouge sont au
+                  milieu de la toile, la bande visible (13 % à 87 %) les garde
+                  en entier. */}
               <figure className="flex h-full flex-col">
                 <div className="relative min-h-[260px] flex-1 overflow-hidden rounded-[20px]">
                   <Image
-                    src="/images/henri-rousseau-le-reve-1910.jpg"
+                    src="/images/henri-rousseau-lutte-de-l-indien-et-du-gorille-1910.jpg"
                     alt=""
                     fill
                     sizes="(min-width: 1024px) 38vw, 100vw"
@@ -211,7 +217,8 @@ export default function PourquoiConsulter() {
                   />
                 </div>
                 <figcaption className="mt-3 text-xs text-ardoise">
-                  Henri Rousseau, <cite>Le Rêve</cite> (1910).
+                  Henri Rousseau, <cite>Paysage tropical&nbsp;: lutte de
+                  l&rsquo;Indien et du gorille</cite> (1910).
                 </figcaption>
               </figure>
             </aside>
