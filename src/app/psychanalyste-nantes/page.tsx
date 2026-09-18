@@ -212,12 +212,18 @@ export default function PsychanalysteNantes() {
 
           <Apparition delai={120} className="lg:col-span-5">
             <aside className="h-full">
-              {/* Quatrième œuvre du site, pour ne pas répéter celles des autres
-                  pages. Matisse, domaine public depuis 2025. */}
+              {/* 2026-09-18 (soir) — échange demandé par Vincent : le
+                  géranium de Matisse part en tête de /aide-faq/, et c'est La
+                  Charmeuse de serpents qui illustre ici la psychanalyse.
+                  Henri Rousseau, domaine public depuis 1981 ; aucun lien de
+                  parenté avec Vincent Rousseau.
+
+                  Elle ouvre aussi le carrousel de l'accueil : la répétition
+                  est assumée, c'est l'œuvre que Vincent place en premier. */}
               <figure className="flex h-full flex-col">
                 <div className="relative min-h-[260px] flex-1 overflow-hidden rounded-[20px]">
                   <Image
-                    src="/images/matisse-nature-morte-geranium-1906.jpg"
+                    src="/images/henri-rousseau-charmeuse-de-serpents-1907.jpg"
                     alt=""
                     fill
                     sizes="(min-width: 1024px) 38vw, 100vw"
@@ -225,7 +231,7 @@ export default function PsychanalysteNantes() {
                   />
                 </div>
                 <figcaption className="mt-3 text-xs text-ardoise">
-                  Henri Matisse, <cite>Nature morte au géranium</cite> (1906).
+                  Henri Rousseau, <cite>La Charmeuse de serpents</cite> (1907).
                 </figcaption>
               </figure>
             </aside>

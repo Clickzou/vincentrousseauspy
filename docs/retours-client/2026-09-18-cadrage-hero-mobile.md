@@ -2,6 +2,8 @@
 
 **Destinataire :** Vincent Rousseau · **Date :** 18 septembre 2026
 **Commit :** `7cc621c` · **En ligne :** oui
+**Suite :** voir « Après envoi » en bas de page — le dernier paragraphe du
+message était fondé sur un malentendu, corrigé le soir même.
 
 > Texte destiné à être copié tel quel dans un mail. Il est volontairement
 > sans vocabulaire technique : les détails d'implémentation sont dans le
@@ -38,3 +40,23 @@ Contraste du texte blanc sur *La Charmeuse*, mesuré sur un écran de 390 px de 
 
 La mesure précédente, notée dans `src/app/page.tsx`, portait sur la géométrie
 du texte **en grand écran** : elle ne couvrait pas ce cas.
+
+---
+
+## Après envoi — le malentendu sur l'échange des tableaux
+
+Le paragraphe « Une proposition que je n'ai pas retenue » partait d'une
+mauvaise lecture de la demande. Vincent ne proposait pas de mettre le
+géranium en page d'accueil : il voulait
+
+- le **géranium** en tête de `/aide-faq/`, à la place de la « Lutte de
+  l'Indien et du gorille » — une scène de combat qu'il jugeait trop dure
+  pour ouvrir une page de questions pratiques ;
+- **La Charmeuse de serpents** en illustration de la section « La
+  psychanalyse », sur `/psychanalyste-nantes/`, là où était le géranium.
+
+L'accueil n'était pas concerné, et l'objection du format 1.78 ne s'appliquait
+donc pas : sur ces deux pages, l'œuvre est montrée dans sa proportion d'origine
+(`OeuvreIllustration`) ou dans un cadre presque carré. L'échange a été fait tel
+que demandé. La Charmeuse apparaît désormais à deux endroits — carrousel de
+l'accueil et page psychanalyse ; répétition assumée, c'est son premier choix.

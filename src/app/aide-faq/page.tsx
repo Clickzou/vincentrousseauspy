@@ -67,19 +67,26 @@ export default function AideFaq() {
 
         <Apparition>
           <div className="mt-8 rounded-[20px] border border-sable bg-creme px-6 py-10 sm:px-12">
-            {/* Œuvre choisie par Vincent pour cette page (2026-09-18).
-                L'œuvre tient 5 colonnes sur 12 à gauche, le titre et le chapeau
-                les 7 autres, alignés sur son milieu. En dessous de `lg`, elle
-                repasse au-dessus du texte. */}
+            {/* Œuvre choisie par Vincent pour cette page. L'œuvre tient 5
+                colonnes sur 12 à gauche, le titre et le chapeau les 7 autres,
+                alignés sur son milieu. En dessous de `lg`, elle repasse
+                au-dessus du texte.
+
+                2026-09-18 (soir) — la « Lutte de l'Indien et du gorille »
+                cède la place à la « Nature morte au géranium », qui illustrait
+                jusqu'ici la page psychanalyse : Vincent trouvait la scène de
+                combat trop dure en tête d'une page de questions pratiques.
+                La Charmeuse de serpents prend le géranium en échange, sur
+                /psychanalyste-nantes/. */}
             <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
               <div className="lg:col-span-5">
                 <OeuvreIllustration
-                  src="/images/henri-rousseau-lutte-de-l-indien-et-du-gorille-1910.jpg"
-                  auteur="Henri Rousseau"
-                  titre={<>Paysage tropical&nbsp;: lutte de l&rsquo;Indien et du gorille</>}
-                  annee="1910"
-                  largeur={1600}
-                  hauteur={1108}
+                  src="/images/matisse-nature-morte-geranium-1906.jpg"
+                  auteur="Henri Matisse"
+                  titre="Nature morte au géranium"
+                  annee="1906"
+                  largeur={1772}
+                  hauteur={996}
                 />
               </div>
 
