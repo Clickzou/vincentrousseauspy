@@ -193,8 +193,13 @@ export default function PourquoiConsulter() {
           <Apparition delai={120} className="lg:col-span-5">
             <aside className="h-full">
               {/* Choix de Vincent (2026-09-18) : la Desserte part en
-                  /consultations/, Le Rêve la remplace ici. Aucune page ne
-                  répète l'œuvre d'une autre. Rousseau, domaine public. */}
+                  /consultations/, Le Rêve la remplace ici. Rousseau, domaine
+                  public.
+
+                  Le même soir, Le Rêve est aussi venu sur l'accueil, au bloc
+                  « Mon approche » : la règle « aucune page ne répète l'œuvre
+                  d'une autre » ne tient plus. Cadrage laissé centré, il garde
+                  la dormeuse entière dans cette colonne-ci. */}
               <figure className="flex h-full flex-col">
                 <div className="relative min-h-[260px] flex-1 overflow-hidden rounded-[20px]">
                   <Image

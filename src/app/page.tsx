@@ -724,10 +724,18 @@ export default function Accueil() {
               </Link>
             </p>
 
-            {/* Détail de l'œuvre du hero, recadré : même univers, cadrage
-                différent. Le domaine public (Matisse, 2025) est la seule
-                source d'image utilisable en l'état — cf. donnees-vincent.md
-                § 11. Décorative, donc alt vide. */}
+            {/* Choix de Vincent (2026-09-18, soir) : Le Rêve remplace ici le
+                détail de la Desserte. Rousseau, domaine public depuis 1981 ;
+                aucun lien de parenté avec Vincent Rousseau. Décorative, donc
+                alt vide.
+
+                CADRAGE — la dormeuse occupe le quart gauche de la toile
+                (de 8 % à 45 %), et cette colonne est bien plus haute que
+                large : en `object-cover` centré, il ne restait d'elle que les
+                jambes, la tête tombait hors champ. A 15 %, la bande visible
+                part de 6 % et la garde entière quelle que soit la hauteur que
+                le texte voisin donne à la colonne. Sur téléphone la colonne
+                s'aplatit au format de la toile : le décalage n'y joue plus. */}
             {/* flex-1 + fill : l'image occupe exactement la hauteur restante
                 de la colonne, ce qui aligne le bas des deux colonnes. Sans
                 cela, la colonne de gauche dépasse et laisse un blanc sous le
@@ -735,16 +743,15 @@ export default function Accueil() {
             <figure className="mt-8 flex flex-1 flex-col">
               <div className="relative min-h-[240px] flex-1 overflow-hidden rounded-[20px]">
                 <Image
-                  src="/images/matisse-detail-nature-morte.jpg"
+                  src="/images/henri-rousseau-le-reve-1910.jpg"
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 30vw, 100vw"
-                  className="object-cover"
+                  className="object-cover object-[15%_center]"
                 />
               </div>
               <figcaption className="mt-3 text-xs text-ardoise">
-                Henri Matisse, <cite>Nature morte d&rsquo;après « La Desserte » de Jan
-                Davidsz. de Heem</cite> (1915), détail.
+                Henri Rousseau, <cite>Le Rêve</cite> (1910).
               </figcaption>
             </figure>
           </div>
