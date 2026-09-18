@@ -259,6 +259,17 @@ export default function Accueil() {
           Toute oeuvre ajoutee au carrousel doit repasser cette mesure : une
           toile a fond clair, comme Composition VIII, n'est pas acquise.
 
+          2026-09-18 (suite) — cette mesure avait ete faite sur la geometrie du
+          TEXTE EN GRAND ECRAN. Sur telephone le bloc de texte est bien plus
+          haut (le paragraphe passe a sept ou huit lignes) et monte donc dans
+          une zone que le degrade ne couvrait presque plus : sur La Charmeuse
+          de serpents, le paragraphe y tombait deja a 4.24 au 5e centile, sous
+          le seuil de 4.5. Le degrade est renforce SOUS `sm` uniquement
+          (90/50 au lieu de 80/40) ; grand ecran inchange. Avec le nouveau
+          cadrage mobile de la Charmeuse (cf. `cadrage` dans oeuvres.ts), la
+          bande du paragraphe remonte a 4.81 au 5e centile et celle du H1 a
+          5.86 — meilleur qu'avant sur les deux.
+
           VISUEL : le Chagall du site actuel est protege jusqu'en 2056 et son
           fichier porte un filigrane « WahooArt.com ». Remplace ici par un
           Matisse, domaine public depuis le 1er janvier 2025.
@@ -267,7 +278,7 @@ export default function Accueil() {
         <HeroCarrousel oeuvres={OEUVRES_ACCUEIL} />
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+          className="absolute inset-0 -z-10 bg-gradient-to-t from-black/90 via-black/50 to-transparent sm:from-black/80 sm:via-black/40"
         />
 
         <div className="mx-auto w-full max-w-6xl px-5 pb-20 pt-32">

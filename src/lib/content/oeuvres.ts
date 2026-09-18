@@ -47,6 +47,21 @@ export type Oeuvre = {
   auteur: string;
   titre: string;
   annee: string;
+  /**
+   * Cadrage du hero sur ecran etroit, en classes Tailwind (`object-position`).
+   *
+   * Le hero est en `object-cover` : sur un telephone, le cadre est nettement
+   * plus haut que large (390 x 689 environ, soit 0.57) alors que les toiles
+   * sont a l'horizontale. L'image est donc rognee SUR LES COTES, et il ne
+   * reste que la bande centrale — 52 % de la largeur pour une toile au format
+   * 1.13, 33 % pour une toile au format 1.78. Centree par defaut, cette bande
+   * ne tombe pas forcement sur le sujet.
+   *
+   * A ne renseigner que pour une toile dont le sujet est excentre, et toujours
+   * avec un `sm:object-center` : sur un ecran large, c'est en hauteur que
+   * l'image est rognee, et le decalage horizontal n'aurait plus de sens.
+   */
+  cadrage?: string;
 };
 
 export const OEUVRES_ACCUEIL: Oeuvre[] = [
@@ -58,6 +73,13 @@ export const OEUVRES_ACCUEIL: Oeuvre[] = [
     auteur: "Henri Rousseau",
     titre: "La Charmeuse de serpents",
     annee: "1907",
+    /* La charmeuse, la lune et l'echassier occupent le tiers gauche de la
+       toile ; toute la moitie droite n'est que feuillage. Centree, la bande
+       visible sur telephone allait de 24 % a 76 % : la lune et l'oiseau
+       tombaient dehors, la charmeuse se retrouvait a cheval sur le bord
+       gauche, et il ne restait a l'ecran que des branchages. A 25 %, la bande
+       va de 12 % a 64 % et cadre la scene. */
+    cadrage: "object-[25%_center] sm:object-center",
   },
   {
     src: "/images/matisse-la-danse-1910.jpg",

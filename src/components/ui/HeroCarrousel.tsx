@@ -56,6 +56,9 @@ export function HeroCarrousel({ oeuvres }: { oeuvres: Oeuvre[] }) {
             sizes="100vw"
             className={[
               "object-cover transition-opacity duration-[1600ms] ease-in-out",
+              /* Recadrage sur ecran etroit, quand le sujet de la toile est
+                 excentre : cf. `cadrage` dans oeuvres.ts. */
+              o.cadrage ?? "",
               i === index ? "opacity-100" : "opacity-0",
             ].join(" ")}
           />
