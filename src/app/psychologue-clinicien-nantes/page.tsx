@@ -192,12 +192,13 @@ export default function PourquoiConsulter() {
 
           <Apparition delai={120} className="lg:col-span-5">
             <aside className="h-full">
-              {/* Sixième et dernière œuvre disponible, pour qu'aucune page ne
-                  répète celle d'une autre. Matisse, domaine public depuis 2025. */}
+              {/* Choix de Vincent (2026-09-18) : la Desserte part en
+                  /consultations/, Le Rêve la remplace ici. Aucune page ne
+                  répète l'œuvre d'une autre. Rousseau, domaine public. */}
               <figure className="flex h-full flex-col">
                 <div className="relative min-h-[260px] flex-1 overflow-hidden rounded-[20px]">
                   <Image
-                    src="/images/matisse-desserte-1915.jpg"
+                    src="/images/henri-rousseau-le-reve-1910.jpg"
                     alt=""
                     fill
                     sizes="(min-width: 1024px) 38vw, 100vw"
@@ -205,8 +206,7 @@ export default function PourquoiConsulter() {
                   />
                 </div>
                 <figcaption className="mt-3 text-xs text-ardoise">
-                  Henri Matisse, <cite>Nature morte d&rsquo;après « La Desserte » de Jan
-                  Davidsz. de Heem</cite> (1915).
+                  Henri Rousseau, <cite>Le Rêve</cite> (1910).
                 </figcaption>
               </figure>
             </aside>

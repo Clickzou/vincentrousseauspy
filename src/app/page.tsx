@@ -238,8 +238,26 @@ export default function Accueil() {
           Le site d'origine n'assombrit PAS le tableau : la lisibilite du texte
           blanc vient d'un `text-shadow: 0 0 10px rgba(0,0,0,0.73)`. Un voile
           opaque etoufferait l'oeuvre, qui est justement l'identite du site.
-          On ajoute seulement un degrade directionnel, present la ou le texte
-          se pose (bas-gauche) et transparent ailleurs.
+          On ajoute seulement un degrade, present la ou le texte se pose et
+          transparent ailleurs.
+
+          2026-09-18 — le degrade etait DIAGONAL (`to-tr`, du bas-gauche vers
+          le haut-droit). Mesure du contraste du blanc sur les huit oeuvres du
+          carrousel, dans le rectangle occupe par le texte : trois d'entre
+          elles tombaient sous 4.5:1 au 5e centile (La Desserte 2.66,
+          Composition VIII 3.00, Nature morte au geranium 4.06), donc sous le
+          seuil WCAG AA du paragraphe de 18 px. La cause est la direction : le
+          texte s'etale horizontalement en bas, la diagonale ne protegeait que
+          son extremite gauche.
+
+          Le degrade est desormais VERTICAL. A surface assombrie comparable il
+          couvre toute la largeur du texte, et il laisse le haut de l'oeuvre
+          entierement intact — la ou la diagonale mordait deja dessus. Les huit
+          oeuvres passent : pire pixel 3.67 (seuil 3.0 pour le H1 de 66 px
+          gras), 5e centile 5.11 (seuil 4.5 pour le paragraphe).
+
+          Toute oeuvre ajoutee au carrousel doit repasser cette mesure : une
+          toile a fond clair, comme Composition VIII, n'est pas acquise.
 
           VISUEL : le Chagall du site actuel est protege jusqu'en 2056 et son
           fichier porte un filigrane « WahooArt.com ». Remplace ici par un
@@ -249,7 +267,7 @@ export default function Accueil() {
         <HeroCarrousel oeuvres={OEUVRES_ACCUEIL} />
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-gradient-to-tr from-black/60 via-black/25 to-transparent"
+          className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
         />
 
         <div className="mx-auto w-full max-w-6xl px-5 pb-20 pt-32">

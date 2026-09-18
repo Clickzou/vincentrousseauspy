@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import { AuthorSignature } from "@/components/seo/AuthorSignature";
@@ -249,7 +250,28 @@ export default function TarifsEtRemboursement() {
           </Apparition>
 
           <Apparition delai={120} className="lg:col-span-5">
-            <AuthorSignature modifieLe={MODIFIE_LE} variante="encadre" />
+            <div className="flex h-full flex-col gap-6">
+              <AuthorSignature modifieLe={MODIFIE_LE} variante="encadre" />
+
+              {/* Œuvre demandée par Vincent pour cette page (2026-09-18).
+                  Elle occupe la hauteur restante sous la signature : sur une
+                  page de tarifs, elle desserre une colonne qui, sinon, n'est
+                  que chiffres. Décorative, donc `alt=""`. */}
+              <figure className="flex min-h-0 flex-1 flex-col">
+                <div className="relative min-h-[220px] flex-1 overflow-hidden rounded-[20px]">
+                  <Image
+                    src="/images/kandinsky-composition-viii-1923.jpg"
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 38vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="mt-3 text-xs text-ardoise">
+                  Vassily Kandinsky, <cite>Composition VIII</cite> (1923).
+                </figcaption>
+              </figure>
+            </div>
           </Apparition>
         </div>
       </section>

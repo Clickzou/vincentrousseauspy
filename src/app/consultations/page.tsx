@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AuthorSignature } from "@/components/seo/AuthorSignature";
 import { UrgenceBanner } from "@/components/seo/UrgenceBanner";
 import { Apparition } from "@/components/ui/Apparition";
+import { OeuvreIllustration } from "@/components/ui/OeuvreIllustration";
 import { breadcrumbSchema, graph } from "@/lib/seo/schemas";
 import {
   adressePostale,
@@ -116,23 +117,43 @@ export default function Consultations() {
         </nav>
 
         <Apparition>
-          <div className="mt-8 rounded-[20px] border border-sable bg-creme px-6 py-10 text-center sm:px-12">
-            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
-              Consultations pour adultes, sur rendez-vous au cabinet
-            </p>
+          <div className="mt-8 rounded-[20px] border border-sable bg-creme px-6 py-10 sm:px-12">
+            {/* Œuvre reportée ici depuis /psychologue-clinicien-nantes/ à la
+                demande de Vincent (2026-09-18).
+                L'œuvre tient 5 colonnes sur 12 à gauche, le titre et le chapeau
+                les 7 autres, alignés sur son milieu. En dessous de `lg`, elle
+                repasse au-dessus du texte. */}
+            <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
+              <div className="lg:col-span-5">
+                <OeuvreIllustration
+                  src="/images/matisse-desserte-1915.jpg"
+                  auteur="Henri Matisse"
+                  titre={<>Nature morte d&rsquo;après « La Desserte » de Jan Davidsz. de Heem</>}
+                  annee="1915"
+                  largeur={1580}
+                  hauteur={888}
+                />
+              </div>
 
-            <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-bois sm:text-[40px]">
-              Le déroulé, le cadre et la première séance
-            </h1>
+              <div className="lg:col-span-7">
+                <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
+                  Consultations pour adultes, sur rendez-vous au cabinet
+                </p>
 
-            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+                <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-bois sm:text-[40px]">
+                  Le déroulé, le cadre et la première séance
+                </h1>
 
-            <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
-              Faire la démarche de consulter est un grand pas, et il est tout à fait naturel
-              de ressentir de l&rsquo;appréhension face à l&rsquo;inconnu. Pour vous aider à
-              aborder ce moment plus sereinement, je vous propose de découvrir ici, en toute
-              transparence, comment se déroulent nos rencontres au cabinet.
-            </p>
+                <div className="mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+
+                <p className="mt-5 font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
+                  Faire la démarche de consulter est un grand pas, et il est tout à fait naturel
+                  de ressentir de l&rsquo;appréhension face à l&rsquo;inconnu. Pour vous aider à
+                  aborder ce moment plus sereinement, je vous propose de découvrir ici, en toute
+                  transparence, comment se déroulent nos rencontres au cabinet.
+                </p>
+              </div>
+            </div>
           </div>
         </Apparition>
       </section>

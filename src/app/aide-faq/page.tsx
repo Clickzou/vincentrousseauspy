@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Apparition } from "@/components/ui/Apparition";
 import { FaqAccordeon } from "@/components/ui/FaqAccordeon";
+import { OeuvreIllustration } from "@/components/ui/OeuvreIllustration";
 import { QUESTIONS, reponseEnTexte } from "@/lib/content/faq";
 import { breadcrumbSchema, faqSchema, graph } from "@/lib/seo/schemas";
 import { cabinet, contact, praticien } from "@/lib/site-config";
@@ -65,24 +66,43 @@ export default function AideFaq() {
         </nav>
 
         <Apparition>
-          <div className="mt-8 rounded-[20px] border border-sable bg-creme px-6 py-10 text-center sm:px-12">
-            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
-              {`${QUESTIONS.length} questions · Prix, remboursement, première séance`}
-            </p>
+          <div className="mt-8 rounded-[20px] border border-sable bg-creme px-6 py-10 sm:px-12">
+            {/* Œuvre choisie par Vincent pour cette page (2026-09-18).
+                L'œuvre tient 5 colonnes sur 12 à gauche, le titre et le chapeau
+                les 7 autres, alignés sur son milieu. En dessous de `lg`, elle
+                repasse au-dessus du texte. */}
+            <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
+              <div className="lg:col-span-5">
+                <OeuvreIllustration
+                  src="/images/henri-rousseau-lutte-de-l-indien-et-du-gorille-1910.jpg"
+                  auteur="Henri Rousseau"
+                  titre={<>Paysage tropical&nbsp;: lutte de l&rsquo;Indien et du gorille</>}
+                  annee="1910"
+                  largeur={1600}
+                  hauteur={1108}
+                />
+              </div>
 
-            <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-bois sm:text-[40px]">
-              Questions fréquentes
-            </h1>
+              <div className="lg:col-span-7">
+                <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
+                  {`${QUESTIONS.length} questions · Prix, remboursement, première séance`}
+                </p>
 
-            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+                <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-bois sm:text-[40px]">
+                  Questions fréquentes
+                </h1>
 
-            <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
-              Entreprendre une démarche thérapeutique soulève souvent des interrogations.
-              Retrouvez ici les réponses aux questions les plus courantes, pour vous aider à
-              aborder votre premier rendez-vous en toute sérénité. Si la vôtre n&rsquo;y
-              figure pas, appelez-moi&nbsp;: je vous répondrai avec plaisir, sans aucun
-              engagement de votre part.
-            </p>
+                <div className="mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+
+                <p className="mt-5 font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
+                  Entreprendre une démarche thérapeutique soulève souvent des interrogations.
+                  Retrouvez ici les réponses aux questions les plus courantes, pour vous aider à
+                  aborder votre premier rendez-vous en toute sérénité. Si la vôtre n&rsquo;y
+                  figure pas, appelez-moi&nbsp;: je vous répondrai avec plaisir, sans aucun
+                  engagement de votre part.
+                </p>
+              </div>
+            </div>
           </div>
         </Apparition>
       </section>

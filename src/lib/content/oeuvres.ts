@@ -7,6 +7,7 @@
  *   - Henri Matisse .... 1869-1954 → domaine public depuis le 1er janvier 2025
  *   - Vassily Kandinsky  1866-1944 → domaine public depuis 2015
  *   - Félix Vallotton .. 1865-1925 → domaine public depuis 1996
+ *   - Henri Rousseau ... 1844-1910 → domaine public depuis 1981
  *
  * Les œuvres des cartes du blog viennent de Wikimedia Commons, marquées
  * domaine public : le serveur d'images de l'Art Institute oppose désormais un
@@ -26,6 +27,16 @@
  * fichiers portent en plus un filigrane « WahooArt.com » visible.
  * Cf. docs/donnees-vincent.md § 11.
  *
+ * Le 2026-09-18, Vincent a proposé huit œuvres (Word « Les images ») dont un
+ * Miró des Constellations, pour l'accueil et pour la page tarifs. Écarté pour
+ * cette raison : les sept autres, toutes dans le domaine public, ont été
+ * reprises. Les fichiers viennent de Wikimedia Commons (domaine public ou
+ * CC0) et non du Word, dont les reproductions de « La Danse » et de « La
+ * Musique » étaient des copies repeintes.
+ *
+ * Le peintre Henri Rousseau n'a aucun lien avec Vincent Rousseau : ses
+ * fichiers sont préfixés « henri-rousseau- » pour lever l'ambiguïté.
+ *
  * Source des fichiers : Art Institute of Chicago, collection en accès ouvert.
  * Reproductions fidèles d'œuvres 2D du domaine public : la photographie ne
  * crée pas de droit nouveau en droit français.
@@ -39,6 +50,27 @@ export type Oeuvre = {
 };
 
 export const OEUVRES_ACCUEIL: Oeuvre[] = [
+  // Les trois œuvres choisies par Vincent le 2026-09-18, dans son ordre de
+  // préférence. Elles ouvrent le carrousel : la première porte le LCP et
+  // reste seule affichée si le visiteur a demandé moins d'animation.
+  {
+    src: "/images/henri-rousseau-charmeuse-de-serpents-1907.jpg",
+    auteur: "Henri Rousseau",
+    titre: "La Charmeuse de serpents",
+    annee: "1907",
+  },
+  {
+    src: "/images/matisse-la-danse-1910.jpg",
+    auteur: "Henri Matisse",
+    titre: "La Danse",
+    annee: "1910",
+  },
+  {
+    src: "/images/kandinsky-composition-viii-1923.jpg",
+    auteur: "Vassily Kandinsky",
+    titre: "Composition VIII",
+    annee: "1923",
+  },
   {
     src: "/images/matisse-desserte-1915.jpg",
     auteur: "Henri Matisse",

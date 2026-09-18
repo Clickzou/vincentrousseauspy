@@ -173,7 +173,7 @@ export default function PageAuteur() {
                   ou l'écran étroit. */}
               <div className="relative min-h-[260px] flex-1 overflow-hidden rounded-[20px]">
                 <Image
-                  src="/images/matisse-detail-nature-morte.jpg"
+                  src="/images/matisse-la-musique-1910.jpg"
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 38vw, 100vw"
@@ -181,8 +181,7 @@ export default function PageAuteur() {
                 />
               </div>
               <figcaption className="mt-3 text-xs text-ardoise">
-                Henri Matisse, <cite>Nature morte d&rsquo;après « La Desserte » de Jan
-                Davidsz. de Heem</cite> (1915), détail.
+                Henri Matisse, <cite>La Musique</cite> (1910).
               </figcaption>
             </figure>
             </aside>

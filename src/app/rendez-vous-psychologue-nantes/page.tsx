@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FormulaireRappel } from "@/components/formulaire/FormulaireRappel";
 import { UrgenceBanner } from "@/components/seo/UrgenceBanner";
 import { Apparition } from "@/components/ui/Apparition";
+import { OeuvreIllustration } from "@/components/ui/OeuvreIllustration";
 import {
   IconeDocument,
   IconeHorloge,
@@ -103,22 +104,41 @@ export default function RendezVous() {
         </nav>
 
         <Apparition>
-          <div className="mx-auto mt-8 max-w-6xl rounded-[20px] border border-sable bg-creme px-6 py-10 text-center sm:px-12">
-            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
-              {`${horaires.libelle} · Réponse ${priseRdv.delaiReponse}`}
-            </p>
+          <div className="mx-auto mt-8 max-w-6xl rounded-[20px] border border-sable bg-creme px-6 py-10 sm:px-12">
+            {/* Œuvre choisie par Vincent pour cette page (2026-09-18).
+                L'œuvre tient 5 colonnes sur 12 à gauche, le titre et le chapeau
+                les 7 autres, alignés sur son milieu. En dessous de `lg`, elle
+                repasse au-dessus du texte. */}
+            <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
+              <div className="lg:col-span-5">
+                <OeuvreIllustration
+                  src="/images/kandinsky-jaune-rouge-bleu-1925.jpg"
+                  auteur="Vassily Kandinsky"
+                  titre={<>Jaune-rouge-bleu</>}
+                  annee="1925"
+                  largeur={1600}
+                  hauteur={1029}
+                />
+              </div>
 
-            <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-bois sm:text-[40px]">
-              {`Prendre rendez-vous avec un psychologue à ${cabinet.ville}`}
-            </h1>
+              <div className="lg:col-span-7">
+                <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
+                  {`${horaires.libelle} · Réponse ${priseRdv.delaiReponse}`}
+                </p>
 
-            <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+                <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-bois sm:text-[40px]">
+                  {`Prendre rendez-vous avec un psychologue à ${cabinet.ville}`}
+                </h1>
 
-            <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
-              Le plus simple est de m&rsquo;appeler&nbsp;: nous fixons un rendez-vous en
-              quelques minutes. Si vous préférez ne pas téléphoner, vous pouvez demander à
-              être rappelé. Je vous recontacte {priseRdv.delaiReponse}.
-            </p>
+                <div className="mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
+
+                <p className="mt-5 font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
+                  Le plus simple est de m&rsquo;appeler&nbsp;: nous fixons un rendez-vous en
+                  quelques minutes. Si vous préférez ne pas téléphoner, vous pouvez demander à
+                  être rappelé. Je vous recontacte {priseRdv.delaiReponse}.
+                </p>
+              </div>
+            </div>
           </div>
         </Apparition>
       </section>
