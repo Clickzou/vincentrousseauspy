@@ -332,6 +332,40 @@ export default function PourquoiConsulter() {
         </div>
       </section>
 
+      {/* BANDEAU — demande de Vincent (2026-09-22) : un détail du Rêve en bas
+          de page. Le détail retenu est celui qu'il a envoyé : les deux lions,
+          les nymphéas et le pan rayé du joueur de flûte. La dormeuse, qui
+          occupe le quart gauche de la toile, en est absente — c'est tout
+          l'objet du recadrage.
+
+          Le fichier est un vrai découpage de la toile (henri-rousseau-le-reve-
+          1910.jpg, zone 660-1600 × 512-874), et non un object-position : en
+          `object-cover`, un bandeau PLUS large que la toile (2,6 contre 1,48)
+          ne rogne que verticalement, jamais sur les côtés — la dormeuse serait
+          restée dans le champ quoi qu'on fasse du cadrage CSS.
+
+          Deux formats : 16/9 sur téléphone, sans quoi la bande ferait 140 px
+          de haut et les lions y seraient illisibles ; 2,6 au-delà, le format du
+          détail lui-même, donc sans nouvelle coupe. */}
+      <section className="px-5 pb-10 sm:px-10 lg:px-[100px]">
+        <Apparition>
+          <figure>
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[20px] sm:aspect-[2.6/1]">
+              <Image
+                src="/images/henri-rousseau-le-reve-1910-detail-lions.jpg"
+                alt=""
+                fill
+                sizes="(min-width: 1024px) calc(100vw - 200px), 100vw"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="mt-3 text-xs text-ardoise">
+              Henri Rousseau, <cite>Le Rêve</cite> (1910), détail.
+            </figcaption>
+          </figure>
+        </Apparition>
+      </section>
+
       {/* CONVERSION, en carte pêche comme sur les autres pages. */}
       <section aria-labelledby="commencer" className="px-5 pb-10 sm:px-10 lg:px-[100px]">
         <Apparition>
