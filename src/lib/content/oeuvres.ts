@@ -65,9 +65,24 @@ export type Oeuvre = {
 };
 
 export const OEUVRES_ACCUEIL: Oeuvre[] = [
-  // Les trois œuvres choisies par Vincent le 2026-09-18, dans son ordre de
-  // préférence. Elles ouvrent le carrousel : la première porte le LCP et
-  // reste seule affichée si le visiteur a demandé moins d'animation.
+  // Les trois œuvres choisies par Vincent le 2026-09-18. Elles ouvrent le
+  // carrousel : la première porte le LCP et reste seule affichée si le
+  // visiteur a demandé moins d'animation.
+  //
+  // 2026-09-22 — Vincent a photographié le hero sur Composition VIII et
+  // demandé que ce soit elle, la première. Elle passe donc devant la
+  // Charmeuse, qui tenait la place depuis le 18. Le contraste du blanc y
+  // reste conforme : c'est la toile la plus claire des huit, mesurée à 3.00
+  // au 5e centile sous l'ancien dégradé DIAGONAL, mais le dégradé vertical
+  // mis en place le même jour la fait repasser (cf. le bloc HERO dans
+  // page.tsx). Aucun cadrage mobile : la composition occupe toute la toile,
+  // la bande centrale ne perd pas de sujet.
+  {
+    src: "/images/kandinsky-composition-viii-1923.jpg",
+    auteur: "Vassily Kandinsky",
+    titre: "Composition VIII",
+    annee: "1923",
+  },
   {
     src: "/images/henri-rousseau-charmeuse-de-serpents-1907.jpg",
     auteur: "Henri Rousseau",
@@ -86,12 +101,6 @@ export const OEUVRES_ACCUEIL: Oeuvre[] = [
     auteur: "Henri Matisse",
     titre: "La Danse",
     annee: "1910",
-  },
-  {
-    src: "/images/kandinsky-composition-viii-1923.jpg",
-    auteur: "Vassily Kandinsky",
-    titre: "Composition VIII",
-    annee: "1923",
   },
   {
     src: "/images/matisse-desserte-1915.jpg",
