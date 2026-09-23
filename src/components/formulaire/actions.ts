@@ -23,7 +23,8 @@ import { ETAT_INITIAL, type EtatFormulaire } from "./etat";
  * Rien n'est écrit nulle part : ni base, ni fichier, ni log (§ 2.4).
  */
 
-const NOM = /^[\p{L}\p{M}'’ -]{2,80}$/u;
+/** Nom ET prénom : au moins deux mots — Vincent ne reçoit pas de demande anonyme. */
+const NOM = /^(?=.{3,80}$)[\p{L}\p{M}'’-]+(?: [\p{L}\p{M}'’-]+)+$/u;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 /** Numéro français, fixe ou mobile, une fois retirés espaces, points et tirets. */
 const TELEPHONE = /^(?:\+33|0)[1-9]\d{8}$/;
@@ -48,9 +49,9 @@ export async function demanderRappel(
 
   const erreurs: Record<string, string> = {};
 
-  const nom = texte(data, "nom");
+  const nom = texte(data, "nom").replace(/\s+/g, " ");
   if (!NOM.test(nom)) {
-    erreurs.nom = "Indiquez le nom sous lequel vous rappeler (2 caractères minimum).";
+    erreurs.nom = "Indiquez votre nom et votre prénom, par exemple Marie Durand.";
   }
 
   const telephoneBrut = texte(data, "telephone");

@@ -76,7 +76,7 @@ export function FormulaireRappel() {
 
       <div>
         <label htmlFor="nom" className={ETIQUETTE}>
-          Votre nom <span className="text-ardoise">(ou le prénom qui vous convient)</span>
+          Votre nom et prénom <span className="text-ardoise">(obligatoire)</span>
         </label>
         <input
           id="nom"
