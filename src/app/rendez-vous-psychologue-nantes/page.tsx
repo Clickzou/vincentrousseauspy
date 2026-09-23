@@ -63,12 +63,15 @@ export const metadata: Metadata = {
 const ETAPES = [
   {
     titre: "Vous prenez contact",
-    texte: "Par téléphone ou en demandant à être rappelé. Vous n'avez rien à préparer à l'avance.",
+    texte:
+      "Par téléphone, par e-mail ou en demandant à être rappelé. Vous n'avez rien à " +
+      "préparer à l'avance.",
   },
   {
     titre: "Nous convenons d'un horaire",
     texte:
-      "Un échange de quelques minutes suffit à fixer une première séance et à " +
+      "Un échange de quelques minutes ou une réponse écrite suffit à fixer une " +
+      "première séance et à " +
       "répondre à vos questions pratiques.",
   },
   {
