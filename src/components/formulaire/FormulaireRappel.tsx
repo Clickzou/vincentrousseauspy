@@ -118,12 +118,13 @@ export function FormulaireRappel() {
 
         <div>
           <label htmlFor="email" className={ETIQUETTE}>
-            E-mail <span className="text-ardoise">(facultatif)</span>
+            E-mail <span className="text-ardoise">(obligatoire)</span>
           </label>
           <input
             id="email"
             name="email"
             type="email"
+            required
             maxLength={120}
             autoComplete="email"
             aria-invalid={Boolean(erreurs.email)}
@@ -131,8 +132,7 @@ export function FormulaireRappel() {
             className={CHAMP}
           />
           <p id="aide-email" className="mt-2 text-sm text-ardoise">
-            Utile seulement si vous préférez que je vous écrive pour convenir d&rsquo;un
-            horaire.
+            Pour vous confirmer l&rsquo;horaire si je n&rsquo;arrive pas à vous joindre.
           </p>
           <Erreur id="erreur-email" texte={erreurs.email} />
         </div>

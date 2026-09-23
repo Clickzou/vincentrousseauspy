@@ -60,8 +60,8 @@ export async function demanderRappel(
   }
 
   const email = texte(data, "email");
-  if (email && (!EMAIL.test(email) || email.length > 120)) {
-    erreurs.email = "Cette adresse ne semble pas valide. Vous pouvez aussi la laisser vide.";
+  if (!EMAIL.test(email) || email.length > 120) {
+    erreurs.email = "Indiquez une adresse e-mail valide, par exemple nom@exemple.fr.";
   }
 
   const situation = texte(data, "situation");
@@ -88,7 +88,7 @@ export async function demanderRappel(
   const resultat = await envoyerDemande({
     nom,
     telephone: telephoneBrut,
-    email: email || undefined,
+    email,
     situation: libelleSituation(situation),
     creneaux: creneaux.map(libelleCreneau),
   });

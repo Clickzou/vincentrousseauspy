@@ -111,9 +111,8 @@ export default function PolitiqueDeConfidentialite() {
         <H2 id="formulaire">Le formulaire de rappel</H2>
         <p className="mt-4">
           C&rsquo;est le seul endroit du site où vous pouvez saisir quelque chose. Il
-          demande trois informations&nbsp;: un nom, un numéro de téléphone, et les moments
-          où vous pouvez être rappelé. Une adresse e-mail peut être ajoutée, elle est
-          facultative.
+          demande quatre informations&nbsp;: un nom, un numéro de téléphone, une adresse
+          e-mail et les moments où vous pouvez être rappelé.
         </p>
         <p className="mt-4">
           Il ne comporte <strong>aucune zone de texte libre</strong>. Ce n&rsquo;est pas un

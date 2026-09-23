@@ -276,8 +276,8 @@ export default function RendezVous() {
               <div className="mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
               <p className="mt-6 text-ardoise">
-                Trois informations suffisent&nbsp;: comment vous appeler, à quel numéro, et
-                quand. {priseRdv.suite}
+                Quatre informations suffisent&nbsp;: comment vous appeler, à quel numéro,
+                votre e-mail, et quand. {priseRdv.suite}
               </p>
 
               <div className="mt-8">
