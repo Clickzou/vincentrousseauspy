@@ -36,6 +36,15 @@ export function IconeTelephone() {
   );
 }
 
+export function IconeEnveloppe() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" {...traits}>
+      <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
+      <path d="m4 7 8 6 8-6" />
+    </svg>
+  );
+}
+
 export function IconeHorloge() {
   return (
     <svg viewBox="0 0 24 24" className="h-5 w-5" {...traits}>

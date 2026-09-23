@@ -10,6 +10,8 @@ import {
 } from "@/lib/content/rendez-vous";
 import { envoyerDemande } from "@/lib/email/envoi";
 
+import { ETAT_INITIAL, type EtatFormulaire } from "./etat";
+
 /**
  * Traitement de la demande de rappel.
  *
@@ -20,16 +22,6 @@ import { envoyerDemande } from "@/lib/email/envoi";
  *
  * Rien n'est écrit nulle part : ni base, ni fichier, ni log (§ 2.4).
  */
-
-export type EtatFormulaire = {
-  statut: "attente" | "erreur";
-  /** Messages par champ, affichés sous l'intitulé concerné. */
-  erreurs?: Record<string, string>;
-  /** Message général, affiché en tête de formulaire. */
-  message?: string;
-};
-
-export const ETAT_INITIAL: EtatFormulaire = { statut: "attente" };
 
 const NOM = /^[\p{L}\p{M}'’ -]{2,80}$/u;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;

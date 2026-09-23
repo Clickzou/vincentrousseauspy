@@ -4,7 +4,8 @@ import { useActionState } from "react";
 
 import { CRENEAUX, SITUATIONS } from "@/lib/content/rendez-vous";
 import { contact, priseRdv } from "@/lib/site-config";
-import { demanderRappel, ETAT_INITIAL } from "./actions";
+import { demanderRappel } from "./actions";
+import { ETAT_INITIAL } from "./etat";
 
 /**
  * Formulaire de demande de rappel.
@@ -94,7 +95,7 @@ export function FormulaireRappel() {
       <div className="grid gap-7 sm:grid-cols-2">
         <div>
           <label htmlFor="telephone" className={ETIQUETTE}>
-            Téléphone
+            Téléphone <span className="text-ardoise">(obligatoire)</span>
           </label>
           <input
             id="telephone"

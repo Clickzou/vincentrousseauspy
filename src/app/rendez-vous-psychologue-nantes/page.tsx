@@ -7,6 +7,7 @@ import { Apparition } from "@/components/ui/Apparition";
 import { OeuvreIllustration } from "@/components/ui/OeuvreIllustration";
 import {
   IconeDocument,
+  IconeEnveloppe,
   IconeHorloge,
   IconeLieu,
   IconeTelephone,
@@ -211,6 +212,29 @@ export default function RendezVous() {
                     </li>
                   ))}
                 </ul>
+              </div>
+            </Apparition>
+
+            {/* Même bouton que sur la page contact. */}
+            <Apparition delai={60}>
+              <div className="rounded-[20px] bg-lavande p-7 sm:p-9">
+                <h3 id="par-email" className="text-2xl font-bold text-bois">
+                  Écrire un mail
+                </h3>
+                <p className="mt-3 text-ardoise">
+                  Pour convenir d&rsquo;un horaire ou poser une question pratique.
+                  Je ne réponds pas par écrit aux questions cliniques.
+                </p>
+
+                <p className="mt-6">
+                  <a
+                    href={`mailto:${contact.email}`}
+                    className="inline-flex items-center gap-3 rounded-full border border-bois px-8 py-4 text-sm font-semibold uppercase tracking-wider text-bois"
+                  >
+                    <IconeEnveloppe />
+                    Écrire un e-mail
+                  </a>
+                </p>
               </div>
             </Apparition>
 
