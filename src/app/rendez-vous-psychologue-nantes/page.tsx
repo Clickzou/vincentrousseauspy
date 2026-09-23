@@ -164,7 +164,9 @@ export default function RendezVous() {
         </h2>
 
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
-          <div className="space-y-6 lg:col-span-5">
+          {/* Colonne en flex : la carte e-mail s'étire pour finir au même
+              niveau que la carte du formulaire, à droite. */}
+          <div className="flex flex-col gap-6 lg:col-span-5">
             <Apparition>
               <div className="rounded-[20px] bg-peche p-7 sm:p-9">
                 <h3 id="par-telephone" className="text-2xl font-bold text-bois">
@@ -216,14 +218,32 @@ export default function RendezVous() {
             </Apparition>
 
             {/* Même bouton que sur la page contact. */}
-            <Apparition delai={60}>
-              <div className="rounded-[20px] bg-lavande p-7 sm:p-9">
+            <Apparition delai={60} className="flex-1">
+              <div className="h-full rounded-[20px] bg-lavande p-7 sm:p-9">
                 <h3 id="par-email" className="text-2xl font-bold text-bois">
                   Écrire un mail
                 </h3>
                 <p className="mt-3 text-ardoise">
-                  Pour convenir d&rsquo;un horaire ou poser une question pratique.
-                  Je ne réponds pas par écrit aux questions cliniques.
+                  Pour convenir d&rsquo;un premier rendez-vous ou poser une question
+                  pratique.
+                </p>
+                <p className="mt-3 text-ardoise">
+                  Pour faciliter nos échanges, merci d&rsquo;indiquer dans votre
+                  message&nbsp;:
+                </p>
+                <ul className="mt-2 space-y-1 text-ardoise">
+                  {["Vos disponibilités horaires", "Votre numéro de téléphone"].map((point) => (
+                    <li key={point} className="flex gap-3">
+                      <span
+                        aria-hidden="true"
+                        className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-terracotta"
+                      />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-3 text-sm text-ardoise">
+                  Note&nbsp;: je ne réponds pas par écrit aux questions cliniques.
                 </p>
 
                 <p className="mt-6">
@@ -237,39 +257,11 @@ export default function RendezVous() {
                 </p>
               </div>
             </Apparition>
-
-            {/* Explication du champ absent. Sans elle, l'absence de zone de
-                message passe pour un oubli — alors que c'est une protection. */}
-            <Apparition delai={120}>
-              <div className="rounded-[20px] border border-sable bg-white p-7 sm:p-9">
-                <h3 className="text-lg font-bold text-bois">
-                  Pourquoi n&rsquo;y a-t-il pas de zone de message&nbsp;?
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-ardoise">
-                  Ce que vous traversez relève du secret professionnel. Écrit dans un
-                  formulaire, il transiterait par un serveur et une boîte mail, qui ne sont
-                  pas prévus pour recevoir des informations de santé.
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-ardoise">
-                  Ce site ne vous demande donc rien de votre situation, et n&rsquo;enregistre
-                  aucune de ces demandes&nbsp;: elles sont transmises par e-mail, puis
-                  disparaissent du site. Nous en parlerons de vive voix.
-                </p>
-                <p className="mt-4 text-sm">
-                  <Link
-                    href="/politique-de-confidentialite/"
-                    className="text-terracotta-fonce underline underline-offset-2"
-                  >
-                    Comment vos données sont traitées
-                  </Link>
-                </p>
-              </div>
-            </Apparition>
           </div>
 
           {/* CANAL 3 — le formulaire. */}
           <Apparition delai={60} className="lg:col-span-7">
-            <div className="rounded-[20px] bg-white p-7 sm:p-9 lg:p-10">
+            <div className="h-full rounded-[20px] bg-white p-7 sm:p-9 lg:p-10">
               <h3 id="par-formulaire" className="text-2xl font-bold text-bois sm:text-[33px]">
                 Demander à être rappelé
               </h3>
@@ -286,6 +278,39 @@ export default function RendezVous() {
             </div>
           </Apparition>
         </div>
+
+        {/* Explication du champ absent. Sans elle, l'absence de zone de
+            message passe pour un oubli — alors que c'est une protection.
+            Sur toute la largeur, sous les deux colonnes (demande de JC,
+            2026-09-23) ; les deux paragraphes côte à côte en `md` pour que les
+            lignes ne s'étirent pas sur toute la page. */}
+        <Apparition delai={120}>
+          <div className="mt-8 rounded-[20px] border border-sable bg-white p-7 sm:p-9 lg:p-10">
+            <h3 className="text-lg font-bold text-bois">
+              Pourquoi n&rsquo;y a-t-il pas de zone de message&nbsp;?
+            </h3>
+            <div className="mt-3 grid gap-3 md:grid-cols-2 md:gap-10">
+              <p className="text-sm leading-relaxed text-ardoise">
+                Ce que vous traversez relève du secret professionnel. Écrit dans un
+                formulaire, il transiterait par un serveur et une boîte mail, qui ne sont
+                pas prévus pour recevoir des informations de santé.
+              </p>
+              <p className="text-sm leading-relaxed text-ardoise">
+                Ce site ne vous demande donc rien de votre situation, et n&rsquo;enregistre
+                aucune de ces demandes&nbsp;: elles sont transmises par e-mail, puis
+                disparaissent du site. Nous en parlerons de vive voix.
+              </p>
+            </div>
+            <p className="mt-4 text-sm">
+              <Link
+                href="/politique-de-confidentialite/"
+                className="text-terracotta-fonce underline underline-offset-2"
+              >
+                Comment vos données sont traitées
+              </Link>
+            </p>
+          </div>
+        </Apparition>
       </section>
 
       {/* CANAL 2 — plateforme hébergée HDS. Le bloc n'apparaît que si elle
