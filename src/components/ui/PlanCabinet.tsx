@@ -28,8 +28,16 @@ import { adressePostale } from "@/lib/site-config";
  * trajet porte à porte, ce qu'une carte encastrée ne donne pas.
  */
 
-/** Lien de plan externe, repris du site actuel (docs/donnees-vincent.md § 2). */
-export const PLAN_URL = "https://goo.gl/maps/DQ4LPE52wByQV3i29";
+/**
+ * Lien d'itinéraire externe. Il remplace le raccourci goo.gl du site actuel
+ * (docs/donnees-vincent.md § 2) : Google a fermé ce service, et le lien
+ * renvoyait vers une carte sans rapport (Miami). La forme `dir/?api=1` est
+ * l'URL documentée et stable de Google Maps : elle ouvre l'itinéraire vers
+ * l'adresse, dans l'application sur mobile, et propose le point de départ.
+ */
+export const PLAN_URL =
+  "https://www.google.com/maps/dir/?api=1&destination=" +
+  encodeURIComponent(`${adressePostale}, France`);
 
 /**
  * URL d'intégration sans clé d'API ni compte Google Cloud. `output=embed` est
