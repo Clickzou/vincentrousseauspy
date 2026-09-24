@@ -46,7 +46,7 @@ export const praticien = {
    */
   doubleTitre:
     "Le double titre de « psychologue clinicien-psychanalyste » sous lequel je me présente " +
-    "met l'accent sur ma double formation. Ces deux approches, menées en parallèle, se " +
+    "met l'accent sur ma double formation. Ces deux parcours, menés en parallèle, se " +
     "complètent pour enrichir ma pratique.",
   rattachements: [
     "Association lacanienne internationale (ALI)",
