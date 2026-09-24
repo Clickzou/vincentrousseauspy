@@ -177,8 +177,8 @@ const ETAPES = [
   {
     titre: "Le suivi",
     texte:
-      "Si nous choisissons de poursuivre, nous définissons ensemble le rythme et les " +
-      "modalités des séances.",
+      "Si nous choisissons de poursuivre, nous définissons ensemble le cadre et les " +
+      "modalités pratiques des séances.",
   },
 ];
 

@@ -1,4 +1,4 @@
-import { cabinet, honoraires, horaires, publics } from "@/lib/site-config";
+import { cabinet, honoraires, horaires, monSoutienPsy, publics } from "@/lib/site-config";
 
 /**
  * SOURCE UNIQUE des questions fréquentes.
@@ -48,6 +48,12 @@ export type Question = {
   reponse: BlocReponse[];
   /** Affichée sur la page d'accueil (sélection à forte intention). */
   surAccueil?: boolean;
+  /**
+   * Expressions de la réponse à rendre cliquables : `{ "ameli.fr": url }`.
+   * Le texte reste une chaîne simple, ce qui laisse `reponseEnTexte()` intact
+   * pour le JSON-LD ; seul l'affichage pose le lien.
+   */
+  liens?: Record<string, string>;
 };
 
 /**
@@ -93,6 +99,7 @@ export const QUESTIONS: Question[] = [
      * chiffrer ici le nombre de séances — c'est le rôle de la page tarifs, qui
      * porte la date de vérification et les sources.
      */
+    liens: { "ameli.fr": monSoutienPsy.urlAmeli },
     reponse: [
       "En cabinet libéral, les consultations de psychologie ne sont pas remboursées " +
         "par le régime général de l'Assurance Maladie. Des solutions de prise en charge " +

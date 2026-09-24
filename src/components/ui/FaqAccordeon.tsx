@@ -36,18 +36,60 @@ import type { BlocReponse, Question } from "@/lib/content/faq";
  * les donne à lire d'un coup d'œil, là où le paragraphe unique du modèle
  * précédent obligeait à tout lire pour trouver la ligne qui concerne.
  */
-function CorpsReponse({ reponse }: { reponse: BlocReponse[] }) {
+/**
+ * Pose les liens de `Question.liens` sur le texte. Ce sont des sources
+ * externes (ameli.fr) : nouvel onglet et `noopener noreferrer`, comme les
+ * autres sources du site.
+ */
+function AvecLiens({ texte, liens }: { texte: string; liens?: Record<string, string> }) {
+  const expressions = liens ? Object.keys(liens) : [];
+  if (expressions.length === 0) return <>{texte}</>;
+
+  const echappees = expressions.map((e) => e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const morceaux = texte.split(new RegExp(`(${echappees.join("|")})`));
+  return (
+    <>
+      {morceaux.map((morceau, i) =>
+        liens && morceau in liens ? (
+          <a
+            key={i}
+            href={liens[morceau]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-terracotta-fonce underline underline-offset-2"
+          >
+            {morceau}
+          </a>
+        ) : (
+          morceau
+        ),
+      )}
+    </>
+  );
+}
+
+function CorpsReponse({
+  reponse,
+  liens,
+}: {
+  reponse: BlocReponse[];
+  liens?: Record<string, string>;
+}) {
   return (
     <div className="space-y-3 px-6 pb-6 text-ardoise">
       {reponse.map((bloc, i) =>
         typeof bloc === "string" ? (
-          <p key={i}>{bloc}</p>
+          <p key={i}>
+            <AvecLiens texte={bloc} liens={liens} />
+          </p>
         ) : (
           /* `list-disc` et non des pastilles maison : la puce doit rester une
              puce pour les lecteurs d'écran, qui annoncent le nombre d'éléments. */
           <ul key={i} className="list-disc space-y-2 pl-5">
             {bloc.liste.map((point) => (
-              <li key={point}>{point}</li>
+              <li key={point}>
+                <AvecLiens texte={point} liens={liens} />
+              </li>
             ))}
           </ul>
         ),
@@ -87,7 +129,7 @@ export function FaqAccordeon({
                 <IconeChevron />
               </span>
             </summary>
-            <CorpsReponse reponse={item.reponse} />
+            <CorpsReponse reponse={item.reponse} liens={item.liens} />
           </details>
         </li>
       ))}
