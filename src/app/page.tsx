@@ -533,8 +533,12 @@ export default function Accueil() {
             haut : c'est le motif générique de tous les thèmes WordPress. Ici,
             plus de boîte du tout — la structure vient de la typographie, d'un
             grand numéro et de filets d'un pixel. Le regard suit une hiérarchie
-            au lieu de compter des rectangles. */}
-        <ol className="grid gap-px overflow-hidden rounded-[20px] bg-sable sm:grid-cols-3">
+            au lieu de compter des rectangles.
+
+            Trois colonnes à partir de `lg` seulement : en tablette portrait
+            (768 px), « Psychothérapeute » débordait de sa colonne et les
+            mentions se cassaient sur trois lignes. */}
+        <ol className="grid gap-px overflow-hidden rounded-[20px] bg-sable lg:grid-cols-3">
           {TITRES.map((carte, i) => (
             <Apparition key={carte.nom} delai={i * 120} className="h-full">
               <li className="flex h-full flex-col bg-white p-8 sm:p-9">
