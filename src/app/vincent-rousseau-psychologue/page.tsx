@@ -227,7 +227,7 @@ export default function PageAuteur() {
               id="pourquoi-consulter"
               className="max-w-3xl text-2xl font-bold leading-tight tracking-tight text-bois sm:text-[33px]"
             >
-              Pourquoi consulter&nbsp;? Qu&rsquo;est-ce que je propose&nbsp;?
+              Pourquoi consulter et quelle est mon approche&nbsp;?
             </h2>
             <div className="mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
           </Apparition>
