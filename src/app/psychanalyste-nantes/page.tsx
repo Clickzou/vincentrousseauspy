@@ -165,8 +165,9 @@ export default function PsychanalysteNantes() {
             <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
               La psychanalyse est mon outil de travail quotidien. C&rsquo;est un dispositif
               de psychothérapie par la parole, qui s&rsquo;attache moins à faire taire un
-              symptôme qu&rsquo;à comprendre ce qu&rsquo;il dit. Je reçois {publics.libelle}{" "}
-              à {cabinet.ville}.
+              symptôme qu&rsquo;à comprendre ce qu&rsquo;il dit. Je reçois sur rendez-vous
+              un public d&rsquo;adultes et de jeunes adultes (à partir de{" "}
+              {publics.ageMinimum}&nbsp;ans) au sein de mon cabinet à {cabinet.ville}.
             </p>
           </div>
         </Apparition>

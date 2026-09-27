@@ -141,7 +141,9 @@ export default function PsychotherapeuteNantes() {
             <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
               Je suis psychothérapeute — un titre protégé par la loi, qui suppose une
               formation vérifiée et une inscription auprès de l&rsquo;Agence régionale de
-              santé. Je reçois {publics.libelle} à {cabinet.ville}, sur rendez-vous.
+              santé. Je reçois sur rendez-vous un public d&rsquo;adultes et de jeunes adultes
+              (à partir de {publics.ageMinimum}&nbsp;ans) au sein de mon cabinet à{" "}
+              {cabinet.ville}.
             </p>
           </div>
         </Apparition>
@@ -301,7 +303,7 @@ export default function PsychotherapeuteNantes() {
             <p>
               Il n&rsquo;y a pas de seuil à franchir, ni de degré de souffrance à atteindre
               pour avoir le droit de consulter. Les personnes que je reçois arrivent le plus
-              souvent dans l&rsquo;une de ces situations.
+              souvent dans l&rsquo;une de ces situations&nbsp;:
             </p>
           </div>
         </Apparition>
@@ -323,7 +325,9 @@ export default function PsychotherapeuteNantes() {
           ))}
         </ul>
 
-        <p className="mx-auto mt-10 max-w-lecture text-center text-sm text-ardoise">
+        {/* Même corps que l'introduction de la section : ce paragraphe en
+            prolonge le propos, ce n'est pas une note de bas de section. */}
+        <p className="mx-auto mt-10 max-w-lecture text-center text-base leading-relaxed text-ardoise">
           Un premier rendez-vous sert justement à faire le point. Si ce que vous traversez
           relève d&rsquo;un autre professionnel — un médecin, un psychiatre — je vous le
           dirai, et je vous orienterai.{" "}
@@ -423,7 +427,7 @@ export default function PsychotherapeuteNantes() {
                       `Première séance gratuite, puis de ${honoraires.min} à ` +
                       `${honoraires.max} € la séance. ${honoraires.modulation}`,
                   },
-                  { terme: "Pour qui", detail: `Uniquement ${publics.libelle}.` },
+                  { terme: "Pour qui", detail: `Consultations pour adultes et jeunes adultes (à partir de ${publics.ageMinimum} ans).` },
                   {
                     terme: "Confidentialité",
                     detail:
