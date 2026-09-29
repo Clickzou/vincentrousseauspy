@@ -335,9 +335,9 @@ export default function Consultations() {
         </ol>
 
         <p className="mx-auto mt-8 max-w-lecture text-center text-ardoise">
-          Si nous choisissons d&rsquo;engager ce travail, nous validerons la mise en place du
-          suivi. Dans le cas contraire, je vous orienterai vers un professionnel plus
-          adapté. Rien ne vous engage au-delà de cette première rencontre.
+          Cette première rencontre nous permettra de décider ensemble de la mise en place
+          d&rsquo;un suivi. Si ce n&rsquo;est pas le cas, je vous orienterai vers un
+          professionnel plus adapté. Rien ne vous engage au-delà.
         </p>
 
         {/* La phrase sur « Mon Soutien Psy » n'est pas dans le document du
