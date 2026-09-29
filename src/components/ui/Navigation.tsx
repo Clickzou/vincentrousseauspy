@@ -80,7 +80,17 @@ const NAVIGATION: Entree[] = [
       { href: "/psychanalyste-nantes/", label: "La psychanalyse" },
     ],
   },
-  { href: "/consultations/", label: "Consultations" },
+  /* Sous-menu pour faire entrer /cabinet-nantes/ dans la navigation sans
+     ajouter d'entrée à une barre déjà pleine : la page d'ancrage local n'était
+     jusque-là atteignable que par un lien de la page Consultations. */
+  {
+    href: "/consultations/",
+    label: "Consultations",
+    enfants: [
+      { href: "/consultations/", label: "Déroulement des séances" },
+      { href: "/cabinet-nantes/", label: "Accès au cabinet" },
+    ],
+  },
   { href: "/tarifs-et-remboursement/", label: "Tarifs" },
   /* « FAQ » dans le menu, « Questions fréquentes » en H1 sur la page : le menu
      est en petites capitales et doit rester court, le titre de page porte le

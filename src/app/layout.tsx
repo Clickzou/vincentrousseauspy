@@ -216,6 +216,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <br />
                 {cabinet.acces.tram}
               </address>
+              <p className="mt-2">
+                <Link href="/cabinet-nantes/" className="underline underline-offset-2">
+                  Accès au cabinet
+                </Link>
+              </p>
               <p className="mt-3">{horaires.libelle}</p>
               <p>{horaires.modalite}</p>
             </div>
