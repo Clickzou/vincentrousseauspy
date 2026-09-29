@@ -240,8 +240,7 @@ export default function Consultations() {
                 <p className="mt-3 text-ardoise">
                   Les consultations durent {seance.duree}. En règle générale, le rythme des
                   séances est {seance.rythme}. Néanmoins, nous prendrons le temps
-                  d&rsquo;évaluer vos besoins lors de notre première rencontre afin de fixer
-                  la fréquence la plus adaptée.
+                  d&rsquo;évaluer vos besoins lors de notre première rencontre.
                 </p>
               </article>
             </Apparition>
