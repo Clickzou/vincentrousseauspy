@@ -169,10 +169,11 @@ export const pourquoiPasDeVisio: Article = {
     {
       type: "p",
       texte:
-        "Dans ce cas, appelez-moi quand même. Nous verrons si un aménagement est " +
-        "possible, et sinon je vous orienterai vers un confrère qui pratique le " +
-        "distanciel. Un praticien qui vous convient et que vous pouvez voir vaut " +
-        "infiniment mieux qu'un cadre théoriquement idéal auquel vous n'accédez pas.",
+        "Je vous invite à m'appeler malgré tout pour que nous étudiions un éventuel " +
+        "aménagement. Si cela s'avère impossible, je vous aiderai à trouver une autre " +
+        "orientation. Trouver un professionnel qui vous correspond et avec qui le " +
+        "contact est possible est bien plus important que de viser un cadre idéal " +
+        "mais inaccessible.",
       lien: {
         href: "/cabinet-nantes/",
         libelle: "L'accès au cabinet, le tram et le stationnement",
