@@ -95,7 +95,7 @@ export default function Blog() {
             <div className="mx-auto mt-5 h-px w-12 bg-terracotta" aria-hidden="true" />
 
             <p className="mx-auto mt-5 max-w-3xl font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
-              Vous trouverez ici quelques textes simples sur la réalité des consultations et
+              Vous trouverez ici quelques textes accessibles sur la réalité des consultations et
               le cadre des séances.
             </p>
           </div>
