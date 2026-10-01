@@ -142,9 +142,13 @@ export default function MentionsLegales() {
           l&rsquo;usage privé dans le cercle de famille est autorisé.
         </p>
         <p className="mt-4">
-          Les œuvres reproduites sur ce site — Henri Matisse (1869-1954) et Vassily
-          Kandinsky (1866-1944) — appartiennent au domaine public. Les fichiers proviennent
-          de collections en accès ouvert, dont celle de l&rsquo;Art Institute of Chicago.
+          Les œuvres reproduites sur ce site appartiennent au domaine public. Elles sont de
+          Henri Matisse (1869-1954), Vassily Kandinsky (1866-1944), Henri Rousseau
+          (1844-1910), Félix Vallotton (1865-1925), Édouard Vuillard (1868-1940), Paul Klee
+          (1879-1940), Vilhelm Hammershøi (1864-1916), Franz Marc (1880-1916), August Macke
+          (1887-1914) et Alexej von Jawlensky (1864-1941). Les fichiers proviennent de
+          collections en accès ouvert, dont celle de l&rsquo;Art Institute of Chicago et
+          Wikimedia Commons.
         </p>
 
         <H2 id="liens">Liens hypertextes</H2>

@@ -128,7 +128,7 @@ export default function PolitiqueDeConfidentialite() {
           n&rsquo;avez donc ni compte à supprimer, ni mot de passe à retenir.
         </p>
         <p className="mt-4">
-          Le message reçu vit ensuite dans la boîte de courrier de {praticien.nom}, comme
+          Le message reçu est ensuite conservé dans la boîte de courrier de {praticien.nom}, comme
           n&rsquo;importe quel courriel, et sert uniquement à vous rappeler{" "}
           {priseRdv.delaiReponse}.
         </p>
@@ -205,10 +205,12 @@ export default function PolitiqueDeConfidentialite() {
           .
         </p>
         <p className="mt-4">
-          En dehors de ce plan, le site n&rsquo;encastre ni vidéo, ni bouton de réseau
-          social, ni aucun autre contenu extérieur. Les polices de caractères sont servies
-          depuis le site lui-même, ce qui évite que votre adresse IP soit communiquée à un
-          tiers à votre insu.
+          En dehors de ce plan, le site n&rsquo;encastre aucun contenu extérieur&nbsp;: ni
+          lecteur vidéo d&rsquo;une plateforme, ni bouton de réseau social. La vidéo
+          présentée avec les écrits est hébergée sur le site lui-même, et non sur
+          YouTube&nbsp;: la regarder ne transmet rien à un tiers. Il en va de même des
+          polices de caractères, servies depuis le site, ce qui évite que votre adresse IP
+          soit communiquée à un tiers à votre insu.
         </p>
 
         <H2 id="hebergement">Hébergement et journaux techniques</H2>
