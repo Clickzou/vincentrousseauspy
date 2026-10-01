@@ -214,7 +214,7 @@ le bloc `sources`, où elle est attribuée à son éditeur et vérifiable.
 | **Schéma `FAQPage` sur `/aide-faq/` seulement** | Éviter deux blocs FAQ concurrents |
 | **Aucun champ de texte libre dans le formulaire** | Il collecterait des données de santé (art. 9 RGPD) sur un hébergement non agréé HDS. Refuser toute demande d'ajout |
 | **Aucun stockage des demandes** | Un e-mail, puis plus rien. Ni base, ni fichier, ni log du contenu |
-| **Délai de réponse : « en moins de 24 heures, hors soir et week-end »** | Validé à « sous 48 heures ouvrées » le 2026-09-08, puis **raccourci à la demande de Vincent le 2026-09-11**, et borné le même jour aux jours et heures ouvrés. Engagement public (§ 9.4) : ne pas le modifier sans son accord |
+| **Délai de réponse : « en moins de 24 heures (hors soirs et week-ends) »** | Validé à « sous 48 heures ouvrées » le 2026-09-08, puis **raccourci à la demande de Vincent le 2026-09-11**, et borné le même jour aux jours et heures ouvrés. Mis entre parenthèses et au pluriel à sa demande le 2026-10-01. Engagement public (§ 9.4) : ne pas le modifier sans son accord |
 | **Rythme : « le plus souvent une séance par semaine »** | Réponse de Vincent du 2026-09-11. Jamais présenté comme une condition fixe |
 | **`/dispositions-legales/` est redirigée en 301 vers les mentions légales** | Elle portait ADELI et SIRET, désormais à leur place. Elle était `noindex`, donc sans référencement à transférer |
 | **Le plan du site est engendré, jamais écrit** | Un plan recopié à la main diverge du registre et finit par lister des URLs mortes |
@@ -574,7 +574,8 @@ de remerciement, politique de confidentialité, `llms.txt`, deux meta descriptio
 2. ~~**« En moins de 24 heures »** court-il le week-end ?~~ Non : **« en moins de 24
    heures, hors soir et week-end »**. La valeur de `priseRdv.delaiReponse` se répercute
    seule sur ses neuf emplacements ; la meta description de `/rendez-vous-…/`, qui
-   dépassait alors 160 caractères, a été resserrée.
+   dépassait alors 160 caractères, a été resserrée. Reformulé le 2026-10-01 à la
+   demande de Vincent : **« en moins de 24 heures (hors soirs et week-ends) »**.
 3. ~~**Le rythme** : fixe ou adaptable ?~~ **« C'est le plus souvent une séance par
    semaine. »** Le bloc « Le cadre thérapeutique » et le repère « Rythme des séances »
    de `/consultations/`, ainsi que `/tarifs-et-remboursement/`, qui le disaient fixe,

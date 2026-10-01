@@ -139,7 +139,8 @@ export default function RendezVous() {
                 <p className="mt-5 font-accent text-lg italic leading-relaxed text-ardoise sm:text-xl">
                   Le plus simple est de m&rsquo;appeler&nbsp;: nous fixons un rendez-vous en
                   quelques minutes. Si vous préférez ne pas téléphoner, vous pouvez demander à
-                  être rappelé. Je vous recontacte {priseRdv.delaiReponse}.
+                  être rappelé ou m&rsquo;envoyer un e-mail. Je vous recontacte{" "}
+                  {priseRdv.delaiReponse}.
                 </p>
               </div>
             </div>

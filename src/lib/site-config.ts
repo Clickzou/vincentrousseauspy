@@ -158,13 +158,15 @@ export const contact = {
  *
  * Le nouveau délai ne disait plus « ouvrées » et, lu à la lettre, courait le
  * week-end. Réponse de Vincent le 2026-09-11 : « hors soir et week-end ».
+ * Mis entre parenthèses et au pluriel le 2026-10-01 : « (hors soirs et
+ * week-ends) ». L'engagement lui-même ne change pas.
  *
  * La valeur s'insère après « Réponse », « Je réponds » ou « je rappelle » :
  * elle doit rester une locution, sans majuscule ni point final.
  */
 export const priseRdv = {
   plateforme: null as { nom: string; url: string } | null,
-  delaiReponse: "en moins de 24 heures, hors soir et week-end",
+  delaiReponse: "en moins de 24 heures (hors soirs et week-ends)",
   /** Ce qui se passe concrètement après l'envoi du formulaire (§ 9.4). */
   suite: "Je vous rappelle au numéro indiqué, sur l'un des créneaux que vous avez cochés.",
 } as const;
