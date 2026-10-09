@@ -1,0 +1,89 @@
+[
+  {
+    "id": "redirections-anciennes-adresses-2026-10",
+    "titre": "Rediriger les anciennes adresses du site qui n'existent plus",
+    "probleme": "Constat d'audit du 09/10/2026 sur le nouveau site : l'ancienne page « Galerie » de l'ancien site répond « page introuvable » (erreur 404), ainsi que les deux anciens plans du site que l'ancien site déclarait à Google. Les autres anciennes adresses sont bien traitées : pages conservées, trois anciennes pages redirigées, sept articles de démonstration en anglais signalés comme supprimés.",
+    "correction": "Ajouter trois redirections permanentes (301) dans la configuration du site (next.config.ts, réservée à JC) : /galerie/ vers l'accueil, /sitemap_index.xml et /page-sitemap.xml vers /sitemap.xml. Puis, dès que la Search Console donne des chiffres, relire son rapport des pages introuvables et rediriger au cas par cas toute autre ancienne adresse encore visitée.",
+    "type": "technique",
+    "qui": "vous",
+    "statut": "prevue",
+    "prevue_le": "2026-10-15",
+    "faite_le": null,
+    "verifiee_le": null,
+    "mesure": "citation",
+    "questions": []
+  },
+  {
+    "id": "domaine-https-bascule-2026-10",
+    "titre": "Vérifier que l'adresse définitive du site répond après la bascule",
+    "probleme": "Constat du 09/10/2026 : le nom de domaine pointe déjà vers le nouvel hébergeur (Vercel), mais l'adresse https://psychologuenantes-vincentrousseau.fr ne répondait toujours pas l'après-midi (aucune réponse, même après un second essai), alors que la version provisoire vincentrousseauspy.vercel.app répond normalement. Tant que l'adresse définitive ne répond pas, Google et les IA ne voient plus aucune page du site.",
+    "correction": "Dans le tableau de bord Vercel du projet : contrôler que le domaine et son certificat HTTPS sont validés, régler la redirection de www vers l'adresse sans www (308), puis vérifier que l'accueil, une page intérieure et le formulaire de rappel (envoi Resend) fonctionnent sur l'adresse définitive.",
+    "type": "technique",
+    "qui": "vous",
+    "statut": "prevue",
+    "prevue_le": "2026-10-15",
+    "faite_le": null,
+    "verifiee_le": null,
+    "mesure": "citation",
+    "questions": []
+  },
+  {
+    "id": "search-console-sans-donnees-2026-10",
+    "titre": "Faire remonter les chiffres de Google pour le nouveau site",
+    "probleme": "Search Console sur 90 jours (du 09/07 au 06/10/2026) : la propriété du domaine ne renvoie aucune donnée, ni page, ni recherche. La propriété est peut-être trop récente ou mal vérifiée ; sans ces chiffres, impossible de suivre la bascule ni de repérer les anciennes adresses encore visitées.",
+    "correction": "Contrôler dans la Search Console que la propriété du domaine est bien vérifiée (enregistrement DNS chez o2switch), y déclarer le plan du site https://psychologuenantes-vincentrousseau.fr/sitemap.xml, demander l'indexation de l'accueil, puis vérifier dans les deux semaines que des chiffres apparaissent.",
+    "type": "technique",
+    "qui": "vous",
+    "statut": "prevue",
+    "prevue_le": "2026-10-22",
+    "faite_le": null,
+    "verifiee_le": null,
+    "mesure": "citation",
+    "questions": []
+  },
+  {
+    "id": "faq-visio-ou-cabinet-2026-10",
+    "titre": "Répondre clairement dans la FAQ : séances au cabinet uniquement, pas de visio",
+    "probleme": "Relevé Pulse du 05/10/2026 : 0 réponse sur 6 cite le site sur la question « visio ou cabinet ». Le nouveau site l'explique dans un article (« Pourquoi je reçois uniquement au cabinet ») et indique « en présentiel uniquement » sous les horaires, mais la page des questions fréquentes n'a aucune question sur la visio ou le téléphone (constat d'audit du 09/10/2026).",
+    "correction": "Page des questions fréquentes (src/lib/content/faq.ts) : ajouter la question « Proposez-vous des séances en visio ou par téléphone ? » avec une réponse courte tirée des faits vérifiés (non : les consultations ont lieu au cabinet, 10 bis rue de la Havane à Nantes, sur rendez-vous, en présentiel uniquement) et un lien vers l'article « Pourquoi je reçois uniquement au cabinet ». La question entre d'elle-même dans les données structurées de la FAQ ; mettre à jour le nombre de questions annoncé dans llms.txt.",
+    "type": "technique",
+    "qui": "pulse",
+    "statut": "prevue",
+    "prevue_le": "2026-10-22",
+    "faite_le": null,
+    "verifiee_le": null,
+    "mesure": "citation",
+    "questions": ["Consulter un psychologue en visio ou au cabinet : que choisir ?"]
+  },
+  {
+    "id": "faq-differences-psy-2026-10",
+    "titre": "Ajouter à la FAQ une réponse courte sur la différence entre les « psy »",
+    "probleme": "Relevé Pulse du 05/10/2026 : 0 réponse sur 7 cite le site sur la différence entre psychologue, psychiatre, psychothérapeute et psychanalyste. Le nouveau site a une page complète sur le sujet (« Les différents « psy » », avec un tableau comparatif), mais la page des questions fréquentes, la seule balisée en questions-réponses, n'en dit rien (constat d'audit du 09/10/2026).",
+    "correction": "Page des questions fréquentes (src/lib/content/faq.ts) : ajouter la question « Quelle différence entre psychologue, psychiatre, psychothérapeute et psychanalyste ? » avec une réponse de trois ou quatre phrases reprenant uniquement le tableau déjà publié (formation, titre protégé ou non, seul le psychiatre, médecin, peut prescrire ; Vincent Rousseau détient les titres de psychologue, psychothérapeute et psychanalyste, il n'est pas psychiatre) et un lien vers la page « Les différents « psy » ». Mettre à jour le nombre de questions annoncé dans llms.txt.",
+    "type": "technique",
+    "qui": "pulse",
+    "statut": "prevue",
+    "prevue_le": "2026-10-29",
+    "faite_le": null,
+    "verifiee_le": null,
+    "mesure": "citation",
+    "questions": ["Quelle différence entre psychologue, psychiatre, psychothérapeute et psychanalyste ?"]
+  },
+  {
+    "id": "fiche-faits-mise-en-ligne-2026-10",
+    "titre": "Mettre à jour la fiche de faits du cabinet avec le nouveau site",
+    "probleme": "Constat d'audit du 09/10/2026 : le nouveau site affiche la première séance gratuite, l'affiliation au dispositif « Mon soutien psy » (séance à 50 €) et la durée de séance de 45 minutes, mais la fiche de faits utilisée pour juger les réponses des IA les tient encore pour « non vérifiés » ; deux questions suivies portent sur ces points (0 réponse sur 7 cite le site dans le relevé Pulse du 05/10/2026). L'adresse de l'hébergeur Vercel publiée dans les mentions légales vient d'annuaires d'entreprises et reste à confirmer sur vercel.com.",
+    "correction": "Passer en faits, dans la fiche de faits (geo_fiche) et la fiche de consignes : première séance gratuite, affiliation à « Mon soutien psy » à 50 € la séance, séances de 45 minutes, site hébergé par Vercel. Confirmer l'adresse de Vercel sur vercel.com et la faire corriger dans les mentions légales si elle diffère.",
+    "type": "externe",
+    "qui": "vous",
+    "statut": "prevue",
+    "prevue_le": "2026-10-29",
+    "faite_le": null,
+    "verifiee_le": null,
+    "mesure": "description",
+    "questions": [
+      "Psychologue à Nantes dont la première séance est gratuite",
+      "Psychologue à Nantes partenaire du dispositif Mon soutien psy"
+    ]
+  }
+]
