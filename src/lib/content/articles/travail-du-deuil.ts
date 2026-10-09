@@ -15,7 +15,7 @@ import type { Article } from "@/lib/content/blog";
  * BANDEAU D'URGENCE : oui. Un deuil peut se compliquer d'une dépression, et le
  * lecteur qui cherche ces mots peut aller mal (§ 2.1, point 5).
  *
- * ÉCARTS PAR RAPPORT AU DOCUMENT, à faire valider par Vincent :
+ * ÉCARTS PAR RAPPORT AU DOCUMENT, validés par Vincent (confirmé le 2026-10-09) :
  *   - « faire semblant d'aller bien bloque le processus » devient « peut
  *     l'entraver » : l'affirmation absolue n'est pas démontrable — arbitrage
  *     déjà rendu sur la version courte, maintenu ici ;
@@ -63,8 +63,8 @@ export const travailDuDeuil: Article = {
     "bouleverse nos fondations. Le deuil n'est pas une maladie : c'est un processus " +
     "psychique normal, mais particulièrement exigeant.",
   metaTitre: "Le travail du deuil en thérapie",
-  publieLe: "2026-10-15",
-  modifieLe: "2026-10-15",
+  publieLe: "2026-10-23",
+  modifieLe: "2026-10-23",
   motCle: "travail du deuil",
   urgence: true,
   illustration: {

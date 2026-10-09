@@ -95,13 +95,37 @@ export type Article = {
 };
 
 /**
- * Articles PUBLIÉS, du plus récent au plus ancien. Eux seuls ont une page, une
+ * Articles PUBLIÉS, du plus récent au plus ancien. Avec les articles programmés
+ * dont la date est arrivée (`articlesPublies`), eux seuls ont une page, une
  * entrée au sitemap et une carte sur /blog/.
  */
-export const ARTICLES: Article[] = [pourquoiPasDeVisio, secretProfessionnel];
+export const ARTICLES: Article[] = [silenceEnSeance, pourquoiPasDeVisio, secretProfessionnel];
 
 /**
- * Articles ÉCRITS, EN ATTENTE DE PUBLICATION, dans l'ordre où ils paraîtront.
+ * Articles VALIDÉS par Vincent et PROGRAMMÉS : chacun paraît seul le jour de
+ * son `publieLe` (heure de Paris), sans déploiement. Les pages qui lisent le
+ * registre se régénèrent toutes les heures (`revalidate = 3600`), l'article
+ * apparaît donc dans l'heure qui suit minuit.
+ *
+ * N'entre ici qu'un texte validé (§ 7.1) : programmer, c'est publier.
+ */
+export const PROGRAMMES: Article[] = [
+  travailDuDeuil, //           23 octobre 2026
+];
+
+/** Date du jour à Paris, au format AAAA-MM-JJ de `publieLe`. */
+export const dateParis = (d: Date = new Date()) =>
+  new Intl.DateTimeFormat("fr-CA", { timeZone: "Europe/Paris" }).format(d);
+
+/** Articles visibles au jour donné, du plus récent au plus ancien. */
+export function articlesPublies(jour: string = dateParis()): Article[] {
+  return [...PROGRAMMES.filter((a) => a.publieLe <= jour), ...ARTICLES].sort((a, b) =>
+    b.publieLe.localeCompare(a.publieLe),
+  );
+}
+
+/**
+ * Articles ÉCRITS, EN ATTENTE DE VALIDATION, dans l'ordre où ils paraîtront.
  *
  * Treize textes transmis d'un coup par Vincent le 2026-09-11 (document
  * « Articles & Vidéos »). Le § 7.1 du master plafonne le rythme à deux par
@@ -113,17 +137,16 @@ export const ARTICLES: Article[] = [pourquoiPasDeVisio, secretProfessionnel];
  * Ces articles ne sont importés nulle part ailleurs : aucune page, aucune URL,
  * rien dans le sitemap. `publieLe` y porte la date PRÉVUE.
  *
- * POUR PUBLIER (chaque 1er et 15 du mois) :
+ * POUR PUBLIER :
  *   1. vérifier que Vincent a validé le texte (§ 7.1) — les écarts avec son
  *      document sont listés en tête de chaque module ;
- *   2. déplacer le premier article de cette file en tête de `ARTICLES`, et
- *      ajuster `publieLe` et `modifieLe` à la date réelle ;
+ *   2. déplacer l'article de cette file vers `PROGRAMMES`, avec `publieLe` et
+ *      `modifieLe` à la date de parution voulue (ou vers `ARTICLES`, à la date
+ *      du jour, pour une publication immédiate) ;
  *   3. déployer. `verifierPubliable` bloque la compilation s'il manque
  *      quelque chose.
  */
 export const A_PARAITRE: Article[] = [
-  silenceEnSeance, //          1er octobre 2026
-  travailDuDeuil, //           15 octobre
   psychologueConseils, //      1er novembre
   angoisse, //                 15 novembre
   associationLibre, //         1er décembre
@@ -154,7 +177,10 @@ function verifierPubliable(article: Article) {
   if (!article.illustration) manques.push("aucune œuvre");
   for (const bloc of article.corps) {
     const href = bloc.type === "p" ? bloc.lien?.href : undefined;
-    if (href?.startsWith("/blog/") && !ARTICLES.some((a) => href === `/blog/${a.slug}/`)) {
+    /* Un article programmé ne peut pointer que vers un article déjà paru à sa
+       propre date de parution. */
+    const visibles = articlesPublies(article.publieLe);
+    if (href?.startsWith("/blog/") && !visibles.some((a) => href === `/blog/${a.slug}/`)) {
       manques.push(`lien vers un article non publié (${href})`);
     }
   }
@@ -162,6 +188,6 @@ function verifierPubliable(article: Article) {
     throw new Error(`Article « ${article.slug} » non publiable : ${manques.join(" ; ")}.`);
   }
 }
-ARTICLES.forEach(verifierPubliable);
+[...ARTICLES, ...PROGRAMMES].forEach(verifierPubliable);
 
-export const articleParSlug = (slug: string) => ARTICLES.find((a) => a.slug === slug);
+export const articleParSlug = (slug: string) => articlesPublies().find((a) => a.slug === slug);

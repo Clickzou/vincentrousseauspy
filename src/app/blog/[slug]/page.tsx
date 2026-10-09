@@ -8,7 +8,7 @@ import { Sources } from "@/components/seo/Sources";
 import { UrgenceBanner } from "@/components/seo/UrgenceBanner";
 import { CorpsArticle } from "@/components/blog/CorpsArticle";
 import { Apparition } from "@/components/ui/Apparition";
-import { ARTICLES, articleParSlug } from "@/lib/content/blog";
+import { articlesPublies, articleParSlug } from "@/lib/content/blog";
 import { articleSchema, breadcrumbSchema, graph } from "@/lib/seo/schemas";
 import { contact, praticien } from "@/lib/site-config";
 import { canonical } from "@/lib/url-helpers";
@@ -16,18 +16,23 @@ import { canonical } from "@/lib/url-helpers";
 /**
  * /blog/[slug]/ — article.
  *
- * Entièrement statique : `generateStaticParams` énumère le registre, il n'y a
- * ni base ni rendu à la demande. Un slug inconnu tombe en 404 plutôt que de
- * générer une page vide — Next répondrait sinon 200 sur n'importe quelle URL
- * fantaisiste, ce qui ouvre la porte au spam d'indexation.
+ * Statique : `generateStaticParams` énumère les articles parus au moment du
+ * déploiement. Un article programmé (`PROGRAMMES`) est rendu à la demande le
+ * jour de sa parution, puis mis en cache ; avant cette date, comme tout slug
+ * inconnu, il tombe en 404 plutôt que de générer une page vide — Next
+ * répondrait sinon 200 sur n'importe quelle URL fantaisiste, ce qui ouvre la
+ * porte au spam d'indexation.
  *
  * C'est ici, et seulement ici, que le schéma `Article` est déclaré : il porte
  * l'auteur, les dates et les sources citées, qui sont les signaux E-E-A-T
  * attendus en YMYL (§ 5).
  */
 
+/* Une heure : un 404 servi la veille de la parution ne reste pas en cache. */
+export const revalidate = 3600;
+
 export function generateStaticParams() {
-  return ARTICLES.map((a) => ({ slug: a.slug }));
+  return articlesPublies().map((a) => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({

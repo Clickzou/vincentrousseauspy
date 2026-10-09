@@ -1,15 +1,16 @@
 import { NextResponse } from "next/server";
 
-import { A_PARAITRE, ARTICLES, type Article } from "@/lib/content/blog";
+import { A_PARAITRE, PROGRAMMES, articlesPublies, dateParis, type Article } from "@/lib/content/blog";
 import { envoyerMailInterne, smtpConfigure } from "@/lib/email/smtp";
 
 /**
  * GET /api/cron/publication-blog/ — point de publication du blog, par mail.
  *
  * Appelé par le cron Vercel (`vercel.json`) le 1er et le 15 de chaque mois,
- * c'est-à-dire aux dates de la file `A_PARAITRE`. La publication, elle, reste
- * MANUELLE (validation de Vincent d'abord, § 7.1 du master) : ce mail dit à
- * l'agence si elle a eu lieu.
+ * c'est-à-dire aux dates de la file `A_PARAITRE`. Un article validé par
+ * Vincent (§ 7.1 du master) et placé dans `PROGRAMMES` paraît seul à sa date ;
+ * un article resté dans `A_PARAITRE` attend sa validation. Ce mail dit à
+ * l'agence ce qui a paru et ce qui attend.
  *
  * La route lit le registre de la version DÉPLOYÉE : ce qu'elle voit est donc
  * exactement ce qui est en ligne. Un article déplacé dans le code mais jamais
@@ -30,9 +31,6 @@ const DESTINATAIRE = process.env.BLOG_SUIVI_EMAIL ?? "jc@clickzou.fr";
 
 /** Deux points sont espacés de quinze jours au plus ; seize par sécurité. */
 const FENETRE_JOURS = 16;
-
-const dateParis = (d: Date) =>
-  new Intl.DateTimeFormat("fr-CA", { timeZone: "Europe/Paris" }).format(d); // AAAA-MM-JJ
 
 const dateLisible = (iso: string) => {
   const d = new Date(`${iso}T12:00:00Z`);
@@ -59,12 +57,12 @@ export async function GET(request: Request) {
   }
 
   const apercu = new URL(request.url).searchParams.get("apercu") === "1";
-  const aujourdhui = dateParis(new Date());
+  const aujourdhui = dateParis();
   const debut = dateParis(new Date(Date.now() - FENETRE_JOURS * 86_400_000));
 
   const enRetard = A_PARAITRE.filter((a) => a.publieLe <= aujourdhui);
-  const publies = ARTICLES.filter((a) => a.publieLe > debut && a.publieLe <= aujourdhui);
-  const prochain = A_PARAITRE.find((a) => a.publieLe > aujourdhui);
+  const publies = articlesPublies(aujourdhui).filter((a) => a.publieLe > debut && a.publieLe <= aujourdhui);
+  const prochain = [...PROGRAMMES, ...A_PARAITRE].find((a) => a.publieLe > aujourdhui);
 
   if (!apercu && enRetard.length === 0 && publies.length === 0) {
     return NextResponse.json({ envoye: false, raison: "rien à signaler" });
@@ -95,7 +93,7 @@ export async function GET(request: Request) {
   ${enRetard.length > 0 ? bloc("NON publié", "#b91c1c", `<ul>${enRetard.map((a) => ligne(a, false)).join("")}</ul>`) : ""}
   ${publies.length > 0 ? bloc("Publié depuis le dernier point", "#15803d", `<ul>${publies.map((a) => ligne(a, true)).join("")}</ul>`) : ""}
   ${bloc("Prochain", "#0f172a", prochain ? `<ul>${ligne(prochain, false)}</ul>` : "<p>La file est vide : tous les articles prévus sont publiés.</p>")}
-  ${enRetard.length > 0 ? `<p style="background:#f8fafc;border-left:3px solid #b91c1c;padding:10px 14px;font-size:14px">Pour publier, après validation du texte par Vincent : dans <code>src/lib/content/blog.ts</code>, déplacer l'article de <code>A_PARAITRE</code> en tête de <code>ARTICLES</code>, mettre <code>publieLe</code> et <code>modifieLe</code> à la date du jour, puis déployer.</p>` : ""}
+  ${enRetard.length > 0 ? `<p style="background:#f8fafc;border-left:3px solid #b91c1c;padding:10px 14px;font-size:14px">Pour publier, après validation du texte par Vincent : dans <code>src/lib/content/blog.ts</code>, déplacer l'article de <code>A_PARAITRE</code> vers <code>PROGRAMMES</code> (date de parution voulue) ou en tête de <code>ARTICLES</code> (date du jour), puis déployer.</p>` : ""}
   <p style="color:#64748b;font-size:12px;margin-top:22px">Mail envoyé le 1er et le 15 de chaque mois par le site lui-même (cron Vercel). Aucun mail quand il n'y a rien à signaler.</p>
 </div>`;
 

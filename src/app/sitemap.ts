@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { ARTICLES } from "@/lib/content/blog";
+import { articlesPublies } from "@/lib/content/blog";
 import { pagesIndexables } from "@/lib/sitemap-data";
 import { absoluteUrl } from "@/lib/url-helpers";
 
@@ -17,13 +17,17 @@ import { absoluteUrl } from "@/lib/url-helpers";
  *
  * Le jour où les pages porteront une vraie date de révision, la reprendre ici.
  */
+/* Les articles programmés paraissent à leur date sans déploiement
+   (`PROGRAMMES` dans blog.ts) : le sitemap se régénère toutes les heures. */
+export const revalidate = 3600;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: MetadataRoute.Sitemap = pagesIndexables().map((page) => ({
     url: absoluteUrl(page.slug),
     priority: page.priorite,
   }));
 
-  const articles: MetadataRoute.Sitemap = ARTICLES.map((article) => ({
+  const articles: MetadataRoute.Sitemap = articlesPublies().map((article) => ({
     url: absoluteUrl(`blog/${article.slug}`),
     lastModified: new Date(article.modifieLe),
     priority: 0.6,

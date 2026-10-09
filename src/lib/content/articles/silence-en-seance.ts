@@ -13,7 +13,7 @@ import type { Article } from "@/lib/content/blog";
  * ANTI-CANNIBALISATION : mot-clé « silence en séance psychologue », qu'aucune
  * page ne cible. /consultations/ décrit la première séance sans en parler.
  *
- * ÉCARTS PAR RAPPORT AU DOCUMENT, à faire valider par Vincent :
+ * ÉCARTS PAR RAPPORT AU DOCUMENT, validés par Vincent (confirmé le 2026-10-09) :
  *   - le titre de proposition (« L'importance du silence en séance ») sert de
  *     titre court pour Google, l'intertitre de Vincent reste le titre de page ;
  *   - « le silence n'est jamais un vide » perd son « jamais » : Freud rattache
@@ -45,8 +45,8 @@ export const silenceEnSeance: Article = {
     "vais-je dire ? », « Et si je n'ai plus d'idées ? » Pourtant, en séance, le silence " +
     "n'est pas un vide : c'est un espace de travail à part entière.",
   metaTitre: "Le silence en séance chez le psychologue",
-  publieLe: "2026-10-01",
-  modifieLe: "2026-10-01",
+  publieLe: "2026-10-09",
+  modifieLe: "2026-10-09",
   motCle: "silence en séance psychologue",
   illustration: {
     src: "/images/hammershoi-portes-ouvertes-1905.jpg",

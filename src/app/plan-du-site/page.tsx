@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { PageEnTete } from "@/components/ui/PageEnTete";
-import { ARTICLES } from "@/lib/content/blog";
+import { articlesPublies } from "@/lib/content/blog";
 import { breadcrumbSchema, graph } from "@/lib/seo/schemas";
 import { PAGES } from "@/lib/sitemap-data";
 import { cabinet, praticien } from "@/lib/site-config";
@@ -20,6 +20,10 @@ import { canonical } from "@/lib/url-helpers";
  * Les pages `noindex` en sont exclues, comme du sitemap XML — les lister
  * reviendrait à inviter le robot là où on lui demande de ne pas aller.
  */
+
+/* Les articles programmés paraissent à leur date sans déploiement
+   (`PROGRAMMES` dans blog.ts) : la page se régénère toutes les heures. */
+export const revalidate = 3600;
 
 const TITRE = "Plan du site";
 
@@ -135,7 +139,7 @@ export default function PlanDuSite() {
                   Tous les articles
                 </Link>
               </li>
-              {ARTICLES.map((article) => (
+              {articlesPublies().map((article) => (
                 <li key={article.slug}>
                   <Link
                     href={`/blog/${article.slug}/`}

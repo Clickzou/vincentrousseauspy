@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Apparition } from "@/components/ui/Apparition";
 import { IconeLienExterne } from "@/components/ui/Icones";
 import { breadcrumbSchema, graph, publicationSchema, videoSchema } from "@/lib/seo/schemas";
-import { ARTICLES } from "@/lib/content/blog";
+import { articlesPublies } from "@/lib/content/blog";
 import {
   INTRODUCTION_VIDEOS,
   PUBLICATIONS,
@@ -28,6 +28,10 @@ import { canonical } from "@/lib/url-helpers";
  * seuil de `/blog/page/2/` ne sera pas atteint avant longtemps. Quand il le
  * sera, la page 2 sera canonique sur elle-même, jamais sur /blog/ (§ 3.3).
  */
+
+/* Les articles programmés paraissent à leur date sans déploiement
+   (`PROGRAMMES` dans blog.ts) : la page se régénère toutes les heures. */
+export const revalidate = 3600;
 
 const TITRE = "Blog";
 
@@ -52,6 +56,7 @@ const datePublication = (p: Publication) =>
   p.publieLe.length === 4 ? `en ${p.publieLe}` : `le ${dateLisible(p.publieLe)}`;
 
 export default function Blog() {
+  const articles = articlesPublies();
   const jsonLd = graph(
     breadcrumbSchema([
       { nom: "Accueil", url: "/" },
@@ -82,9 +87,9 @@ export default function Blog() {
         <Apparition>
           <div className="mt-8 rounded-[20px] border border-sable bg-creme px-6 py-10 text-center sm:px-12">
             <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-fonce">
-              {ARTICLES.length > 1
-                ? `${ARTICLES.length} textes`
-                : `${ARTICLES.length} texte`}{" "}
+              {articles.length > 1
+                ? `${articles.length} textes`
+                : `${articles.length} texte`}{" "}
               · {praticien.nom}
             </p>
 
@@ -108,7 +113,7 @@ export default function Blog() {
           article de plus chaque quinzaine, la colonne de gauche aurait vite
           dépassé la vidéo de plusieurs écrans. */}
       <section aria-label="Liste des articles" className="px-5 py-10 sm:px-10 lg:px-[100px]">
-        {ARTICLES.length === 0 ? (
+        {articles.length === 0 ? (
           <p className="max-w-lecture text-ardoise">
             Le premier texte est en cours d&rsquo;écriture. En attendant, les{" "}
             <Link
@@ -124,7 +129,7 @@ export default function Blog() {
              cartes d'une même rangée prennent la hauteur de la plus haute, et
              le lien « Lire l'article » reste calé en bas de chacune. */
           <ul className="grid gap-6 md:grid-cols-2">
-            {ARTICLES.map((article, i) => (
+            {articles.map((article, i) => (
               <li key={article.slug}>
                 <Apparition delai={(i % 2) * 120} className="h-full">
                   <article className="flex h-full flex-col overflow-hidden rounded-[20px] bg-lin">
